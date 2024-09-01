@@ -1,0 +1,14 @@
+#+TITLE: What is OOP
+
+
+* Object Oriented Programming
+
+- Object oriented programming is a programming paradigm
+- It is based on the four pillars of polymorphism, abstraction, encapsulation and Inheritance
+
+** Some notable OOP languages include:
+- Java (What will we be focusing on)
+- C++
+- C#
+- Typescript
+etc.
