@@ -7,15 +7,15 @@
         of problem.
 
 ** Features of Algorithms
-- **Finiteness**: An algorithm must always terminate after a finite number of steps.
-- **Definiteness**: Each step must be precisely defined. the actions carried out must be specified for each case.
-- **Input**: An algorithm has zero or more inputs;These inputs come from a specified set of objects.These quantites are given
+- Finiteness: An algorithm must always terminate after a finite number of steps.
+- Definiteness: Each step must be precisely defined. the actions carried out must be specified for each case.
+- Input: An algorithm has zero or more inputs;These inputs come from a specified set of objects.These quantites are given
   into it initially or dynamically change as the algorithm runs.
-- **Output**: Algorithms have one or more outputs and their quantities have a specified relation to the inputs
-- **Effectiveness**: An algorithm is expected to be generally effective in that its operations must all be sufficiently basic
+- Output: Algorithms have one or more outputs and their quantities have a specified relation to the inputs
+- Effectiveness: An algorithm is expected to be generally effective in that its operations must all be sufficiently basic
   that they can in principle be done in a finite length of time by someone using pencil and paper
 
--**Computational Problems**: a descriptive relationship between all possible inputs and corresponding
+-Computational Problems: a descriptive relationship between all possible inputs and corresponding
         expected outputs
 
         Inputs have a specific format to satisft pre-conditions
