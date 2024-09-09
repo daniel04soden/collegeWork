@@ -1,0 +1,31 @@
+#+title: Random Acc
+
+* What is an alogorithm?
+
+- There are lots of different definitions for what an algorithm actually is, however the best definition would be:
+        An algorithm is a finite set of rules that gives a sequence of operations for solving a specific type
+        of problem.
+
+** Features of Algorithms
+- **Finiteness**: An algorithm must always terminate after a finite number of steps.
+- **Definiteness**: Each step must be precisely defined. the actions carried out must be specified for each case.
+- **Input**: An algorithm has zero or more inputs;These inputs come from a specified set of objects.These quantites are given
+  into it initially or dynamically change as the algorithm runs.
+- **Output**: Algorithms have one or more outputs and their quantities have a specified relation to the inputs
+- **Effectiveness**: An algorithm is expected to be generally effective in that its operations must all be sufficiently basic
+  that they can in principle be done in a finite length of time by someone using pencil and paper
+
+-**Computational Problems**: a descriptive relationship between all possible inputs and corresponding
+        expected outputs
+
+        Inputs have a specific format to satisft pre-conditions
+        Outputs are specified by some post-conditions
+        An instance of a problem is a specific valid input that satisfies all pre-conditons and for which
+        the problem therefore defines some output.
+
+* Random Access Machines
+
+** A random access machine is an abstract model that
+- Operates on an arbitrary size
+- Has infinitely many addressable memory cells
+- Executes its instruction in order and one at a time
