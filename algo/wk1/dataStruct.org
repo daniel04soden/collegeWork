@@ -1,0 +1,28 @@
+#+title: Data Struct
+
+* Elementary Data Structures
+
+** Arrays
+- Arrays are the most fundamental linear data structure sometimes called a list or vector
+- They store objects of identical size consecutively in memory
+- On a Random Access Machine they can be accessed via the array index in constant time
+
+*** Pointer
+
+- The array index can be a variable in itself, enabling pointer operations such as
+
+ #+begin_src python :file sample.py
+    a = [7,9,2,2,3] # Python only used as it is the simplest code to express this problem
+    i = 2
+    x=a[i]
+    print(x)
+ #+end_src
+
+ #+RESULTS:
+ : None
+
+- Since array indexes are also integers, the random access machines can also perform pointer arithmetic
+
+ #+begin_example
+        A[2*i-1]
+ #+end_example
