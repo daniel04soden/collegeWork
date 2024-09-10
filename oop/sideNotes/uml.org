@@ -1,0 +1,21 @@
+#+title: Uml
+
+* What is UML
+
+UML or unified modeling language is a way of visualizing a software program using a collection of diagrams it has evolved from the work of Grady Booch and transforms model system of application in code.
+
+** What Is the Point?
+
+It is a way of demonstrating the relationships between classes, objects, attributes and operations.
+
+*** Features of UML
+
+- Classes: representation of entities with common characteristics
+  They have attributes such as age and name and can perform operations
+  known as methods like speaking or eating.
+- Active Classes vs Passive classes:
+        - Active initiate and control activity flow
+        - Passive classes store data and serve other classes
+- Visibility Markers: Signifies who can access info within a class
+  Public vs private visibility.
+- Associations: Static relationships between classes.

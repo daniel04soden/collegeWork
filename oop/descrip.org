@@ -4,7 +4,8 @@
 * Object Oriented Programming
 
 - Object oriented programming is a programming paradigm
-- It is based on the four pillars of polymorphism, abstraction, encapsulation and Inheritance
+- It's based on the four pillars of polymorphism, abstraction, encapsulation and Inheritance
+- It's basis relies on classes on objects and it's used to structure a software program into simple reusable pieces of code blueprints, ie classes.
 
 ** Some notable OOP languages include:
 - Java (What will we be focusing on)
