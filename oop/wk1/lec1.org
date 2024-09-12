@@ -1,0 +1,13 @@
+#+title: Lec1
+
+* Module Introduction & Java basic syntax
+
+#+begin_src java
+// Simple hello world program
+public class myMain {
+    public static void main(String[] args){
+        System.out.println("Hello, world!")
+    }
+}
+
+#+end_src
