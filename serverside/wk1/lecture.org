@@ -33,3 +33,26 @@
 - The code we will generate will be run on a web server that processes data,
   interacts with databases, manages user sessions and dynamically generates web pages
   before sending them to client's browser
+- What we need:
+        - Nodejs
+        - Javascript
+        - EJS- Embedded javascript template engine
+        - Mongodb database to store data
+
+
+** Key elements
+**** Four layers of web apps:
+- Client
+- Server
+- Business
+- Data
+- Web servers (Htttp)
+- Static sites  - One that returns the same hard coded content form the server whenever a resource is requested
+- Dynamic sites - One that where some of the response content is dynamically generated,
+  only when needed using server side programming
+
+
+** Server side web dev:
+
+- Sample languages: PHP, nodejs, Python
+- AKA the back end
