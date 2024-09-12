@@ -14,11 +14,13 @@ public class Main {
     //-------------------------------------
     public static void myFunction(){
         // 1. Print a message by the standard output
-        System.out.print("Hello World!");
+        System.out.println("Hello World!");
 
         //2. We can print the value of a variable
         int x = 3;
-        System.out.println(x);
+        for (int i = 0; i < 5; i++) {
+            System.out.println(x);
+        }
 
         //3. We can print to a file
 

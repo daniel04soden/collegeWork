@@ -11,3 +11,20 @@ public class myMain {
 }
 
 #+end_src
+
+
+** Background: Java Programs execution
+        - Most computers with Java know things such as for loops,booleans, data types, if statements etc
+        - However it doesn't know things such as logarithms so we need to import certain libraries
+
+#+begin_src java
+// Importing files (sample not 100% accurate)
+
+import Java.Math
+    Math.log()
+
+#+end_src
+
+*** Keywords
+
+        -
