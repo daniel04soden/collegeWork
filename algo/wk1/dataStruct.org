@@ -3,7 +3,12 @@
 * Elementary Data Structures
 
 ** Arrays
-- Arrays are the most fundamental linear data structure sometimes called a list or vector
+- Arrays are the most fundamental linear data structure sometimes called a list or vector.
+ #+begin_src java
+
+int[] array = {2,3,4,5,6}
+
+ #+end_src
 - They store objects of identical size consecutively in memory
 - On a Random Access Machine they can be accessed via the array index in constant time
 
