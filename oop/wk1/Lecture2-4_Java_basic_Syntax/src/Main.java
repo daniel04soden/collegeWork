@@ -2,13 +2,40 @@
 // Purpose: First Java program
 
 /**
- * The main class of our project.<br>.
+ * The main class of our project:
  */
 
 import java.util.Scanner;
 import java.io.PrintWriter;
 public class Main {
 
+
+		public static int addition(int num1, int num2) {
+			return num1 + num2;
+		}
+
+		public static int subtraction(int num1, int num2) {
+		/*
+		 *Subtraction function returns the largest number - the smallest number
+		@param int num1 = first number provided 
+					 int num2 = second number provided
+
+		returns:
+						
+		 *
+		 * */
+		int result;
+		if (num1>num2) {
+			result = num1 - num2;
+			} else if (num2 == num1) {
+			return 0;
+			} else {
+			result = num2 - num1;
+			}
+
+		return result;
+
+		}
     //-------------------------------------
     //	myFunction
     //-------------------------------------
@@ -46,12 +73,14 @@ public class Main {
     //	main
     //-------------------------------------
     /**
-     * Main Method:<br>
-     * Main method of the class.<br>
+     * Main Method:
+     * Main method of the class.
      * @param args: We will run the program parameter free, so do not worry about it.
      */
     public static void main(String[] args) {
         myFunction();
+				System.out.println(addition(2, 3));
+				System.out.println(subtraction(2, 3));
     }
 
 }
