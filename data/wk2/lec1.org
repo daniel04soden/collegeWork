@@ -1,0 +1,38 @@
+#+title: Lecture wk2
+
+* Database Design 1 basics
+
+** Database design methodologies
+- Methodologies are systematic ways of doing something
+- A model is a lgoical high level way of organising a view of a system
+
+*** Relational Model
+
+- The *Relational Model* only uses one concept to describe and design the system: that is a table of records.
+
+- The only real world systems that can be modelled are therefore record based data processing systems.
+
+- One problem with this modle is that not all systems are data processing systems like a database.
+
+- *Relational Database*: A system that divides/normalizes your info into logical subsets and places
+  each subset in a separate table.
+
+- Each subset of attributes is described by dependency on an identifier ie, _keys_.
+
+*** Normalisation
+
+- *Normalisation* is the process that progressively refines tables used in the database so that each stage (1st,2nd etc normal form)
+  the set of tables are used to store the data adhere to certin rules and constraints.
+
+- It works by analysing patterns within actual data. These patterns reveal depedencies between differenet items of data.
+
+- This design process takes a relatively disorganised table and reorganises the data into a set of linked smaller tables that model the basic elements of the data better. Each table has a set of attributes that form the data pattern.
+
+- Good design includes more tables in the database, not overly many but not only like 3
+
+**** Main Aims of Normalisation:
+
+1. Reduce and control redundancy or duplication
+2. Identify group of attributes that function together in the real world. (Can be inserted, updated and delete and select operations)
+
+***
