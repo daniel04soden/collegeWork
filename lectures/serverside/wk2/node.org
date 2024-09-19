@@ -61,3 +61,13 @@
    One paramaeter for callback
   - f.readFile(filename,encoding,callback function) method
    Two paramaeters for callback
+
+*** Third-Party modules
+- examples: mongoose, express, etc
+- Modules that are available online using the NPM
+
+** Node.js as a web server
+
+- Creating a web server that lsitens to server ports and gives back a reponse to the client
+- Res.end signals node that the response is all done and ready to be sent to the client
+- When a request arrives, the anon callback function is called (func(request,response))
