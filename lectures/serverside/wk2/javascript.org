@@ -1,0 +1,86 @@
+#+title: Javascript
+
+* Javascript details
+
+** Advantages of it
+- Easy to learn and use
+- It is not compiled and is executed at runtime
+- Primarily client side but also serverside
+- Interacts directly with HTML and the DOM
+
+** Javascript syntax
+
+- Borrows most of its syntax from java, C,C++.
+- Loosely typed, no type declaration.
+- var, let and const.
+- Let,const - scope is limited to a block of elements
+- var - scope has no limits.
+- it doesn't require ; but at run time it is inserted for you, at best practice you should insert them yourself.
+- Types: booleans, null, undefined, number, Bigint, String, symbol, NaN
+
+*** Javascript numbers
+
+- Integers
+- Hex
+- Float
+- Binary
+- Octal
+- Hexa-decimal
+- Infinity
+- -Infinty
+
+**** Number checks:
+- isNaN: checks whether a value is a number and returns a boolean
+- isFinite: converts its argument to a number and returns true if its a regular number
+
+** Maths
+- Javascript numbers
+#+BEGIN_SRC js
+var myNumber = 33;
+
+Math.round();
+Math.sign(x);
+Math.pow(x,y);
+Math.random();
+#+END_SRC
+
+** Booleans and checks for equality
+
+- Javascript Booleans
+
+  true;
+  false;
+
+ #+BEGIN_SRC js
+
+true;
+false;
+
+isJosephMean === true;
+isJosephMean == false;
+
+
+ #+END_SRC
+
+** Objects
+
+#+BEGIN_SRC js
+
+var bird ={
+genus:'corvus'
+}
+
+bird1 = JSON.parse(JSON.stringify(animal));
+
+bird1.genus='ursus'
+
+bird1;
+bird2;
+#+END_SRC
+** Javascript arrays
+#+BEGIN_SRC js
+var array = [1,2,3]
+
+array.push(3)
+array.pop()
+#+END_SRC
