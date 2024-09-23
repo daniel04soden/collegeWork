@@ -1,0 +1,22 @@
+total=0; answer=true;
+while(answer == true)
+{
+answer = window.confirm("Click OK to continue or Click cancel to finish.");
+if (answer === true) {
+console.log("You said OK");
+}
+}
+console.log("while loop finished. You must have clicked finsh")
+
+////////////////////
+
+total=0; answer=true;
+
+do
+{
+answer = window.confirm("Click OK to continue or Click cancel to finish.");
+if (answer === true) {
+console.log("You said OK");
+}
+}while(answer == true)
+console.log("while loop finished. You must have clicked finsh")
