@@ -1,0 +1,31 @@
+#+title: Abstract Data Types
+
+* Abstract Data types
+
+** Data Abstraction
+
+*** User vs developer view.
+
+- It is often not necessary to know how exactly libraries are implemented and how data is managed internally
+- While developing libraries, it is desireable to not depend on any client code to be able to adapt to implementation
+  and internal data management without affecting any end-users.
+
+- These two concerns are covered by APIs (Application programming interfaces), which act as a contract between the code
+  and the library
+- Both the client ocde as well as the library only interact through the API in this apporach, never directly with each other.
+
+*** Specification vs Implentation
+
+- From a users POV the API is a specification which functions are available to interact with the data
+- The specific implentation are kept completely transparent to the user
+
+- Implentations have different properties due to
+  - Runtime
+  - Memory effeciency
+  - Cost
+- An understanding of the underlying implmentation is helpful, even if not implementing any library functions directly
+
+*** Abstract vs Data structure
+
+- An ADT (Abstract data structure) describes what operations the data supports and how it can be used
+- A data structure is how the data is organised, managed and stored in actual implementation.

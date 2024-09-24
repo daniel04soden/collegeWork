@@ -1,0 +1,63 @@
+------------------------------
+
+   TESTING CLASS CAT
+
+------------------------------
+
+
+----------- 1. Cat instances creation -----------
+
+----------- 2. Cat test for getMethods -----------
+
+--- The value of the field 'name' in o1 is = 
+Mocha
+
+--- The value of the field 'playfulLevel' in o1 is = 
+6
+
+--- The value of the field 'name' in o2 is = 
+Latte
+
+--- The value of the field 'playfulLevel' in o2 is = 
+5
+
+----------- 3. Cat test for setMethods -----------
+
+--- The value of the field 'name' in o1 is = 
+Moki
+
+--- The value of the field 'playfulLevel' in o1 is = 
+8
+
+----------- 4. Cat test extra methods -----------
+
+--- Is o1 paying attention at the moment = 
+false
+
+--- Is o1 paying attention at the moment = 
+false
+
+--- Is o1 paying attention at the moment = 
+false
+
+--- Is o1 paying attention at the moment = 
+false
+
+--- Is o1 paying attention at the moment = 
+true
+
+--- Is o1 paying attention at the moment = 
+false
+
+--- Is o1 paying attention at the moment = 
+true
+
+--- Is o1 paying attention at the moment = 
+false
+
+--- Is o1 paying attention at the moment = 
+false
+
+--- Is o1 paying attention at the moment = 
+false
+

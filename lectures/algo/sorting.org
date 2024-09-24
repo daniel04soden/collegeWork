@@ -1,0 +1,23 @@
+#+title: Sorting Algorithms
+
+
+** Insertion Sort Algorithm:
+- Formal Problem state
+  - Input = An array of comparable objects
+  - Output = An orderd permutation of the input array
+
+#+begin_example c
+For j = 2..n
+
+k=A[j]
+i=j-1 // Looking at previous card
+
+while i>0 && A[i]>k:
+        A[i+1] = A[i]
+        i = i-1
+A[i+1] = k
+#+end_example
+
+
+
+**

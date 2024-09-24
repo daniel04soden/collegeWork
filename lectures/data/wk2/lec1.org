@@ -35,4 +35,35 @@
 1. Reduce and control redundancy or duplication
 2. Identify group of attributes that function together in the real world. (Can be inserted, updated and delete and select operations)
 
-***
+**** Design using Normalisation
+***** First normal form design rule
+- All tables must have a primary key
+- Cells must have a single value. That is repeating groups like an embedded comma lists (Mary,joe,liz) aren't allowed. A key determines the other attributes in the group
+
+
+***** Higher Normal form design rule:
+- Attributes are dependent on the key, the whole key and nothing but the key
+- The whole key ensures no attribute is dependent on only some of the key. This applies to designs where you have a composite key.
+- Nothing but the key ensures no attribute has multiple dependencies.
+
+*** Steps of normal form
+1. UNF ->
+2. 1NF -> No repeating data
+3. 2NF -> NO transitive data
+4. 3NF -> No partial data
+5. BCNF -> Composite keys
+
+** Modelling & UML
+- Designs with objects can be described in a model using Unified modelling language or UML.
+- UML is a very complex set of notations to describe any type of system not just data processing.
+- It absorbed an earlier modelling method called Entity relationship modelling (ER). This was commonly used in database systems design. The two models differe slightly however in nature they are very similar.
+- For DB design puporses, we are really only interested in the section or UML being class diagrams.
+- A *class diagram* descibes the structural aspects of the system.
+*** Class diagrams describe the
+- Basic elements of the system
+- Associations or relationships between entities/object classes
+- Objects are linked using associations/relationships.
+- You can define the association in more detail using Multiplicity.
+- For an assocation, you derive the multiplicity by asking how is the link constrainted to work in each direction
+- For branch to staff, can a given branch have many staff - Yes
+- For staff to branch, can a given staff member be in more than one branch - No

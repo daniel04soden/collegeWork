@@ -141,7 +141,7 @@ resources.
        - Page fault,clock interrupt
   2. Trap
      - Sometimes a process tries to do something illegal
-     - When this occurs, interrupt handler takes over and determines the severityof the problem (minor,fatal)
+     - When this occurs, interrupt handler takes over and determines the severity of the problem (minor,fatal)
      - If minor some recovery is done or an error is displayed
      - If fatal, offending process is moved to 'exit' state. Means cpu is available to other waiting processes.
   3. System call
@@ -149,3 +149,31 @@ resources.
      - Current program amy call on the OS to intervene
      - Results in a Process being moved to a blocked state while it awaits service of its call
      - CPU available for other waiting processes
+- An interrupt handler is typically a short program which does some adminstrative work.
+- When the hanlder is finished, the interrupted porcess's psw and the pc are restored to the CPU and that same
+  procesess resumes execution.
+- This is a mode switch, the interrupted process regains the CPU
+
+*** How are process switches done.
+1. Interrupt occurs, signal sent to CPU
+2. CPU hardware completes execution of current instruction of current process
+3. CPU hardware checks for interrupt and detects signal
+4. CPu hardware sends acknowledgement
+5. CPU saves the PSW and the PC.
+6. CPU hardware looks up address of the first
+instruction of the interrupt handler and loads this as
+the new PC value. This means the next instruction
+run will be that of the interrupt handler routine.
+1. Interrupt handler software saves context of previous
+process (i.e. register values etc. that may be affected)
+8. Interrupt handler software processes interrupt
+9. Full execution context of interrupted process is saved
+in its PCB, its state is updated and it joins some
+queue.
+10. Scheduler software selects next process for CPU
+11. Context of next process restored to CPU (i.e. register
+values etc.), process state is updated, and that
+process’s ID removed from ready queue. PC value is
+set that of the chosen process, so the next instruction
+run will be the next instruction of the process chosen
+by the scheduler.
