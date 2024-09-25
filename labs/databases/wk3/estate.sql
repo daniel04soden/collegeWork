@@ -35,3 +35,22 @@ CREATE TABLE owners (
   PRIMARY KEY(ownerNo),
 FOREIGN KEY(propertyNo) REFERENCES properties(propertyNo)
 );
+
+INSERT INTO clients (
+  clientNo, fName, lName,telNo
+) VALUES ( 1,'Daniel','Soden','0861628488' );
+
+
+INSERT INTO clients (
+  clientNo, fName, lName,telNo
+) VALUES ( 2,'Sean','Soden','0861628388' );
+
+
+INSERT INTO clients (
+  clientNo, fName, lName,telNo
+) VALUES ( 3,'Aoife','Soden','0863628488' );
+
+
+
+
+

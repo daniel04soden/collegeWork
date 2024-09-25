@@ -1,0 +1,121 @@
+#+title: Lecture wk3
+
+
+* Javascript notes
+
+** Loop options
+- For
+- For of
+- For in
+- while
+- do while
+
+** Array.forEach
+
+- Calls a function once for each array element.
+- callback function
+- Function to multiply each value in an array of prices by 0.2% for a discount
+
+ #+begin_example
+        randomValues=[2,4,34,5]
+        Array.forEach(multiplyNums)
+
+        function multiplyNums(item,index,arr){
+        arr[index] = item*10
+        }
+ #+end_example
+
+** JavaScript sets
+
+- A set is a collection of unique values
+- Each element can only occur once in a sec
+- Essential set methods:
+  - new Set()
+  - add,delete,has,forEach,values,property,size
+
+   #+begin_src js
+
+    let newSet = new Set([2,3,4,5,6,7,8,9,10]);
+
+    newSet.add(20);
+    newSet.add(2);
+
+    newSet.forEach(function value){
+    console.log(value)
+    };
+
+   #+end_src
+
+** Javascript maps
+
+- Holds key value pairs
+  - Map methods:
+    - new Map()
+    - set
+    - get,delete,has,entries,size
+
+
+** Javascript functions
+
+- Function invocation
+- Function returns
+
+ #+begin_src js
+
+let x = myFunction(4,3);
+
+function myFunction2(a,b){
+return a*b
+}
+
+ #+end_src
+** Local and global variables
+
+- In functions we can have both local and variable scope
+- If it is defined within the function you cannot access it outside of that function
+- In local scope a variable cannot have the same name
+
+** Parameters
+
+A function can have multiple parameters or no parameters at all
+- the function changes a paramater but the change is not seen outside because a function always gets a copy of the value
+** Callback function
+- A function passed into another function as an argument
+- Then invoked inside the outer functino to complete some kind of routine or action
+
+
+* Server side web dev start
+
+** Client vs Server
+- Web apps are not stand alone, many of them have a cloud backend
+- Hosting a web server is very easy these days by using any of the could based infrastructure servers like AWS and Azure
+- HTTP,Rest (Representational State transfer) APIs, etc
+
+
+** Hosting a web server
+
+- Making a website/app available to users of the internet
+
+*** Types of hosting
+- Shared hosting: Website shares resources with several othr websites ( limited resources )
+- Virtual Private server hosting: Dedicated resource on a server shared by fewer websites more control and performance
+- Dedicated hosting: A dedicated physical server, expensive with high control and performance
+- Cloud hosting: Uses a network of services to host websites offering scalability and reliability.
+
+*** Advantages of cloud computing
+- Cost
+- Speed
+- Flexibility
+
+*** Networking alphabetic soup
+- URL
+- SOAP
+- HTTP
+- JSON
+- XML
+- REST
+- GET
+- DELETE
+- POST
+
+** Client
