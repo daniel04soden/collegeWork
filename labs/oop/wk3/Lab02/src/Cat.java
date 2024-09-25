@@ -54,12 +54,16 @@ public class Cat {
     public boolean isPayingAttention(){
     int max = 3;
       int attentionVal = (int)(Math.random()* (max)+1); 
-
+    
+    /*
+     *
     if (attentionVal == 3) {
      return true;
     } else {
      return false;    
     }
+     * */
+    return attentionVal == 3; //Much better 
   }
 
     
