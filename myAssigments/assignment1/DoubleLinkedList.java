@@ -1,4 +1,4 @@
-package assignment1;
+import java.util.ArrayList;
 
 public class DoubleLinkedList implements List<Object> {
     private class ListNode {
@@ -13,7 +13,7 @@ public class DoubleLinkedList implements List<Object> {
     public DoubleLinkedList()
     {
         // TASK 1.A
-        throw new RuntimeException("Not implemented yet!");
+     ArrayList<Object> list = new ArrayList<Object>();
     }
 
     public void prepend(Object x) {
