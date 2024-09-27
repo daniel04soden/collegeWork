@@ -69,3 +69,106 @@ int[] array = {2,3,4,5,6}
 - Retrieving and array element for a given index is easy buecuase it is direcetly supported by the RAM mdoel.
 - But what about the opposite?
 - In this csae every key must be inspected to find the index corresponding to a value V as follows
+
+
+** Pre allocated arrays 
+
+- We hve looked at array based implementations for ADTs such as lists stacks and queus
+- Arrays store objects sequentially and use the indices to access the elements and to determine their linear order.
+- The main advantage of these data structures iis that they naturally map onto the RAM model enabling very efficient access to te elements being stored in the array.
+- The main disadvantages are all memory must be allocated at creation time, making adding and deleting elements inefficient.
+- Deleting or inserting and element into a specific psotion requires making space by shifting all other elements into other positions
+
+** Linked lists
+
+- Dynamic data structure address the issues of arrays by allocating storage in random access memory when needed.
+
+- The order is established not by the position in memory but by a pointer in each element pointing to the next.
+
+- Such a dynamic data structure is called a linked list which can often be used to implement linear ADTs more efficiently.
+
+*** Nodes
+
+- A linked list is made up of nodes x, which contain the data key[x] and a pointer next[x] to the following node in the list.
+
+#+begin_src java
+
+public class ListNode<item>{
+public Item key;
+    public ListNode<item> next;
+
+}
+
+public abstract class SimpleLinkedList<item>{
+private ListNode<Item> head;
+
+}
+#+end_src
+
+- The list L starts at a specific head node head[L]
+- It continues until the last node does not point to any next node, ie a NIL pointer.
+- An empty list would just be a head pointer pointing to NIL (Not in list)
+- Sometimes a speicial sentinel object us used instead of pointing to ill to terminate te list.
+- It is a dummy object with key nil[L] = NIL and next nil[L] = nil[L].
+
+*** Searching a node for a given key k
+#+begin_example
+x = head[L]
+
+While key[x] != k and next[x] != nil[L]:
+        x = next[x]
+
+return x
+
+
+#+end_example
+
+- How the sentinel simplifies notation in case the list is empty, because key[x] can be evaluated even if head[L] = NIL
+
+
+** Double Linked lists
+
+- Sometimes it is useful to be able to search not only forward but also backward which can be avhieved using a doubly linked list.
+- Every node now also has a prev[x] pointer to the previous element.
+- It is also useful to have two entry points into the list so an additional tail[L] pointer can be introduced.
+
+- A sentinel can again be useful to simplify the notation for boundary cases.
+
+
+** Circular Linked lists
+
+- Another variant is a circular linked list where the first and the last element are connected, these dont have a speicic entry point and any node can be used
+
+
+** How to create a linked list
+
+- Inserting a new element x at the beginning of the list
+
+  - Prepend(L,x) - Node type
+  - next[x] = head[L]
+  - Prev[x] = NIL
+  - prev[head[L]] = x
+  - head[L] = x
+
+- Inserting a new element y after element x
+  - Insert (x,y)
+    - prev[next[x]] = y
+    - next[y] = next[x]
+    - next[x] = y
+    - prev[y] = x
+
+  - Delete(y)
+    - prev[next[y]] = prev[y]
+    - next[prev[y]] = next[y]
+
+    - At this point no reference points to y, and therefore the garbage collector will get rid of this object, in Java,python etc
+
+  - SWAP(y,y')
+    - x = prev[y]
+    - z = next[y]
+    - x'=prev[y']
+    - y'=next[y']
+    - next[x] = y' , next[x'] = y
+    - next[y'] = z, next[y] = z'
+    - prev[z] = y', prev[z'] = y
+    - prev[y'] = x, prev[y] = x'
