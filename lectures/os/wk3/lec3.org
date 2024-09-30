@@ -70,3 +70,21 @@
 - Risk of **starvation**
 
   - Is it possible to keep these advantages and remove the risk of starvation
+
+
+** Multi level feedack
+
+- Maintains a few ready queues that operate under different rules
+- Waiting processs can be assigned to the different queues as required and the queues ca be given different priorities
+
+- It chooses the process from the head of the highest priority queue that contains waiting processes.
+- Here we try to avoid guesswork and focus on shorter processes.
+- Instead we focus on the amount of time a process has already spent running as a measure of its length
+- IE instead of explicitly favouring short jobs, longer jobs are penalized.
+
+  - When a process enters the queue it joins RQ0 and when it gets the cpu it is given n time units.
+  - If it doesn't complete its execution in this burst time it will be put in a lower queue of Q1
+  - If this continues the process may end up in an extremely low priority queue
+  - This will leave the process unattended for some time as the processor will continue to ignore this process until
+    it finishes with the higher process queue.
+  -
