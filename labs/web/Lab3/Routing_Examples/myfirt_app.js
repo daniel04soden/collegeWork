@@ -7,7 +7,7 @@ const server = http.createServer((req, res) => { //function from http module tha
  // d=new Date();
   res.statusCode = 200; //status means everything is fine
   res.setHeader('Content-Type', 'text/plain'); //type of content to be provided in the response to the client request
-  res.end('Hello World');
+  res.end('what even is this')
   
 });
 
