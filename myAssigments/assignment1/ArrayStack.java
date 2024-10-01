@@ -5,12 +5,11 @@ public class ArrayStack implements Stack<Object> {
 
     public ArrayStack(int capacity) {
         // TASK 2.A.a
-        throw new RuntimeException("Not implemented yet!");
+				this.S = new Object[capacity];
     }
 
     public void push(Object x) {
         // TASK 2.A.b
-        throw new RuntimeException("Not implemented yet!");
     }
 
     public Object pop() {

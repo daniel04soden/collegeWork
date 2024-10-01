@@ -13,7 +13,7 @@ public class DoubleLinkedList implements List<Object> {
     public DoubleLinkedList()
     {
         // TASK 1.A
-     ArrayList<Object> list = new ArrayList<Object>();
+        throw new RuntimeException("Not implemented yet!");
     }
 
     public void prepend(Object x) {
