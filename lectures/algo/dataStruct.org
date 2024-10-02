@@ -172,3 +172,51 @@ return x
     - next[y'] = z, next[y] = z'
     - prev[z] = y', prev[z'] = y
     - prev[y'] = x, prev[y] = x'
+
+      - All algorithms work by splicing in our out the element in th emidle
+      - This middle element can be an entire list itself
+      - The preceding element msut then connect to the first element of this list and the succeeding element must connect to the last element of the list.
+
+*** Accessing elements by index
+
+- Dynamically adding deleting or swapping elements is very efficient by reassiging reference pointers.
+- In linked lists to access elements you have to go along each pointer which is extremely inefficient
+
+  - GET-ITEM(L,i):
+    x = head[L];
+    For j={2..i}
+        x = next[X]
+Return x
+
+- Linear time in linked list, constant time in an array
+
+  - This makes every algorithm for linked lists inefficient that requires random data access.
+
+
+** Linked list implementation of stacks and queues
+
+*** Stack
+- PUSH(S,x)
+  - PREPEND(S,x)
+- POP(S)
+  - x = head[S]
+  -DELETE(x)
+  -return x
+*** Queue
+Linked list implementation
+
+- Push(S,x)
+  PREPEND(s,x)
+
+  - POP(S)
+    x = head[S]
+    DELETE(x)
+    Return x
+
+- ENQUEUE(Q,x)
+  - PREPEND(Q,x)
+
+- DEQUEUE(S)
+  - x=tail[S]
+  - DELETE(x)
+  - Return x

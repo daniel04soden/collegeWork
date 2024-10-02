@@ -1,11 +1,15 @@
-package assignment1;
-
 public class ArrayQueue implements Queue<Object> {
     private Object[] Q;
+		private int tail;
+		private int head;
+		private int n;
+		private int maxCap;
 
     public ArrayQueue(int capacity) {
         // TASK 3.A.a
-        throw new RuntimeException("Not implemented yet!");
+				this.maxCap = capacity;
+				this.n = Q.length;
+				
     }
 
     public void enqueue(Object x) {
