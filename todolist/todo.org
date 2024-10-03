@@ -1,0 +1,13 @@
+#+title: Todo
+
+* This is my college todolist of things currently on my agenda
+
+* TODO Linear Data Structures Assignment - due <2024-18-04>
+** TODO Finish Arraystack code
+** TODO Continue ArrayQueue
+
+* TODO Server side web development Assignment - due <2024-11-03>
+
+* TODO Study for OOP test - due <2024-10-04>
+
+* TODO Study for OS test - due <2024-10-10>
