@@ -1,0 +1,12 @@
+------------------------------
+
+   TESTING SECOND CONSTRUCTOR OF DOG
+
+------------------------------
+
+Ron
+8
+Greyhound
+Same toy
+5
+5

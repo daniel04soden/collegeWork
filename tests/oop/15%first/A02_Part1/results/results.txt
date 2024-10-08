@@ -1,0 +1,53 @@
+------------------------------
+
+   TESTING CLASS STUDENT
+
+------------------------------
+
+
+----------- 1. Module instances creation -----------
+
+----------- 2. Student test for getMethods -----------
+
+--- The value of the field 'name' in o1 is =
+Kellie Harrington
+
+--- The value of the field 'id' in o1 is =
+150123
+
+--- The value of the field 'memberOfProgSociety' in o1 is =
+true
+
+--- The value of the field 'name' in o2 is =
+Philip Doyle
+
+--- The value of the field 'id' in o2 is =
+300000
+
+--- The value of the field 'memberOfProgSociety' in o2 is =
+false
+
+----------- 3. Student test for setMethods -----------
+
+--- The value of the field 'name' in o1 is =
+Daire Lynch
+
+--- The value of the field 'id' in o1 is =
+300000
+
+--- The value of the field 'memberOfProgSociety' in o1 is =
+false
+
+----------- 4. Student test extra methods -----------
+
+--- Testing printStudentInfo
+Daire Lynch
+300000
+Please consider joining the Programming Society
+Kellie Harrington
+150123
+Thank you for joining the Programming Society
+
+--- Testing sumOfIDDigits
+12
+3

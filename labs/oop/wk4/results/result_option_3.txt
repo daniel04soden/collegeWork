@@ -1,0 +1,16 @@
+------------------------------
+
+   TESTING COPY CONSTRUCTOR OF DOG IN SHALLOW MODE
+
+------------------------------
+
+Ron
+8
+Greyhound
+Ron
+8
+Greyhound
+Different dog
+Same toy
+5
+5

@@ -1,0 +1,16 @@
+------------------------------
+
+   TESTING COPY CONSTRUCTOR OF DOG IN DEEP MODE
+
+------------------------------
+
+Ron
+8
+Greyhound
+Ron
+8
+Greyhound
+Different dog
+Different toy
+3
+5
