@@ -7,29 +7,52 @@ public class ArrayQueue implements Queue<Object> {
 
     public ArrayQueue(int capacity) {
         // TASK 3.A.a
-				this.maxCap = capacity;
-				this.n = Q.length;
+				
+				this.Q = new Object[capacity]; // The array itself
+				this.maxCap = capacity; // Assigned capacity for the array 
+				this.n = Q.length; // The current length (not the capacity)
+				this.head = -1;	// Index of the element at the front of the queue
+				this.tail = -1; // index of the element at the end of the queue
 				
     }
 
     public void enqueue(Object x) {
         // TASK 3.A.b
-        throw new RuntimeException("Not implemented yet!");
+				Q[tail] = x; // X is the tail of the array 
+				if (tail == n) { // If the tail is equal to the length, then the tail is 0
+				tail = -1; 
+				} else {
+				tail++; // otherwise move the index of the tail up to make room for the next value
+				}
     }
 
     public Object dequeue() {
         // TASK 3.A.c
-        throw new RuntimeException("Not implemented yet!");
+				Object x = Q[head];
+
+				if (head == n) {
+					head = 0;
+				} else {
+					head++;
+				}
+		return x;
     }
 
-    public Object next() {
+    public Object next() { // Fn to inspect the next element in the array
         // TASK 3.A.d
-        throw new RuntimeException("Not implemented yet!");
+			Object x = Q[head];
+
+		if (n == -1) {
+			;
+		} else {
+		head--;
+		}
+			return x;
     }
 
     public boolean empty() {
         // TASK 3.A.e
-        throw new RuntimeException("Not implemented yet!");
+				return n == -1;
     }
 
     public static void main(String[] args) {

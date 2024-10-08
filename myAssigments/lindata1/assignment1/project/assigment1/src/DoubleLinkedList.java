@@ -6,29 +6,53 @@ public class DoubleLinkedList implements List<Object> {
             key = x;
         }
         public Object key;
-        public ListNode prev = null;
-        public ListNode next = null;
+        public ListNode prev = null; // Pointer to previous data 
+        public ListNode next = null; // Pointer to next data
     }
+
+		private ListNode head; // Pointer to the value at the top of the linked list
+		private ListNode tail; // Pointer to the value at the end of the linked list (At value length)
+		private int length; // Current length of the doubly linked list (No max capacity)
 
     public DoubleLinkedList()
     {
         // TASK 1.A
-        throw new RuntimeException("Not implemented yet!");
+				this.tail = null;
+				this.head = null;
+				this.length = 0;
+			
     }
 
     public void prepend(Object x) {
         // TASK 1.B
-        throw new RuntimeException("Not implemented yet!");
+				ListNode newNode = new ListNode(x); // The new value x becomes a node which will point to some previous and next data
+
+			if (empty()) { 
+				tail = newNode; // If the entire doublylinked list is empty then it can simply be assigned as the tail
+			} else {
+				head.prev = newNode; // Otherwise it becomes the previous pointer of the current head
+			}
+			newNode.next = head; // The new nodes next pointer is the current head
+			head = newNode; // Now this node becomes the head
+			length++; // the length is now increased by 1
     }
 
     public Object getFirst() {
         // TASK 1.C
-        throw new RuntimeException("Not implemented yet!");
+			if (empty()) {
+				return null;
+			} else {
+				return head;
+			}
     }
 
-    public void deleteFirst() {
-        // TASK 1.D
-        throw new RuntimeException("Not implemented yet!");
+    public Object getLast() {
+        // TASK 1.F
+			if (empty()) {
+				return null;
+			} else {
+				return tail;
+			}
     }
 
     public void append(Object x) {
@@ -36,8 +60,8 @@ public class DoubleLinkedList implements List<Object> {
         throw new RuntimeException("Not implemented yet!");
     }
 
-    public Object getLast() {
-        // TASK 1.F
+    public void deleteFirst() {
+        // TASK 1.D
         throw new RuntimeException("Not implemented yet!");
     }
 
@@ -48,7 +72,7 @@ public class DoubleLinkedList implements List<Object> {
 
     public boolean empty() {
         // TASK 1.H
-        throw new RuntimeException("Not implemented yet!");
+			return length == 0; // Boolean if the length is 0 it is true it is empty
     }
 
     public static void main(String[] args) {
