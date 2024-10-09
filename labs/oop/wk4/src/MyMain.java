@@ -1,4 +1,4 @@
-
+import java.util.Scanner;
 /**
  * The class tests the functionality of Lab03.
  * @author Ignacio.Castineiras
@@ -192,7 +192,11 @@ public class MyMain {
 	 */
 	public static void main(String[] args) {
 		// 1. We parse any input arguments
-		int option = 1;
+		int option;
+		Scanner myScanner = new Scanner(System.in);
+		System.out.println("Enter an option 1-4");
+		option = myScanner.nextInt();
+		myScanner.close();
 
 		// 2. We call to the method we want to try
 		switch (option) {
