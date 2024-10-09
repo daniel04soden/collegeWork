@@ -10,7 +10,7 @@ public class ArrayStack implements Stack<Object> {
 				this.ArrayStackCapacity = capacity; // reassigning capacity of the array stack to constructor
 				this.S = new Object[capacity]; // constructing the array itself
 				this.top = -1; // the most recently added value (top of array)
-				this.n = S.length; // Getting the length of the array (-1 as 0 based)
+				this.n = capacity - 1; // Getting the length of the array (-1 as 0 based)
     }
 
     public void push(Object x) {
@@ -26,10 +26,10 @@ public class ArrayStack implements Stack<Object> {
     public Object pop() {
         // TASK 2.A.c
 				if (top == -1) { // If the array is already empty 
-				throw new RuntimeException("Stack underflow");
+				return null;
 				} else { // Any other condition 
 					top--; // Changing the position of the top value
-					return S[top]; // The value at the top is now the 2nd last value added originally
+					return S[top+1]; // The value at the top is now the 2nd last value added originally
 				}
     }
 

@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class DoubleLinkedList implements List<Object> {
     private class ListNode {
         public ListNode(Object x) {

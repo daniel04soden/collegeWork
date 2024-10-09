@@ -3,35 +3,34 @@ public class ArrayQueue implements Queue<Object> {
 		private int tail;
 		private int head;
 		private int n;
-		private int maxCap;
 
     public ArrayQueue(int capacity) {
         // TASK 3.A.a
-				
 				this.Q = new Object[capacity]; // The array itself
-				this.maxCap = capacity; // Assigned capacity for the array 
-				this.n = Q.length; // The current length (not the capacity)
+				this.n = capacity - 1; // The current length (not the capacity)
 				this.head = -1;	// Index of the element at the front of the queue
 				this.tail = -1; // index of the element at the end of the queue
-				
     }
 
     public void enqueue(Object x) {
+			if (empty()) { // If the tail is at the start of the array
+				head = 0; // Points to both head and tail to the start 
+				tail = 0;
+			}  
         // TASK 3.A.b
 				Q[tail] = x; // X is the tail of the array 
-				if (tail == n) { // If the tail is equal to the length, then the tail is 0
-				tail = -1; 
+				if (tail == n) { // If the tail is equal to the length, then the tail is at the first position
+				tail = 0; 
 				} else {
 				tail++; // otherwise move the index of the tail up to make room for the next value
 				}
     }
 
-    public Object dequeue() {
+    public Object dequeue() { // Moving the pointer head over by 1
         // TASK 3.A.c
 				Object x = Q[head];
-
 				if (head == n) {
-					head = 0;
+					head = -1;
 				} else {
 					head++;
 				}
@@ -45,14 +44,14 @@ public class ArrayQueue implements Queue<Object> {
 		if (n == -1) {
 			;
 		} else {
-		head--;
+		x = Q[head+1];
 		}
 			return x;
     }
 
     public boolean empty() {
         // TASK 3.A.e
-				return n == -1;
+				return head == -1;
     }
 
     public static void main(String[] args) {
