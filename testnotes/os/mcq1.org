@@ -1,0 +1,64 @@
+* Operating systems mcq notes
+
+- Operating system is the layer of software between the applications and the computer hardware
+
+  - It manages the execution of applications
+  - It manages the resources given to applications
+
+    - Ensures efficient use of a processor
+    - Allows switching between multiple processes (concurrency)
+
+
+** Processes:
+
+- A unit of activity characterised by the execution of a sequence of instructions
+
+  - It consists of a PCB, set of instructions and associated data
+
+
+** Control structures:
+
+*** File table
+
+- Contains all info about existence of files
+- Current Location in disk
+- Current status
+  
+*** Process table
+- File access
+- Current IO status
+- Location in memory
+- Uses Cross references to the other tables
+
+*** IO table
+- What IO is being used and what is available
+- Status of current io operation on each device
+ - Source/destination used in main memory
+*** Memory table
+
+- Allocation of main and virtual memroy to processes
+  - Info for managing virtual memory
+ - Protection info about segments of main memory ie whoch processes may access shared memory areas
+
+* Process Control Block
+
+- Process Control block are the attributes of a process stored with the process
+
+  - The pcb is unique for each process
+  - Three categories of info for the PCB
+
+    1. Process ID
+    2. CPU State info
+    3. Prcess control info
+
+
+*** PID
+- Process identification
+  - Unique numeric value for the process, its Parent process and the associated
+
+*** CPU State info
+- Execution context of the process ie copies of the current values
+  of the cpu registers for this process need to be stores when the process isnt using the CPU
+
+  - Such as: Programmer visible registers
+  - Control and status registers (PC,IR,MAR,MBR, Program Status Word.)
