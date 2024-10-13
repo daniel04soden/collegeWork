@@ -1,0 +1,44 @@
+#+title: Priority Queues
+
+
+* Priority queues
+
+- A priority queue is an ADT to storea  aset S of elements supporting the following elements:
+  - S=CREATE(A)
+    - Creates a new priority queue containing all elements of the array A.
+
+  - Insert(S,x)
+    - Adding a enw element in the set ie S= S U {x}
+
+  - x = EXTRACT-MINIMUM(S)
+    - Returns element from S with the smallest key ie x E s so that all other elements are larger and remove it from the set ie S-={x}.
+
+  - Decrease-Key(x,y):
+    - For an element with key[x]>v change the value of the key to the new value key[x] = v, potentially moving it up the queue to be extracted earlier by the above operation
+
+** Priority queues in operating systems
+
+- Process scheduling is used in opearting systems, these are implemented often with priority based queues
+
+
+** Priority queues in applicaitons
+
+- Calendar reminders (MLF)
+- TODO list
+- Issue tracking in agile development tools, Jira
+
+
+* Binary heaps
+
+- Layered Logical structure
+  - Lets consider a linear data structure with random access such as an array.
+  - Then the addresses to access the data can be logically structured into layers so that each
+    alwyas has twice the size of the previous layer.
+    - 2^n-1 elements in the array
+  - The height of a datapoint in this structure is the distance to the lowest layer
+  - The relationship between the height h f the topmost first element and teh numer of elements n is n+1= 2^h+1 or
+    h = log2(n+1) - 1
+
+* Complete binary trees
+
+- This layered logical structure can be visualised as a compelete binary tree.
