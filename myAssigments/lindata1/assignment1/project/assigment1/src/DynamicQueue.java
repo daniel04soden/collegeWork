@@ -1,5 +1,3 @@
-package assignment1;
-
 public class DynamicQueue implements Queue<Object> {
     List<Object> Q = new DoubleLinkedList();
 

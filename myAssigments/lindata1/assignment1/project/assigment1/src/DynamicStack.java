@@ -1,5 +1,3 @@
-package assignment1;
-
 public class DynamicStack implements Stack<Object> {
     List<Object> S = new DoubleLinkedList();
 

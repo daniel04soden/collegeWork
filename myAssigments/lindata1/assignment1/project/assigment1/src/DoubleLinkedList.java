@@ -18,7 +18,6 @@ public class DoubleLinkedList implements List<Object> {
 				this.tail = null;
 				this.head = null;
 				this.length = 0;
-			
     }
 
     public void prepend(Object x) {
@@ -55,7 +54,15 @@ public class DoubleLinkedList implements List<Object> {
 
     public void append(Object x) {
         // TASK 1.E
-        throw new RuntimeException("Not implemented yet!");
+				ListNode newestNode = new ListNode(x); // Creating a new node of the value x
+				if (empty()) { // If the linked list is already empty then just let it be the head
+					head = newestNode;
+				} else { // Otherwise the next node after the current tail is x
+					tail.next = newestNode;
+					newestNode.prev = tail; // Now the previous node of newestNode is tail
+				}
+			tail = newestNode; // Finally the tail becomes the newNode and the length increases
+			length++;
     }
 
     public void deleteFirst() {
