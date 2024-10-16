@@ -1,0 +1,38 @@
+------------------------------
+
+   TESTING CLASS GOLDEN RETRIEVER 
+
+------------------------------
+
+Tom
+5
+Thomas
+7
+6
+0
+null
+DogToy@1f32e575
+0
+0
+0
+1
+1
+1
+1
+2
+2
+2
+woof woof 
+woof woof woof woof 
+3
+8
+3
+0
+9
+22
+11
+6
+16
+21
+17
+5

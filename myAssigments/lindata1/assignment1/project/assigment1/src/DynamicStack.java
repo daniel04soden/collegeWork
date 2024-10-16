@@ -3,22 +3,25 @@ public class DynamicStack implements Stack<Object> {
 
     public void push(Object x) {
         // TASK 2.B.a
-        throw new RuntimeException("Not implemented yet!");
+				S.append(x);
     }
 
     public Object pop() {
         // TASK 2.B.b
-        throw new RuntimeException("Not implemented yet!");
+				Object value = S.getFirst();
+				S.deleteFirst();
+
+				return value;
     }
 
     public Object peek() {
         // TASK 2.B.c
-        throw new RuntimeException("Not implemented yet!");
+				return S.getFirst();
     }
 
     public boolean empty() {
         // TASK 2.B.d
-        throw new RuntimeException("Not implemented yet!");
+				return S.empty();
     }
 
     public static void main(String[] args) {

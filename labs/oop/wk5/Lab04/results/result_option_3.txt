@@ -1,0 +1,22 @@
+------------------------------
+
+   TESTING CLASS CAT 
+
+------------------------------
+
+Toby
+5
+Tobias
+7
+6
+3
+true
+false
+true
+false
+true
+false
+true
+false
+true
+false

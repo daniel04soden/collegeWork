@@ -22,13 +22,14 @@ public class DoubleLinkedList implements List<Object> {
 
     public void prepend(Object x) {
         // TASK 1.B
-				ListNode newNode = new ListNode(x); // The new value x becomes a node which will point to some previous and next data
-
+			ListNode newNode = new ListNode(x); // The new value x becomes a node which will point to some previous and next data
+		
 			if (empty()) { 
 				tail = newNode; // If the entire doublylinked list is empty then it can simply be assigned as the tail
 			} else {
 				head.prev = newNode; // Otherwise it becomes the previous pointer of the current head
 			}
+
 			newNode.next = head; // The new nodes next pointer is the current head
 			head = newNode; // Now this node becomes the head
 			length++; // the length is now increased by 1
@@ -36,19 +37,19 @@ public class DoubleLinkedList implements List<Object> {
 
     public Object getFirst() {
         // TASK 1.C
-			if (empty()) {
+			if (empty()) { // If the list is empty we return no values
 				return null;
 			} else {
-				return head;
+				return head.key; // Otherwise we return the first value, the head's key
 			}
     }
 
     public Object getLast() {
         // TASK 1.F
-			if (empty()) {
+			if (empty()) { // If the list is empty we return no values
 				return null;
 			} else {
-				return tail;
+				return tail.key; // Otherwise we return the first value, the head's key
 			}
     }
 
@@ -58,8 +59,9 @@ public class DoubleLinkedList implements List<Object> {
 				if (empty()) { // If the linked list is already empty then just let it be the head
 					head = newestNode;
 				} else { // Otherwise the next node after the current tail is x
-					tail.next = newestNode;
 					newestNode.prev = tail; // Now the previous node of newestNode is tail
+					newestNode.next = null;
+					tail.next = newestNode;
 				}
 			tail = newestNode; // Finally the tail becomes the newNode and the length increases
 			length++;
@@ -67,17 +69,34 @@ public class DoubleLinkedList implements List<Object> {
 
     public void deleteFirst() {
         // TASK 1.D
-        throw new RuntimeException("Not implemented yet!");
+				if (empty()) { // If it is empty
+					;
+				}else if(tail == head){ // If theres only one value in the list (head is the same as tail)
+					head = null;
+					tail = null;
+				}else{
+				head.next.prev = null; // The next and previous value of the first value is the first value
+				head = head.next;
+		}
+				
     }
 
     public void deleteLast() {
         // TASK 1.G
-        throw new RuntimeException("Not implemented yet!");
+				if (empty()) { // If it is empty
+					;
+				}else if(tail == head){ // If theres only one value in the list (head is the same as tail)
+					head = null;
+					tail = null;
+				}else{
+				tail.prev.next = null; // The next and previous value of the first value is the first value
+				tail = tail.prev;
+		}
     }
 
     public boolean empty() {
         // TASK 1.H
-			return length == 0; // Boolean if the length is 0 it is true it is empty
+				return tail == null && head == null;
     }
 
     public static void main(String[] args) {

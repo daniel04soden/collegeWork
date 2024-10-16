@@ -3,22 +3,25 @@ public class DynamicQueue implements Queue<Object> {
 
     public void enqueue(Object x) {
         // TASK 3.B.a
-        throw new RuntimeException("Not implemented yet!");
+			Q.prepend(x); // Prepending a value is the same as enqueuing a value at the start of a queue
     }
 
     public Object dequeue() {
         // TASK 3.B.b
-        throw new RuntimeException("Not implemented yet!");
+				Object dequeuedValue = Q.getFirst(); // Defined for return
+				Q.deleteFirst(); // This is a FIFO algorithm so the first value in must be deleted 
+				return dequeuedValue; // Returns deleted value
     }
 
     public Object next() {
         // TASK 3.B.c
-        throw new RuntimeException("Not implemented yet!");
+			return Q.getFirst();
+			
     }
 
     public boolean empty() {
         // TASK 3.B.d
-        throw new RuntimeException("Not implemented yet!");
+				return Q.empty();
     }
 
     public static void main(String[] args) {

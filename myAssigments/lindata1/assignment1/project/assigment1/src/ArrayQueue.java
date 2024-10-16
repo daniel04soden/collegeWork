@@ -40,11 +40,10 @@ public class ArrayQueue implements Queue<Object> {
     public Object next() { // Fn to inspect the next element in the array
         // TASK 3.A.d
 			Object x = Q[head];
-
 		if (n == -1) {
 			;
 		} else {
-		x = Q[head+1];
+		x = Q[head];
 		}
 			return x;
     }
