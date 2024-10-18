@@ -1,11 +1,14 @@
 public class ArrayStack implements Stack<Object> {
 	// Last in first out data structure
+	
+
+	// Array-stack fields
     private Object[] S; // Initialising the array 
 		private int top; // The index of the most recently added value 
 		private int ArrayStackCapacity;
 		private int n; // To be the length of the array 
 
-    public ArrayStack(int capacity) {
+    public ArrayStack(int capacity) { // Constructor defining the array stack
         // TASK 2.A.a
 				this.ArrayStackCapacity = capacity; // reassigning capacity of the array stack to constructor
 				this.S = new Object[capacity]; // constructing the array itself
@@ -15,7 +18,8 @@ public class ArrayStack implements Stack<Object> {
 
     public void push(Object x) {
         // TASK 2.A.b
-				if (top >= n)  { // If the value at the top of the array is equal to the length of the array (we are at the top)
+				// Pushing (adding) a value to the end of the array 
+				if (top >= n)  { // If the pointer to the value at the top of the array is equal to the length of the array (we are at the top)
         System.out.println("Stack overflow"); // Capacity of the stack has exceeded
 				} else {
 					top++; // Moving the top value index up in the stack 

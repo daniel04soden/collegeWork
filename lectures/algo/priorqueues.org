@@ -42,3 +42,36 @@
 * Complete binary trees
 
 - This layered logical structure can be visualised as a compelete binary tree.
+
+
+** Maintaining the heap property
+
+- When a  vlue of a single node violates the heap but both of its descendants are also heaps
+
+  - Exchanging this element with its smallest descendant fixes the heap property for this node
+  - However, the problem is potentially pushed further down the line
+  - If this is the case we must recursively exchange the value with its smallest descendant again until
+    we reach the lowest layer of the heap.
+
+* Creating a binary heap
+
+- To run the heapify procedure on any node of all its descnedants must already be heaps
+
+- The nodes at the bottom of the heap, trivially satisfy the heap property already.
+- Going backward from there we can use the heapify method to establish the heap property
+  node by node
+- After the top node has been heapified the entire array satisfies the heap property
+
+* Heapsort
+
+- Heaps can be used directly for sorting
+
+** Heapsort code
+
+- n = heapsize[A] = length[A]
+- CREATE-HEAP(A)
+  For i = n down to 2
+    exchangeA[1] <--> A[i]
+    heapsize[A] = heapsize[A] - 1
+    HEAPIFY(A,1)
+    
