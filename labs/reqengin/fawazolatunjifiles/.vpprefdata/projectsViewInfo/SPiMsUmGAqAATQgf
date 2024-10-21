@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ProjectsViewInfo>
-	<DiagramOpenInfos activeDiagramId="71LSsUmGAqAATQvq">
+	<DiagramOpenInfos activeDiagramId="pxbjhUmGAqAATQy3">
 		<Info bounds="Re:0.0,0.0,0.0,0.0" diagramId="KuuisUmGAqAATQuc" maximized="true" offsetX="0" offsetY="0"/>
-		<Info bounds="Re:0.0,0.0,1894.0,870.0" diagramId="71LSsUmGAqAATQvq" maximized="true" offsetX="0" offsetY="0"/>
+		<Info bounds="Re:0.0,0.0,0.0,0.0" diagramId="71LSsUmGAqAATQvq" maximized="true" offsetX="0" offsetY="0"/>
+		<Info bounds="Re:0.0,0.0,2534.0,1214.0" diagramId="pxbjhUmGAqAATQy3" maximized="true" offsetX="0" offsetY="0"/>
+		<Info bounds="Re:0.0,0.0,0.0,0.0" diagramId="N8_EZqSGAqAATQyV" maximized="true" offsetX="0" offsetY="0"/>
 	</DiagramOpenInfos>
 	<DiagramLastActivated>
-		<Diagram id="71LSsUmGAqAATQvq" time="1728947450333"/>
-		<Diagram id="KuuisUmGAqAATQuc" time="1728947431800"/>
+		<Diagram id="pxbjhUmGAqAATQy3" time="1729462049782"/>
+		<Diagram id="LUsP1UmGAqAAows." time="1729461539861"/>
+		<Diagram id="N8_EZqSGAqAATQyV" time="1729460354192"/>
+		<Diagram id="71LSsUmGAqAATQvq" time="1729459392355"/>
+		<Diagram id="KuuisUmGAqAATQuc" time="1729459079490"/>
+		<Diagram id="Use Case Statement" time="0"/>
+		<Diagram id="Use Case" time="0"/>
+		<Diagram id="User Story" time="0"/>
+		<Diagram id="Sprint" time="0"/>
+		<Diagram id="Agile" time="0"/>
 	</DiagramLastActivated>
 </ProjectsViewInfo>

@@ -2,12 +2,22 @@
 
 * This is my college todolist of things currently on my agenda
 
-* TODO Linear Data Structures Assignment - due <2024-18-04>
-** TODO Finish Arraystack code
-** TODO Continue ArrayQueue
+* DONE Linear Data Structures Assignment - due <2024-18-04>
+** TODO Linear Data Structures Assignment Oral - due <2024-23-04>
 
 * TODO Server side web development Assignment - due <2024-11-03>
+** TODO Get basic EJS working
+** TODO Get Mongodb connection basic
+** TODO Draft up structure completely justinmind
+*** TODO Make login sys
 
-* TODO Study for OOP test - due <2024-10-04>
+* DONE Study for OOP test - due <2024-10-04>
 
-* TODO Study for OS test - due <2024-10-10>
+* DONE Study for OS test - due <2024-10-10>
+* TODO Study for OS test - due <2024-24-10>
+
+* TODO - Midterm - Sort out notes:
+** TODO - Summarize OS Notes
+** TODO - Test out OOP Notes
+** TODO - Test+Summarize Database Notes
+
