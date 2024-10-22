@@ -1,0 +1,154 @@
+#+title: Project 1 Documentation
+
+* ArrayStack Docs
+
+
+- An array stack or a stack implementation of an array uses an array to represent a data structure in which
+  only the top-most element can be accessed.
+
+  - New items are always put on top of the stack and therefore when an item is removed it is also only taken from the top
+
+** Initializing the ArrayStack
+
+#+BEGIN_SRC java
+  public class ArrayStack implements Stack<Object> {
+
+      private Object[] S
+      private int top;
+      private int capacity;
+      private int n;
+      public ArrayStack(int capacity_){
+       this.capacity = capacity_;
+       this.S = new Object[capacity];
+       this.top = -1; // Pointer to -1 (the current position of the value)
+       this.n = capacity - 1 // Length of the array 
+      }
+
+  }
+
+#+END_SRC
+
+- As we can see above the code implements an array stack by first
+  creating an array Object S with an integer pointing to the top of the stakc
+
+- We then create both a capacity and length to keep track of both the current amount of values (n) on the stack and the maximum capacity.
+
+  - Top is set to -1 as these are modeled around 1 based index methods and must be translated accordingly
+  - The length is set to the max capacity -1 to account for the fact we are working in 0 based arrays.
+
+** Pushing a value on top of the stack
+
+
+#+BEGIN_SRC java
+      public void push(Object x){
+          if(top>= n){
+              System.out.println("Stack overflow helppppp");
+
+          }else{
+              top++
+              Object[top] = x;
+
+          }
+      }
+
+#+END_SRC
+
+- If the top value is already greater than or equal to the current length we have to throw a stack overflow as we have reached the capacity
+  - Otherwise we must increment the top value pointer and assign the value at the index of top to x.
+
+** Popping a value off the top of the stack
+
+#+BEGIN_SRC java
+
+  public Object pop(){
+      if (top == -1){
+          return null // If the array is empty where the top is at index -1
+              // Return null object
+
+      }else{
+          top--
+           return S[top+1] // Give back the value right under the previous top
+
+      }
+
+  }
+#+END_SRC
+- When an element is now removed from the top of the stack, the top pointer is decrimented
+  - We then return the value at the index right before the previous top ie S[top+1]
+
+** Peeking at a value at the top of the Stack
+
+- To peek at the value at the top we must return the value for S at the index Top
+  - We use the top pointer to identify this value
+
+#+BEGIN_SRC java
+  public Object peek(){
+      return S[top];
+  }
+#+END_SRC
+
+
+** Checking whether or not the Stack has no values in it
+
+#+BEGIN_SRC java
+  public boolean empty(){
+      return top == -1;
+  }
+#+END_SRC
+
+* Array Implementation of a queue
+
+** Initialization of the Array Queue
+
+#+BEGIN_SRC java
+  public class ArrayQueue implements Queue<Object>{
+
+      // Fields 
+      private Object[] Q;
+      private int tail;
+      private int head;
+      private int n
+
+         public ArrayQueue(int capacity){
+          this.Q = new Object[capacity];
+          this.n = capacity -1;
+          this.head = -1;
+          this.tail = -1
+      } 
+
+  }
+
+
+#+END_SRC
+
+- Queues can also be implemented using an array, this is done by creating a tail and head pointer pointing to the end and front of the array respectively
+
+** Enqueue a value onto the array queue
+
+- This method will add a new value to the end of the array by incrementing the pointer to the tail value and assigning a new object at this pointer
+
+  #+BEGIN_SRC java
+    public void enqueue(Object x){
+        if(empty()){
+            head=0;
+            tail;
+            }
+        Q[tail]=x;
+            if (tail == n){
+                tail = 0
+
+                }else{
+                tail++;
+
+                }
+        }
+  #+END_SRC 
+
+  
+** Dequeue a value off the array queue
+  #+BEGIN_SRC java
+    public Object dequeue(){
+        
+
+    }
+  #+END_SRC 
