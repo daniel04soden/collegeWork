@@ -45,7 +45,7 @@ public class ArrayQueue implements Queue<Object> {
         if (empty()) { // If the length is -1 return nothing
             return null;
         } else {
-            return x; // Return the object at the index of ehad
+            return x; // Return the object at the index of head
         }
     }
 
