@@ -8,9 +8,9 @@ public class ProgrammingLanguage extends Language {
 
     // Constructors
     public ProgrammingLanguage(int monthsLearned) {
-				super();
+        super();
         this.learningMonths = monthsLearned;
-				this.setAlphabetBased(true);
+        this.setAlphabetBased(true);
     }
 
     public ProgrammingLanguage(int _numWorldSpeakers, int _monthsLearned) {
