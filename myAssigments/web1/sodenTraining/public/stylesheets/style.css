@@ -10,5 +10,17 @@ html {
 }
 
 a {
-    color: #00b7ff;
+    color: red;
+    text-decoration: none;
+}
+
+a:hover {
+    color:purple;
+    text-decoration: underline;
+}
+
+.book-button{
+        text-decoration: none;
+        padding: 0.5rem;
+        border: 1px solid white;  
 }
