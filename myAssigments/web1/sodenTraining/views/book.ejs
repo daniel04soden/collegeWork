@@ -2,5 +2,41 @@
 
     <main>
         <h2>Epic booking page</h2>
+        <div class="book-square">
+          <h3>Please provide training session details below:</h3>
+          <hr>
+
+          <p>Gender:</p>
+          <form>
+
+            <input type="radio" id="male" name="gender" value="Male">
+            <label for="Male">Male</label><br>
+
+            <input type="radio" id="female" name="gender" value="Female">
+            <label for="Female">Female</label><br>
+
+            <input type="radio" id="other" name="gender" value="Other">
+            <label for="Other">Other</label><br>
+
+
+
+            <label for="name">Enter your name below:</label><br>
+            <input type="text" id="name" name="" value=""><br>
+
+
+            <label for="id">Enter your given ID (10 Characters long) below:</label><br>
+            <input type="text" id="id" name="id" value=""><br>
+            
+
+            <label for="time">Enter the date you would like to book this session for:</label><br>
+            <input type="date" id="time" name="time" value=""><br>
+
+
+            <label for="time">Enter the time you would like to book this session for:</label><br>
+            <input type="time" id="time" name="time" value=""><br>
+
+            <button type="submit">Submit</button>
+          </form>
+        </div>
     </main>
     <%- include('partials/foot') %>
