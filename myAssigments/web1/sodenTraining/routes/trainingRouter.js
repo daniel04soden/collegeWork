@@ -25,7 +25,17 @@ trainingRouter.route("/contact").get((req, res, next) => {
 
 trainingRouter.route("/help").get((req, res, next) => {
   res.render("help.ejs", { title: "Help/Faqs" });
-  console.log("Routed to contact us page");
+  console.log("Routed to help page");
+});
+
+trainingRouter.route("/login").get((req, res, next) => {
+  res.render("login.ejs", { title: "Login to account" });
+  console.log("Routed to login page");
+});
+
+trainingRouter.route("/register").get((req, res, next) => {
+  res.render("register.ejs", { title: "Register an account" });
+  console.log("Routed to register page");
 });
 
 module.exports = trainingRouter;
