@@ -44,6 +44,8 @@ app.use(function (err, req, res, next) {
 
 // Mongooose code
 
+let errorMessage;
+
 // Registering
 
 app.post("/register",async (req,res) => {
@@ -78,7 +80,6 @@ app.post("/register",async (req,res) => {
 // Logging in 
 
 app.post("/login", async (req,res) => {
-  let errorMessage;
   try {
     // Check for inputted username
     const checkName = await collection.User.findOne({
@@ -103,6 +104,26 @@ app.post("/login", async (req,res) => {
     errorMessage = 'Username or password wrong';
    res.send(errorMessage);
    console.log(errorMessage);
+  }
+})
+
+// Booking Code
+
+app.post('/book', async (req,res) =>{
+  try {
+    const checkID = await collection.Book.findOne({
+      userID: req.body.id
+    })
+	if(checkID === true){
+		res.render('index');
+	}else{
+	errorMessage = 'ID not found';
+	res.send(errorMessage);
+	}
+    
+  } catch{
+    errorMessage = 'Unknown userID'
+    res.send(errorMessage)
   }
 }
 
