@@ -1,13 +1,16 @@
 const mongoose = require('mongoose'); // Exporting over mongoose
-const connect = mongoose.connect('mongodb://localhost:27017/training/users'); // Connecting to the local db
 
-connect.then(() => {console.log('Connected to db !');});
-
-connect.catch(() => {console.log('Cannot currently connect to db')});
+mongoose.connect('mongodb://localhost:27017/training')
+  .then(() => {
+    console.log('Connected to database');
+  })
+  .catch((err) => {
+    console.error('Error connecting to database:', err);
+  });
 
 // Creating our schema:
 
-const schema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -26,6 +29,25 @@ const schema = new mongoose.Schema({
     }
 });
 
-const collection = new mongoose.model("users",schema);
+const bookSchema = new mongoose.Schema(
+    {
+        userID: {
+            type: Number,
+            required: true
+        },
+        date:{
+            type:String,
+            required:true
+        },
+        time:{
+            type:String,
+            required:true
+        }
 
-module.exports = collection;
+    }
+)
+
+const User = mongoose.model('User', userSchema);
+const Book = mongoose.model('Book', bookSchema);
+
+module.exports = { User, Book };

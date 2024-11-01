@@ -54,7 +54,7 @@ app.post("/register",async (req,res) => {
     age: req.body.age
   }
 
-  const userExists = await collection.findOne({name: individualUser.name});
+  const userExists = await collection.User.findOne({name: individualUser.name});
 
   if (userExists){
     res.send('Username taken, please choose a different username')
@@ -67,7 +67,7 @@ app.post("/register",async (req,res) => {
     const passSalt = 10;
     const saltHashPassword = await bcrypt.hash(individualUser.password, passSalt);
 
-    const userData = await collection.insertMany(individualUser);
+    const userData = await collection.User.insertMany(individualUser);
     console.log(userData);
   }
   }
@@ -81,7 +81,7 @@ app.post("/login", async (req,res) => {
   let errorMessage;
   try {
     // Check for inputted username
-    const checkName = await collection.findOne({
+    const checkName = await collection.User.findOne({
       name: req.body.username
     })
     if(!checkName){
