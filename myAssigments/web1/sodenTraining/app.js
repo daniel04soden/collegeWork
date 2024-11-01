@@ -3,10 +3,12 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const bcrypt = require('bcrypt');
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const trainingRouter = require("./routes/trainingRouter");
+const collection = require("./mongoose");
 
 const app = express();
 
@@ -39,6 +41,41 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
+
+// Mongooose code
+
+// Registering
+
+app.post("/register",async (req,res) => {
+  const individualUser = {
+    name: req.body.username,
+    password: req.body.password,
+    email: req.body.email,
+    age: req.body.age
+  }
+
+  const userExists = await collection.findOne({name: individualUser.name});
+
+  if (userExists){
+    res.send('Username taken, please choose a different username')
+  }else{
+
+    if (age < 18) {
+      res.send('You are too young to sign up for this system please come back when you are 18')
+    } else {
+      
+    const passSalt = 10;
+    const saltHashPassword = await bcrypt.hash(individualUser.password, passSalt);
+
+    const userData = await collection.insertMany(individualUser);
+    console.log(userData);
+  }
+  }
+
+
+});
+
+// Logging in 
 
 
 
