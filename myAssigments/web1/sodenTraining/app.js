@@ -77,6 +77,36 @@ app.post("/register",async (req,res) => {
 
 // Logging in 
 
+app.post("/login", async (req,res) => {
+  let errorMessage;
+  try {
+    // Check for inputted username
+    const checkName = await collection.findOne({
+      name: req.body.username
+    })
+    if(!checkName){
+      errorMessage = 'Unknown name'
+      res.send(errorMessage)
+    }
 
+    // Compare the provided password to the matching password of that name
+      const passwordsMatch = await bcrypt.compare(req.body.password, checkName.password);
+
+      if (passwordsMatch) {
+       res.render('book') 
+      } else {
+       errorMessage = 'Wrong password'
+       res.send(errorMessage)
+      }
+    
+  } catch{
+    errorMessage = 'Username or password wrong';
+   res.send(errorMessage);
+   console.log(errorMessage);
+  }
+}
+
+
+)
 
 module.exports = app;
