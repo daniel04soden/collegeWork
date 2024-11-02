@@ -1,3 +1,5 @@
+// Node modules required for this app
+
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
@@ -12,7 +14,7 @@ const collection = require("./mongoose");
 
 const app = express();
 
-// view engine setup
+// Setting up EJS
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
@@ -21,6 +23,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+// Using various routers to navigate the website
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
@@ -42,12 +46,12 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
-// Mongooose code
+// Mongoose interaction code
 
 
 //Important variables
 let errorMessage;
-let isLoggedIn = false;
+let isLoggedIn = false; // Will be implemented, will determine whether a user will see login, logout or register
 
 // Registering
 
@@ -56,7 +60,8 @@ app.post("/register",async (req,res) => {
     name: req.body.username,
     password: req.body.password,
     email: req.body.email,
-    age: req.body.age
+    age: req.body.age,
+    id: req.body.userID
   }
 
   const userExists = await collection.User.findOne({name: individualUser.name});
@@ -114,9 +119,9 @@ app.post("/login", async (req,res) => {
 
 app.post('/book', async (req,res) =>{
   try {
-    const checkID = await collection.Book.findOne({
-      userID: req.body.id
-    })
+
+    const checkID = await collection.User.findOne({userID: req.body.id})
+
 	if(checkID === true){
 		res.render('index');
 	}else{
@@ -130,7 +135,5 @@ app.post('/book', async (req,res) =>{
   }
 }
 
-
-)
 
 module.exports = app;
