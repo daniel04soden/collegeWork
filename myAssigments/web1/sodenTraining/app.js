@@ -44,7 +44,10 @@ app.use(function (err, req, res, next) {
 
 // Mongooose code
 
+
+//Important variables
 let errorMessage;
+let isLoggedIn = false;
 
 // Registering
 

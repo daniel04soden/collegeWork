@@ -13,11 +13,13 @@ mongoose.connect('mongodb://localhost:27017/training')
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     email: {
         type: String,
-        required: false
+        required: false,
+        unique: true
     },
     age: {
         type: Number,
@@ -33,15 +35,19 @@ const bookSchema = new mongoose.Schema(
     {
         userID: {
             type: Number,
-            required: true
+            required: true,
+            unique: true
         },
         date:{
-            type:String,
-            required:true
+            type:Date,
+            required:true,
+            default: Date.now
         },
         time:{
             type:String,
-            required:true
+            required:true,
+            default:'12:30 PM'
+            
         }
 
     }
