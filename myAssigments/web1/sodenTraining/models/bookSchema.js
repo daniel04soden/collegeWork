@@ -21,3 +21,7 @@ const bookSchema = new mongoose.Schema(
 
     }
 )
+
+const collection = mongoose.model("booking", bookSchema);
+
+module.exports = collection;
