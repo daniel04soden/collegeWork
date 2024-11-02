@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const collection = require("../mongoose")
+const bcrypt = require('bcrypt')
+const users = require("../models/userSchema")
 
 /* GET users listing. */
 router.get("/", function (req, res, next) {
@@ -11,7 +12,6 @@ router.get("/login", function (req, res, next) {
   res.render("login.ejs", { title: "Login to Account" });
   console.log("Connected user");
 });
-
 
 router.get("/register", function (req, res, next) {
   res.render("register.ejs", { title: "Register for an account" });
@@ -25,24 +25,24 @@ router.post("/register",async (req,res) => {
     email: req.body.email,
     age: req.body.age,
     password: req.body.password,
-    id: req.body.userID
+    id: req.body.userid
   }
 
-  const userExists = await collection.User.findOne({name: individualUser.name});
+  const userExists = await users.findOne({name: individualUser.name});
   console.log(individualUser)
 
   if (userExists){
     res.send('Username taken, please choose a different username')
   }else{
 
-    if (age < 18) {
+    if (req.body.age < 18) {
       res.send('You are too young to sign up for this system please come back when you are 18')
     } else {
       
     const passSalt = 10;
     const saltHashPassword = await bcrypt.hash(individualUser.password, passSalt);
 
-    const userData = await collection.User.insertMany(individualUser);
+    const userData = await users.insertMany(individualUser);
     console.log(userData);
   }
   }
@@ -55,7 +55,7 @@ router.post("/register",async (req,res) => {
 router.post("/login", async (req,res) => {
   try {
     // Check for inputted username
-    const checkName = await collection.User.findOne({
+    const checkName = await users.findOne({
       name: req.body.username
     })
     if(!checkName){

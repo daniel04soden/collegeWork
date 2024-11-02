@@ -6,13 +6,12 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-const bcrypt = require('bcrypt');
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const trainingRouter = require("./routes/trainingRouter");
 const mongoose = require("mongoose")
-const collection = require("./mongoose");
+const booking = require('./models/bookSchema')
 
 const app = express();
 
@@ -67,7 +66,7 @@ let isLoggedIn = false; // Will be implemented, will determine whether a user wi
 app.post('/session/book', async (req,res) => {
   try {
 
-    const checkID = await collection.User.findOne({userID: req.body.id})
+    const checkID = await booking.findOne({userID: req.body.id})
 
     if (checkID === true) {
       res.render('index');
