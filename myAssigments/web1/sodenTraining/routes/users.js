@@ -20,11 +20,12 @@ router.get("/register", function (req, res, next) {
 // Registering
 
 router.post("/register",async (req,res) => {
+  const passSalt = 10;
   const individualUser = {
     name: req.body.username,
     email: req.body.email,
     age: req.body.age,
-    password: req.body.password,
+    password: await bcrypt.hash(req.body.password,10),
     id: req.body.userid
   }
 
@@ -39,8 +40,6 @@ router.post("/register",async (req,res) => {
       res.send('You are too young to sign up for this system please come back when you are 18')
     } else {
       
-    const passSalt = 10;
-    const saltHashPassword = await bcrypt.hash(individualUser.password, passSalt);
 
     const userData = await users.insertMany(individualUser);
     console.log(userData);
@@ -67,7 +66,7 @@ router.post("/login", async (req,res) => {
       const passwordsMatch = await bcrypt.compare(req.body.password, checkName.password);
 
       if (passwordsMatch) {
-       res.render('book') 
+       res.redirect('/') 
       } else {
        errorMessage = 'Wrong password'
        res.send(errorMessage)

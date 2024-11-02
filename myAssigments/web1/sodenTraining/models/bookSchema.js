@@ -15,8 +15,6 @@ const bookSchema = new mongoose.Schema(
         time:{
             type:String,
             required:true,
-            default:'12:30 PM'
-            
         }
 
     }

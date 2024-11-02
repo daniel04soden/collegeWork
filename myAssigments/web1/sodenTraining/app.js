@@ -11,7 +11,6 @@ const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const trainingRouter = require("./routes/trainingRouter");
 const mongoose = require("mongoose")
-const booking = require('./models/bookSchema')
 
 const app = express();
 
@@ -54,30 +53,6 @@ mongoose.connect('mongodb://localhost:27017/training')
   })
   .catch((err) => {
     console.error('Error connecting to database:', err);
-  });
-
-//Important variables
-let errorMessage;
-let isLoggedIn = false; // Will be implemented, will determine whether a user will see login, logout or register
-
-
-// Booking Code
-
-app.post('/session/book', async (req,res) => {
-  try {
-
-    const checkID = await booking.findOne({userID: req.body.id})
-
-    if (checkID === true) {
-      res.render('index');
-    } else {
-      errorMessage = 'ID not found';
-      res.send(errorMessage);
-    }
-
-  } catch {
-    errorMessage = 'Unknown userID'
-    res.send(errorMessage)}
   });
 
   module.exports = app;

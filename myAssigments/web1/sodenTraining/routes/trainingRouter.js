@@ -1,5 +1,7 @@
 const express = require("express");
 const trainingRouter = express.Router();
+const users = require('../models/userSchema')
+const bookings = require('../models/bookSchema')
 
 trainingRouter
   .route("/")
@@ -11,10 +13,25 @@ trainingRouter
 trainingRouter.route("/book").get((req, res, next) => {
   res.render("book.ejs", { title: "Book a session" });
   console.log("Routed to booking page");
+})
+.post(async (req,res) => {
+    const bookingData = {
+      userID:req.body.id,
+      date:req.body.date,
+      time:req.body.time
+    }
+    const userData = await users.findOne({id : req.body.id})
+    if (userData != []) {
+      const bookingConfirmation = await bookings.insertMany(bookingData)
+    } else {
+     res.send('Invalid id') 
+    }
 });
 
+
+
 trainingRouter.route("/manage").get((req, res, next) => {
-  res.render("managing.ejs", { title: "Manage your session" });
+  res.render('managing.ejs', {: , title: 'Manage Your Session' });
   console.log("Routed to manage booking page");
 });
 
@@ -27,6 +44,7 @@ trainingRouter.route("/help").get((req, res, next) => {
   res.render("help.ejs", { title: "Help/Faqs" });
   console.log("Routed to help page");
 });
+
 
 
 module.exports = trainingRouter;
