@@ -1,13 +1,4 @@
 const mongoose = require('mongoose'); // Exporting over mongoose
-
-mongoose.connect('mongodb://localhost:27017/training')
-  .then(() => {
-    console.log('Connected to database');
-  })
-  .catch((err) => {
-    console.error('Error connecting to database:', err);
-  });
-
 // Creating our schema:
 
 const userSchema = new mongoose.Schema({
