@@ -117,23 +117,21 @@ app.post("/login", async (req,res) => {
 
 // Booking Code
 
-app.post('/book', async (req,res) =>{
+app.post('/book', async (req,res) => {
   try {
 
     const checkID = await collection.User.findOne({userID: req.body.id})
 
-	if(checkID === true){
-		res.render('index');
-	}else{
-	errorMessage = 'ID not found';
-	res.send(errorMessage);
-	}
-    
-  } catch{
+    if (checkID === true) {
+      res.render('index');
+    } else {
+      errorMessage = 'ID not found';
+      res.send(errorMessage);
+    }
+
+  } catch {
     errorMessage = 'Unknown userID'
-    res.send(errorMessage)
-  }
-}
+    res.send(errorMessage)}
+  });
 
-
-module.exports = app;
+  module.exports = app;
