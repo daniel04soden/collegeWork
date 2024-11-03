@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt')
 const users = require("../models/userSchema")
 
-/* GET users listing. */
+
 router.get("/", function (req, res, next) {
   res.send("respond with a resource");
 });
@@ -29,14 +29,14 @@ router.post("/register",async (req,res) => {
     id: req.body.userid
   }
 
-  const userExists = await users.findOne({name: individualUser.name});
+  const nameTaken = await users.findOne({name: individualUser.name});
   console.log(individualUser)
 
-  if (userExists){
+  if (nameTaken){
     res.send('Username taken, please choose a different username')
   }else{
 
-    if (req.body.age < 18) {
+    if (individualUser.age < 18) {
       res.send('You are too young to sign up for this system please come back when you are 18')
     } else {
       

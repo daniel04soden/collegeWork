@@ -7,6 +7,10 @@ const bookSchema = new mongoose.Schema(
             required: true,
             unique: true
         },
+        name:{
+            type: String,
+            unique:true
+        },
         date:{
             type:Date,
             required:true,

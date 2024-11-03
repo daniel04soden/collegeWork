@@ -15,12 +15,17 @@ trainingRouter.route("/book").get((req, res, next) => {
   console.log("Routed to booking page");
 })
 .post(async (req,res) => {
+  // Identifying user from id
+    const userData = await users.findOne({id : req.body.id})
+
+    // Storing booking information
     const bookingData = {
       userID:req.body.id,
+      name: userData.name,
       date:req.body.date,
       time:req.body.time
     }
-    const userData = await users.findOne({id : req.body.id})
+    
     if (userData != []) {
       const bookingConfirmation = await bookings.insertMany(bookingData)
     } else {
@@ -28,13 +33,31 @@ trainingRouter.route("/book").get((req, res, next) => {
     }
 });
 
+trainingRouter.route("/manage")
+  .get((req, res, next) => {
+    res.render('managing.ejs', {title: 'Manage Your Session' });
+  })
+  .post(async (req,res,next) => {
+    try {
+      const userIdcheck = req.body.idCheck;
+      if (!userIdcheck) {
+        return res.send('Please give an ID')
+      } else {
+       const bookingData = await bookings.findOne({userID:userIdcheck});
 
-
-trainingRouter.route("/manage").get(async ( req, res, next) => {
-  const managingData = await bookings.findOne({id: req.body.idCheck});
-  res.render('managing.ejs', { bookingInfo: managingData , title: 'Manage Your Session' });
-  console.log("Routed to manage booking page");
+       if (bookingData != []) {
+          return res.send('No booking found with this ID');
+       } else {
+        res.render('managing.ejs',{bookingInfo: bookingData, title: 'Manage your Bookings'}) 
+        console.log('found booking page')
+       }
+      }
+    } catch {
+      console.log('id error')
+     res.render('managing.ejs',{errorMessage: 'An error occured while retrieving your booking info'}) 
+    }
 });
+
 
 trainingRouter.route("/contact").get((req, res, next) => {
   res.render("contact.ejs", { title: "Contact Us" });

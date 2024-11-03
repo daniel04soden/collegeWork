@@ -11,7 +11,15 @@
           </form>
         </div>
         <div>
-          
+         <% if (bookingInfo) { %> 
+            <ul>Your Booking Information</ul>
+            <li><%= bookingInfo.name %> </li>
+            <li><%= bookingInfo.date %> </li>
+            <li><%= bookingInfo.time %> </li>
+          <% } else { %>
+            <p>No booking information available.</p>
+          <% } %>
+           
         </div>
 
 <%- include('partials/foot') %> 
