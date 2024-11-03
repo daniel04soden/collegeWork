@@ -19,6 +19,17 @@
 
             <label for="time">Enter the time you would like to book this session for:</label><br>
             <input type="text" id="time" name="time" value=""><br>
+            <hr>
+            <h4>Card Details</h4>
+
+            <label for="cardNumber">Enter your card Number</label><br>
+            <input type="number" id="cardNumber" name="cardNumber" minlength="13" maxlength="19" value=""><br>
+
+            <label for="expiryDate">Enter your cards expiry date:</label><br>
+            <input type="date" id="expiryDate" name="expiryDate" value=""><br>
+
+            <label for="cvc">CVC (Security pin):</label><br>
+            <input type="password" id="cvc" name="cvc" value="" minlength="3" maxlength="3" required><br>
 
             <button type="submit">Submit</button>
           </form>

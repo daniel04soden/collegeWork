@@ -1,0 +1,21 @@
+<%- include('partials/head') %> 
+            <table>
+              <thead>
+              <tr>
+                <th>Name</th>
+                <th>Booking Date</th>
+                <th>Booking time</th>
+              </tr>
+              </thead>
+              <tbody>
+                <% bookingInfo.forEach(element => { %>
+                <% console.log('hi') %>
+                <tr>
+                  <td> <%= element.name %> </td>
+                  <td> <%= element.date %> </td>
+                  <td><%= element.time %> </td>
+                <% }); %>
+                </tr>
+             </tbody> 
+            </table> 
+<%- include('partials/foot') %> 

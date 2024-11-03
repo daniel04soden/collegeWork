@@ -19,6 +19,18 @@ const bookSchema = new mongoose.Schema(
         time:{
             type:String,
             required:true,
+        },
+        cardNumber:{
+            type:Number,
+            required:true
+        },
+        expiryDate:{
+            type:Date,
+            required:true
+        },
+        securityCode:{
+            type:String,
+            required: true
         }
 
     }

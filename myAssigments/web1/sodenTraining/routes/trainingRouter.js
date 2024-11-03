@@ -2,6 +2,7 @@ const express = require("express");
 const trainingRouter = express.Router();
 const users = require('../models/userSchema')
 const bookings = require('../models/bookSchema')
+const encryption = require('bcrypt')
 
 trainingRouter
   .route("/")
@@ -23,7 +24,10 @@ trainingRouter.route("/book").get((req, res, next) => {
       userID:req.body.id,
       name: userData.name,
       date:req.body.date,
-      time:req.body.time
+      time:req.body.time,
+      cardNumber:req.body.cardNumber,
+      expiryDate:req.body.expiryDate,
+      securityCode: await encryption.hash(req.body.cvc,10)
     }
     
     if (userData != []) {
@@ -36,28 +40,18 @@ trainingRouter.route("/book").get((req, res, next) => {
 trainingRouter.route("/manage")
   .get((req, res, next) => {
     res.render('managing.ejs', {title: 'Manage Your Session' });
+
   })
-  .post(async (req,res,next) => {
-    try {
-      const userIdcheck = req.body.idCheck;
-      if (!userIdcheck) {
-        return res.send('Please give an ID')
-      } else {
-       const bookingData = await bookings.findOne({userID:userIdcheck});
+  .post(async (req,res) => {
+    const userDataBooking = await users.findOne({id:req.body.idCheck})
 
-       if (bookingData != []) {
-          return res.send('No booking found with this ID');
-       } else {
-        res.render('managing.ejs',{bookingInfo: bookingData, title: 'Manage your Bookings'}) 
-        console.log('found booking page')
-       }
-      }
-    } catch {
-      console.log('id error')
-     res.render('managing.ejs',{errorMessage: 'An error occured while retrieving your booking info'}) 
+    if(userDataBooking != null){
+      res.render("display-book.ejs",{title: "Bookings", bookingInfo :userDataBooking})
+    }else{
+      res.send('Unknown id try again!')
     }
-});
-
+    
+  });
 
 trainingRouter.route("/contact").get((req, res, next) => {
   res.render("contact.ejs", { title: "Contact Us" });
