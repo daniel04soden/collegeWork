@@ -3,13 +3,11 @@ const mongoose = require('mongoose')
 const bookSchema = new mongoose.Schema(
     {
         userID: {
-            type: Number,
+            type: String,
             required: true,
-            unique: true
         },
         name:{
             type: String,
-            unique:true
         },
         date:{
             type:Date,

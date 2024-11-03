@@ -8,13 +8,10 @@
               </tr>
               </thead>
               <tbody>
-                <% bookingInfo.forEach(element => { %>
-                <% console.log('hi') %>
                 <tr>
-                  <td> <%= element.name %> </td>
-                  <td> <%= element.date %> </td>
-                  <td><%= element.time %> </td>
-                <% }); %>
+                  <td>  <%= bookingInfo.name%> </td>
+                  <td> <%=bookingInfo.date%> </td>
+                  <td> <%=bookingInfo.time%> </td>
                 </tr>
              </tbody> 
             </table> 

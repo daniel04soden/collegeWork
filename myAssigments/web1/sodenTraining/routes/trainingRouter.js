@@ -43,10 +43,10 @@ trainingRouter.route("/manage")
 
   })
   .post(async (req,res) => {
-    const userDataBooking = await users.findOne({id:req.body.idCheck})
+    const bookingInfo = await bookings.findOne({userID:req.body.idCheck})
 
-    if(userDataBooking != null){
-      res.render("display-book.ejs",{title: "Bookings", bookingInfo :userDataBooking})
+    if(bookingInfo != null){
+      res.render("display-book.ejs",{title: "Bookings", bookingInfo :bookingInfo})
     }else{
       res.send('Unknown id try again!')
     }
