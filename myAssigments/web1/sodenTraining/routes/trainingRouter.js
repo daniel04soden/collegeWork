@@ -30,8 +30,9 @@ trainingRouter.route("/book").get((req, res, next) => {
 
 
 
-trainingRouter.route("/manage").get((req, res, next) => {
-  res.render('managing.ejs', {: , title: 'Manage Your Session' });
+trainingRouter.route("/manage").get(async ( req, res, next) => {
+  const managingData = await bookings.findOne({id: req.body.idCheck});
+  res.render('managing.ejs', { bookingInfo: managingData , title: 'Manage Your Session' });
   console.log("Routed to manage booking page");
 });
 
