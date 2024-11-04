@@ -1,22 +1,44 @@
-package assignment2;
-
 public class DivideAndConquer {
 
     public static int fibonacci(int n) {
         // TASK 1.A.a
-        throw new RuntimeException("Not yet implemented!");
+				if (n == 0) { // Base case 0
+				return 0;
+				} else if(n == 1 ){ // Base case 1 
+				return 1;
+				}else{
+				return fibonacci(n-1) + fibonacci(n-2);
+			}
     }
 
     public static int search(int[] A, int v)
     {
         // TASK 1.A.b
-        throw new RuntimeException("Not yet implemented!");
+				int res = 0;
+				int n = A.length;
+				
+				if (n == 0 ){
+				return 0;
+		}else{
+					if (A[n/2] <= v) {
+                        
+					} else {
+				
+					}
+		}
+
+
+		return res;
     }
 
     public static void hanoi(int n, char A, char B, char C)
     {
         // TASK 1.A.c
-        throw new RuntimeException("Not yet implemented!");
+        if (n == 0) {
+            ;
+        } else {
+            
+        }
     }
 
     public static void main(String[] args) {

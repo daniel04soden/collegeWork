@@ -6,8 +6,6 @@ const encryption = require('bcrypt')
 
 trainingRouter
   .route("/")
-  .get((req, res, next) => {})
-  .post((req, res, next) => {})
   .put((req, res, next) => {})
   .delete((req, res, next) => {});
 
