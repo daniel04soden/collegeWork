@@ -8,6 +8,7 @@ public class HeapOfBinaryTries {
     {
         // TASK 3.A.a
         throw new RuntimeException("Not yet implemented!");
+        
     }
 
     public HeapOfBinaryTries(BinaryTrie[] A)

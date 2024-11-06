@@ -1,6 +1,5 @@
 // Node modules required for this app
 
-
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
