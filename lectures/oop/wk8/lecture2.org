@@ -1,0 +1,104 @@
+#+title: Lecture2
+
+* Mutability
+
+- In python for example a datatype like a tuple cannot be changed at a particular index
+
+ #+begin_src python
+
+my_tuple = (1,2,4)
+print(my_tuple)
+
+my_tuple[0] = 2 # This cannot be changed/assigned to a new value as it is immutable
+
+ #+end_src
+
+Immutable = an object whose state cannot be modified after creation.
+Mutable = an object which can be modified after intialisation
+
+** Java implementation
+
+#+begin_src java
+
+public class Tuple{
+
+    private int first;
+    private boolean second;
+
+        public Tuple(int _first, boolean _second){
+        this.first = _first;
+        this.second = _second;
+    }
+
+    // Getters
+
+    public int getFirst(){
+        return this.first;
+    }
+
+
+    public boolean getSecond(){
+        return this.second;
+    }
+
+    // Setters
+
+    // Setters will not be created as this is to modelled as an immutable value
+
+// Non explicitly defined data type tuple
+
+public class TupleGeneric<T1,T2>{
+
+    private T1 first;
+    private T2 second;
+
+
+    public TupleGeneric(T1 _first, T2 _second){
+        this.first = _first;
+        this.second = _second;
+
+    }
+
+}
+
+    public static void main(String[] args){
+        Tuple t = new Tuple(1,true);
+        Tuple t2 = new Tuple(2,false);
+        // Tuple t3 = new Tuple(2,3); - Will not work as the datatypes are explicitly defined!
+
+        // Generic tuple
+
+        TupleGeneric<Double, String> TG = new TupleGeneric<Double String>(2.5,"This is long omg")
+
+        // ArrayList
+
+        ArrayList<Integer> a = new ArrayList<Integer>();
+        a.add(10);
+        a.add(10);
+        a.add(10);
+
+        ArrayList<boolean> a2 = new ArrayList<boolean>();
+        a.add(true);
+        a.add(false);
+        a.add(false);
+    }
+
+}
+
+
+#+end_src
+
+
+** Java Generics
+
+- What is seen above within TupleGeneric is an example of java generics in which the datatypes aren't explicitly defined
+  - For the majority of the time java types need to be explicitly defined but if we are making a datatype like a tuple or an arrayList
+    we need to be able to support all various kinds of datatypes.
+  - An arraylist is a dynamic array which doesn't require you to define the capacity of the arraylist.
+  - Regardless of this being a more general array approach, java does not support various type arrays dynamically apart from using object
+    as the datatype. This isn't a good traditional approach as every datatype is an object but that means even objects
+    we've defined ourself can be put in the array.
+
+** Dictionaries
+
+-
