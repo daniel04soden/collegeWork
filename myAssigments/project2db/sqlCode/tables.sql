@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS consultation (
 
 CREATE TABLE IF NOT EXISTS treatment (
   VARCHAR(20) treatmentNo,
-  VARCHAR(20) consultNo
+  VARCHAR(20) consultNo,
   PRIMARY KEY treatmentNo,
   Foreign Key (consultNo) REFERENCES (consultation)
 );
