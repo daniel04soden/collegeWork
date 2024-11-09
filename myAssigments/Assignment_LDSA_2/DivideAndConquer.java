@@ -13,23 +13,24 @@ public class DivideAndConquer {
     }
   }
 
-  public static int search(int[] A, int v) {
+  public static int search(int[] A, int v) { // V is the searched for value and A is the array
     // TASK 1.A.b
-    int n = A.length;
-    if (n == 0) {
-      return 0;
-    } else if (n == 1) {
-      return 1;
-    } else {
-      int[] leftHandSide = Arrays.copyOfRange(A, 0, n / 2); // Left hand side copies the array A from range 0 to half
-      int[] rightHandSide = Arrays.copyOfRange(A, n / 2, n); // Right hand side copies array A from half to the end
-      int middleValue = A[n / 2]; // Vallue right in the middle of the array
-      if (middleValue < v) {
-        return search(leftHandSide, v);
+    int lowerIndex = 0; // Lower value index
+    int higherIndex = A.length - 1; // Higher Value index
+
+    while (lowerIndex <= higherIndex) {
+      int middleIndex = lowerIndex + (higherIndex - lowerIndex) / 2;
+
+      if (A[middleIndex] == v) {
+        return v;
+      } else if (A[middleIndex] <= v) {
+        lowerIndex = middleIndex + 1;
       } else {
-        return search(rightHandSide, v);
+        higherIndex = middleIndex - 1;
       }
     }
+
+    return -1; // If number is not found, return -1
   }
 
   public static void hanoi(int n, char A, char B, char C) {

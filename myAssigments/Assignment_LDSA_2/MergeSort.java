@@ -2,9 +2,8 @@ public class MergeSort {
 
   private static int[] merge(int[] A1, int[] A2) {
     // TASK 2.A.a
-    int i = 1;
-    int j = 1;
-    return 
+
+    return A1;
   }
 
   public static int[] mergesort(int[] A) {
