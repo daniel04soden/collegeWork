@@ -2,13 +2,37 @@ public class MergeSort {
 
   private static int[] merge(int[] A1, int[] A2) {
     // TASK 2.A.a
+<<<<<<< HEAD
 
     return A1;
+=======
+    int n = A1.length + A2.length; // The new arrays length is the two arrays sum
+    int i = 0; // Index for A1
+    int j = 0; // Index for A2
+    int[] A3 = new int[n]; // New array with the capacity of n
+
+    for (int k = 0; k < n; k++) {
+      if (A1[i] <= A2[j]) {
+        A3[k] = A1[i];
+        i++;
+      } else {
+        A3[k] = A2[j];
+        j++;
+      }
+
+    }
+    return A3;
+>>>>>>> fb10922 (added partial merge sort code, nearly there)
   }
 
   public static int[] mergesort(int[] A) {
     // TASK 2.A.b
-    throw new RuntimeException("Not yet implemented!");
+    // if (A.length <= 1) {
+    // return A;
+    // }
+    //
+    throw new RuntimeException("bruh");
+
   }
 
   private static void print(int[] A) {
