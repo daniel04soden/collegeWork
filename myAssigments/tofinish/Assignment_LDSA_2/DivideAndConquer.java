@@ -7,7 +7,7 @@ public class DivideAndConquer {
     } else if (n == 1) { // Base case 1
       return 1;
     } else {
-      return fibonacci(n - 1) + fibonacci(n - 2);
+      return fibonacci(n - 1) + fibonacci(n - 2); // Recursively run the fibonacci sequence to the previous and second previous value
     }
   }
 
@@ -16,15 +16,15 @@ public class DivideAndConquer {
     int lowerIndex = 0; // Lower value index
     int higherIndex = A.length - 1; // Higher Value index
 
-    while (lowerIndex <= higherIndex) {
-      int middleIndex = lowerIndex + (higherIndex - lowerIndex) / 2;
+    while (lowerIndex <= higherIndex) { // While the lower pointing index is less than or equal to the higher index,loop
+      int middleIndex = lowerIndex + (higherIndex - lowerIndex) / 2; // Middle index reassigned each loop
 
-      if (A[middleIndex] == v) {
-        return v;
-      } else if (A[middleIndex] <= v) {
-        lowerIndex = middleIndex + 1;
+      if (A[middleIndex] == v) { // If the search value is the middle index
+        return v; // Return the search value
+      } else if (A[middleIndex] < v) { // If the value at the middle index is less than v
+        lowerIndex = middleIndex + 1; // Move the middle index forward
       } else {
-        higherIndex = middleIndex - 1;
+        higherIndex = middleIndex - 1; // Otherwise move the higher index back
       }
     }
 

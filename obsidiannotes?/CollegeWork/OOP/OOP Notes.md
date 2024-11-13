@@ -74,7 +74,7 @@ Myconcept newObject = new Myconcept();
 - The default constructor will initialise any:
 	- Reference variable field (green arrow) as null.
 	- Primitive variable field to a fixed value
-	- E.g.: an int wold be 0 and a boolean would be false
+	- E.g.: An int wold be 0 and a boolean would be false
 
 ### Copy constructor
 - Shallow Copy -> Just simply copying all aspects of the premade object 
@@ -88,3 +88,36 @@ Myconcept newObject = new Myconcept();
 	   Car deepcopyHonda = new Car(             honda.name, new ArrayList<(honda.colors));   
 ```
 
+# Inheritance
+
+## What is inheritance?
+
+- A mechanism in which one object acquires all the properties and behaviours of a parent object.
+- This allows software developers to create and organise reusable classes.
+
+- This makes it possible to create new classes built upon existing classes
+
+- More over these new classes can add additional fields and methods, to provide a more specific functionality.
+- Programmers can also modify existing methods and fields.
+
+### Why use Inheritance ?
+
+- All in all we can say inheritance allows for the reuse of software.
+- By using existing software 
+
+
+# Preview of mcq 
+
+- 12 short questions
+
+1. Each question gives you a java program and you determine the output:
+
+1. error
+2. sample output
+3. sample output 2
+
+- Covers:
+1. Encapsulation
+2. Polymorphism
+3. Inheritance
+4. Abstraction
