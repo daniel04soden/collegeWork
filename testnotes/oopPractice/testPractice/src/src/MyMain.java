@@ -192,6 +192,7 @@ public class MyMain {
 	 * @param args: We will run the program parameter free, so do not worry about it.
 	 */
 	public static void main(String[] args) {
+		Drink coffeeDrink = new Drink();
 		// 1. We parse any parameter in
 		int option = 4;
 
@@ -199,6 +200,8 @@ public class MyMain {
 		switch (option) {
 			case 1:
 				testClassLanguage();
+				System.out.println(coffeeDrink.getIsHot());
+			System.out.println(coffeeDrink.getSugarCount());
 				break;
 			case 2:
 				testClassProgrammingLanguage();
@@ -207,8 +210,10 @@ public class MyMain {
 				testClassOOPLanguage();
 				break;
 			case 4:
+			
 				testClassComputerSoftwareProject();
 				break;
+				
 		}
 	}
 

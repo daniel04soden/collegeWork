@@ -5,6 +5,7 @@ public class HeapOfBinaryTries {
     private int heapsize;
 
     private void heapify(int i)
+
     {
         // TASK 3.A.a
         throw new RuntimeException("Not yet implemented!");

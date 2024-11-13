@@ -9,15 +9,18 @@ public class MergeSort {
     int[] A3 = new int[n]; // New array with the capacity of n
 
     for (int k = 0; k < n; k++) { // K is the iterative index
-      if (i <= j) { // If the indicator of the first array is less than the indicator for the second
-                    // array
-        A3[k] = A1[i]; // The new array at the index of k becomes A1 at the index i
-        i++; // Increase indicator
-      } else { // Otherwise assign K to the value at array 2
-        A3[k] = A2[j];
-        j++;
-      }
+      boolean lengthCheck = i < A1.length && j < A2.length;
 
+      if (lengthCheck) {
+              if (i <= j) { // If the indicator of the first array is less than the indicator for the second
+                // array
+                A3[k] = A1[i]; // The new array at the index of k becomes A1 at the index i
+                i++; // Increase indicator
+              } else { // Otherwise assign K to the value at array 2
+              A3[k] = A2[j];
+              j++;
+              }
+            }
     }
     return A3;
   }
