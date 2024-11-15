@@ -35,12 +35,11 @@
 - Items: Laptops, Desktops, Spare parts
 - Classes Hierarchy/Abstraction - Laptop -> Lenovo/Hp laptop -> Particular Generation/Models ??
 -                     - Desktop -> Gaming/Workstation Desktop?
--                     - Parts -> Memory, Storage 
+-                     - Parts -> Memory, Storage
 - Reading/Writing from files
 - Main ideas
-    - SQLite
-    - Txt
-    - CSV
+    - SQLite - As a way of storing users and orders
+    - Txt For receipts
 
 - Data structures:
     - Arrays
@@ -48,11 +47,17 @@
     - Custom datatypes?
 
 - Interfaces:
-    - Would work well for the object parts 
-    - Just a class with undefined methods/fields??
+    - Would work well for the object parts
 
 - Exception Handling:
-    - Exceptions for database types
+    - Exceptions for database types (will be mostly handled within itself)
+    - Exceptions for items out of stock? (Pre defined stock on new run potentially)
+
+
+## SQLite Planning
+
+- Normalized for the most part (Not too stressed about things as long as it works for orders)
+- Need to find driver: ()
 
 - Final fields, methods and classes:
     - Final fields at the end of abstracted classes

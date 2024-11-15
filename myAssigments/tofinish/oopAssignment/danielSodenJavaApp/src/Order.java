@@ -1,0 +1,60 @@
+import java.util.Arrays;
+
+public abstract class Order{
+    private String orderID;
+    public double orderTotal;
+    public String[] orderProducts;
+    public double[] pricePerProduct;
+    private String customerID;
+
+    public Order(String _orderID,double[] _pricePerProduct,String[] _orderProducts){
+        this.orderID = _orderID;
+        this.pricePerProduct = _pricePerProduct;
+        this.orderProducts = _orderProducts;
+        this.orderTotal = Arrays.stream(_pricePerProduct).sum();
+    }
+
+
+    public String getOrderID() {
+        return this.orderID;
+    }
+
+    public void setOrderID(String orderID) {
+        this.orderID = orderID;
+    }
+
+    public double getOrderTotal() {
+        return this.orderTotal;
+    }
+
+    public void setOrderTotal(double orderTotal) {
+        this.orderTotal = orderTotal;
+    }
+
+    public String[] getOrderProducts() {
+        return this.orderProducts;
+    }
+
+    public void setOrderProducts(String[] orderProducts) {
+        this.orderProducts = orderProducts;
+    }
+
+    public double[] getPricePerProduct() {
+        return this.pricePerProduct;
+    }
+
+    public void setPricePerProduct(double[] pricePerProduct) {
+        this.pricePerProduct = pricePerProduct;
+    }
+
+    public String getCustomerID() {
+        return this.customerID;
+    }
+
+    public void setCustomerID(String customerID) {
+        this.customerID = customerID;
+    }
+
+    // Extra functionality 
+    public abstract Order placeOrder();
+}
