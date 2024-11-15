@@ -4,7 +4,23 @@ public class Greedy {
 
     public static LinkedList<Activity> activitySelection(LinkedList<Activity> activities) {
         // TASK 1.B.a
-        throw new RuntimeException("Not yet implemented!");
+        LinkedList<Activity> A = new LinkedList<>(); // Defining the linked list for activities
+        Activity firstActivity = activities.getFirst(); // Get and add the very first values
+        A.add(firstActivity); 
+        boolean overlap = false; // Overlapping is false as we start
+
+
+        for (int i = 0; i < activities.size(); i++) { // Iterate over the linked list
+        Activity newActivity = activities.get(i); // Get i to then add it
+        overlap = newActivity.overlap(firstActivity);
+
+            if (!overlap) { // If there's no overlap between start and finish times
+                A.add(newActivity); // Add an activity
+                firstActivity = newActivity;
+            }
+        }
+
+        return A; // Return A after adding all this
     }
 
     public static LinkedList<Integer> makeChange(int amount, int[] denominations) {

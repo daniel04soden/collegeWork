@@ -3,7 +3,7 @@ public class MergeSort {
   private static int[] merge(int[] A1, int[] A2) {
     // TASK 2.A.a
 
-    int n = A1.length + A2.length; // The new arrays length is the two arrays sum
+    int n = A1.length +cd A2.length; // The new arrays length is the two arrays sum
     int i = 0; // Index for A1
     int j = 0; // Index for A2
     int[] A3 = new int[n]; // New array with the capacity of n

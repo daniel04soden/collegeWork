@@ -1,5 +1,3 @@
-package assignment2;
-
 public class Activity {
     private int id;
     private int start;
