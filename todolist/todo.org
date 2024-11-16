@@ -1,34 +1,15 @@
 #+title: Todo
 
-* This is my college todolist of things currently on this weeks agenda
+* This is my college todolist of things currently on my agenda
 
-* TODO Make a start on OOP Project
-** TODO Work on Documentation
-** TODO Start user creation
+* TODO Object Oriented Assignment - 8th Dec
 
-* TODO Work on ServerSide Project - due <2024-~30-11>
-** TODO Refactor User Cookie session
-** TODO CSS briefly
-** TODO Add error checking
-** TODO Add deletion of bookings
+* TODO Databases Assignment - 1 Dec
 
+* TODO LDSA Assignment - 29th Nov
 
-* TODO Study for ServerSide test - due <2024-14-11>
-** TODO Summarise notes
-** TODO Read over own project
+* TODO Req Engin Work - Monday 18th
 
-* TODO Databases project - due <2024-01-12>
-** TODO Finish SQL code
-** TODO Revise over normalization currently and answers
+* TODO Op Sys Project Part 2 - Thursday 21st
 
-* TODO LDSA project2 - due <2024-27-11>
-** DONE Divide&Conq
-** TODO Greedy
-** TODO Quicksort
-** TODO MergeSort
-*** DONE Merge
-*** TODO Sort
-** TODO Huffman
-** TODO Binarytree
-** TODO HeapofBinarytrees
-** TODO Activity
+* TODO Server side - Dec 1st

@@ -25,7 +25,20 @@ public class Greedy {
 
     public static LinkedList<Integer> makeChange(int amount, int[] denominations) {
         // TASK 1.B.b
-        throw new RuntimeException("Not yet implemented!");
+        int n = denominations.length;
+
+        LinkedList<Integer> res = new LinkedList<Integer>();
+
+        for (int i = 0; i < n; i++) {
+            if (denominations[i] <= amount) {
+                res.add(denominations[i]);
+                amount -= denominations[i];
+            } else {
+                ;
+            }
+        }
+
+        return res;
     }
 
     public static void main(String[] args) {
