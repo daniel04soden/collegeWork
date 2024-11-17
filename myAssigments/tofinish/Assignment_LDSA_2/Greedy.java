@@ -25,20 +25,21 @@ public class Greedy {
 
     public static LinkedList<Integer> makeChange(int amount, int[] denominations) {
         // TASK 1.B.b
-        int n = denominations.length;
+        int n = denominations.length; // Find the length of the denominations array
 
-        LinkedList<Integer> res = new LinkedList<Integer>();
+        LinkedList<Integer> change = new LinkedList<Integer>(); // Initialise the linked list as the given change
 
-        for (int i = 0; i < n; i++) {
-            if (denominations[i] <= amount) {
-                res.add(denominations[i]);
+        for (int i = 0; i < n; i++) { // Loop over the types of change we have
+            if (denominations[i] <= amount) { // If the change at the array is less than or equal to the amount add to list and go back one
+                change.add(denominations[i]);
                 amount -= denominations[i];
+                i--;
             } else {
                 ;
             }
         }
 
-        return res;
+        return change;
     }
 
     public static void main(String[] args) {
@@ -56,7 +57,16 @@ public class Greedy {
         activities.add(new Activity(11, 12, 14));
         activitySelection(activities).forEach(a -> a.print());
 
-        System.out.println();
+
+        // Added multiple test cases to ensure isn't hard coded
+        System.out.println("Test one");
         makeChange(1234, new int[] { 5000, 2000, 1000, 500, 200, 100, 50, 20, 10, 5, 2, 1 }).forEach(i -> System.out.println(i));
+        System.out.println("Test two");
+        makeChange(34567, new int[] { 5000, 2000, 1000, 500, 200, 100, 50, 20, 10, 5, 2, 1 }).forEach(i -> System.out.println(i));
+        System.out.println("Test three");
+        makeChange(900, new int[] { 5000, 2000, 1000, 500, 200, 100, 50, 20, 10, 5, 2, 1 }).forEach(i -> System.out.println(i));
+        System.out.println("Test four");
+        makeChange(25, new int[] { 5000, 2000, 1000, 500, 200, 100, 50,20,10, 5, 2, 1 }).forEach(i -> System.out.println(i));
+
     }
 }
