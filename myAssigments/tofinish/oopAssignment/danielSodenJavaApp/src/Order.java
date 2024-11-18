@@ -1,60 +1,52 @@
 import java.util.Arrays;
 
-public abstract class Order{
-    private String orderID;
-    public double orderTotal;
-    public String[] orderProducts;
-    public double[] pricePerProduct;
-    private String customerID;
+public abstract class Order extends Agent {
+  public double orderTotal;
+  public String[] orderProducts;
+  public double[] pricePerProduct;
+  private String customerID;
 
-    public Order(String _orderID,double[] _pricePerProduct,String[] _orderProducts){
-        this.orderID = _orderID;
-        this.pricePerProduct = _pricePerProduct;
-        this.orderProducts = _orderProducts;
-        this.orderTotal = Arrays.stream(_pricePerProduct).sum();
-    }
+  public Order(int orderID, double[] _pricePerProduct, String[] _orderProducts) {
+    super(orderID);
+    this.pricePerProduct = _pricePerProduct;
+    this.orderProducts = _orderProducts;
+    this.orderTotal = Arrays.stream(_pricePerProduct).sum();
+  }
 
+  public double getOrderTotal() {
+    return this.orderTotal;
+  }
 
-    public String getOrderID() {
-        return this.orderID;
-    }
+  public void setOrderTotal(double orderTotal) {
+    this.orderTotal = orderTotal;
+  }
 
-    public void setOrderID(String orderID) {
-        this.orderID = orderID;
-    }
+  public String[] getOrderProducts() {
+    return this.orderProducts;
+  }
 
-    public double getOrderTotal() {
-        return this.orderTotal;
-    }
+  public void setOrderProducts(String[] orderProducts) {
+    this.orderProducts = orderProducts;
+  }
 
-    public void setOrderTotal(double orderTotal) {
-        this.orderTotal = orderTotal;
-    }
+  public double[] getPricePerProduct() {
+    return this.pricePerProduct;
+  }
 
-    public String[] getOrderProducts() {
-        return this.orderProducts;
-    }
+  public void setPricePerProduct(double[] pricePerProduct) {
+    this.pricePerProduct = pricePerProduct;
+  }
 
-    public void setOrderProducts(String[] orderProducts) {
-        this.orderProducts = orderProducts;
-    }
+  public String getCustomerID() {
+    return this.customerID;
+  }
 
-    public double[] getPricePerProduct() {
-        return this.pricePerProduct;
-    }
+  public void setCustomerID(String customerID) {
+    this.customerID = customerID;
+  }
 
-    public void setPricePerProduct(double[] pricePerProduct) {
-        this.pricePerProduct = pricePerProduct;
-    }
+  // Extra functionality
+  public abstract Order placeOrder();
 
-    public String getCustomerID() {
-        return this.customerID;
-    }
-
-    public void setCustomerID(String customerID) {
-        this.customerID = customerID;
-    }
-
-    // Extra functionality 
-    public abstract Order placeOrder();
+  public abstract void cancelOrder();
 }
