@@ -3,24 +3,32 @@ public class MergeSort {
   private static int[] merge(int[] A1, int[] A2) {
     // TASK 2.A.a
 
-    int n = A1.length +cd A2.length; // The new arrays length is the two arrays sum
-    int i = 0; // Index for A1
-    int j = 0; // Index for A2
+    int n = A1.length + A2.length; // The new arrays length is the two arrays sum
+    int i = 0, j = 0; // Index for A2
     int[] A3 = new int[n]; // New array with the capacity of n
 
-    for (int k = 0; k < n; k++) { // K is the iterative index
-      boolean lengthCheck = i < A1.length && j < A2.length;
+    for (int k = 0; k < n; k++) {
+      boolean leftLenCheck = i < A1.length;
+      boolean rightLenCheck = j < A2.length;
+      boolean lengthCheck = leftLenCheck && rightLenCheck;
 
       if (lengthCheck) {
-              if (i <= j) { // If the indicator of the first array is less than the indicator for the second
-                // array
-                A3[k] = A1[i]; // The new array at the index of k becomes A1 at the index i
-                i++; // Increase indicator
-              } else { // Otherwise assign K to the value at array 2
-              A3[k] = A2[j];
-              j++;
-              }
-            }
+        if (A1[i] <= A2[j]) {
+          A3[k] = A1[i];
+          i++;
+        } else {
+          A3[k] = A2[j];
+          j++;
+        }
+      } else {
+        if (leftLenCheck) {
+          A3[k] = A1[i];
+          i++;
+        } else if (rightLenCheck) {
+          A3[k] = A2[j];
+          j++;
+        }
+      }
     }
     return A3;
   }
