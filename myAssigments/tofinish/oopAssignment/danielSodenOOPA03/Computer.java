@@ -1,3 +1,4 @@
+
 public class Computer extends Product {
   protected String processor;
   protected int baseStorage;
