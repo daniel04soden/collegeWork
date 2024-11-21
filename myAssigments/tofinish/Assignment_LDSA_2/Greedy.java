@@ -9,15 +9,15 @@ public class Greedy {
     A.add(firstActivity);
     boolean overlap = false; // Overlapping is false as we start
 
-    for (int i = 0; i < activities.size(); i++) { // Iterate over the linked list
-      Activity newActivity = activities.get(i); // Get i to then add it
-      overlap = newActivity.overlap(firstActivity);
+      // Get i to then add it
+      for (Activity newActivity : activities) { // Iterate over the linked list
+          overlap = newActivity.overlap(firstActivity);
 
-      if (!overlap) { // If there's no overlap between start and finish times
-        A.add(newActivity); // Add an activity
-        firstActivity = newActivity;
+          if (!overlap) { // If there's no overlap between start and finish times
+              A.add(newActivity); // Add an activity
+              firstActivity = newActivity;
+          }
       }
-    }
 
     return A; // Return A after adding all this
   }
@@ -35,7 +35,7 @@ public class Greedy {
         amount -= denominations[i];
         i--;
       } else {
-        ;
+
       }
     }
 

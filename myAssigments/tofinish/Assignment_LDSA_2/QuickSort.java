@@ -1,34 +1,43 @@
 public class QuickSort {
 
   // Extra defined function for swapping vars
-  private static void swapVariables(int[] A, int varOne, int varTwo) {
-    int tempVar = A[varOne];
-    A[varOne] = A[varTwo];
-    A[varTwo] = tempVar;
+  private static void swapArrayVariables(int[] myArray, int v1, int v2) {
+    int tempVar = myArray[v1];
+    myArray[v1] = myArray[v2];
+    myArray[v2] = tempVar;
   }
 
   private static int partition(int[] A, int p, int r) {
-    // TASK 2.B.a
-    int pivotValue = A[r];
+
+    int x = A[p]; // Pivot
 
     int i = p - 1;
-
-    for (int j = 0; j <= r - 1; j++) {
-      if (A[j] < pivotValue) {
+    int j = r + 1;
+    boolean running = true;
+    while (running) {
+      if (A[j] <= x) {
+        System.out.println(j);
+        j--;
+      }
+      if (A[i] >= x) {
+        System.out.println(i);
         i++;
-        swapVariables(A, i, j);
+      }
+      if (i < j) {
+        swapArrayVariables(A, A[i], A[j]);
+      } else {
+        running = false;
       }
     }
-    swapVariables(A, i + 1, r);
-    return i + 1;
+    return j;
   }
 
   private static void quicksort(int[] A, int p, int r) {
     // TASK 2.B.b
     if (p < r) {
-      int partitionVal = partition(A, p, r);
-      quicksort(A, p, partitionVal - 1);
-      quicksort(A, partitionVal + 1, r);
+      int q = partition(A, p, r);
+      quicksort(A, p, q - 1);
+      quicksort(A, q + 1, r);
     }
   }
 
