@@ -8,24 +8,22 @@ public class QuickSort {
   }
 
   private static int partition(int[] A, int p, int r) {
-
-    int x = A[p]; // Pivot
-
+    int x = A[p];
     int i = p - 1;
     int j = r + 1;
+
     boolean running = true;
-    while (running) {
-      if (A[j] <= x) {
-        System.out.println(j);
+
+    while (running){
+      do {
         j--;
-      }
-      if (A[i] >= x) {
-        System.out.println(i);
+      }while(!(A[j]<= x));
+      do{
         i++;
-      }
-      if (i < j) {
-        swapArrayVariables(A, A[i], A[j]);
-      } else {
+      }while(!(A[i]>=x));
+      if(i<j){
+        swapArrayVariables(A,i,j);
+      }else{
         running = false;
       }
     }
@@ -36,7 +34,7 @@ public class QuickSort {
     // TASK 2.B.b
     if (p < r) {
       int q = partition(A, p, r);
-      quicksort(A, p, q - 1);
+      quicksort(A, p, q );
       quicksort(A, q + 1, r);
     }
   }
