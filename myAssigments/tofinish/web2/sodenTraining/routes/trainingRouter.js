@@ -7,7 +7,6 @@ const encryption = require('bcrypt')
 trainingRouter
   .route("/")
   .put((req, res, next) => {})
-  .delete((req, res, next) => {});
 
 trainingRouter.route("/book").get((req, res, next) => {
   res.render("book.ejs", { title: "Book a session" });
@@ -41,7 +40,11 @@ trainingRouter.route("/manage")
 
   })
   .post(async (req,res) => {
-    const bookingInfo = await bookings.findOne({userID:req.body.idCheck})
+    const bookingInfo = await bookings.findOne({userID:req.body.idCheck});
+  .delete((req, res, next) => {
+    const deletion = await bookings.deleteOne({bookingID:req.body.bookIDCheck})
+  });
+  
 
     if(bookingInfo != null){
       res.render("display-book.ejs",{title: "Bookings", bookingInfo :bookingInfo})
