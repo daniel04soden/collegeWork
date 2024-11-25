@@ -1,11 +1,7 @@
-CREATE TABLE clinic (
-  clinicNo VARCHAR(20) PRIMARY KEY,
-  clinicAddress VARCHAR(30),
-  telNo VARCHAR(15),
-);
+USE horseClinic;
 
 CREATE TABLE staff (
-  staffNo VARCHAR(20) NOT NULL PRIMARY KEY ,
+  staffNo VARCHAR(20) NOT NULL PRIMARY KEY,
   clinicNo VARCHAR(20) NOT NULL,
   fName VARCHAR(15),
   lName VARCHAR(15),
@@ -17,6 +13,11 @@ CREATE TABLE staff (
   FOREIGN KEY (clinicNo) REFERENCES clinic(clinicNo)
 );
 
+CREATE TABLE clinic (
+  clinicNo VARCHAR(20) PRIMARY KEY,
+  clinicAddress VARCHAR(30),
+  telNo VARCHAR(15),
+);
 
 CREATE TABLE owner (
   ownerNo VARCHAR(20) PRIMARY KEY NOT NULL,
@@ -28,12 +29,10 @@ CREATE TABLE owner (
 CREATE TABLE horse (
   horseNo VARCHAR(20) PRIMARY KEY NOT NULL,
   ownerNo VARCHAR(20) NOT NULL,
-	clinicNo VARCHAR(20)NOT NULL,
   telNo VARCHAR(15),
   color VARCHAR(20),
-  horseName VARCHAR(20),
-  Foreign Key (ownerNo) REFERENCES owner(ownerNo),
-  Foreign Key (clinicNo) REFERENCES clinic(clinicNo)
+  horseName VARCHAR(20)
+  Foreign Key (ownerNo) REFERENCES owner(ownerNo)
 );
 
 CREATE TABLE consultation(
@@ -44,10 +43,6 @@ CREATE TABLE consultation(
   Foreign Key (staffNo) REFERENCES staff(staffNo)
 );
 
-CREATE TABLE treatment(
-  treatmentNo VARCHAR(20) PRIMARY KEY,
-  treatmentSuccessful BOOLEAN
-);
 
 CREATE TABLE consultation_treatment(
   consultNo VARCHAR(20) PRIMARY KEY,
@@ -56,4 +51,8 @@ CREATE TABLE consultation_treatment(
   Foreign Key (treatmentNo) REFERENCES treatment(treatmentNo)
 );
 
+CREATE TABLE treatment(
+  treatmentNo VARCHAR(20) PRIMARY KEY,
+  treatmentSuccessful BOOLEAN
+);
 
