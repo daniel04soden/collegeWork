@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<html>
+
+<head>
+
+    <title>MTU Phone Usage Monitor</title>
+    <link rel="stylesheet" href="/stylesheets/styleTable.css"></link>
+</head>
+
+
+<body>
+    <div class="banner">
+        <div class="navbar">
+            <img src="\images\logo.png" class="logo">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/phone/create">New Entry</a></li>
+                <li><a href="/table">View Data</a></li>
+                <li><a href="/help">Help</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </div>
+        <form action="/phone/find" method="post"></form>
+        <div class="table-wrapper">
+            <table class="tableData" id="table">
+                <caption>
+                    <%= title %>
+                </caption>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Education Usage</th>
+                        <th>Shopping Usage</th>
+                        <th>Searching/Browsing usage</th>
+                        <th>Social Media usage</th>
+                        <th>Date and Time</th>
+                        <th></th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% for(var i=0; i < phonelist.length; i++) { %>
+                        <tr>
+
+                            <td>
+                                <%= phonelist[i].name %>
+                            </td>
+                            <td>
+                                <%= phonelist[i].timeEducation %>
+                            </td>
+                            <td>
+                                <%= phonelist[i].timeShopping %>
+                            </td>
+                            <td>
+                                <%= phonelist[i].timeBrowsing %>
+                            </td>
+                            <td>
+                                <%= phonelist[i].timeSocial %>
+                            </td>
+                            <td>
+                                <%= phonelist[i].createdAt.toLocaleDateString() %>
+                            </td>
+                            <td>
+                                <div class="secret">
+                                    <form action="/phone/delete" method="post"> <input type="String" value="<%= phonelist[i].id%>" name="id" readonly><button type="Submit">Delete</button></form>
+                                    <form action="/phone/update" method="post"> <input type="String" value="<%=phonelist[i].id%>" name="id" readonly><button type="Submit">Update</button></form>
+                                </div>
+                            </td>
+
+
+                        </tr>
+                        <% } %>
+                            <div class="avg">
+                                <p>Average amount of time (in minutes) spent on:</p><br>
+                                <span id="1"></span><br>
+                                <span id="2"></span><br>
+                                <span id="3"></span><br>
+                                <span id="4"></span>
+                            </div>
+                            <script>
+                                var table = document.getElementById("table"),
+                                    avgVal, sumVal = 0,
+                                    rowCount = table.rows.length - 1;
+
+                                for (var x = 1; x < 5; x++) {
+                                    for (var i = 1; i < table.rows.length; i++) {
+                                        sumVal = sumVal + parseInt(table.rows[i].cells[x].innerHTML);
+
+                                    }
+                                    if (x == 1) {
+                                        var text = " Education = ";
+                                    } else if (x == 2) {
+                                        var text = " Shopping = ";
+                                    } else if (x == 3) {
+                                        var text = " Browsing = ";
+                                    } else if (x == 4) {
+                                        var text = " Social Media = "
+                                    }
+                                    document.getElementById(x).innerHTML = text + Math.round(parseFloat(sumVal / rowCount));
+                                    avgVal, sumVal = 0;
+
+                                }
+                            </script>
+        </div>
+
+
+</body>
+
+
+
+</html>

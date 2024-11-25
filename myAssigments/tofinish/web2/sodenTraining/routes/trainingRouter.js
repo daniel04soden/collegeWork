@@ -41,6 +41,14 @@ trainingRouter.route("/manage")
   })
   .post(async (req,res) => {
     const bookingInfo = await bookings.findOne({userID:req.body.idCheck});
+<<<<<<< HEAD
+=======
+  .delete((req, res, next) => {
+    const deletion = await bookings.findByIdAndDelete({bookingID:req.body.bookIDCheck})
+  });
+  
+
+>>>>>>> b6f009f (added examples)
     if(bookingInfo != null){
       res.render("display-book.ejs",{title: "Bookings", bookingInfo :bookingInfo})
     }else{
