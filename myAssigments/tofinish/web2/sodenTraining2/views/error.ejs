@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html> 
+  <% title='Error !!!' %>
+  <% include ../partials/head%>
+  <h1>Error found see details below</h1>
+  <h2><%= error.status %></h2>
+  <pre><%= error.stack %></pre>
+<%- include ../partials/foot %> 
+
