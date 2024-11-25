@@ -41,17 +41,15 @@ trainingRouter.route("/manage")
   })
   .post(async (req,res) => {
     const bookingInfo = await bookings.findOne({userID:req.body.idCheck});
-  .delete((req, res, next) => {
-    const deletion = await bookings.deleteOne({bookingID:req.body.bookIDCheck})
-  });
-  
-
     if(bookingInfo != null){
       res.render("display-book.ejs",{title: "Bookings", bookingInfo :bookingInfo})
     }else{
       res.send('Unknown id try again!')
     }
     
+  })
+  .delete(async (req, res, next) => {
+    const deletion = await bookings.deleteOne({bookingID:req.body.bookIDCheck})
   });
 
 trainingRouter.route("/contact").get((req, res, next) => {

@@ -54,4 +54,19 @@ mongoose.connect('mongodb://localhost:27017/training')
     console.error('Error connecting to database:', err);
   });
 
+
+function authorization (req,res,next) {
+  console.log(req.headers);
+  let authHeader = req.headers.authorization;
+
+  if (!authHeader){
+    var err = new Error("You are not authenticated");
+    res.setHeader("WWW-Authenticate","Basic");
+    err.status = 401;
+    return next(err);
+  }
+}
+
+
+
   module.exports = app;

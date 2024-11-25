@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
+        default:JohnDoe
     },
     email: {
         type: String,
@@ -22,6 +23,10 @@ const userSchema = new mongoose.Schema({
     id: {
         type:Number,
         required:true,
+    },
+    administrator: {
+        type: Boolean,
+        default:false
     }
 });
 
