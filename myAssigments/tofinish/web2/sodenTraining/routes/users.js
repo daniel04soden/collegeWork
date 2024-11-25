@@ -5,7 +5,7 @@ const users = require("../models/userSchema")
 
 
 router.get("/", function (req, res, next) {
-  res.send("respond with a resource");
+  res.send("Respond with a resource");
 });
 
 router.get("/login", function (req, res, next) {
@@ -42,6 +42,7 @@ router.post("/register",async (req,res) => {
       
 
     const userData = await users.insertMany(individualUser);
+    req.session.name = req.body.username;
     console.log(userData);
   }
   }

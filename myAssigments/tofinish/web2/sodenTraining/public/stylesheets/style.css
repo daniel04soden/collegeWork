@@ -1,36 +1,31 @@
-html {
-    padding: 50px;
-    font:
-        14px "Lucida Grande",
-        Helvetica,
-        Arial,
-        sans-serif;
-    background-color: black;
-    color: white;
+html{
+    padding:0;
+    margin:0;
 }
 
-a {
-    color: red;
-    text-decoration: none;
-}
-
-a:hover {
-    color:purple;
-    text-decoration: underline;
-    font-size: medium;
-}
-
-.book-button{
-        text-decoration: none;
-}
-
-.blocks-square{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+body{
+    animation: loading-in 1.5s ease forwards;
+    opacity:0;
+    transform: scale(2);
+    filter: blur(4px);
 }
 
 
-#main-header{
-    text-align: center;
+
+@keyframes loading-in {
+   to{
+    filter:blur(0);
+    transform: scale(1);
+    opacity: 1;
+   }
+}
+
+a{
+    font-weight: bold;
+}
+
+a:hover{
+    text-decoration: double;
+    font-size: larger;
+    
 }

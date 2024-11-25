@@ -5,6 +5,7 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const session = require('express-session');
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
@@ -23,11 +24,32 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+
+// Starting authentication session
+
+app.use(
+  session(
+    {
+      name:'session-id',
+      secret:'12345-67890-09876-54321',
+      saveUninitialized:false,
+      resave:false
+    }));
+
+const auth = (req,res,next) => {
+if (req.session.name) {
+  next();
+}else{
+  res.redirect('/users/login');
+}
+}
+
+
 // Using various routers to navigate the website
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/session", trainingRouter);
+app.use("/session", auth,trainingRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -53,20 +75,6 @@ mongoose.connect('mongodb://localhost:27017/training')
   .catch((err) => {
     console.error('Error connecting to database:', err);
   });
-
-
-function authorization (req,res,next) {
-  console.log(req.headers);
-  let authHeader = req.headers.authorization;
-
-  if (!authHeader){
-    var err = new Error("You are not authenticated");
-    res.setHeader("WWW-Authenticate","Basic");
-    err.status = 401;
-    return next(err);
-  }
-}
-
 
 
   module.exports = app;
