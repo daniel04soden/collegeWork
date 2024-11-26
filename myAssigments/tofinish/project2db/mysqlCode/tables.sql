@@ -23,15 +23,15 @@ CREATE TABLE owner (
   ownerNo VARCHAR(20) PRIMARY KEY NOT NULL,
   fName VARCHAR(15),
   lName VARCHAR(15),
-  telNo VARCHAR(15)
+  telNo VARCHAR(15),
+	address VARCHAR(30)
 );
 
 CREATE TABLE horse (
   horseNo VARCHAR(20) PRIMARY KEY NOT NULL,
   ownerNo VARCHAR(20) NOT NULL,
-  telNo VARCHAR(15),
   color VARCHAR(20),
-  horseName VARCHAR(20)
+  horseName VARCHAR(20),
   Foreign Key (ownerNo) REFERENCES owner(ownerNo)
 );
 
@@ -45,10 +45,11 @@ CREATE TABLE consultation(
 
 
 CREATE TABLE consultation_treatment(
-  consultNo VARCHAR(20) PRIMARY KEY,
-  treatmentNo VARCHAR(20) PRIMARY KEY,
-  Foreign Key (consultNo) REFERENCES consultation(consultNo)
-  Foreign Key (treatmentNo) REFERENCES treatment(treatmentNo)
+  consultNo VARCHAR(20),
+  treatmentNo VARCHAR(20),
+  Foreign Key (consultNo) REFERENCES consultation(consultNo),
+  Foreign Key (treatmentNo) REFERENCES treatment(treatmentNo),
+	PRIMARY KEY(consultNo,treatmentNo)
 );
 
 CREATE TABLE treatment(
