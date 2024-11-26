@@ -1,14 +1,15 @@
 public class HeapOfBinaryTries {
-  private void exchange(BinaryTrie b1, BinaryTrie b2) {
-    BinaryTrie tempBt = b1;
-    b1 = b2;
-    b2 = tempBt;
-
-  }
 
   private BinaryTrie[] A;
   private int heapSize;
 
+  private void exchange(BinaryTrie b1, BinaryTrie b2) {
+    BinaryTrie tempBt = b1;
+    b1 = b2;
+    b2 = tempBt;
+  }
+
+  
   private void heapify(int i) {
     boolean running = true;
     int n = this.heapSize;
