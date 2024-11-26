@@ -3,65 +3,63 @@ public class HeapOfBinaryTries {
   private BinaryTrie[] A;
   private int heapSize;
 
-  private void exchange(BinaryTrie b1, BinaryTrie b2) {
-    BinaryTrie tempBt = b1;
-    b1 = b2;
-    b2 = tempBt;
-  }
-
-  
   private void heapify(int i) {
-    boolean running = true;
-    int n = this.heapSize;
-    while (running) {
-      int l = i * 2;
-      int r = (i * 2) + 1;
+    int n = heapSize;
+    while (true) {
+      int l = (i * 2) + 1;
+      int r = (i * 2) + 2;
 
       int smallest = i;
 
-      if (l <= n && A[l].compare(A[i])) {
+      if (l < n && A[l].compare(A[i])) {
         smallest = l;
       }
 
-      if (l <= n && A[r].compare(A[smallest])) {
-        smallest = l;
+      if (r < n && A[r].compare(A[smallest])) {
+        smallest = r;
       }
 
       if (smallest != i) {
+				BinaryTrie temp = A[i];
+				A[i] = A[smallest];
+				A[smallest] = temp;
         i = smallest;
-        exchange(A[i], A[smallest]);
 
       } else {
-        running = false;
+				break;
       }
     }
   }
 
   public HeapOfBinaryTries(BinaryTrie[] A) {
     // TASK 3.A.b
+
     this.A = A;
     this.heapSize = A.length;
+		for (int i = (heapSize/2)-1; i >= 0; i--) {
+			heapify(i);
+			}
   }
 
   public BinaryTrie extractMin() {
     // TASK 3.A.c
-    BinaryTrie min = A[1];
-    A[1] = A[heapSize];
-    heapSize--;
-    heapify(1);
-    return min;
+		BinaryTrie min = A[0];
+		A[0] = A[heapSize-1];
+		heapSize--;
+		heapify(0);
+
+		return min;
   }
 
   public void insert(BinaryTrie x) {
     // TASK 3.A.d
-    heapSize+=1;
-    int i = heapSize;
-
-    while (i > 1 && A[i-1] > x){
-      A[i] = A[i-1];
-      i--;
-    }
-    A[i] = x;
+		heapSize++;
+		int i = heapSize-1;
+		while (i>0 && x.compare(A[i/2])) {
+			A[i]=A[i/2];
+			i = i/2;
+		}
+		A[i] = x;
   }
 
   public int size() {

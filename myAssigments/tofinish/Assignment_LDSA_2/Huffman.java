@@ -1,5 +1,3 @@
-package assignment2;
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -26,7 +24,17 @@ public class Huffman {
 
     private static BinaryTrie findOptimalCode(HeapOfBinaryTries H) {
         // TASK 3.B
-        throw new RuntimeException("Not yet implemented!");
+				while (H.size()>1) {
+				BinaryTrie x = H.extractMin();
+				BinaryTrie y = H.extractMin();
+
+				BinaryTrie z = new BinaryTrie(x, y);
+				H.insert(z);
+				
+					
+					
+				}
+			return H.extractMin();	
     }
 
     public void printCodeTable() {
