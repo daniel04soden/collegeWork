@@ -6,52 +6,63 @@ const encryption = require('bcrypt')
 
 trainingRouter
   .route("/")
-  .put((req, res, next) => {})
+  .put((req, res, next) => { })
 
 trainingRouter.route("/book").get((req, res, next) => {
   res.render("book.ejs", { title: "Book a session" });
   console.log("Routed to booking page");
 })
-.post(async (req,res) => {
-  // Identifying user from id
-    const userData = await users.findOne({id : req.body.id})
+  .post(async (req, res) => {
+    // Identifying user from id
+    const userData = await users.findOne({ id: req.body.id })
 
     // Storing booking information
     const bookingData = {
-      userID:req.body.id,
+      userID: req.body.id,
       name: userData.name,
-      date:req.body.date,
-      time:req.body.time,
-      cardNumber:req.body.cardNumber,
-      expiryDate:req.body.expiryDate,
-      securityCode: await encryption.hash(req.body.cvc,10)
+      date: req.body.date,
+      time: req.body.time,
+      cardNumber: req.body.cardNumber,
+      expiryDate: req.body.expiryDate,
+      securityCode: await encryption.hash(req.body.cvc, 10)
     }
-    
+
     if (userData != []) {
       const bookingConfirmation = await bookings.insertMany(bookingData)
     } else {
-     res.send('Invalid id') 
+      res.send('Invalid id')
     }
-});
+  });
 
 trainingRouter.route("/manage")
   .get((req, res, next) => {
-    res.render('managing.ejs', {title: 'Manage Your Session' });
+    res.render('managing.ejs', { title: 'Manage Your Session' });
 
   })
-  .post(async (req,res) => {
-    const bookingInfo = await bookings.findOne({userID:req.body.idCheck});
+  .post(async (req, res) => {
+    const bookingInfoJS = await bookings.findOne({ userID: req.body.idCheck });
 
-    if(bookingInfo != null){
-      res.render("display-book.ejs",{title: "Bookings", bookingInfo :bookingInfo})
-    }else{
-      res.send('Unknown id try again!')
-    }
-    
-  })
-  .delete(async (req, res, next) => {
-    const deletion = await bookings.deleteOne({bookingID:req.body.bookIDCheck})
+    // if (bookingInfoJS != null) {
+    res.render("display-book.ejs", { bookingInfo: bookingInfoJS })
+    // } else {
+    //   res.send('Unknown id try again!')
+    // }
+
   });
+
+trainingRouter.route("/deletion")
+  .get((req, res, next) => {
+    res.render("deletion.ejs", { title: "Delete a booking" });
+    console.log("Routed to deletion page");
+  })
+  .post(async (req, res) => {
+    console.log("post not supported on this router");
+    res.redirect("/");
+  })
+  .delete(async (req, res) => {
+    const bookingInfo = await bookings.findOneAndDelete({})
+  }
+  )
 
 trainingRouter.route("/contact").get((req, res, next) => {
   res.render("contact.ejs", { title: "Contact Us" });

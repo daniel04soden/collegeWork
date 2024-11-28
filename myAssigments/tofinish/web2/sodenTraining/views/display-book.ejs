@@ -1,18 +1,26 @@
-<%- include('partials/head') %> 
-            <table>
-              <thead>
-              <tr>
-                <th>Name</th>
-                <th>Booking Date</th>
-                <th>Booking time</th>
-              </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>  <%= bookingInfo.name%> </td>
-                  <td> <%=bookingInfo.date%> </td>
-                  <td> <%=bookingInfo.time%> </td>
-                </tr>
-             </tbody> 
-            </table> 
-<%- include('partials/foot') %> 
+<%- include('partials/head') %>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Booking Date</th>
+        <th>Booking time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <% for (let i=0; i < bookingInfo.length; i++) { %>
+          <td>
+            <%= bookingInfo[i].name%>
+          </td>
+          <td>
+            <%=bookingInfo[i].date%>
+          </td>
+          <td>
+            <%=bookingInfo[i].time%>
+          </td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+  <%- include('partials/foot') %>
