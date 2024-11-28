@@ -36,33 +36,75 @@ trainingRouter.route("/book").get((req, res, next) => {
 
 trainingRouter.route("/manage")
   .get((req, res, next) => {
-    res.render('managing.ejs', { title: 'Manage Your Session' });
+    res.render('managing', { title: 'Manage Your Session' });
 
   })
   .post(async (req, res) => {
-    const bookingInfoJS = await bookings.findOne({ userID: req.body.idCheck });
+    const { idCheck, startingDate, endingDate } = req.body;
 
-    // if (bookingInfoJS != null) {
-    res.render("display-book.ejs", { bookingInfo: bookingInfoJS })
-    // } else {
-    //   res.send('Unknown id try again!')
-    // }
+    let trainingData = {
+      $and: [
+        { userID: idCheck.trim() },
+        { date: { $gte: startingDate, $lte: endingDate } }
+      ]
+    }
+    bookings.find(trainingData)
+      .then(records => {
+        res.render("display-book", { "bookingInfo": records });
+      })
+      .catch(err => {
+        console.error("Error fetching booking:", err);
+        res.status(500).send("An error occurred while fetching booking.");
+      });
+
 
   });
 
-trainingRouter.route("/deletion")
-  .get((req, res, next) => {
-    res.render("deletion.ejs", { title: "Delete a booking" });
-    console.log("Routed to deletion page");
+trainingRouter.route("/changingBegin")
+  .post((req, res, next) => {
+    console.log("um whats going onnn");
+    console.log(req.body._id);
+    res.render("edit", { _id: req.body._id })
+  });
+
+
+trainingRouter.route("/changing")
+  .post((req, res, next) => {
+    console.log("cum dumpster");
+    console.log(req.body); // Log body parameters
+    const { _id, newDate, newTime } = req.body;
+
+    const trainingUpdate = {
+      date: newDate.trim(),
+      time: newTime.trim(),
+    };
+
+    bookings.findByIdAndUpdate(_id, trainingUpdate)
+      .then((trainingUpdated) => {
+        console.log("Training updated successfully.");
+        res.render('managing', { title: 'Manage Your Session' });
+      })
+      .catch(err => {
+        console.error("Error:", err);
+        res.status(500).json({ error: "An error occurred while editting training." });
+        next(err); // Call next with the error to handle it elsewhere if needed
+      });
   })
-  .post(async (req, res) => {
-    console.log("post not supported on this router");
-    res.redirect("/");
-  })
-  .delete(async (req, res) => {
-    const bookingInfo = await bookings.findOneAndDelete({})
-  }
-  )
+
+trainingRouter.route("/delete").post((req, res, next) => {
+  bookings.findByIdAndDelete(req.body._id)
+    .then((bookingDeleted) => {
+      console.log("Booking deleted!!");
+      res.render('managing', { title: 'Manage Your Session' });
+
+    })
+    .catch(err => {
+      console.error("Error detected", err);
+      res.status(500).json({ error: "An error occurred during deletion" })
+    }
+    )
+}
+);
 
 trainingRouter.route("/contact").get((req, res, next) => {
   res.render("contact.ejs", { title: "Contact Us" });

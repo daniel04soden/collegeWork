@@ -1,0 +1,14 @@
+<%- include('partials/head') %>
+    <h1>Modify Record</h1>
+    <form action="/session/changing" method="POST">
+        <input type="hidden" name="_id" value="<%= _id %>">
+
+        <label for="newDate">New Date:</label>
+        <input type="date" id="newDate" name="newDate" min="2000-05-11" max="2080-05-20" required>
+        <br>
+        <label for="newTime">New Time:</label>
+        <input type="time" id="newTime" name="newTime" required>
+        <br><br>
+        <button type="submit">Edit Record</button>
+    </form>
+    <%- include('partials/foot') %>
