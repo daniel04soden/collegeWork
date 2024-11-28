@@ -1,5 +1,3 @@
-USE horseClinic;
-
 CREATE TABLE staff (
   staffNo VARCHAR(20) NOT NULL PRIMARY KEY,
   clinicNo VARCHAR(20) NOT NULL,
@@ -43,6 +41,11 @@ CREATE TABLE consultation(
   Foreign Key (staffNo) REFERENCES staff(staffNo)
 );
 
+CREATE TABLE treatment(
+  treatmentNo VARCHAR(20) PRIMARY KEY,
+  treatmentSuccessful BOOLEAN
+);
+
 
 CREATE TABLE consultation_treatment(
   consultNo VARCHAR(20),
@@ -50,10 +53,5 @@ CREATE TABLE consultation_treatment(
   Foreign Key (consultNo) REFERENCES consultation(consultNo),
   Foreign Key (treatmentNo) REFERENCES treatment(treatmentNo),
 	PRIMARY KEY(consultNo,treatmentNo)
-);
-
-CREATE TABLE treatment(
-  treatmentNo VARCHAR(20) PRIMARY KEY,
-  treatmentSuccessful BOOLEAN
 );
 

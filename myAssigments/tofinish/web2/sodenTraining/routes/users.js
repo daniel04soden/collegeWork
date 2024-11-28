@@ -19,32 +19,32 @@ router.get("/register", function (req, res, next) {
 });
 // Registering
 
-router.post("/register",async (req,res) => {
+router.post("/register", async (req, res) => {
   const passSalt = 10;
   const individualUser = {
     name: req.body.username,
     email: req.body.email,
     age: req.body.age,
-    password: await bcrypt.hash(req.body.password,10),
+    password: await bcrypt.hash(req.body.password, 10),
     id: req.body.userid
   }
 
-  const nameTaken = await users.findOne({name: individualUser.name});
+  const nameTaken = await users.findOne({ name: individualUser.name });
   console.log(individualUser)
 
-  if (nameTaken){
+  if (nameTaken) {
     res.send('Username taken, please choose a different username')
-  }else{
+  } else {
 
     if (individualUser.age < 18) {
       res.send('You are too young to sign up for this system please come back when you are 18')
     } else {
-      
 
-    const userData = await users.insertMany(individualUser);
-    req.session.name = req.body.username;
-    console.log(userData);
-  }
+
+      const userData = await users.insertMany(individualUser);
+      console.log(userData);
+      res.redirect('/')
+    }
   }
 
 
@@ -52,31 +52,33 @@ router.post("/register",async (req,res) => {
 
 // Logging in 
 
-router.post("/login", async (req,res) => {
+router.post("/login", async (req, res) => {
   try {
     // Check for inputted username
     const checkName = await users.findOne({
       name: req.body.username
     })
-    if(!checkName){
+    if (!checkName) {
       errorMessage = 'Unknown name'
       res.send(errorMessage)
     }
 
     // Compare the provided password to the matching password of that name
-      const passwordsMatch = await bcrypt.compare(req.body.password, checkName.password);
+    const passwordsMatch = await bcrypt.compare(req.body.password, checkName.password);
 
-      if (passwordsMatch) {
-       res.redirect('/') 
-      } else {
-       errorMessage = 'Wrong password'
-       res.send(errorMessage)
-      }
-    
-  } catch{
+    if (passwordsMatch) {
+      req.session.name = req.body.username;
+
+      res.redirect('/')
+    } else {
+      errorMessage = 'Wrong password'
+      res.send(errorMessage)
+    }
+
+  } catch {
     errorMessage = 'Username or password wrong';
-   res.send(errorMessage);
-   console.log(errorMessage);
+    res.send(errorMessage);
+    console.log(errorMessage);
   }
 })
 

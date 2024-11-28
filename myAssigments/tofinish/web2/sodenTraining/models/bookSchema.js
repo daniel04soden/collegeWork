@@ -5,10 +5,6 @@ const bookSchema = new mongoose.Schema({
 		type: Number,
 		required: true,
 	},
-	bookingID:{
-		type: Number,
-		required:true,
-	},
 	name: {
 		type: String,
 		required: true,

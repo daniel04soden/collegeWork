@@ -30,18 +30,18 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(
   session(
     {
-      name:'session-id',
-      secret:'12345-67890-09876-54321',
-      saveUninitialized:false,
-      resave:false
+      name: 'session-id',
+      secret: '12345-67890-09876-54321',
+      saveUninitialized: false,
+      resave: false
     }));
 
-const auth = (req,res,next) => {
-if (req.session.name) {
-  next();
-}else{
-  res.redirect('/users/login');
-}
+const auth = (req, res, next) => {
+  if (req.session.name) {
+    next();
+  } else {
+    res.redirect('/users/login');
+  }
 }
 
 
@@ -49,7 +49,7 @@ if (req.session.name) {
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/session", auth,trainingRouter);
+app.use("/session", auth, trainingRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -77,4 +77,4 @@ mongoose.connect('mongodb://localhost:27017/training')
   });
 
 
-  module.exports = app;
+module.exports = app;
