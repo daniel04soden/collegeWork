@@ -10,15 +10,17 @@
         <label for="newTime">New Time:</label>
         <input type="time" id="newTime" name="newTime" required>
         <br>
-        <h4>Please re-enter card details</h4>
-        <label for="newCardNumber">Re-enter your card Number</label><br>
-        <input type="number" id="newCardNumber" name="newCardNumber" minlength="13" maxlength="19" value=""><br>
+        <h4>Change your training session type:</h4>
 
-        <label for="newExpiryDate">Re-enter your cards expiry date:</label><br>
-        <input type="date" id="newExpiryDate" name="newExpiryDate" value=""><br>
+        <input type="radio" id="cardio" name="newTrainingType" value="Cardio">
+        <label for="cardio">Cardio</label>
+        <br>
 
-        <label for="newCvc">Re-enter your CVC (Security pin):</label><br>4
-        <input type="password" id="newCvc" name="newCvc" minlength="3" maxlength="3" required><br>
+        <input type="radio" id="weights" name="newTrainingType" value="Weights">
+        <label for="weights">Weights</label><br>
+
+        <input type="radio" id="yoga" name="newTrainingType" value="Yoga">
+        <label for="yoga">Yoga</label>
         <br>
         <br>
         <button type="submit">Edit Record</button>

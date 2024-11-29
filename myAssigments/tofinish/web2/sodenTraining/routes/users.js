@@ -30,17 +30,16 @@ router.post("/register", async (req, res) => {
   }
 
   const nameTaken = await users.findOne({ name: individualUser.name });
-  console.log(individualUser)
+  let uniqueID = await users.findOne({ id: individualUser.id });
 
-  if (nameTaken) {
-    res.send('Username taken, please choose a different username')
+  if (nameTaken || uniqueID) {
+    res.send('Username/ID taken, please try again');
+    console.log('Failed to create user invalid ID');
   } else {
-
-    if (individualUser.age < 18) {
-      res.send('You are too young to sign up for this system please come back when you are 18')
+    if (individualUser.age < 16) { // Use must be 16 or over to sign up
+      res.send('You are too young to sign up for this system please come back when you are 18');
+      console.log('Failed to create user, age requirement not met')
     } else {
-
-
       const userData = await users.insertMany(individualUser);
       console.log(userData);
       res.redirect('/')

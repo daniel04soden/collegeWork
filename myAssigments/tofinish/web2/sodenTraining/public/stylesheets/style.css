@@ -10,7 +10,42 @@ body {
     filter: blur(4px);
 }
 
+#main-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+#nav-head-bar {
+    text-align: center;
+}
+
+.center-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    height: 70vh;
+    width: 100%;
+    background-color: darkgrey;
+}
+
+.center-item {
+    background-color: grey;
+    width: 75%;
+    height: 65vh;
+}
+
+#start-now-button {
+    transition-duration: 0.5s;
+    color: black;
+    background-color: blue;
+}
+
+#start-now-button:hover {
+    background-color: #04AA6D;
+    color: white;
+}
 
 @keyframes loading-in {
     to {

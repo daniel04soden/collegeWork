@@ -1,23 +1,21 @@
 // Main imports
 
-const express = require("express");
-const trainingRouter = express.Router();
-const users = require('../models/userSchema')
+const express = require("express"); // Acessing express methods
+const trainingRouter = express.Router(); // Accessing router methods
+const users = require('../models/userSchema') // Accessing various schemas
 const bookings = require('../models/bookSchema')
-const encryption = require('bcrypt')
+const encryption = require('bcrypt') // Encrpytion for passwords and security 
 
 
 // Beginning of router which handles all booking operations
 trainingRouter
   .route("/") // Route to main page
-  .put((req, res, next) => { })
-
 trainingRouter.route("/book").get((req, res, next) => {
-  res.render("book.ejs", { title: "Book a session" });
+  res.render("book.ejs", { title: "Book a session" }); // Rendering the booking page with a title
   console.log("Routed to booking page");
 })
   .post(async (req, res) => {
-    // Identifying user from id
+    // Identifying user from their chosen id
     const userData = await users.findOne({ id: req.body.id })
 
     // Storing booking information
