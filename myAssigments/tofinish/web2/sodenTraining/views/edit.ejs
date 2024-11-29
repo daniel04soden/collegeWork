@@ -1,14 +1,26 @@
 <%- include('partials/head') %>
-    <h1>Modify Record</h1>
+    <h1>Modify your Training Session</h1>
     <form action="/session/changing" method="POST">
+        <h4>Booking time and date</h4>
         <input type="hidden" name="_id" value="<%= _id %>">
 
         <label for="newDate">New Date:</label>
-        <input type="date" id="newDate" name="newDate" min="2000-05-11" max="2080-05-20" required>
+        <input type="date" id="newDate" name="newDate" required>
         <br>
         <label for="newTime">New Time:</label>
         <input type="time" id="newTime" name="newTime" required>
-        <br><br>
+        <br>
+        <h4>Please re-enter card details</h4>
+        <label for="newCardNumber">Re-enter your card Number</label><br>
+        <input type="number" id="newCardNumber" name="newCardNumber" minlength="13" maxlength="19" value=""><br>
+
+        <label for="newExpiryDate">Re-enter your cards expiry date:</label><br>
+        <input type="date" id="newExpiryDate" name="newExpiryDate" value=""><br>
+
+        <label for="newCvc">Re-enter your CVC (Security pin):</label><br>4
+        <input type="password" id="newCvc" name="newCvc" minlength="3" maxlength="3" required><br>
+        <br>
+        <br>
         <button type="submit">Edit Record</button>
     </form>
     <%- include('partials/foot') %>

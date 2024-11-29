@@ -21,7 +21,7 @@
           </td>
           <td>
             <form action="/session/changingBegin" method="POST">
-              <input type="hidden" name="_id" value="<%= bookingInfo[i]._id %>" required>
+              <input type="hidden" name="_id" value="<%= bookingInfo[i]._id %>" maxlength="10" required>
               <button type="submit">Modify</button>
             </form>
           </td>

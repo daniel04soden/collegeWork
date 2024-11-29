@@ -1,11 +1,11 @@
-html{
-    padding:0;
-    margin:0;
+html {
+    padding: 0;
+    margin: 0;
 }
 
-body{
+body {
     animation: loading-in 1.5s ease forwards;
-    opacity:0;
+    opacity: 0;
     transform: scale(2);
     filter: blur(4px);
 }
@@ -13,19 +13,21 @@ body{
 
 
 @keyframes loading-in {
-   to{
-    filter:blur(0);
-    transform: scale(1);
-    opacity: 1;
-   }
+    to {
+        filter: blur(0);
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
-a{
+a {
     font-weight: bold;
+    text-decoration: none;
+    color: black;
 }
 
-a:hover{
-    text-decoration: double;
-    font-size: larger;
-    
+a:hover {
+    text-decoration: none;
+    color: lightgreen;
+
 }

@@ -1,6 +1,8 @@
-<% let user=false;%>
-  <% if (user) { %>
-    <a href="/users/login">Logout</a>
-    <% } else { %>
-      <a href="/users/login">Login</a>
-      <% } %>
+<% if (usersSignedIn) { %>
+  <h4>Hi there
+    <%= username %>
+      !
+  </h4>
+  <% } else { %>
+    <a href="/users/login">Login</a>
+    <% } %>

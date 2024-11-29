@@ -10,15 +10,30 @@
 
 
         <label for="id">Enter your given ID (10 Characters long) below:</label><br>
-        <input type="text" id="id" name="id" value=""><br>
+        <input type="text" id="id" name="id" maxlength="10" required>
+        <br>
 
 
         <label for="date">Enter the date you would like to book this session for:</label><br>
-        <input type="date" id="date" name="date" value=""><br>
-
+        <input type="date" id="date" name="date">
+        <br>
 
         <label for="time">Enter the time you would like to book this session for:</label><br>
-        <input type="time" id="time" name="time" value=""><br>
+        <input type="time" id="time" name="time">
+        <br>
+
+        <h4>What kind of training would you like to do?</h4>
+
+        <input type="radio" id="cardio" name="trainingType" value="Cardio">
+        <label for="cardio">Cardio</label>
+        <br>
+
+        <input type="radio" id="weights" name="trainingType" value="Weights">
+        <label for="weights">Weights</label><br>
+
+        <input type="radio" id="yoga" name="trainingType" value="Yoga">
+        <label for="yoga">Yoga</label>
+
         <hr>
         <h4>Card Details</h4>
 

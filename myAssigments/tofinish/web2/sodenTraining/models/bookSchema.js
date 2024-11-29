@@ -30,6 +30,11 @@ const bookSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	trainingType: {
+		type: String,
+		required: true,
+		default: "Cardio",
+	}
 });
 
 const collection = mongoose.model("booking", bookSchema);

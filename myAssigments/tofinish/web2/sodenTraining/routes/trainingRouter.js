@@ -1,11 +1,15 @@
+// Main imports
+
 const express = require("express");
 const trainingRouter = express.Router();
 const users = require('../models/userSchema')
 const bookings = require('../models/bookSchema')
 const encryption = require('bcrypt')
 
+
+// Beginning of router which handles all booking operations
 trainingRouter
-  .route("/")
+  .route("/") // Route to main page
   .put((req, res, next) => { })
 
 trainingRouter.route("/book").get((req, res, next) => {
@@ -24,7 +28,8 @@ trainingRouter.route("/book").get((req, res, next) => {
       time: req.body.time,
       cardNumber: req.body.cardNumber,
       expiryDate: req.body.expiryDate,
-      securityCode: await encryption.hash(req.body.cvc, 10)
+      securityCode: await encryption.hash(req.body.cvc, 10),
+      trainingType: req.body.trainingType
     }
 
     if (userData != []) {
@@ -62,16 +67,14 @@ trainingRouter.route("/manage")
 
 trainingRouter.route("/changingBegin")
   .post((req, res, next) => {
-    console.log("um whats going onnn");
-    console.log(req.body._id);
+    console.log(`Current ID: ${req.body._id}`);
     res.render("edit", { _id: req.body._id })
   });
 
 
 trainingRouter.route("/changing")
   .post((req, res, next) => {
-    console.log("cum dumpster");
-    console.log(req.body); // Log body parameters
+    console.log(req.body);
     const { _id, newDate, newTime } = req.body;
 
     const trainingUpdate = {
@@ -86,8 +89,8 @@ trainingRouter.route("/changing")
       })
       .catch(err => {
         console.error("Error:", err);
-        res.status(500).json({ error: "An error occurred while editting training." });
-        next(err); // Call next with the error to handle it elsewhere if needed
+        res.status(500).json({ error: "An error occurred while editing training." });
+        next(err);
       });
   })
 

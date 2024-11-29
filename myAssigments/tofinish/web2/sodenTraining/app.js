@@ -44,6 +44,18 @@ const auth = (req, res, next) => {
   }
 }
 
+app.use((req, res, next) => {
+
+  if (req.session.name != null) {
+    res.locals.usersSignedIn = true;
+    res.locals.username = req.session.name;
+    next()
+  } else {
+    res.locals.usersSignedIn = false;
+    next()
+  }
+});
+
 
 // Using various routers to navigate the website
 
