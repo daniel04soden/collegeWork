@@ -30,8 +30,23 @@ trainingRouter.route("/book").get((req, res, next) => {
       trainingType: req.body.trainingType
     }
 
+
+    // Date verification
+
+    let todaysDate = new Date(today);
+    const maxDate = new Date('2099-12-31');
+    let minDate = new Date(todaysDate + 1);
+
+    function checkIfWithinDate(min, max, given) {
+      return given >= min && given <= max;
+    }
+
     if (userData != []) {
-      const bookingConfirmation = await bookings.insertMany(bookingData)
+      if (!withinDateRange || bookingData.expiryDate > todaysDate) {
+        res.send('Invalid date/expiry date')
+      } else {
+        const bookingConfirmation = await bookings.insertMany(bookingData)
+      }
     } else {
       res.send('Invalid id')
     }
