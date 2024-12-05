@@ -1,3 +1,5 @@
+package org.example;
+
 public class Agent {
     private final int id;
 

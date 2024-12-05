@@ -67,6 +67,10 @@ public class HeapOfBinaryTries {
 					 returns:
 								BinaryTrie min; minimum value binary trie
 					  */
+
+				if (heapSize == 0) {
+					throw new RuntimeException("Empty heap");
+				}
         BinaryTrie min = A[0]; // The min binartrie is at the index 0 of A
         A[0] = A[heapSize - 1]; // A[0] is then assigned to the value at the top of the array
         heapSize--; // Reduce the heapSize (Essentially take it out)

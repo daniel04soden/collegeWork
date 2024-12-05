@@ -75,9 +75,10 @@ public class DivideAndConquer {
     if (n == 1) {
       System.out.println("Move disk" + " from tower " + A + " to tower " + C); // Base case and print output once n is 1
     } else {
-      hanoi(n - 1, A, C, B);
-      hanoi(1, A, B, C);
-      hanoi(n - 1, B, A, C);
+      hanoi(n - 1, A, C, B); // Move stack of n-1 from A to B 
+      hanoi(1, A, B, C); // Move a singular disk from A to C 
+      hanoi(n - 1, B, A, C); // Move a stack of n-1 disks from B to C
+
     }
   }
 
