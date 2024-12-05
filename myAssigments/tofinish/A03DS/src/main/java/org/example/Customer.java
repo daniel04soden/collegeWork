@@ -1,12 +1,19 @@
 package org.example;
 
 public class Customer extends Agent{
+
+    // Fields
+
     public String username;
     public int age;
+    double currentBal;
 
-    public Customer(int customerID, String _username, int _age){
+    // Constructors
+
+    public Customer(int customerID, String _username, int _age,double _currentBal){
         super(customerID);
         this.username = _username;
+        this.currentBal = _currentBal;
         if (checkAge(_age)){
            this.age = _age;
         }else{
@@ -16,8 +23,9 @@ public class Customer extends Agent{
 
     // Getters and setters
 
-    private boolean checkAge(int _age){
-        return _age >= 18;
+
+    public double getCurrentBal() {
+        return currentBal;
     }
 
     public String getUsername() {
@@ -35,4 +43,14 @@ public class Customer extends Agent{
     public void setAge(int age) {
         this.age = age;
     }
+
+    // Extra functionality
+    private boolean checkAge(int _age){
+        return _age >= 18;
+    }
+
+    public void addMoneyToAccount(int id, double extraToBal){
+       this.currentBal += extraToBal;
+    }
+
 }
