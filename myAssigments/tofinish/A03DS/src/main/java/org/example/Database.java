@@ -5,8 +5,9 @@ import java.sql.SQLException;
 
 public class Database {
 
-    public static String url = "jdbc:sqlite:A02Ds/database/shop.db";
-    public static void connect(String url){
+    public static String url = "jdbc:sqlite:A03Ds/database/shop.db";
+
+    public static void connect(String url) {
         try (var conn = DriverManager.getConnection(url)) {
             if (conn != null) {
                 var meta = conn.getMetaData();
@@ -18,7 +19,7 @@ public class Database {
         }
     }
 
-    public static void createTable(String url,String sqlStatement){
+    public static void createTable(String url, String sqlStatement) {
         try (var conn = DriverManager.getConnection(url);
              var stmt = conn.createStatement()) {
             // create a new table
@@ -27,4 +28,5 @@ public class Database {
             System.out.println(e.getMessage());
         }
     }
+
 }

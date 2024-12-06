@@ -14,11 +14,7 @@ public class Customer extends Agent{
         super(customerID);
         this.username = _username;
         this.currentBal = _currentBal;
-        if (checkAge(_age)){
-           this.age = _age;
-        }else{
-            throw new RuntimeException("Our user is too young to be a customer");
-        }
+        this.age = _age;
     }
 
     // Getters and setters
@@ -45,12 +41,12 @@ public class Customer extends Agent{
     }
 
     // Extra functionality
-    private boolean checkAge(int _age){
+    public boolean checkAge(int _age){
         return _age >= 18;
     }
 
     public void addMoneyToAccount(int id, double extraToBal){
-       this.currentBal += extraToBal;
+        this.currentBal += extraToBal;
     }
 
 }

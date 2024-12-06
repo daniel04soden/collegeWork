@@ -1,6 +1,5 @@
 package org.example;
 
-import javax.xml.crypto.Data;
 import java.util.Scanner;
 
 public class Main {
@@ -21,6 +20,39 @@ public class Main {
         System.out.println("\n\n");
     }
 
+    public static int scanInt(String prompt, int maxLen, int minLen){
+        Scanner scanning = new Scanner(System.in);
+        int ans = 0;
+        int length = String.valueOf(ans).length();
+        while(length >=minLen && length < maxLen){
+            System.out.println(prompt);
+            ans = scanning.nextInt();
+            length = String.valueOf(ans).length();
+        }
+        return ans;
+    }
+
+    public static String scanString(String prompt, int maxLen, int minLen){
+        String ans = " ";
+        Scanner scanning = new Scanner(System.in);
+        while( ans.length() >= minLen && ans.length() < maxLen){
+            System.out.println(prompt);
+            ans = scanning.next().strip();
+        }
+        return ans;
+    }
+
+    public static Double scanDouble(String prompt, int maxLen, int minLen){
+        Scanner scanning = new Scanner(System.in);
+        double ans = 0.0;
+        int length = String.valueOf(ans).length();
+        while(length >=minLen && length < maxLen){
+            System.out.println(prompt);
+            ans = scanning.nextDouble();
+            length = String.valueOf(ans).length();
+        }
+        return ans;
+    }
     public static int menuChooser(int startRange, int endRange) {
         Scanner scanning = new Scanner(System.in);
         int nextAnswer = scanning.nextInt();
@@ -33,6 +65,7 @@ public class Main {
     }
 
     public static void main(String[] args) throws Exception {
+        ShopImp s = new ShopImp();
         Database.connect(Database.url);
         boolean running = true;
         while (running) {
@@ -44,6 +77,21 @@ public class Main {
                     break;
 
                 case 1:
+                    Scanner scanning = new Scanner(System.in);
+                    System.out.println("Enter a username:  ");
+                    String name = scanning.next();
+
+                    System.out.println("Enter a username:  (Must be 9 characters long)");
+                    int customerID = scanning.nextInt();
+
+                    System.out.println("Enter your age:  ");
+                    int age = scanning.nextInt();
+
+                    System.out.println("Enter the balance currently in your account:");
+                    double balance = scanning.nextDouble();
+
+                    s.addCustomer(customerID,name,age,balance);
+
 
                     break;
 
