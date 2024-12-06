@@ -1,6 +1,7 @@
 package org.example;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 
 public final class ShopImp implements Shop{
@@ -75,35 +76,42 @@ public final class ShopImp implements Shop{
 
     }
 
-    public Customer addCustomer(int customerID,String name, int age, double currentBal) {
-        Customer brandNewCustomer = new Customer(customerID,name,age,currentBal);
-        boolean correctAge = brandNewCustomer.checkAge(brandNewCustomer.age);
+    public Customer addCustomer(String name, int age, double currentBal) {
+        boolean correctAge = Customer.checkAge(age);
 
-        if (!correctAge){
+        if (!correctAge) {
             System.out.println("You must be over 18 to be a customer at this store");
-						return null;
-        }else{
+            return null;
+        } else {
+            String sqlStmt = "INSERT INTO customers(customerID, username, age, currentBal) VALUES(DEFAULT, ?, ?, ?)";
 
-            String sqlStmt = "INSERT INTO customers(" +
-                    "customerID,username,age,currentBal)" +
-                    "VALUES(" + brandNewCustomer.getId() +
-                    brandNewCustomer.username + brandNewCustomer.age + brandNewCustomer.currentBal +
-                    ")";
-
-            try(var conn = DriverManager.getConnection(Database.url);
-                var prepStmt = conn.prepareStatement(sqlStmt)){
-                prepStmt.setInt(1,brandNewCustomer.getId());
-                prepStmt.setString(2,brandNewCustomer.username);
-                prepStmt.setInt(3,brandNewCustomer.age);
-                prepStmt.setDouble(4,brandNewCustomer.currentBal);
+            try (var conn = DriverManager.getConnection(Database.url);
+                 var prepStmt = conn.prepareStatement(sqlStmt, Statement.RETURN_GENERATED_KEYS)) {
+                prepStmt.setString(1, name);
+                prepStmt.setInt(2, age);
+                prepStmt.setDouble(3, currentBal);
                 prepStmt.executeUpdate();
 
-            } catch (SQLException e){
+                // Retrieve the generated customerID
+                try (var rs = prepStmt.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        int customerID = rs.getInt(1);
+                        System.out.println("Thanks " + name + "You are now a registered Customer\n");
+                        System.out.println("------------------------------------------------");
+                        System.out.println("Your given id is " + customerID +" ,Remember it!");
+                        return new Customer(customerID, name, age, currentBal);
+                    } else {
+                        // Handle error: Failed to retrieve generated ID
+                        System.err.println("Failed to retrieve generated customerID");
+                        return null;
+                    }
+                }
+            } catch (SQLException e) {
                 System.err.println(e.getMessage());
+                return null;
             }
-            return brandNewCustomer; // Return statement - Main functionality relates to the sql insertion
         }
-
+    }
     }
 
     @Override

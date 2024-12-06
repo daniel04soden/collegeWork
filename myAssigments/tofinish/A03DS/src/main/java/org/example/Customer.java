@@ -41,7 +41,7 @@ public class Customer extends Agent{
     }
 
     // Extra functionality
-    public boolean checkAge(int _age){
+    public static boolean checkAge(int _age){
         return _age >= 18;
     }
 
