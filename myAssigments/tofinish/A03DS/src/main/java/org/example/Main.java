@@ -17,7 +17,11 @@ public class Main {
         System.out.print("6. Display Item Info\n");
         System.out.print("7. Display All Item IDs\n");
         System.out.print("8. Add money to a customer account\n");
-        System.out.println("\n\n");
+        System.out.print("9. List recent orders\n");
+        System.out.print("10. Save order as receipt (to disk)\n");
+        System.out.println("\n");
+        System.out.print("------------------------------------\n");
+        System.out.print("------------------------------------\n");
     }
 
     public static int scanInt(String prompt, int maxLen, int minLen){
@@ -73,16 +77,16 @@ public class Main {
             int starterChoice = menuChooser(0, 11);
             switch (starterChoice) {
                 case 0:
+                    System.out.println("bye!");
                     running = false;
                     break;
 
                 case 1:
                     Scanner scanning = new Scanner(System.in);
-                    System.out.println("Enter a username:  ");
-                    String name = scanning.next();
+                    String name = scanString("Enter your name:",30,1);
 
-                    System.out.println("Enter a username:  (Must be 9 characters long)");
-                    int customerID = scanning.nextInt();
+                    System.out.println("Enter an id:  (Must be 9 characters long)");
+                    int customerID = scanInt("Enter an id: (must be 9 characters long)",9,9);
 
                     System.out.println("Enter your age:  ");
                     int age = scanning.nextInt();
@@ -96,7 +100,6 @@ public class Main {
                     break;
 
                 case 2:
-
                     break;
 
                 case 3:
@@ -125,7 +128,7 @@ public class Main {
 
 
                 default:
-                    break;
+                    System.out.println("Pick a valid option");
             }
         }
 

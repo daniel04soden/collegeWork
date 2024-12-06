@@ -1,14 +1,12 @@
 package org.example;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Scanner;
 
 
 public final class ShopImp implements Shop{
     // Fields
 
     // Null
-
 
    // Constructors
 
@@ -18,7 +16,7 @@ public final class ShopImp implements Shop{
 
        Database.createTable(Database.url,
                "CREATE TABLE customers IF NOT EXISTS(" +
-                            "customerID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                            "customerID INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT," +
                        "username text," +
                        "age INTEGER," +
                        "currentBal REAL," +
@@ -27,7 +25,7 @@ public final class ShopImp implements Shop{
 
        Database.createTable(Database.url,
                "CREATE TABLE computers IF NOT EXISTS(" +
-                       "productID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                       "productID INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT," +
                        "price REAL," +
                        "stock INTEGER," +
                        "amountOnOrder INTEGER," +
@@ -61,7 +59,11 @@ public final class ShopImp implements Shop{
              var rs = stmt.executeQuery(sqlSelect)) {
 
             while (rs.next()) {
-                // TODO Add in sql selects
+                System.out.printf(
+                        "%-10s%-20s%n", // Formatting column
+                        rs.getInt("productID"),
+                        rs.getString("productName")
+                );
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
@@ -73,7 +75,6 @@ public final class ShopImp implements Shop{
 
     }
 
-    @Override
     public Customer addCustomer(int customerID,String name, int age, double currentBal) {
         Customer brandNewCustomer = new Customer(customerID,name,age,currentBal);
         boolean correctAge = brandNewCustomer.checkAge(brandNewCustomer.age);
@@ -82,14 +83,51 @@ public final class ShopImp implements Shop{
             System.out.println("You must be over 18 to be a customer at this store");
 						return null;
         }else{
-						return brandNewCustomer;
+
+            String sqlStmt = "INSERT INTO customers(" +
+                    "customerID,username,age,currentBal)" +
+                    "VALUES(" + brandNewCustomer.getId() +
+                    brandNewCustomer.username + brandNewCustomer.age + brandNewCustomer.currentBal +
+                    ")";
+
+            try(var conn = DriverManager.getConnection(Database.url);
+                var prepStmt = conn.prepareStatement(sqlStmt)){
+                prepStmt.setInt(1,brandNewCustomer.getId());
+                prepStmt.setString(2,brandNewCustomer.username);
+                prepStmt.setInt(3,brandNewCustomer.age);
+                prepStmt.setDouble(4,brandNewCustomer.currentBal);
+                prepStmt.executeUpdate();
+
+            } catch (SQLException e){
+                System.err.println(e.getMessage());
+            }
+            return brandNewCustomer; // Return statement - Main functionality relates to the sql insertion
         }
 
     }
 
     @Override
-    public void removeCustomer(int id, String name) {
+    public void removeCustomer(Customer c, String name) {
+       String confirm = "YES I WANT TO PROCEED TO DELETE MY THIS CUSTOMER";
+       String deletePrompt = Main.scanString("Would you like to delete your user?",255,1);
+       System.out.println("To proceed please enter:   " + confirm);
+       if (deletePrompt.equals(confirm)){
+           var sql = "DELETE FROM customer WHERE id = ?";
+           var id = c.getId();
 
+           try (var conn = DriverManager.getConnection(Database.url);
+                var prepStmt = conn.prepareStatement(sql)) {
+
+               prepStmt.setInt(1, id);
+
+               // execute the delete statement
+               prepStmt.executeUpdate();
+
+           } catch (SQLException e) {
+               System.err.println(e.getMessage());
+           }
+           c = null;
+       }
     }
 
     @Override
@@ -114,13 +152,29 @@ public final class ShopImp implements Shop{
         }
     }
 
-    @Override
-    public void addMoneyToCustAccount(int amount) {
+    public void addMoneyToCustAccount(Customer c) {
+       int id = Main.scanInt("Enter your user id to add money to your account:",9,9);
+        double amount = Main.scanDouble("How much do you want to add?",100,1);
+       c.addMoneyToAccount(id,amount);
 
+       var sql = "UPDATE customers SET currentBal = ? WHERE customerID = ?";
+
+        try (var conn = DriverManager.getConnection(Database.url);
+             var prepstmt = conn.prepareStatement(sql)) {
+            // set the parameters
+            prepstmt.setDouble(1, amount);
+            prepstmt.setInt(2, c.getId());
+            // update
+            prepstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+
+
+            System.out.println("You have successfully added €" + amount + " to your account and now have €" + c.currentBal);
     }
 
     @Override
-    public int purchaseItem(int customerID, int productID, double amountGiven) {
+    public int purchaseItem(int customerID, product p, double amountGiven) {
         return 0;
     }
 
