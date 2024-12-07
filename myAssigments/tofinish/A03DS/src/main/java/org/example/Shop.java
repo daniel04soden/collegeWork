@@ -11,10 +11,13 @@ public interface Shop {
 
     // Product methods
 
-    public int purchaseItem(int customerID, int productID, double amountGiven);
-    public int returnItem(int customerID, int productID, double itemPrice);
+    public double purchaseItem(int customerID, int productID, double amountGiven);
     public void listItems();
+    public void listItemIDs();
 
-    // Stock Methods
-    public void orderStock(int productID);
+    // Order Methods
+
+    public void listRecentOrders();
+    public String saveReceipt(Order o);
+
 }

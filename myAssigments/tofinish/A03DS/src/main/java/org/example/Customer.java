@@ -1,5 +1,8 @@
 package org.example;
 
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 public class Customer extends Agent{
 
     // Fields
@@ -45,8 +48,23 @@ public class Customer extends Agent{
         return _age >= 18;
     }
 
-    public void addMoneyToAccount(int id, double extraToBal){
+    public void addMoneyToAccount(double extraToBal){
         this.currentBal += extraToBal;
     }
+		
+		public void takeMoneyFromAcc(double amount){
+        var sql = "UPDATE customers SET currentBal = ? WHERE customerID=" + this.getId() +";";
 
-}
+        try (var conn = DriverManager.getConnection(Database.url);
+             var pstmt = conn.prepareStatement(sql)) {
+            // set the parameters
+            pstmt.setDouble(1,this.currentBal - amount);
+            // update
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+	
+	}
+
