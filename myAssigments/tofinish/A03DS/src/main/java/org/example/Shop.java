@@ -11,7 +11,7 @@ public interface Shop {
 
     // Product methods
 
-    public double purchaseItem(int customerID, int productID, double amountGiven);
+    public double purchaseItem(int productNo, Customer c, double amountGiven);
     public void listItems();
     public void listItemIDs();
 

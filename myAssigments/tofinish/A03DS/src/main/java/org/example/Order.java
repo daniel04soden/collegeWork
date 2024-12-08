@@ -18,6 +18,15 @@ public class Order extends Agent{
         return cost;
     }
 
+		public int getCustomerID() {
+			return customerID;
+		}
+
+			public int getProductID() {
+				return productID;
+		}
+		
+
     // Printing value to String
     @Override
     public String toString() {
@@ -27,4 +36,5 @@ public class Order extends Agent{
                 ", cost=" + cost +
                 '}';
     }
+
 }

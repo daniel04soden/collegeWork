@@ -33,6 +33,7 @@ public class Main {
             ans = scanning.nextInt();
             length = String.valueOf(ans).length();
         }
+				scanning.close();
         return ans;
     }
 
@@ -43,6 +44,7 @@ public class Main {
             System.out.println(prompt);
             ans = scanning.next().strip();
         }
+				scanning.close();
         return ans;
     }
 
@@ -55,6 +57,7 @@ public class Main {
             ans = scanning.nextDouble();
             length = String.valueOf(ans).length();
         }
+				scanning.close();
         return ans;
     }
     public static int menuChooser(int startRange, int endRange) {
@@ -100,10 +103,12 @@ public class Main {
                     break;
 
                 case 2:
+										s.removeCustomer(c, name);
                     break;
 
                 case 3:
-
+										int id = scanInt("What is your customer id", 10, 10);
+										s.displayCustomerInfo(id);
                     break;
 
                 case 4:

@@ -74,8 +74,25 @@ public final class ShopImp implements Shop{
         }
     }
 
-    public void orderStock(int productID) {
+	
+    @Override
+    public void listItemIDs() {
+        var sqlSelect = "SELECT productID FROM computers";
 
+
+        try (var conn = DriverManager.getConnection(Database.url);
+             var stmt = conn.createStatement();
+             var rs = stmt.executeQuery(sqlSelect)) {
+
+            while (rs.next()) {
+                System.out.printf(
+                        "%-10s%n", // Formatting column
+                        rs.getInt("productID")
+                );
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     public Customer addCustomer(String name, int age, double currentBal) {
@@ -204,13 +221,15 @@ public void addMoneyToCustAccount(Customer c) {
 							System.out.println("You don't have enough money sorry! ");	
 
 						}else{
+					// Creating order for the user 
+					Order newOrder = new Order(orderID, c.getId(), sqlProductNo, sqlProductCost);
 					// Updating user balance
 						changeGiven = amountGiven - sqlProductCost;
 						c.takeMoneyFromAcc(sqlProductCost);	
+					
+						// TODO add in automatic orderid
 						
-						System.out.println("Thank you very much the" + sqlProductName + "is a great choice");
-					// Updating stock
-
+						System.out.println("Thank you very much, the " + sqlProductName + " is a great choice");
 
 				}	
 					}
@@ -223,6 +242,27 @@ public void addMoneyToCustAccount(Customer c) {
 			
     }
 
+    @Override
+    public void listRecentOrders() {
+        var sqlSelect = "SELECT * FROM orders";
 
+
+        try (var conn = DriverManager.getConnection(Database.url);
+             var stmt = conn.createStatement();
+             var rs = stmt.executeQuery(sqlSelect)) {
+
+            while (rs.next()) {
+                System.out.printf(
+                        "%-10s%-10s%-10s%-12s%n", // Formatting column
+                        rs.getInt("orderID"),
+                        rs.getInt("customerID"),
+                        rs.getInt("productID"),
+                        rs.getDouble("cost")
+                );
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
 
 }
