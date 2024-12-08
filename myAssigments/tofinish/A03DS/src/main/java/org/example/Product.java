@@ -33,8 +33,9 @@ public class Product extends Agent{
 
     // No setter for setting current stock, that will be implemented as follows:
 
-    public void incrementStock(int amountOfNewStock){
-        this.currentStock+= amountOfNewStock;
+
+    public void setCurrentStock(int currentStock) {
+        this.currentStock = currentStock;
     }
 
     public int getAmountOnOrder() {
@@ -45,4 +46,11 @@ public class Product extends Agent{
         this.amountOnOrder = amountOnOrder;
     }
 
+    public boolean isDiscontinued() {
+        return discontinued;
+    }
+
+    public void setDiscontinued(boolean discontinued) {
+        this.discontinued = discontinued;
+    }
 }

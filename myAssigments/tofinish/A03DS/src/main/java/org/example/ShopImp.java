@@ -1,7 +1,8 @@
 package org.example;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.io.FileWriter;
+import java.io.IOException;
 
 
 public final class ShopImp implements Shop{
@@ -16,8 +17,8 @@ public final class ShopImp implements Shop{
         // Initialising the customer and computer databases rather than keeping them in a list
 
         Database.createTable(Database.url,
-                "CREATE TABLE customers IF NOT EXISTS(" +
-                        "customerID INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT," +
+                "CREATE TABLE IF NOT EXISTS customers(" +
+                        "customerNo INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT," +
                         "username text," +
                         "age INTEGER," +
                         "currentBal REAL" +
@@ -25,8 +26,8 @@ public final class ShopImp implements Shop{
         ); // Handles creating a Customer table
 
         Database.createTable(Database.url,
-                "CREATE TABLE computers IF NOT EXISTS(" +
-                        "productID INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT," +
+                "CREATE TABLE IF NOT EXISTS computers(" +
+                        "productNo INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT," +
                         "price REAL," +
                         "compName TEXT," +
                         "stock INTEGER," +
@@ -38,13 +39,13 @@ public final class ShopImp implements Shop{
                         ");"
         );
         Database.createTable(Database.url,
-                "CREATE TABLE orders IF NOT EXISTS(" +
-                        "orderID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        "customerID INTEGER," +
-                        "productID INTEGER," +
+                "CREATE TABLE IF NOT EXISTS orders(" +
+                        "orderNo INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "customerNo INTEGER," +
+                        "productNo INTEGER," +
                         "cost REAL," +
-                        "FOREIGN KEY (customerID) REFERENCES customer(customerID)," +
-                        "FOREIGN KEY (productID) REFERENCES computer(productID)" +
+                        "FOREIGN KEY (customerNo) REFERENCES customer(customerNo)," +
+                        "FOREIGN KEY (productNo) REFERENCES computer(productNo)" +
                         ");"
         );
     }
@@ -53,7 +54,7 @@ public final class ShopImp implements Shop{
 
     @Override
     public void listItems() {
-        var sqlSelect = "SELECT productID,compName, stock, price FROM computers";
+        var sqlSelect = "SELECT productNo,compName, stock, price FROM computers";
 
 
         try (var conn = DriverManager.getConnection(Database.url);
@@ -63,8 +64,8 @@ public final class ShopImp implements Shop{
             while (rs.next()) {
                 System.out.printf(
                         "%-10s%-20s%-15s%-12s%n", // Formatting column
-                        rs.getInt("productID"),
-                        rs.getString("productName"),
+                        rs.getInt("productNo"),
+                        rs.getString("compName"),
                         rs.getInt("stock"),
                         rs.getDouble("price")
                 );
@@ -77,7 +78,7 @@ public final class ShopImp implements Shop{
 	
     @Override
     public void listItemIDs() {
-        var sqlSelect = "SELECT productID FROM computers";
+        var sqlSelect = "SELECT productNo FROM computers";
 
 
         try (var conn = DriverManager.getConnection(Database.url);
@@ -87,7 +88,7 @@ public final class ShopImp implements Shop{
             while (rs.next()) {
                 System.out.printf(
                         "%-10s%n", // Formatting column
-                        rs.getInt("productID")
+                        rs.getInt("productNo")
                 );
             }
         } catch (SQLException e) {
@@ -96,54 +97,30 @@ public final class ShopImp implements Shop{
     }
 
     public Customer addCustomer(String name, int age, double currentBal) {
+				Customer newCustomer = null;
         boolean correctAge = Customer.checkAge(age);
 
         if (!correctAge) {
             System.out.println("You must be over 18 to be a customer at this store");
-            return null;
         } else {
-            String sqlStmt = "INSERT INTO customers(customerID, username, age, currentBal) VALUES(DEFAULT, ?, ?, ?)";
-
-            try (var conn = DriverManager.getConnection(Database.url);
-                 var prepStmt = conn.prepareStatement(sqlStmt, Statement.RETURN_GENERATED_KEYS)) {
-                prepStmt.setString(1, name);
-                prepStmt.setInt(2, age);
-                prepStmt.setDouble(3, currentBal);
-                prepStmt.executeUpdate();
-
-                // Retrieve the generated customerID
-                try (var rs = prepStmt.getGeneratedKeys()) {
-                    if (rs.next()) {
-                        int customerID = rs.getInt(1);
-                        System.out.println("Thanks " + name + "You are now a registered Customer\n");
-                        System.out.println("------------------------------------------------");
-                        System.out.println("Your given id is " + customerID +" ,Remember it!");
-                        return new Customer(customerID, name, age, currentBal);
-                    } else {
-                        // Handle error: Failed to retrieve generated ID
-                        System.err.println("Failed to retrieve generated customerID");
-                        return null;
-                    }
-                }
-            } catch (SQLException e) {
-                System.err.println(e.getMessage());
-                return null;
-            }
-        }
+			 newCustomer = new Customer(name, age, currentBal);
     }
+			return newCustomer;
+	}
+	
 
-public void removeCustomer(Customer c, String name) {
+public void removeCustomer(int id, String name) {
     String confirm = "YES I WANT TO PROCEED TO DELETE MY THIS CUSTOMER";
     String deletePrompt = Main.scanString("Would you like to delete your user?",255,1);
     System.out.println("To proceed please enter:   " + confirm);
     if (deletePrompt.equals(confirm)){
-        var sql = "DELETE FROM customer WHERE id = ?";
-        var id = c.getId();
+        var sql = "DELETE FROM customer WHERE sqlId = ?";
+        var sqlId = id;
 
         try (var conn = DriverManager.getConnection(Database.url);
              var prepStmt = conn.prepareStatement(sql)) {
 
-            prepStmt.setInt(1, id);
+            prepStmt.setInt(1, sqlId);
 
             // execute the delete statement
             prepStmt.executeUpdate();
@@ -151,7 +128,6 @@ public void removeCustomer(Customer c, String name) {
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
-        c = null;
     }
 }
 
@@ -166,7 +142,7 @@ public void displayCustomerInfo(int id) {
 
         while (rs.next()) {
             System.out.printf("%-5s%-20s%-4s%-20s%n",
-                    rs.getInt("customerID"),
+                    rs.getInt("customerNo"),
                     rs.getString("username"),
                     rs.getInt("age"),
                     rs.getDouble("currentBal")
@@ -177,41 +153,37 @@ public void displayCustomerInfo(int id) {
     }
 }
 
-public void addMoneyToCustAccount(Customer c) {
-    int id = Main.scanInt("Enter your user id to add money to your account:",9,9);
-    double amount = Main.scanDouble("How much do you want to add?",100,1);
-    c.addMoneyToAccount(amount);
 
-    var sql = "UPDATE customers SET currentBal = ? WHERE customerID = "+c.getId();
+		public void addMoneyToCustAccount(int id,double amount){
+        var sql = "UPDATE customers SET currentBal = ? WHERE customerNo=" + id +";";
 
-    try (var conn = DriverManager.getConnection(Database.url);
-         var prepstmt = conn.prepareStatement(sql)) {
-        // set the parameters
-        prepstmt.setDouble(1, amount);
-        // update
-        prepstmt.executeUpdate();
-    } catch (SQLException e) {
-        System.err.println(e.getMessage());
-
-
-        System.out.println("You have successfully added €" + amount + " to your account and now have €" + c.currentBal);
-		}
+        try (var conn = DriverManager.getConnection(Database.url);
+             var pstmt = conn.prepareStatement(sql)) {
+						double balance = Customer.getCustomerBalance(id);
+            pstmt.setDouble(1, balance + amount);
+            // update
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
-    public double purchaseItem(int productNo, Customer c, double amountGiven){
+    public void purchaseItem(int productID, int customerID){
 			double changeGiven = 0.0;
 			
-			var sqlProductLookup = "SELECT productNo,productName,price,stock FROM computers WHERE productNo=" + productNo;
+			var sqlProductLookup = "SELECT productNo,compName,price,stock FROM computers WHERE productNo=" + productID + ";";
 
 			try (var conn = DriverManager.getConnection(Database.url);
 					var prepStmt = conn.createStatement();
 					var rs = prepStmt.executeQuery(sqlProductLookup)){
 
 					int sqlProductNo = rs.getInt("productNo");
-					String sqlProductName = rs.getString("productName");
+					String sqlProductName = rs.getString("compName");
 					Double sqlProductCost= rs.getDouble("price");
 
-					if (sqlProductNo != productNo) {
+					double amountGiven = Main.scanDouble("That will be" + sqlProductCost + ", please enter how much you have on hand:");
+
+					if (sqlProductNo != productID) {
 						System.out.println("HEY WHATS UP not same P/N");	
 
 					} else {
@@ -221,15 +193,26 @@ public void addMoneyToCustAccount(Customer c) {
 							System.out.println("You don't have enough money sorry! ");	
 
 						}else{
-					// Creating order for the user 
-					Order newOrder = new Order(orderID, c.getId(), sqlProductNo, sqlProductCost);
+
 					// Updating user balance
 						changeGiven = amountGiven - sqlProductCost;
-						c.takeMoneyFromAcc(sqlProductCost);	
-					
-						// TODO add in automatic orderid
-						
+						Customer.takeMoneyFromAcc(sqlProductCost,customerID);
+                        Order newOrder = new Order(customerID, sqlProductNo, sqlProductCost);
 						System.out.println("Thank you very much, the " + sqlProductName + " is a great choice");
+
+
+						String receiptDecision = Main.scanString("Would you like a receipt too? ", 1, 1);
+
+						switch (receiptDecision) {
+							case "y":
+								saveReceipt(newOrder);
+                                System.out.println("thanks for shopping with us");
+								break;
+
+							default:
+                                System.out.println("thanks for shopping with us");
+								break;
+						}
 
 				}	
 					}
@@ -238,8 +221,8 @@ public void addMoneyToCustAccount(Customer c) {
 				System.err.println(e.getMessage());
 			}
 
-		return changeGiven;
-			
+		// Logging users order
+
     }
 
     @Override
@@ -254,9 +237,9 @@ public void addMoneyToCustAccount(Customer c) {
             while (rs.next()) {
                 System.out.printf(
                         "%-10s%-10s%-10s%-12s%n", // Formatting column
-                        rs.getInt("orderID"),
-                        rs.getInt("customerID"),
-                        rs.getInt("productID"),
+                        rs.getInt("orderNo"),
+                        rs.getInt("customerNo"),
+                        rs.getInt("productNo"),
                         rs.getDouble("cost")
                 );
             }
@@ -264,5 +247,21 @@ public void addMoneyToCustAccount(Customer c) {
             System.err.println(e.getMessage());
         }
     }
+
+		public String saveReceipt(Order o){
+			String receipt = "";
+
+        String fileName = o.getCustomerID()+".txt";
+
+        try (FileWriter writer = new FileWriter(fileName)) {
+					receipt  = o.toString();
+            writer.write(receipt);
+        } catch (IOException e) {
+            System.err.println("Error writing to file: " + e.getMessage());
+        }
+
+		return receipt;
+
+	}
 
 }

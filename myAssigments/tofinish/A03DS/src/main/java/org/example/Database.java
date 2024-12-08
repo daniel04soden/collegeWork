@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 public class Database {
 
-    public static String url = "jdbc:sqlite:A03Ds/database/shop.db";
+    public static String url = "jdbc:sqlite:./database/shop.db";
 
     public static void connect(String url) {
         try (var conn = DriverManager.getConnection(url)) {

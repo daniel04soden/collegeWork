@@ -18,57 +18,37 @@ public class Main {
         System.out.print("7. Display All Item IDs\n");
         System.out.print("8. Add money to a customer account\n");
         System.out.print("9. List recent orders\n");
-        System.out.print("10. Save order as receipt (to disk)\n");
         System.out.println("\n");
         System.out.print("------------------------------------\n");
         System.out.print("------------------------------------\n");
     }
 
-    public static int scanInt(String prompt, int maxLen, int minLen){
+    public static int scanInt(String prompt){
         Scanner scanning = new Scanner(System.in);
-        int ans = 0;
-        int length = String.valueOf(ans).length();
-        while(length >=minLen && length < maxLen){
-            System.out.println(prompt);
-            ans = scanning.nextInt();
-            length = String.valueOf(ans).length();
-        }
-				scanning.close();
-        return ans;
-    }
-
-    public static String scanString(String prompt, int maxLen, int minLen){
-        String ans = " ";
-        Scanner scanning = new Scanner(System.in);
-        while( ans.length() >= minLen && ans.length() < maxLen){
-            System.out.println(prompt);
-            ans = scanning.next().strip();
-        }
-				scanning.close();
-        return ans;
-    }
-
-    public static Double scanDouble(String prompt, int maxLen, int minLen){
-        Scanner scanning = new Scanner(System.in);
-        double ans = 0.0;
-        int length = String.valueOf(ans).length();
-        while(length >=minLen && length < maxLen){
-            System.out.println(prompt);
-            ans = scanning.nextDouble();
-            length = String.valueOf(ans).length();
-        }
-				scanning.close();
-        return ans;
-    }
-    public static int menuChooser(int startRange, int endRange) {
-        Scanner scanning = new Scanner(System.in);
-        int nextAnswer = scanning.nextInt();
-        boolean inRange = nextAnswer >= startRange || nextAnswer <= endRange;
-        if (!inRange) {
-            System.err.println("error: Please select an item between" + startRange + "and" + endRange);
-        }
+        System.out.println(prompt);
+        int res = scanning.nextInt();
         scanning.close();
-        return nextAnswer;
+
+        return res;
+    }
+    public static String scanString(String prompt, int maxLen, int minLen){
+        Scanner scanning = new Scanner(System.in);
+        String ans = " ";
+        while( !(ans.length() >= minLen && ans.length() < maxLen)){
+            System.out.println(prompt);
+            ans = scanning.next();
+            scanning.close();
+        }
+        return ans;
+    }
+
+    public static Double scanDouble(String prompt){
+        Scanner scanning = new Scanner(System.in);
+        System.out.println(prompt);
+        double res = scanning.nextDouble();
+        scanning.close();
+
+        return res;
     }
 
     public static void main(String[] args) throws Exception {
@@ -77,65 +57,63 @@ public class Main {
         boolean running = true;
         while (running) {
             displayMenu();
-            int starterChoice = menuChooser(0, 11);
+            int starterChoice = scanInt("Enter menu choice");
             switch (starterChoice) {
                 case 0:
                     System.out.println("bye!");
                     running = false;
-                    break;
+                    break; // Added break to exit the loop
 
                 case 1:
-                    Scanner scanning = new Scanner(System.in);
-                    String name = scanString("Enter your name:",30,1);
-
-                    System.out.println("Enter an id:  (Must be 9 characters long)");
-                    int customerID = scanInt("Enter an id: (must be 9 characters long)",9,9);
-
-                    System.out.println("Enter your age:  ");
-                    int age = scanning.nextInt();
-
-                    System.out.println("Enter the balance currently in your account:");
-                    double balance = scanning.nextDouble();
-
-                    s.addCustomer(customerID,name,age,balance);
-
-
+                    String name = scanString("Enter your name:", 30, 1);
+                    int age = scanInt("Enter your age");
+                    double balance = scanDouble("Enter the balance in your account now:");
+                    s.addCustomer(name, age, balance);
                     break;
 
                 case 2:
-										s.removeCustomer(c, name);
+                    int removeCustomerID = scanInt("Enter your customerID:");
+                    String custName = scanString("Confirm your customer name:", 30, 1);
+                    s.removeCustomer(removeCustomerID, custName);
                     break;
 
                 case 3:
-										int id = scanInt("What is your customer id", 10, 10);
-										s.displayCustomerInfo(id);
+                    int displayId = scanInt("What is your customer id");
+                    s.displayCustomerInfo(displayId);
                     break;
 
                 case 4:
-
+                    s.listItems();
+                    int chosenProduct = scanInt("What product do you want to purchase? ");
+                    int buyId = scanInt("What is your customer id");
+                    s.purchaseItem(chosenProduct, buyId);
                     break;
 
                 case 5:
-
+                    // ... (implement case 5 logic)
                     break;
 
                 case 6:
-
+                    s.listItems();
                     break;
 
                 case 7:
-
+                    s.listItemIDs();
                     break;
 
                 case 8:
-
+                    int addId = Main.scanInt("What is your id?");
+                    double amountToAdd = Main.scanDouble("How much would you like to add to your account?");
+                    s.addMoneyToCustAccount(addId, amountToAdd);
                     break;
 
+                case 9:
+                    s.listRecentOrders();
+                    break;
 
                 default:
                     System.out.println("Pick a valid option");
             }
         }
-
     }
 }
