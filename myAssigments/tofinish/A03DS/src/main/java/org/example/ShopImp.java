@@ -3,6 +3,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 
 public final class ShopImp implements Shop{
@@ -110,17 +111,19 @@ public final class ShopImp implements Shop{
 	
 
 public void removeCustomer(int id, String name) {
+        Scanner confirmingScanner = new Scanner(System.in);
     String confirm = "YES I WANT TO PROCEED TO DELETE MY THIS CUSTOMER";
-    String deletePrompt = Main.scanString("Would you like to delete your user?",255,1);
+    String deletePrompt = Main.scanString(confirmingScanner,"Would you like to delete your user?",
+                         50,1);
     System.out.println("To proceed please enter:   " + confirm);
+    confirmingScanner.close();
     if (deletePrompt.equals(confirm)){
         var sql = "DELETE FROM customer WHERE sqlId = ?";
-        var sqlId = id;
 
         try (var conn = DriverManager.getConnection(Database.url);
              var prepStmt = conn.prepareStatement(sql)) {
 
-            prepStmt.setInt(1, sqlId);
+            prepStmt.setInt(1, id);
 
             // execute the delete statement
             prepStmt.executeUpdate();
@@ -181,7 +184,10 @@ public void displayCustomerInfo(int id) {
 					String sqlProductName = rs.getString("compName");
 					Double sqlProductCost= rs.getDouble("price");
 
-					double amountGiven = Main.scanDouble("That will be" + sqlProductCost + ", please enter how much you have on hand:");
+                    // Providing amount given
+                    Scanner givenMoney = new Scanner(System.in);
+					double amountGiven = Main.scanDouble(givenMoney,"That will be" + sqlProductCost +
+                            ", please enter how much you have on hand:");
 
 					if (sqlProductNo != productID) {
 						System.out.println("HEY WHATS UP not same P/N");	
@@ -199,20 +205,18 @@ public void displayCustomerInfo(int id) {
 						Customer.takeMoneyFromAcc(sqlProductCost,customerID);
                         Order newOrder = new Order(customerID, sqlProductNo, sqlProductCost);
 						System.out.println("Thank you very much, the " + sqlProductName + " is a great choice");
+                        Scanner receiptScan = new Scanner(System.in);
 
+						String receiptDecision = Main.scanString(receiptScan,"Would you like a receipt too? ",
+                                1, 1);
+                        receiptScan.close();
 
-						String receiptDecision = Main.scanString("Would you like a receipt too? ", 1, 1);
-
-						switch (receiptDecision) {
-							case "y":
-								saveReceipt(newOrder);
+                            if (receiptDecision.equals("y")) {
+                                saveReceipt(newOrder);
+                                System.out.println("thanks for shopping with us, check for your receipt");
+                            } else {
                                 System.out.println("thanks for shopping with us");
-								break;
-
-							default:
-                                System.out.println("thanks for shopping with us");
-								break;
-						}
+                            }
 
 				}	
 					}
