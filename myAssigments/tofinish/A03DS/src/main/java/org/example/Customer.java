@@ -16,12 +16,8 @@ public class Customer{
     // Constructors
 
     public Customer(String _username, int _age,double _currentBal){
-        boolean correctAge = Customer.checkAge(age);
 
-        if (!correctAge) {
-            System.out.println("You must be over 18 to be a customer at this store");
-        } else {
-            String sqlStmt = "INSERT INTO customers(customerID, username, age, currentBal) VALUES(DEFAULT, ?, ?, ?)";
+        String sqlStmt = "INSERT INTO customers(username, age, currentBal) VALUES(?, ?, ?)";
 
             try (var conn = DriverManager.getConnection(Database.url);
                  var prepStmt = conn.prepareStatement(sqlStmt, Statement.RETURN_GENERATED_KEYS)) {
@@ -46,19 +42,13 @@ public class Customer{
             } catch (SQLException e) {
                 System.err.println(e.getMessage());
             }
-        }
-
         this.username = _username;
         this.currentBal = _currentBal;
         this.age = _age;
-    }
+        }
+
 
     // Getters and setters
-
-
-    public double getCurrentBal() {
-        return currentBal;
-    }
 
     public String getUsername() {
         return username;
@@ -79,14 +69,37 @@ public class Customer{
 		public int getCustomerNo() {
 		return customerNo;
 	}
+
+    public static double getCustomerBalance(int id) {
+        var sql = "SELECT currentBal FROM customers WHERE customerNo = ?";
+
+        try (var conn = DriverManager.getConnection(Database.url);
+             var pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id); // Set the customer ID as the first parameter
+
+            try (var rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getDouble("currentBal"); // Best case scenario
+                } else { // Customer cannot be found
+                    System.err.println("Customer " + id + " not found.");
+                    return 0.0;
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage()); // SQLError
+            return 0.0;
+        }
+    }
+
     // Extra functionality
+
     public static boolean checkAge(int _age){
-        return _age >= 18;
+        return _age >= 16;
     }
 
 
 		public static void takeMoneyFromAcc(double amount,int customerID){
-        var sql = "UPDATE customers SET currentBal = ? WHERE customerID=" + customerID +";";
+        var sql = "UPDATE customers SET currentBal = ? WHERE customerNo=" + customerID +";";
 
         try (var conn = DriverManager.getConnection(Database.url);
              var pstmt = conn.prepareStatement(sql)) {
@@ -99,26 +112,5 @@ public class Customer{
         }
     }
 
-    public static double getCustomerBalance(int id) {
-
-        double balance = 0.0;
-        var sqlSelect = "SELECT currentBal FROM customers WHERE customerNo=" +id+";";
-
-
-        try (var conn = DriverManager.getConnection(Database.url);
-             var stmt = conn.createStatement();
-             var rs = stmt.executeQuery(sqlSelect)) {
-
-            while (rs.next()) {
-                System.out.printf("%-20s%n",
-                        rs.getDouble("currentBal")
-                );
-            }
-            balance = rs.getDouble("currentBal");
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-        }
-        return balance;
-    }
 	}
 

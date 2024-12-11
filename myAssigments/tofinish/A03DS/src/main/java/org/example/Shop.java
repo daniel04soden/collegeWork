@@ -13,7 +13,7 @@ public interface Shop {
 
     public void purchaseItem(int productNo, int id);
     public void listItems();
-    public void listItemIDs();
+    public void listCurrentStock();
 
     // Order Methods
 

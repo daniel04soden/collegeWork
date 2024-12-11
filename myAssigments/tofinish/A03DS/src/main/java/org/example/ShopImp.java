@@ -78,18 +78,21 @@ public final class ShopImp implements Shop{
 
 	
     @Override
-    public void listItemIDs() {
-        var sqlSelect = "SELECT productNo FROM computers";
+    public void listCurrentStock() {
+        var sqlSelect = "SELECT productNo,compName,stock FROM computers";
 
 
         try (var conn = DriverManager.getConnection(Database.url);
              var stmt = conn.createStatement();
              var rs = stmt.executeQuery(sqlSelect)) {
 
+            System.out.printf("%-20s%-40s%-20s%n", "Product No.", "Company Name", "Stock");
+            System.out.println("--------------------------------------------------------------------");
             while (rs.next()) {
-                System.out.printf(
-                        "%-10s%n", // Formatting column
-                        rs.getInt("productNo")
+                System.out.printf("%-20s%-40s%-20s%n",
+                        rs.getInt("productNo"),
+                        rs.getString("compName"),
+                        rs.getInt("stock")
                 );
             }
         } catch (SQLException e) {
@@ -98,27 +101,25 @@ public final class ShopImp implements Shop{
     }
 
     public Customer addCustomer(String name, int age, double currentBal) {
-				Customer newCustomer = null;
         boolean correctAge = Customer.checkAge(age);
 
         if (!correctAge) {
             System.out.println("You must be over 18 to be a customer at this store");
         } else {
-			 newCustomer = new Customer(name, age, currentBal);
+			 return new Customer(name, age, currentBal);
     }
-			return newCustomer;
+			return null;
 	}
 	
 
 public void removeCustomer(int id, String name) {
         Scanner confirmingScanner = new Scanner(System.in);
-    String confirm = "YES I WANT TO PROCEED TO DELETE MY THIS CUSTOMER";
+    String confirm = "YES";
+    System.out.println("To proceed please enter: the phrase" + "\"" + confirm + "\"");
     String deletePrompt = Main.scanString(confirmingScanner,"Would you like to delete your user?",
-                         50,1);
-    System.out.println("To proceed please enter:   " + confirm);
-    confirmingScanner.close();
-    if (deletePrompt.equals(confirm)){
-        var sql = "DELETE FROM customer WHERE sqlId = ?";
+                         1,30);
+    if ((deletePrompt.strip()).equals(confirm)){
+        var sql = "DELETE FROM customers WHERE customerNo = ?";
 
         try (var conn = DriverManager.getConnection(Database.url);
              var prepStmt = conn.prepareStatement(sql)) {
@@ -131,18 +132,23 @@ public void removeCustomer(int id, String name) {
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
+    }else{
+        System.out.println("We hope not to see you again haha");
     }
+    confirmingScanner.close();
 }
 
 @Override
 public void displayCustomerInfo(int id) {
-    var sqlSelect = "SELECT * FROM customers";
+    var sqlSelect = "SELECT * FROM customers WHERE customerNo="+id+";";
 
 
     try (var conn = DriverManager.getConnection(Database.url);
          var stmt = conn.createStatement();
          var rs = stmt.executeQuery(sqlSelect)) {
 
+        System.out.printf("%-5s%-20s%-4s%-20s%n", "No", "Name", "Age", "Balance");
+        System.out.println("-------------------------------------------------------\n");
         while (rs.next()) {
             System.out.printf("%-5s%-20s%-4s%-20s%n",
                     rs.getInt("customerNo"),
@@ -156,15 +162,18 @@ public void displayCustomerInfo(int id) {
     }
 }
 
-
-		public void addMoneyToCustAccount(int id,double amount){
-        var sql = "UPDATE customers SET currentBal = ? WHERE customerNo=" + id +";";
+    public void addMoneyToCustAccount(int id, double amount) {
+        var sql = "UPDATE customers SET currentBal = ? WHERE customerNo = ?";
 
         try (var conn = DriverManager.getConnection(Database.url);
              var pstmt = conn.prepareStatement(sql)) {
-						double balance = Customer.getCustomerBalance(id);
-            pstmt.setDouble(1, balance + amount);
-            // update
+            double balance = Customer.getCustomerBalance(id);
+            double newAmount = balance + amount;
+
+            pstmt.setDouble(1, newAmount);
+            pstmt.setInt(2, id); // Set the customer ID as the second parameter
+
+            // Update the database
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.err.println(e.getMessage());
@@ -174,7 +183,8 @@ public void displayCustomerInfo(int id) {
     public void purchaseItem(int productID, int customerID){
 			double changeGiven = 0.0;
 			
-			var sqlProductLookup = "SELECT productNo,compName,price,stock FROM computers WHERE productNo=" + productID + ";";
+			var sqlProductLookup = "SELECT productNo,compName,price,stock FROM computers WHERE productNo=" +
+                    productID + ";";
 
 			try (var conn = DriverManager.getConnection(Database.url);
 					var prepStmt = conn.createStatement();

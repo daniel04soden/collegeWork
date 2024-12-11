@@ -15,8 +15,8 @@ public class Main {
         System.out.print("3. Display Customer Info\n");
         System.out.print("4. Purchase a computer\n");
         System.out.print("5. Display Item Info\n");
-        System.out.print("6. Display All Item IDs\n");
-        System.out.print("7. Add money to a customer account\n");
+        System.out.print("6. Check on item stock\n");
+        System.out.print("7. ATM\n");
         System.out.print("8. List recent orders\n");
         System.out.println("\n");
         System.out.print("------------------------------------\n");
@@ -37,7 +37,7 @@ public class Main {
                 } else {
                     System.out.println("Please enter a value in the range" + lowRange + "and" + upRange + "!");
                 }
-            } catch (Exception e) {
+            } catch (InputMismatchException e) {
                 System.out.println("Please enter a real integer");
                 scanning.next();
             }
@@ -99,7 +99,7 @@ public class Main {
                     System.out.println("Make sure your answer isn't greater than" + maxLen + "or less than" + minLen);
                 }
             } catch (Exception e) {
-                System.out.println("Please enter a real integer");
+                System.out.println("Please enter a real string");
                 scanning.next();
             }
         }
@@ -121,15 +121,15 @@ public static void session(){
             }
 
             case 1 -> {
-                String name = scanString(newScanner,"Enter your name:", 30, 1);
+                String name = scanString(newScanner,"Enter your name:", 1, 30);
                 int age = scanInt(newScanner,"Enter your age");
                 double balance = scanDouble(newScanner,"Enter the balance in your account now:");
-                s.addCustomer(name, age, balance);
+                s.addCustomer(name,age,balance);
             }
             case 2 -> {
 
                 int removeCustomerID = scanInt(newScanner,"Enter your customerID:");
-                String custName = scanString(newScanner,"Confirm your customer name:", 30, 1);
+                String custName = scanString(newScanner,"Confirm your customer name:", 1, 30);
                 s.removeCustomer(removeCustomerID, custName);
             }
             case 3 -> {
@@ -142,30 +142,24 @@ public static void session(){
                 int buyId = scanInt(newScanner,"What is your customer id");
                 s.purchaseItem(chosenProduct, buyId);
             }
-            case 5 ->{
-                s.listItems();
-            }
-            case 6 -> {
-                s.listItemIDs();
-            } // TODO Change to list Customer ids - Security issue but fuck it
+            case 5 -> s.listItems();
+            case 6 -> s.listCurrentStock(); // TODO Change to list Customer ids - Security issue but fuck it
 
             case 7 -> {
                 int addId = Main.scanInt(newScanner,"What is your id?");
-                double amountToAdd = Main.scanDouble(newScanner,"How much would you like to add to your account?");
+                double amountToAdd = Main.scanDouble(newScanner,
+                        "How much would you like to add to your account?");
                 s.addMoneyToCustAccount(addId, amountToAdd);
             }
-            case 8 -> {
-                s.listRecentOrders();
-            }
+            case 8 -> s.listRecentOrders();
 
-            default ->{
-                System.out.println("Enter a valid option");
-            }
+            default -> System.out.println("Enter a valid option");
 
         }
     }
+    newScanner.close();
 }
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         session();
     }
 }
