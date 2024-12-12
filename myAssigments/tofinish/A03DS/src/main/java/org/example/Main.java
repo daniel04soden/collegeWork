@@ -14,8 +14,19 @@ import java.util.Scanner;
 //	CLASS Main
 //
 //--------------------------------------------------
+
+/**
+ * This is the main class for the A03 Assignment
+ * representing a computer Shop<br>
+ */
 public class Main {
 
+    // --------------------------------------------------
+    // displayMenu
+    // --------------------------------------------------
+    /**
+     * This function displays the menu by the screen to the user.<br>
+     */
     public static void displayMenu() {
         System.out.print("------------------------------------\n");
         System.out.print("\n");
@@ -33,7 +44,19 @@ public class Main {
         System.out.print("------------------------------------\n");
         System.out.print("------------------------------------\n");
     }
-
+    // --------------------------------------------------
+    // scanInt
+    // --------------------------------------------------
+    /**
+     * This function asks the user to enter a valid integer value (within a range)
+     *.<br>
+     *
+     * @param scanning - The scanner taking in user input
+     * @param lowRange - Lowest Menu value
+     * @param upRange - Highest Menu value
+     * @param prompt -  Prompt to give the user as input
+     * @return - Integer entered by user.
+     */
     public static int scanInt(Scanner scanning, String prompt, int lowRange, int upRange) {
         int res = -1;
 
@@ -57,13 +80,22 @@ public class Main {
         return res;
     }
 
+    // --------------------------------------------------
+    // scanInt
+    // --------------------------------------------------
+    /**
+     * This function asks the user to enter a valid integer value
+     *.<br>
+     *
+     * @param scanning - The scanner taking in user input
+     * @param prompt -  Prompt to give the user as input
+     * @return - Integer entered by user.
+     */
     public static int scanInt(Scanner scanning, String prompt){
         int res = -1;
 
-        // 2. We create an auxiliary variable for the loop
         boolean valid = false;
 
-        // 3. We keep asking for a valid option until one is given
         while (!valid) {
             System.out.println(prompt);
             try {
@@ -79,6 +111,17 @@ public class Main {
             return res;
     }
 
+    // --------------------------------------------------
+    // scanDouble
+    // --------------------------------------------------
+    /**
+     * This function asks the user to enter a valid double value
+     *.<br>
+     *
+     * @param scanning - The scanner taking in user input
+     * @param prompt -  Prompt to give the user as input
+     * @return - double entered by user.
+     */
     public static double scanDouble(Scanner scanning, String prompt){ // Taking in a double make sure it's currency
         double res = 0.0;
         boolean valid = false;
@@ -94,9 +137,22 @@ public class Main {
                 scanning.next();
             }
         }
-        return Math.floor((res*100)) / 100;
+        return Math.floor((res*100)) / 100; // Ensuring value is to two decimal places
     }
 
+    // --------------------------------------------------
+    // scanString
+    // --------------------------------------------------
+    /**
+     * This function asks the user to enter a valid string value
+     *.<br>
+     *
+     * @param scanning - The scanner taking in user input
+     * @param prompt -  Prompt to give the user as input
+     * @param minLen -  minimum length of the string
+     * @param maxLen -  maximum length of the string
+     * @return - string entered by user.
+     */
     public static String scanString(Scanner scanning, String prompt,int minLen, int maxLen){
         String res = "";
         boolean valid = false;
@@ -121,13 +177,30 @@ public class Main {
         return res;
     }
 
+    // --------------------------------------------------
+    // nameConversion
+    // --------------------------------------------------
+    /**
+     * This function asks the user to enter a valid string value
+     *.<br>
+     *
+     * @param name - turns all names into strings with a capital at the start
+     * @return - string given by user in capital format
+     */
     public static String nameConversion(String name){
-            if (name == null || name.isEmpty()) {
+            if (name.isEmpty()) {
                 return name;
             }else{
                 return name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
             }
     }
+    // --------------------------------------------------
+    // shopSession
+    // --------------------------------------------------
+    /**
+     * This function starts the interactive shop session for the user
+     *.<br>
+     */
 public static void shopSession(){
         Scanner newScanner = new Scanner(System.in);
     ShopImp s = new ShopImp();
@@ -182,7 +255,15 @@ public static void shopSession(){
         }
     }
     newScanner.close();
-}
+    }
+    // --------------------------------------------------
+    // main
+    // --------------------------------------------------
+    /**
+     * This is the main method for the Java application.<br>
+     *
+     * @param args - Any argument passed when calling to the Java application.
+     */
     public static void main(String[] args) {
         shopSession();
     }

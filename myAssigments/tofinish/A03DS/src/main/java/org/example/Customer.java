@@ -78,19 +78,48 @@ public class Customer{
     //	GET METHODS
     //---------------------------------------
 
+    //---------------------------------------
+    //	getUsername
+    //---------------------------------------
+
+    /**
+     * @return Customer Username
+     */
     public String getUsername() {
         return username;
     }
 
 
+    //---------------------------------------
+    //	getAge
+    //---------------------------------------
+
+    /**
+     * @return Customer Age
+     */
     public int getAge() {
         return age;
     }
 
 
+    //---------------------------------------
+    //	getCustomerNo
+    //---------------------------------------
+
+    /**
+     * @return Customer id
+     */
     public int getCustomerNo() {
 		return customerNo;
 	}
+
+    //---------------------------------------
+    //	getCustomerBalance
+    //---------------------------------------
+    /**
+     * @param id - Customer id to find balance
+     * @return the Customers balance - if invalid search return 0.0
+     */
 
     public static double getCustomerBalance(int id) {
         var sql = "SELECT currentBal FROM customers WHERE customerNo = ?";
@@ -112,21 +141,56 @@ public class Customer{
             return 0.0;
         }
     }
+
+    //---------------------------------------
+    //	SET METHODS
+    //---------------------------------------
+
+
+    //---------------------------------------
+    //	setUsername
+    //---------------------------------------
+    /**
+     * @param username - new username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+
+    //---------------------------------------
+    //	setAge
+    //---------------------------------------
+    /**
+     * @param age - updated age
+     */
     public void setAge(int age) {
         this.age = age;
     }
 
     // Extra functionality
 
+    //---------------------------------------
+    //	checkAge
+    //---------------------------------------
+    /**
+     * @param _age - age provided by the customer
+     * @return - boolean to check if the customer is or is older than 16
+     */
     public static boolean checkAge(int _age){
         return _age >= 16;
     } // Must be 16 or older
 
 
+
+    //---------------------------------------
+    //	takeMoneyFromAcc
+    //---------------------------------------
+
+    /**
+     * @param amount - Amount to be taken
+     * @param customerID - ID of the customers account
+     */
 		public static void takeMoneyFromAcc(double amount,int customerID){
         var sql = "UPDATE customers SET currentBal = ? WHERE customerNo=" + customerID +";";
 
