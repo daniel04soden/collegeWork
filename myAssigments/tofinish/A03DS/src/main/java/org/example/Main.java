@@ -34,8 +34,9 @@ public class Main {
         System.out.print("------------------------------------\n");
     }
 
-    public static int scanInt(Scanner scanning, String prompt,int lowRange, int upRange){
+    public static int scanInt(Scanner scanning, String prompt, int lowRange, int upRange) {
         int res = -1;
+
         boolean valid = false;
 
         while (!valid) {
@@ -43,36 +44,39 @@ public class Main {
             try {
                 res = scanning.nextInt();
                 scanning.nextLine();
-                if ((res >= lowRange) && (res <= upRange)) {
+                if ((res >= lowRange) && (res <= upRange))
                     valid = true;
-                } else {
-                    System.out.println("Please enter a value in the range " + lowRange + " and " + upRange + "!");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Please enter a real integer");
+                else
+                    System.out.println("Sorry but the option must be within the range " + lowRange + " and " + upRange);
+            } catch (Exception e) {
+                System.out.println("Sorry you did not enter an integer");
                 scanning.next();
             }
         }
+
         return res;
     }
 
-
     public static int scanInt(Scanner scanning, String prompt){
         int res = -1;
+
+        // 2. We create an auxiliary variable for the loop
         boolean valid = false;
 
+        // 3. We keep asking for a valid option until one is given
         while (!valid) {
             System.out.println(prompt);
             try {
                 res = scanning.nextInt();
                 scanning.nextLine();
-                    valid = true;
-            } catch (InputMismatchException e) {
-                System.out.println("Please enter a real integer");
+                valid = true;
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+                System.out.println("Sorry you did not enter an integer and then press the return key");
                 scanning.next();
             }
         }
-        return res;
+            return res;
     }
 
     public static double scanDouble(Scanner scanning, String prompt){ // Taking in a double make sure it's currency
@@ -116,6 +120,14 @@ public class Main {
         }
         return res;
     }
+
+    public static String nameConversion(String name){
+            if (name == null || name.isEmpty()) {
+                return name;
+            }else{
+                return name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
+            }
+    }
 public static void shopSession(){
         Scanner newScanner = new Scanner(System.in);
     ShopImp s = new ShopImp();
@@ -134,13 +146,13 @@ public static void shopSession(){
                 String name = scanString(newScanner,"Enter your name:", 1, 30);
                 int age = scanInt(newScanner,"Enter your age");
                 double balance = scanDouble(newScanner,"Enter the balance in your account now:");
-                s.addCustomer(name,age,balance);
+                s.addCustomer(nameConversion(name),age,balance);
             }
             case 2 -> {
 
                 int removeCustomerID = scanInt(newScanner,"Enter your customerID:");
                 String custName = scanString(newScanner,"Confirm your customer name:", 1, 30);
-                s.removeCustomer(removeCustomerID, custName);
+                s.removeCustomer(removeCustomerID, nameConversion(custName));
             }
             case 3 -> {
                 int displayId = scanInt(newScanner, "What is your customer id");

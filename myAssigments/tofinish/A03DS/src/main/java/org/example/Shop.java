@@ -15,9 +15,10 @@ public interface Shop {
     public void listItems();
     public void listCurrentStock();
 
+
     // Order Methods
 
     public void listRecentOrders();
-    public String saveReceipt(Order o); 
+    public void saveReceipt(Order o);
 
 }

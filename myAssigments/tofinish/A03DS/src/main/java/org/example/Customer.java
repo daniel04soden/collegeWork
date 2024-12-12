@@ -1,23 +1,47 @@
 package org.example;
 
+//--------------------------------------------------
+//	IMPORTS
+//--------------------------------------------------
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+//--------------------------------------------------
+//
+//	CLASS Customer
+//
+//--------------------------------------------------
+
+/**
+ * This class models a user of the Shop<br>.
+ */
 public class Customer{
 
-    // Fields
-		
+    //---------------------------------------
+    //	Fields
+    //---------------------------------------
+
     private int customerNo;
     public String username;
     public int age;
     double currentBal;
 
-    // Constructors
+    //---------------------------------------
+    //	Constructor
+    //---------------------------------------
 
+    /**
+     * This constructor creates a model of a user and inserts it into the db
+     * @param _username - intended username
+     * @param _age - age of the customer
+     * @param _currentBal - Honest balance provided by the customer
+     */
     public Customer(String _username, int _age,double _currentBal){
 
-        String sqlStmt = "INSERT INTO customers(username, age, currentBal) VALUES(?, ?, ?)";
+        // Constructing the customer also involves putting them in the database
+        String sqlStmt = "INSERT INTO customers(username, age, currentBal) VALUES(?, ?, ?)"; // Insert given values
+        //SQLite handles default values
 
             try (var conn = DriverManager.getConnection(Database.url);
                  var prepStmt = conn.prepareStatement(sqlStmt, Statement.RETURN_GENERATED_KEYS)) {
@@ -29,11 +53,11 @@ public class Customer{
                 // Retrieve the generated customerID
                 try (var rs = prepStmt.getGeneratedKeys()) {
                     if (rs.next()) {
-                        int customerID = rs.getInt(1);
+                        int customerID = rs.getInt(1); // Get generated id for output to user
 												this.customerNo = customerID;
-                        System.out.println("Thanks " + _username + "You are now a registered Customer\n");
+                        System.out.println("Thanks " + _username + " You are now a registered Customer\n");
                         System.out.println("------------------------------------------------");
-                        System.out.println("Your given id is " + customerID +" ,Remember it!");
+                        System.out.println("Your given id is " + customerID + " ,Remember it!");
                     } else {
                         // Handle error: Failed to retrieve generated ID
                         System.err.println("Failed to retrieve generated customerID");
@@ -42,31 +66,29 @@ public class Customer{
             } catch (SQLException e) {
                 System.err.println(e.getMessage());
             }
+
+        // Standard initialization of values
+
         this.username = _username;
         this.currentBal = _currentBal;
         this.age = _age;
         }
 
-
-    // Getters and setters
+    //---------------------------------------
+    //	GET METHODS
+    //---------------------------------------
 
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public int getAge() {
         return age;
     }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
 
-		public int getCustomerNo() {
+    public int getCustomerNo() {
 		return customerNo;
 	}
 
@@ -89,6 +111,13 @@ public class Customer{
             System.err.println(e.getMessage()); // SQLError
             return 0.0;
         }
+    }
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     // Extra functionality

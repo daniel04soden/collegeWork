@@ -3,6 +3,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -115,27 +116,28 @@ public final class ShopImp implements Shop{
 public void removeCustomer(int id, String name) {
         Scanner confirmingScanner = new Scanner(System.in);
     String confirm = "YES";
-    System.out.println("To proceed please enter: the phrase" + "\"" + confirm + "\"");
+    System.out.println("To proceed please enter: the phrase " + "\"" + confirm + "\" ");
     String deletePrompt = Main.scanString(confirmingScanner,"Would you like to delete your user?",
                          1,30);
     if ((deletePrompt.strip()).equals(confirm)){
-        var sql = "DELETE FROM customers WHERE customerNo = ?";
+        var sql = "DELETE FROM customers WHERE customerNo = ? AND username = ?";
 
         try (var conn = DriverManager.getConnection(Database.url);
              var prepStmt = conn.prepareStatement(sql)) {
 
             prepStmt.setInt(1, id);
+            prepStmt.setString(2, name);
 
             // execute the delete statement
             prepStmt.executeUpdate();
 
         } catch (SQLException e) {
+            System.out.println("SQL Error please see below"); // Will throw if ID or name is unknown/bad combo
             System.err.println(e.getMessage());
         }
     }else{
         System.out.println("We hope not to see you again haha");
     }
-    confirmingScanner.close();
 }
 
 @Override
@@ -182,20 +184,14 @@ public void displayCustomerInfo(int id) {
 
     public void purchaseItem(int productID, int customerID){
 
-        var sqlProductLookup = "SELECT productNo,compName,price,stock FROM computers WHERE productNo=" +
-                    productID + ";";
-
-			try (var conn = DriverManager.getConnection(Database.url);
-					var prepStmt = conn.createStatement();
-					var rs = prepStmt.executeQuery(sqlProductLookup)){
-
-					int sqlProductNo = rs.getInt("productNo");
-					String sqlProductName = rs.getString("compName");
-					double sqlProductCost= rs.getDouble("price");
+                    ArrayList<Object> C = Computer.retrievePurchaseData(productID);
+                    int sqlProductNo = (int) C.get(0);
+                    double sqlProductCost = (double) C.get(1);
+                    String  sqlProductName = (String) C.get(2);
 
                     // Providing amount given
                     Scanner givenMoney = new Scanner(System.in);
-					double amountGiven = Main.scanDouble(givenMoney,"That will be" + sqlProductCost +
+					double amountGiven = Main.scanDouble(givenMoney,"That will be " + sqlProductCost +
                             ", please enter how much you have on hand:");
 
 					if (sqlProductNo != productID) {
@@ -210,9 +206,10 @@ public void displayCustomerInfo(int id) {
 						}else{
 
 					// Updating user balance
-                            Customer.takeMoneyFromAcc(sqlProductCost,customerID);
                         Order newOrder = new Order(customerID, sqlProductNo, sqlProductCost);
 						System.out.println("Thank you very much, the " + sqlProductName + " is a great choice");
+                        Customer.takeMoneyFromAcc(sqlProductCost,customerID);
+                        Product.stockDecremented(sqlProductNo);
                         Scanner receiptScan = new Scanner(System.in);
 
 						String receiptDecision = Main.scanString(receiptScan,"Would you like a receipt too?(y/n)"
@@ -225,16 +222,8 @@ public void displayCustomerInfo(int id) {
                             } else {
                                 System.out.println("thanks for shopping with us");
                             }
-
-				}	
+				}
 					}
-
-			} catch (Exception e) {
-				System.err.println(e.getMessage());
-			}
-
-		// Logging users order
-
     }
 
     @Override
@@ -260,7 +249,7 @@ public void displayCustomerInfo(int id) {
         }
     }
 
-		public String saveReceipt(Order o){
+		public void saveReceipt(Order o){
 			String receipt = "";
 
         String fileName = o.getCustomerID()+".txt";
@@ -272,8 +261,7 @@ public void displayCustomerInfo(int id) {
             System.err.println("Error writing to file: " + e.getMessage());
         }
 
-		return receipt;
+        }
 
-	}
 
 }
