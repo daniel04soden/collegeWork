@@ -104,7 +104,7 @@ public final class ShopImp implements Shop{
         boolean correctAge = Customer.checkAge(age);
 
         if (!correctAge) {
-            System.out.println("You must be over 18 to be a customer at this store");
+            System.out.println("You must be 16 or over to be a customer at this store");
         } else {
 			 return new Customer(name, age, currentBal);
     }
@@ -181,9 +181,8 @@ public void displayCustomerInfo(int id) {
     }
 
     public void purchaseItem(int productID, int customerID){
-			double changeGiven = 0.0;
-			
-			var sqlProductLookup = "SELECT productNo,compName,price,stock FROM computers WHERE productNo=" +
+
+        var sqlProductLookup = "SELECT productNo,compName,price,stock FROM computers WHERE productNo=" +
                     productID + ";";
 
 			try (var conn = DriverManager.getConnection(Database.url);
@@ -192,7 +191,7 @@ public void displayCustomerInfo(int id) {
 
 					int sqlProductNo = rs.getInt("productNo");
 					String sqlProductName = rs.getString("compName");
-					Double sqlProductCost= rs.getDouble("price");
+					double sqlProductCost= rs.getDouble("price");
 
                     // Providing amount given
                     Scanner givenMoney = new Scanner(System.in);
@@ -211,19 +210,18 @@ public void displayCustomerInfo(int id) {
 						}else{
 
 					// Updating user balance
-						changeGiven = amountGiven - sqlProductCost;
-						Customer.takeMoneyFromAcc(sqlProductCost,customerID);
+                            Customer.takeMoneyFromAcc(sqlProductCost,customerID);
                         Order newOrder = new Order(customerID, sqlProductNo, sqlProductCost);
 						System.out.println("Thank you very much, the " + sqlProductName + " is a great choice");
                         Scanner receiptScan = new Scanner(System.in);
 
-						String receiptDecision = Main.scanString(receiptScan,"Would you like a receipt too? ",
-                                1, 1);
+						String receiptDecision = Main.scanString(receiptScan,"Would you like a receipt too?(y/n)"
+                                ,1, 1);
                         receiptScan.close();
 
                             if (receiptDecision.equals("y")) {
-                                saveReceipt(newOrder);
                                 System.out.println("thanks for shopping with us, check for your receipt");
+                                saveReceipt(newOrder);
                             } else {
                                 System.out.println("thanks for shopping with us");
                             }

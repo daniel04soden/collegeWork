@@ -95,7 +95,7 @@ public class Customer{
 
     public static boolean checkAge(int _age){
         return _age >= 16;
-    }
+    } // Must be 16 or older
 
 
 		public static void takeMoneyFromAcc(double amount,int customerID){
@@ -103,10 +103,17 @@ public class Customer{
 
         try (var conn = DriverManager.getConnection(Database.url);
              var pstmt = conn.prepareStatement(sql)) {
-            // set the parameters
-            pstmt.setDouble(1,getCustomerBalance(customerID) - amount);
-            // update
-            pstmt.executeUpdate();
+
+            double currentCustomerBalance = getCustomerBalance(customerID);
+
+            if (amount > currentCustomerBalance){
+                System.out.println("You do not have enough money in your account bozo");
+            }else{
+                // set the parameters
+                pstmt.setDouble(1,getCustomerBalance(customerID) - amount);
+                // update
+                pstmt.executeUpdate();
+            }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }

@@ -1,8 +1,19 @@
+//--------------------------------------------------
+//	PACKAGES
+//--------------------------------------------------
 package org.example;
 
+//--------------------------------------------------
+//	IMPORTS
+//--------------------------------------------------
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+//--------------------------------------------------
+//
+//	CLASS Main
+//
+//--------------------------------------------------
 public class Main {
 
     public static void displayMenu() {
@@ -12,12 +23,12 @@ public class Main {
         System.out.print("0. Exit\n");
         System.out.print("1. Add Customer\n");
         System.out.print("2. Remove Customer\n");
-        System.out.print("3. Display Customer Info\n");
+        System.out.print("3. Review personal Details\n");
         System.out.print("4. Purchase a computer\n");
-        System.out.print("5. Display Item Info\n");
-        System.out.print("6. Check on item stock\n");
-        System.out.print("7. ATM\n");
-        System.out.print("8. List recent orders\n");
+        System.out.print("5. List Our computers\n");
+        System.out.print("6. Check our stock\n");
+        System.out.print("7. Withdraw cash\n");
+        System.out.print("8. List our recent orders\n");
         System.out.println("\n");
         System.out.print("------------------------------------\n");
         System.out.print("------------------------------------\n");
@@ -35,7 +46,7 @@ public class Main {
                 if ((res >= lowRange) && (res <= upRange)) {
                     valid = true;
                 } else {
-                    System.out.println("Please enter a value in the range" + lowRange + "and" + upRange + "!");
+                    System.out.println("Please enter a value in the range " + lowRange + " and " + upRange + "!");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Please enter a real integer");
@@ -64,7 +75,7 @@ public class Main {
         return res;
     }
 
-    public static double scanDouble(Scanner scanning, String prompt){
+    public static double scanDouble(Scanner scanning, String prompt){ // Taking in a double make sure it's currency
         double res = 0.0;
         boolean valid = false;
 
@@ -79,7 +90,7 @@ public class Main {
                 scanning.next();
             }
         }
-        return res;
+        return Math.floor((res*100)) / 100;
     }
 
     public static String scanString(Scanner scanning, String prompt,int minLen, int maxLen){
@@ -105,10 +116,9 @@ public class Main {
         }
         return res;
     }
-public static void session(){
+public static void shopSession(){
         Scanner newScanner = new Scanner(System.in);
     ShopImp s = new ShopImp();
-    Database.connect(Database.url);
     boolean running = true;
     while (running) {
         displayMenu();
@@ -152,14 +162,16 @@ public static void session(){
                 s.addMoneyToCustAccount(addId, amountToAdd);
             }
             case 8 -> s.listRecentOrders();
-
-            default -> System.out.println("Enter a valid option");
+            default -> {
+                System.out.println("Enter a valid option");
+                displayMenu();
+            }
 
         }
     }
     newScanner.close();
 }
     public static void main(String[] args) {
-        session();
+        shopSession();
     }
 }

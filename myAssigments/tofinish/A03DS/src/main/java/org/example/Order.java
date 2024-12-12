@@ -12,7 +12,7 @@ public class Order {
     public final double cost;
 
     public Order(int _customerID, int _productID, double _cost){
-        String sqlStmt = "INSERT INTO orders(customerNo, productID, cost) VALUES(?, ?, ?)";
+        String sqlStmt = "INSERT INTO orders(customerNo, productNo, cost) VALUES(?, ?, ?)";
 
         try (var conn = DriverManager.getConnection(Database.url);
              var prepStmt = conn.prepareStatement(sqlStmt, Statement.RETURN_GENERATED_KEYS)) {
