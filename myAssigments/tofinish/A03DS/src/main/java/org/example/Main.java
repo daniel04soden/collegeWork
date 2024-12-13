@@ -238,7 +238,8 @@ public static void shopSession(){
                 s.purchaseItem(chosenProduct, buyId);
             }
             case 5 -> s.listItems();
-            case 6 -> s.listCurrentStock(); // TODO Change to list Customer ids - Security issue but fuck it
+
+            case 6 -> s.listCurrentStock();
 
             case 7 -> {
                 int addId = Main.scanInt(newScanner,"What is your id?");
@@ -260,7 +261,7 @@ public static void shopSession(){
     // main
     // --------------------------------------------------
     /**
-     * This is the main method for the Java application.<br>
+     * This is the main method for the Java shop application.<br>
      *
      * @param args - Any argument passed when calling to the Java application.
      */

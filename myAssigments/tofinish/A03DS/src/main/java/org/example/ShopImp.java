@@ -1,3 +1,6 @@
+//--------------------------------------------------
+//	PACKAGES
+//--------------------------------------------------
 package org.example;
 
 //--------------------------------------------------
@@ -106,16 +109,15 @@ public final class ShopImp implements Shop{
         }
     }
 
-    public Customer addCustomer(String name, int age, double currentBal) {
+    public void addCustomer(String name, int age, double currentBal) {
         boolean correctAge = Customer.checkAge(age);
 
         if (!correctAge) {
             System.out.println("You must be 16 or over to be a customer at this store");
         } else {
-			 return new Customer(name, age, currentBal);
+            new Customer(name, age, currentBal);
+        }
     }
-			return null;
-	}
 	
 
 public void removeCustomer(int id, String name) {

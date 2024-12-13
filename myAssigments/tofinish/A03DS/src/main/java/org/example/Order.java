@@ -1,17 +1,46 @@
+//--------------------------------------------------
+//	PACKAGES
+//--------------------------------------------------
 package org.example;
 
+//--------------------------------------------------
+//	IMPORTS
+//--------------------------------------------------
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.SQLException;
 
 
+//--------------------------------------------------
+//
+//	CLASS Order
+//
+//--------------------------------------------------
+/*
+* This class models an order for a computer <br>.
+* */
 public class Order {
+    //---------------------------------------
+    //	Fields
+    //---------------------------------------
+
     private int orderID;
     private final int customerID;
     private final int productID;
     public final double cost;
 
+    //---------------------------------------
+    //	Constructor
+    //---------------------------------------
+
+    /**
+     * This constructor creates a model of a user and inserts it into the db
+     * @param _customerID - given customer id for customer
+     * @param _productID - given product id of which the customer is ordering
+     * @param _cost - cost of the product customer is buying
+     */
     public Order(int _customerID, int _productID, double _cost){
+        // Inserting order data into sqlite orders table
         String sqlStmt = "INSERT INTO orders(customerNo, productNo, cost) VALUES(?, ?, ?)";
 
         try (var conn = DriverManager.getConnection(Database.url);
@@ -32,25 +61,62 @@ public class Order {
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
+
+        // Initializing other constructor values
         this.customerID = _customerID;
         this.productID = _productID;
         this.cost = _cost;
     }
-    // Getters
+
+    //---------------------------------------
+    //	GET METHODS
+    //---------------------------------------
+
+    //---------------------------------------
+    //	getCost
+    //---------------------------------------
+
+    /**
+     * @return cost - Cost of entire order
+     */
     public double getCost() {
         return cost;
     }
 
-		public int getCustomerID() {
-			return customerID;
-		}
+    //---------------------------------------
+    //	getCustomerID
+    //---------------------------------------
 
+    /**
+     * @return customerID - Gives back customerid from order
+     */
+    public int getCustomerID() {
+        return customerID;
+    }
+
+    //---------------------------------------
+    //	getProductID
+    //---------------------------------------
+
+    /**
+     * @return productID - Gives back productID from order
+     */
 			public int getProductID() {
 				return productID;
 		}
-		
 
-    // Printing value to String
+
+    //---------------------------------------
+    //	EXTRA METHODS
+    //---------------------------------------
+
+    //---------------------------------------
+    //	toString
+    //---------------------------------------
+
+    /**
+     * @return String - Returns string with order details
+     */
     @Override
     public String toString() {
         return "Order{" +
