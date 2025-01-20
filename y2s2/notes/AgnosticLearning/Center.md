@@ -6,8 +6,7 @@
 
 # NoSQL
 
-[[NoSQL lec1|NoSQL lec1]]
-
+[[Introduction Nosql]]
 # OO Analysis
 
 [[OOA lec1|OOA lec1]]
