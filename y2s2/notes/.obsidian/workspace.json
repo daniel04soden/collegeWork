@@ -1,0 +1,168 @@
+{
+  "main": {
+    "id": "1ea437da5e0a8f96",
+    "type": "split",
+    "children": [
+      {
+        "id": "231a23bae5120ef1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c529fcb7c4d7c51f",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "056da384914cfd83",
+    "type": "split",
+    "children": [
+      {
+        "id": "e800b3b68a4c4f1d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "260b1778335ed8d0",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "306540c9d3dae255",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "62cca289bb31af7c",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "e1109144a7769df3",
+    "type": "split",
+    "children": [
+      {
+        "id": "e9512a99e77f00a8",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "37a6aa4805d0fe08",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "C/lec1.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for lec1"
+            }
+          },
+          {
+            "id": "7523360433c1c20e",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "C/lec1.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from lec1"
+            }
+          },
+          {
+            "id": "9928d424ced0d6f7",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "e1418d95544c73a7",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "C/lec1.md"
+              },
+              "icon": "lucide-list",
+              "title": "Outline of lec1"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "c529fcb7c4d7c51f",
+  "lastOpenFiles": [
+    "NONLin/Introduction.md",
+    "NONLin/Asymptotic Analysis.md",
+    "NONLin/Screenshot_20250118_155800.png",
+    "C/Introduction.md"
+  ]
+}
