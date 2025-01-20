@@ -1,42 +1,24 @@
 {
   "main": {
-<<<<<<< HEAD
-    "id": "1ea437da5e0a8f96",
+    "id": "48be9a3ef06bd5a8",
     "type": "split",
     "children": [
       {
-        "id": "231a23bae5120ef1",
+        "id": "a916837fe9dbde42",
         "type": "tabs",
         "children": [
           {
-            "id": "c529fcb7c4d7c51f",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-=======
-    "id": "387665a15548ca24",
-    "type": "split",
-    "children": [
-      {
-        "id": "165a27a169612bff",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "aa344120c4450293",
+            "id": "0307fafd148ad420",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "C/book.md",
+                "file": "OOP/OOP lec1.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "book"
->>>>>>> 79581ac1c70a498e18a4d556b28ae6c25ea7d112
+              "title": "OOP lec1"
             }
           }
         ]
@@ -45,27 +27,15 @@
     "direction": "vertical"
   },
   "left": {
-<<<<<<< HEAD
-    "id": "056da384914cfd83",
+    "id": "e7379edfbb77f264",
     "type": "split",
     "children": [
       {
-        "id": "e800b3b68a4c4f1d",
+        "id": "1a23d21bd5237872",
         "type": "tabs",
         "children": [
           {
-            "id": "260b1778335ed8d0",
-=======
-    "id": "7f8d40b01c85081a",
-    "type": "split",
-    "children": [
-      {
-        "id": "160a210fb8c85f79",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "8549e941747cb5c3",
->>>>>>> 79581ac1c70a498e18a4d556b28ae6c25ea7d112
+            "id": "c27752cb3a675428",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -77,11 +47,7 @@
             }
           },
           {
-<<<<<<< HEAD
-            "id": "306540c9d3dae255",
-=======
-            "id": "cf226da81f18e5fe",
->>>>>>> 79581ac1c70a498e18a4d556b28ae6c25ea7d112
+            "id": "838d10d2574ad8b1",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -98,11 +64,7 @@
             }
           },
           {
-<<<<<<< HEAD
-            "id": "62cca289bb31af7c",
-=======
-            "id": "e3d099471a42bd95",
->>>>>>> 79581ac1c70a498e18a4d556b28ae6c25ea7d112
+            "id": "83b76607e2552686",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -118,35 +80,20 @@
     "width": 300
   },
   "right": {
-<<<<<<< HEAD
-    "id": "e1109144a7769df3",
+    "id": "6d32b2d4bd1a7c13",
     "type": "split",
     "children": [
       {
-        "id": "e9512a99e77f00a8",
+        "id": "e7a669fdc1089783",
         "type": "tabs",
         "children": [
           {
-            "id": "37a6aa4805d0fe08",
-=======
-    "id": "a14258142b991068",
-    "type": "split",
-    "children": [
-      {
-        "id": "a85f6e170813cd2f",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "2a6b795b8b191fd5",
->>>>>>> 79581ac1c70a498e18a4d556b28ae6c25ea7d112
+            "id": "8b382f6ed36a003a",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-<<<<<<< HEAD
-                "file": "C/lec1.md",
-=======
->>>>>>> 79581ac1c70a498e18a4d556b28ae6c25ea7d112
+                "file": "C/Introduction.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -156,44 +103,25 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-<<<<<<< HEAD
-              "title": "Backlinks for lec1"
+              "title": "Backlinks for Introduction"
             }
           },
           {
-            "id": "7523360433c1c20e",
-=======
-              "title": "Backlinks"
-            }
-          },
-          {
-            "id": "0eb6009296edbb7a",
->>>>>>> 79581ac1c70a498e18a4d556b28ae6c25ea7d112
+            "id": "0ae3d6e1d1cf138e",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-<<<<<<< HEAD
-                "file": "C/lec1.md",
-=======
->>>>>>> 79581ac1c70a498e18a4d556b28ae6c25ea7d112
+                "file": "C/Introduction.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-<<<<<<< HEAD
-              "title": "Outgoing links from lec1"
+              "title": "Outgoing links from Introduction"
             }
           },
           {
-            "id": "9928d424ced0d6f7",
-=======
-              "title": "Outgoing links"
-            }
-          },
-          {
-            "id": "d8e933aad5985dae",
->>>>>>> 79581ac1c70a498e18a4d556b28ae6c25ea7d112
+            "id": "c71f11a5e90dd710",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -206,25 +134,15 @@
             }
           },
           {
-<<<<<<< HEAD
-            "id": "e1418d95544c73a7",
+            "id": "227f912f3cd52060",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "C/lec1.md"
+                "file": "C/Introduction.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of lec1"
-=======
-            "id": "6b708b93fe7e722a",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {},
-              "icon": "lucide-list",
-              "title": "Outline"
->>>>>>> 79581ac1c70a498e18a4d556b28ae6c25ea7d112
+              "title": "Outline of Introduction"
             }
           }
         ]
@@ -244,26 +162,18 @@
       "command-palette:Open command palette": false
     }
   },
-<<<<<<< HEAD
-  "active": "c529fcb7c4d7c51f",
+  "active": "0307fafd148ad420",
   "lastOpenFiles": [
-    "NONLin/Introduction.md",
-    "NONLin/Asymptotic Analysis.md",
+    "OOP/Design patterns.md",
+    "OOP/OOP lec1.md",
+    "C/C Programming Introduction.md",
+    "Statistics/Stats lec1.md",
+    "NoSQL/NoSQL lec1.md",
+    "AgnosticLearning/Center.md",
+    "NONLin/ldsa.md",
     "NONLin/Screenshot_20250118_155800.png",
-    "C/Introduction.md"
-=======
-  "active": "8549e941747cb5c3",
-  "lastOpenFiles": [
-    "C/lec1.md",
-    "NONLin/lec1.md",
-    "NoSQL/lec1.md",
-    "C/book.md",
-    "NON-LinDSA",
-    "Stats",
-    "OOP",
-    "OO Analysis",
-    "NoSQL",
-    "C"
->>>>>>> 79581ac1c70a498e18a4d556b28ae6c25ea7d112
+    "NONLin/ldsa Asymptotic Analysis.md",
+    "AgnosticLearning",
+    "C/book.md"
   ]
 }

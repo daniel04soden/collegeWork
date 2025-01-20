@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include "users.c"
 
+
 // Constants
 #define MAX_TRANSACTIONS = 10000.00; // A person can only make $10,000 worth of transactions a day
 

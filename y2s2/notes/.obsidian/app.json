@@ -1,7 +1,5 @@
-<<<<<<< HEAD
 {
-  "vimMode": true
+  "vimMode": true,
+  "alwaysUpdateLinks": true,
+  "promptDelete": false
 }
-=======
-{}
->>>>>>> 79581ac1c70a498e18a4d556b28ae6c25ea7d112
