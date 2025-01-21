@@ -13,7 +13,7 @@
 
 # Statistics
 
-[[Stats lec1|Stats lec1]]
+[[Stats Module Outline|Stats Module Outline]]
 
 # OOP
 
