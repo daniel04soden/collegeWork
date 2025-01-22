@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Statistics/Intro to Stats and data types.md",
+                "file": "OOAnalysis/Modelling.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Intro to Stats and data types"
+              "title": "Modelling"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Statistics/Intro to Stats and data types.md",
+                "file": "OOAnalysis/Modelling.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Intro to Stats and data types"
+              "title": "Backlinks for Modelling"
             }
           },
           {
@@ -160,7 +160,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -177,8 +178,12 @@
   },
   "active": "91596665ace9a3f4",
   "lastOpenFiles": [
-    "Statistics/Drawing 2025-01-21 14.45.59.excalidraw.md",
+    "OOP/JavaFX.md",
+    "OOP/Interfaces.md",
+    "OOP/OOP lec1.md",
+    "OOP/Design patterns.md",
     "Statistics/Intro to Stats and data types.md",
+    "Statistics/Drawing 2025-01-21 14.45.59.excalidraw.md",
     "Statistics/Stats Module Outline.md",
     "Excalidraw/Drawing 2025-01-21 14.04.26.excalidraw.md",
     "Excalidraw",
@@ -187,8 +192,6 @@
     "SideWork",
     "NoSQL/Introduction Nosql.md",
     "AgnosticLearning/Center.md",
-    "OOP/OOP lec1.md",
-    "OOP/Design patterns.md",
     "C/C Programming Introduction.md",
     "NONLin/ldsa.md",
     "NONLin/Screenshot_20250118_155800.png",

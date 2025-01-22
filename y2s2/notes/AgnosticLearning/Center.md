@@ -9,7 +9,7 @@
 [[Introduction Nosql]]
 # OO Analysis
 
-[[OOA lec1|OOA lec1]]
+[[Modelling|Modelling]]
 
 # Statistics
 

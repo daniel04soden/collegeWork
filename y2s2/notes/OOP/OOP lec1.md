@@ -50,3 +50,4 @@
 - Avoids boilerplate
 
 - See [[Design patterns]]
+- Next lecture [[Interfaces]]
