@@ -8,17 +8,17 @@
         "type": "tabs",
         "children": [
           {
-            "id": "91596665ace9a3f4",
+            "id": "8612cf048879aa2b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "OOAnalysis/Modelling.md",
+                "file": "Statistics/Presentation of data.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Modelling"
+              "title": "Presentation of data"
             }
           }
         ]
@@ -77,8 +77,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "6d32b2d4bd1a7c13",
@@ -94,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "OOAnalysis/Modelling.md",
+                "file": "Statistics/Presentation of data.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +103,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Modelling"
+              "title": "Backlinks for Presentation of data"
             }
           },
           {
@@ -155,13 +154,23 @@
               "icon": "calendar-with-checkmark",
               "title": "Calendar"
             }
+          },
+          {
+            "id": "32a074b4472827d5",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
           }
-        ]
+        ],
+        "currentTab": 5
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -176,15 +185,18 @@
       "zenmode:Toggle Zen Mode": false
     }
   },
-  "active": "91596665ace9a3f4",
+  "active": "8612cf048879aa2b",
   "lastOpenFiles": [
+    "Statistics/Intro to Stats and data types.md",
+    "Statistics/Presentation of data.md",
+    "Statistics/Drawing 2025-01-22 12.10.54.excalidraw.md",
+    "Statistics/Drawing 2025-01-21 14.45.59.excalidraw.md",
+    "Statistics/Stats Module Outline.md",
+    "OOAnalysis/Modelling.md",
     "OOP/JavaFX.md",
     "OOP/Interfaces.md",
     "OOP/OOP lec1.md",
     "OOP/Design patterns.md",
-    "Statistics/Intro to Stats and data types.md",
-    "Statistics/Drawing 2025-01-21 14.45.59.excalidraw.md",
-    "Statistics/Stats Module Outline.md",
     "Excalidraw/Drawing 2025-01-21 14.04.26.excalidraw.md",
     "Excalidraw",
     "SideWork/Golang Text editor Needs.md",
