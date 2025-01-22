@@ -24,6 +24,7 @@
 
 - Used for discrete or continuous data
 - Organised in intervals
+- [[Grouped Frequency tables]]
 
 #### Example  1
 
