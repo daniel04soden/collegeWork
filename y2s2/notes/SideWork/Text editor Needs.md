@@ -1,5 +1,3 @@
-
-
 # Features
 
 - Take in arguments - File name - os.args

@@ -1,18 +1,17 @@
 public class MergeSort {
 
   private static int[] merge(int[] A1, int[] A2) {
-			/*
-			 This method takes in two seperate already sorted arrays 
-			 and merges them together
-
-			 params: 
-						int[] A1; First half of the array to be merged
-						int[] A2; Second half of the array to be merged
-				
-			returns:
-						int[] A3; Merged array
-			 * */
-
+    /*
+     * This method takes in two seperate already sorted arrays
+     * and merges them together
+     * 
+     * params:
+     * int[] A1; First half of the array to be merged
+     * int[] A2; Second half of the array to be merged
+     * 
+     * returns:
+     * int[] A3; Merged array
+     */
 
     // TASK 2.A.a
 
@@ -21,21 +20,21 @@ public class MergeSort {
     int[] A3 = new int[n]; // New array with the capacity of n
 
     for (int k = 0; k < n; k++) { // the value k loops over length of the two arrays combined
-			// done for readability purpose
+      // done for readability purpose
       boolean leftLenCheck = i < A1.length; // Checks for respective indexes to their length
       boolean rightLenCheck = j < A2.length;
       boolean lengthCheck = leftLenCheck && rightLenCheck; // Overall check
 
       if (lengthCheck) {
-        if (A1[i] <= A2[j]) { 
+        if (A1[i] <= A2[j]) {
           A3[k] = A1[i]; // Current A1 values is added to the list
           i++; // i is incremented
         } else { // Opposite for A2
-          A3[k] = A2[j]; 
+          A3[k] = A2[j];
           j++;
         }
       } else {
-        if (leftLenCheck) { 
+        if (leftLenCheck) {
           A3[k] = A1[i]; // Add A1 value to A3
           i++;
         } else if (rightLenCheck) {
@@ -48,14 +47,14 @@ public class MergeSort {
   }
 
   public static int[] mergesort(int[] A) {
-		/*
-		 This method takes in an array A and splits it into two different arrays,
-		 sorts each array and from there merges these arrays.
-
-		 params: int[] A; given unsorted Array
-
-		 returns: merge(sortA1,sortA2); merged sorted arrays
-		 * */
+    /*
+     * This method takes in an array A and splits it into two different arrays,
+     * sorts each array and from there merges these arrays.
+     * 
+     * params: int[] A; given unsorted Array
+     * 
+     * returns: merge(sortA1,sortA2); merged sorted arrays
+     */
     // TASK 2.A.b
     int n = A.length; // Length of A is n
 
