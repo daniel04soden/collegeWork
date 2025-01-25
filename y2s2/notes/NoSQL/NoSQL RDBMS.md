@@ -3,13 +3,51 @@
 
 ## Three Tier Architecture
 
-- Frontend
-- Middle ware
-- Backend
+- External Schema:
+	- User views
+		- IE what the user sees for the database
+- Conceptual Schema:
+	- Conceptual Diagram and ERD
+		- What is drawn up in the plan of the database
+		- Concepts for the database
+		- erd being like implementation
+		- conceptual being just skeletons
+		- so erd is skin and organs
+- Internal Schema
+	- Logical Schema
+		- Transforming the ERD to relational schema and applying normalisation
+		- Does this mean the ERD is completely non-normalised...
+	- Physical Schema
+		- Organisation of physical records, choice of file organisation, indexing.
+# Relational Model
+
+- Degree is the number of attributes a model contains
+- Cardinality is the number of tuples ie  number of records/rows
+- Relational Database: collection of normalised relations with distinct relation names
+## Logical Physical vs Implementation
+### How do we model the various ways of RDBMS:
+
+| implementation | Physical | Logical   |
+| -------------- | -------- | --------- |
+| Table          | File     | Relation  |
+| Column         | Field    | Attribute |
+| Row            | Record   | Tuple     |
+### Keys
+
+- Primary
+- Foreign
+- Candidate
+- Composite
+- Alternate
+- Surrogate
+- Super
+### Constraints
+
+
 # Conceptual Design 
 
 ## Entity/Entity type
-
+### Rough Notes
 - Entity -> Object 
 - Entity type -> Class
 - Entity type has at least one property to describe it
@@ -17,6 +55,18 @@
 - Colour would be an attribute
 
 - The requirements specification of the system is not always a textual description, it can be a vague description with a set of a dataset (csv,json,etc)
+### Real Notes
+
+#### Entity
+- Person place object event or concept in the user environment about which the organisation wishes to maintain data on
+#### Entity Type
+- Collection of entities that share common properties or characteristics
+- Singular noun
+- First letter of each word in the entity name should be in upper case
+![[Screenshot_20250125_000214.png]]
+### Entity instance
+- Each entity instance is a single occurence of an entity type
+
 ## Relationships
 - Binary 
 - Terinary
