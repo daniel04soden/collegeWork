@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "a5167cfd4e6b659d",
+        "id": "861dbcfba4a54320",
         "type": "tabs",
         "children": [
           {
-            "id": "8e5122f34df06472",
+            "id": "0ec576ad2edfb341",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "NoSQL/NoSQL RDBMS.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "NoSQL RDBMS"
+              "title": "New tab"
             }
           }
         ]
@@ -77,8 +73,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "6d32b2d4bd1a7c13",
@@ -187,8 +182,15 @@
       "zenmode:Toggle Zen Mode": false
     }
   },
-  "active": "8e5122f34df06472",
+  "active": "0ec576ad2edfb341",
   "lastOpenFiles": [
+    "NoSQL/NoSQL RDBMS.md",
+    "OOP/JavaFX.md",
+    "OOP/Java refresh.md",
+    "OOP/hello.png",
+    "OOP/Screenshot_20250127_090700.png",
+    "C/Lab2 Notes Analysis.md",
+    "C/C Programming Introduction.md",
     "NoSQL/Screenshot_20250125_000214.png",
     "NONLin/ldsa Asymptotic Analysis.md",
     "NONLin/ldsa.md",
@@ -200,17 +202,14 @@
     "Statistics/Drawing 2025-01-21 14.45.59.excalidraw.md",
     "Statistics/Stats Module Outline.md",
     "OOAnalysis/Modelling.md",
-    "OOP/JavaFX.md",
     "OOP/Interfaces.md",
     "OOP/OOP lec1.md",
     "OOP/Design patterns.md",
     "Excalidraw/Drawing 2025-01-21 14.04.26.excalidraw.md",
     "Excalidraw",
-    "NoSQL/NoSQL RDBMS.md",
     "SideWork",
     "NoSQL/Introduction Nosql.md",
     "AgnosticLearning/Center.md",
-    "C/C Programming Introduction.md",
     "NONLin/Screenshot_20250118_155800.png",
     "AgnosticLearning",
     "C/book.md"

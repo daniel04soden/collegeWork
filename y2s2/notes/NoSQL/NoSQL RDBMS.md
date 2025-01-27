@@ -109,13 +109,10 @@
 |                      | room                                     |                                 |
 | one staff supervises | one supervision supervises many students | many students can be supervised |
 
+
 ## ER vs conceptual Diagram
 
-- Write notes from guide slide
 
-|     |     |     |
-| --- | --- | --- |
-|     |     |     |
 
 # Logical design and Normalisation
 
@@ -133,3 +130,35 @@
 
 # Transaction - New topic never covered :0
 
+ACID:
+- Atomic:
+	- Transaction cannot be subdivided
+	- A transaction succeeds completely or fails completely
+	- if a single operation fails it all should fail
+	- It should be able to deal with any faults in the middle of  a transaction
+	- If a transaction fails a client can safely retry.
+	- in the context of nosql, atomicity is not ensured.
+- Consistent:
+	- Constraints do not change from before transaction to after transaction
+	- Ensures that the transaction brings the database form a valid state to another valid state
+	- It is a property of the application not of the database 
+	- The database cannot enforce application specific invariant
+	- In the context of nosql it is often not discussed
+- Isolated:
+	- Database changes are not revealed to users until after the transaction has been completed
+	- Concurrently executed transactions are isolated from each other in that we need to deal with concurrent transactions that access the same data
+	- High levels of isolation where each transaction occurs as if it was the only transaction on the database
+### Isolation detail
+- Read committed: No dirty reads or writes, no reads or writes can be performed until data has been committed
+- Many SQL databases implement key levels of isolation
+- NO dirty writes prevent all inconsistencies.
+  some inconsistencies can be seen with no dirty reads.
+- Durable:
+	- Database changes are permanent
+	- Ensures that once a  transaction has been committed fully, data cannot be lost
+	- Even if a server crashes
+	- In the context of nosql durability is also ensured
+
+- Having such properties makes the life of devs easy but ACID properties are not the same in all databases 
+	- It may not even be the same in SQL databases
+- NoSQL solutions tend to provide weaker safety guarantees
