@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "NONLin/ldsa Asymptotic Analysis.md",
+                "file": "Statistics/Graphical Methods.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "ldsa Asymptotic Analysis"
+              "title": "Graphical Methods"
             }
           }
         ]
@@ -170,7 +170,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -187,29 +188,39 @@
   },
   "active": "8e5122f34df06472",
   "lastOpenFiles": [
-    "NONLin/ldsa.md",
-    "NONLin/ldsa Asymptotic Analysis.md",
-    "SideWork/Text editor Needs.md",
+    "Statistics/Drawing 2025-01-21 14.45.59.excalidraw.md",
+    "Pasted image 20250122160816.png",
+    "Statistics/Stats Module Outline.md",
     "Statistics/Grouped Frequency tables.md",
     "Statistics/Presentation of data.md",
     "Statistics/Intro to Stats and data types.md",
-    "Statistics/Drawing 2025-01-22 12.10.54.excalidraw.md",
-    "Statistics/Drawing 2025-01-21 14.45.59.excalidraw.md",
-    "Statistics/Stats Module Outline.md",
+    "Statistics/Graphical Methods.md",
+    "NONLin/Asymptotic Notation/ldsa Asymptotic Analysis.md",
+    "NONLin/Asymptotic Notation/Book Analysing Algos.md",
+    "OOAnalysis/OO Sys Analysis and design.md",
     "OOAnalysis/Modelling.md",
+    "C/Syntax.md",
+    "C/notes",
+    "C/notes.c",
+    "C/C Programming Introduction.md",
+    "C/C Programming Book.md",
+    "Excalidraw/Drawing 2025-01-22 19.26.26.excalidraw.md",
+    "NONLin/ldsa.md",
+    "NONLin/Asymptotic Notation",
+    "NoSQL/NoSQL RDBMS.md",
+    "NoSQL/Screenshot_20250122_160748.png",
+    "NoSQL/Introduction Nosql.md",
+    "SideWork/Text editor Needs.md",
+    "Statistics/Drawing 2025-01-22 12.10.54.excalidraw.md",
     "OOP/JavaFX.md",
     "OOP/Interfaces.md",
     "OOP/OOP lec1.md",
     "OOP/Design patterns.md",
     "Excalidraw/Drawing 2025-01-21 14.04.26.excalidraw.md",
     "Excalidraw",
-    "NoSQL/NoSQL RDBMS.md",
     "SideWork",
-    "NoSQL/Introduction Nosql.md",
     "AgnosticLearning/Center.md",
-    "C/C Programming Introduction.md",
-    "NONLin/Screenshot_20250118_155800.png",
-    "AgnosticLearning",
-    "C/book.md"
+    "NONLin/Asymptotic Notation/Screenshot_20250118_155800.png",
+    "AgnosticLearning"
   ]
 }

@@ -24,7 +24,6 @@
 - one to many
 - many to one
 - many to many
-- 
 ## Conceptual Diagram
 
 - Top level design
@@ -62,11 +61,7 @@
 ## ER vs conceptual Diagram
 
 - Write notes from guide slide
-
-|     |     |     |
-| --- | --- | --- |
-|     |     |     |
-
+- ![[Screenshot_20250122_160748.png]]
 # Logical design and Normalisation
 
 ## Local Design
@@ -79,7 +74,45 @@
 
 ## Optimising Data Retrieval in MySQL
 
+- When you execute a select statement Mysql uses the query optimiser to analyse the statement and perform the query as effectively as possible
+- The optimiser tries to use indexes whenever possible to process the statement
+- This tries to determine the greater number of rows that can be eliminated from the search
+- You need to specify that MYSQL should not be using its cache so that we can accurately judge the time these tasks take to complete.
+
+- Before indexing to optimise performance you firstly use the explain statement to analyse how many rows have been scanned to answer the query
+- Another command for this is OPTIMISE table, using defragmentation. This doesn't actually make queries faster ut we use it when we have no choice. For exxample if we are working with a table that constantly dxperiences updates.
+- You might have to use optimise table to ensure the table stats are accurate when read by the query optimiser.
+- Syntax of optimise table statement
+
+``` SQL
+OPTIMIZE TABLE conferences
+```
+
+- Do not use needed wild cards in LIKE clauses 
+- Isolate indexed columns in comparison expressions. Mysql cannot use an index on a column if that column appears as an argument in a function or arithmetic expression
+- We pick the columns involved in either where clause or having clause for indexing.
+- Do not use columns involved in calculations for indexing
+``` SQL
+SELECT id FROM data
+USE INDEX(type)
+WHERE TYPE = 12345 AND level > 3
+ORDER BY id;
+```
 ## Indexing in MySQL 
 
+- On existing tables
+``` SQL
+ALTER TABLE conferences ADD INDEX loc_index(location_id,topic_id);
+```
+
+- Rerun the explain statement after adding the index
+
+``` SQL
+CREATE UNIQUE INDEX orderID,uidx
+USING BTREE ON order(orderID DESC, modelID);
+```
+
+- Do not index columns that only take a few columns
+- So 1-4, gender, etc
 # Transaction - New topic never covered :0
 

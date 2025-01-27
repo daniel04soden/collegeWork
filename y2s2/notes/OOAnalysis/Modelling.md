@@ -100,3 +100,64 @@
 
 - Sub models make up the entire system.
 
+# UML - Unified Modelling Language
+
+## What even is UML ?
+
+- The UML language is used for:
+1. visualising 
+2. specifying  
+3. constructing 
+4. documenting
+
+- IE the artefacts of a software intensive system.
+
+## Unified Modelling Language
+
+- It provides a common vocab of OO terms and diagramming techniques rich enough to model any systems development project form analysis through implementation
+- Version 2.5 has 15 diagrams in 2 major groups those being
+	- structure diagrams 
+	- behaviour diagrams
+
+- It reperesents the data and the static relationships in an information system
+1. Class
+2. Object
+3. Package
+4. Deploytment
+5. COmponent
+6. composite Structure
+
+### UML behaviour diagrams
+- Depicts the dynamic relationships among the instances of objects that represent the business information system
+- It is a language for visualising in that communicating conceptual models to others is prone to error unless all speak the same language
+- there are things about a soft system you can't understand unless you build models/
+- An explicit model facilitates communication.
+- It is a language for specifying in that the uml builds models are precise unambiguous etc.
+
+- It is intended for a variety of languages but in particular java,c++ and other object oriented languages. Something like Ocaml would be useless for UML.
+- Permits forward and reverse engineering
+
+- All diagrams have symbols which contain text and have linked lines with relationships
+- these relationships are represented by different lines to represent different relationship meaning
+- these may have text and numbers on them
+
+### Use case diagrams
+
+- Use case diagrams capture system functionality
+
+### Class diagrams
+
+- Describes the structure of an OO system by showing the classes in that system ,their fields,functionality and how they interact with one another
+### Sequence diagram
+
+- This describes an interaction among a set of objects participated in a collaboration arranged in chronological order.
+### Component diagram
+
+- Classifying a group of classes into components and support the interchangeability and reuse of code.
+
+### Class diagram
+
+- Package diagram used to simplify complex class diagrams and you can group such classes into packages
+### State machine diagrams
+
+- Used to describe state dependent behaviour for an object
