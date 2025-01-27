@@ -1,7 +1,6 @@
-
 - Command for running  and naming file correctly
 
-``` bash
+```bash
 gcc -o main.c main
 ```
 

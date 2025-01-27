@@ -1,18 +1,14 @@
 #include <stdio.h>
 
-int main() {
-  char c;
-  int valid = 0;
+int main(){
+    int letter;
+    printf("Enter a lower case letter\n");
 
-  while (valid) {
-    printf("Enter a lowercase character:\n");
-    if (scanf("%c", &c) >= 'a' && scanf("%c", &c) <= 'z') {
-      c = c - 32;
-      break;
-    } else {
-      ;
+    while ((letter = getchar()) !=EOF) {
+        if (letter >= 'a' && letter <= 'z'){
+            letter = letter - 'a' + 'A';
+        }
+        printf("%c",letter);
     }
-  }
 
-  printf("%c\n", c);
 }
