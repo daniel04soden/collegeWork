@@ -4,13 +4,14 @@
     "type": "split",
     "children": [
       {
-        "id": "a5167cfd4e6b659d",
+        "id": "861dbcfba4a54320",
         "type": "tabs",
         "children": [
           {
-            "id": "8e5122f34df06472",
+            "id": "0ec576ad2edfb341",
             "type": "leaf",
             "state": {
+<<<<<<< HEAD
               "type": "markdown",
               "state": {
                 "file": "Statistics/Graphical Methods.md",
@@ -19,6 +20,12 @@
               },
               "icon": "lucide-file",
               "title": "Graphical Methods"
+=======
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+>>>>>>> 77779d62688d67418b36b2bb7101e453d3938866
             }
           }
         ]
@@ -151,8 +158,8 @@
             "state": {
               "type": "calendar",
               "state": {},
-              "icon": "calendar-with-checkmark",
-              "title": "Calendar"
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
             }
           },
           {
@@ -186,11 +193,25 @@
       "zenmode:Toggle Zen Mode": false
     }
   },
-  "active": "8e5122f34df06472",
+  "active": "0ec576ad2edfb341",
   "lastOpenFiles": [
+<<<<<<< HEAD
     "Statistics/Drawing 2025-01-21 14.45.59.excalidraw.md",
     "Pasted image 20250122160816.png",
     "Statistics/Stats Module Outline.md",
+=======
+    "NoSQL/NoSQL RDBMS.md",
+    "OOP/JavaFX.md",
+    "OOP/Java refresh.md",
+    "OOP/hello.png",
+    "OOP/Screenshot_20250127_090700.png",
+    "C/Lab2 Notes Analysis.md",
+    "C/C Programming Introduction.md",
+    "NoSQL/Screenshot_20250125_000214.png",
+    "NONLin/ldsa Asymptotic Analysis.md",
+    "NONLin/ldsa.md",
+    "SideWork/Text editor Needs.md",
+>>>>>>> 77779d62688d67418b36b2bb7101e453d3938866
     "Statistics/Grouped Frequency tables.md",
     "Statistics/Presentation of data.md",
     "Statistics/Intro to Stats and data types.md",
@@ -199,6 +220,7 @@
     "NONLin/Asymptotic Notation/Book Analysing Algos.md",
     "OOAnalysis/OO Sys Analysis and design.md",
     "OOAnalysis/Modelling.md",
+<<<<<<< HEAD
     "C/Syntax.md",
     "C/notes",
     "C/notes.c",
@@ -213,6 +235,8 @@
     "SideWork/Text editor Needs.md",
     "Statistics/Drawing 2025-01-22 12.10.54.excalidraw.md",
     "OOP/JavaFX.md",
+=======
+>>>>>>> 77779d62688d67418b36b2bb7101e453d3938866
     "OOP/Interfaces.md",
     "OOP/OOP lec1.md",
     "OOP/Design patterns.md",
@@ -220,7 +244,13 @@
     "Excalidraw",
     "SideWork",
     "AgnosticLearning/Center.md",
+<<<<<<< HEAD
     "NONLin/Asymptotic Notation/Screenshot_20250118_155800.png",
     "AgnosticLearning"
+=======
+    "NONLin/Screenshot_20250118_155800.png",
+    "AgnosticLearning",
+    "C/book.md"
+>>>>>>> 77779d62688d67418b36b2bb7101e453d3938866
   ]
 }

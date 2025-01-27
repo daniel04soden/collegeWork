@@ -3,13 +3,51 @@
 
 ## Three Tier Architecture
 
-- Frontend
-- Middle ware
-- Backend
+- External Schema:
+	- User views
+		- IE what the user sees for the database
+- Conceptual Schema:
+	- Conceptual Diagram and ERD
+		- What is drawn up in the plan of the database
+		- Concepts for the database
+		- erd being like implementation
+		- conceptual being just skeletons
+		- so erd is skin and organs
+- Internal Schema
+	- Logical Schema
+		- Transforming the ERD to relational schema and applying normalisation
+		- Does this mean the ERD is completely non-normalised...
+	- Physical Schema
+		- Organisation of physical records, choice of file organisation, indexing.
+# Relational Model
+
+- Degree is the number of attributes a model contains
+- Cardinality is the number of tuples ie  number of records/rows
+- Relational Database: collection of normalised relations with distinct relation names
+## Logical Physical vs Implementation
+### How do we model the various ways of RDBMS:
+
+| implementation | Physical | Logical   |
+| -------------- | -------- | --------- |
+| Table          | File     | Relation  |
+| Column         | Field    | Attribute |
+| Row            | Record   | Tuple     |
+### Keys
+
+- Primary
+- Foreign
+- Candidate
+- Composite
+- Alternate
+- Surrogate
+- Super
+### Constraints
+
+
 # Conceptual Design 
 
 ## Entity/Entity type
-
+### Rough Notes
 - Entity -> Object 
 - Entity type -> Class
 - Entity type has at least one property to describe it
@@ -17,6 +55,18 @@
 - Colour would be an attribute
 
 - The requirements specification of the system is not always a textual description, it can be a vague description with a set of a dataset (csv,json,etc)
+### Real Notes
+
+#### Entity
+- Person place object event or concept in the user environment about which the organisation wishes to maintain data on
+#### Entity Type
+- Collection of entities that share common properties or characteristics
+- Singular noun
+- First letter of each word in the entity name should be in upper case
+![[Screenshot_20250125_000214.png]]
+### Entity instance
+- Each entity instance is a single occurence of an entity type
+
 ## Relationships
 - Binary 
 - Terinary
@@ -58,10 +108,16 @@
 |                      | room                                     |                                 |
 | one staff supervises | one supervision supervises many students | many students can be supervised |
 
+
 ## ER vs conceptual Diagram
 
+<<<<<<< HEAD
 - Write notes from guide slide
 - ![[Screenshot_20250122_160748.png]]
+=======
+
+
+>>>>>>> 77779d62688d67418b36b2bb7101e453d3938866
 # Logical design and Normalisation
 
 ## Local Design
@@ -116,3 +172,35 @@ USING BTREE ON order(orderID DESC, modelID);
 - So 1-4, gender, etc
 # Transaction - New topic never covered :0
 
+ACID:
+- Atomic:
+	- Transaction cannot be subdivided
+	- A transaction succeeds completely or fails completely
+	- if a single operation fails it all should fail
+	- It should be able to deal with any faults in the middle of  a transaction
+	- If a transaction fails a client can safely retry.
+	- in the context of nosql, atomicity is not ensured.
+- Consistent:
+	- Constraints do not change from before transaction to after transaction
+	- Ensures that the transaction brings the database form a valid state to another valid state
+	- It is a property of the application not of the database 
+	- The database cannot enforce application specific invariant
+	- In the context of nosql it is often not discussed
+- Isolated:
+	- Database changes are not revealed to users until after the transaction has been completed
+	- Concurrently executed transactions are isolated from each other in that we need to deal with concurrent transactions that access the same data
+	- High levels of isolation where each transaction occurs as if it was the only transaction on the database
+### Isolation detail
+- Read committed: No dirty reads or writes, no reads or writes can be performed until data has been committed
+- Many SQL databases implement key levels of isolation
+- NO dirty writes prevent all inconsistencies.
+  some inconsistencies can be seen with no dirty reads.
+- Durable:
+	- Database changes are permanent
+	- Ensures that once a  transaction has been committed fully, data cannot be lost
+	- Even if a server crashes
+	- In the context of nosql durability is also ensured
+
+- Having such properties makes the life of devs easy but ACID properties are not the same in all databases 
+	- It may not even be the same in SQL databases
+- NoSQL solutions tend to provide weaker safety guarantees

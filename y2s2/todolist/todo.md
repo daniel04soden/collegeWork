@@ -2,11 +2,14 @@
 
 ## Pre-Semester preparation
 
-- [ ] C Introduction
-- [ ] Work with NoSQL for small project
-- [ ] Write personal idea notes on modules from module descriptor
+- [ x ] C Introduction
+- [ x ] Write personal idea notes on modules from module descriptor
 
 ## Week 1
+
+- [ ] Finish Assignment 1 - NoSQL
+- [ ] Fix C lab - just java work so no stress really
+- [ ] Do NLDSA Lab in advance
 
 ## Week 2
 
