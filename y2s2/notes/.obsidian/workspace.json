@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "8b2f4329b4ef1fef",
+        "id": "1caebc17b2cc077b",
         "type": "tabs",
         "children": [
           {
-            "id": "92a4db488dbeecb0",
+            "id": "7d6ffb80799bf35a",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -73,7 +73,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "c874283fcd7875c4",
@@ -147,8 +148,8 @@
             "state": {
               "type": "calendar",
               "state": {},
-              "icon": "calendar-with-checkmark",
-              "title": "Calendar"
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
             }
           }
         ]
@@ -171,9 +172,15 @@
       "zenmode:Toggle Zen Mode": false
     }
   },
-  "active": "92a4db488dbeecb0",
+  "active": "7d6ffb80799bf35a",
   "lastOpenFiles": [
     "Assignment Notes/OOP/Stage 1/Stage 1 - Planning Phase - Report to be finished.md",
+    "Assignment Notes/OOP/Stage 1/Drawing 2025-01-28 22.04.37.excalidraw.md",
+    "NoSQL/Labs/Drawing 2025-01-28 22.52.21.excalidraw.md",
+    "NoSQL/Labs",
+    "Assignment Notes/OOP/Stage 1/Drawing 2025-01-28 22.04.37.excalidraw 1.md",
+    "Excalidraw/Drawing 2025-01-28 14.18.25.excalidraw.md",
+    "OOP/Design patterns.md",
     "NoSQL/Pasted image 20250122160816.png",
     "Assignment Notes/OOP/Stage 1",
     "Assignment Notes/OOP",
@@ -182,7 +189,6 @@
     "OOP/Event Handlers.md",
     "Statistics/Screenshot_20250128_145450.png",
     "Statistics/Screenshot_20250128_145428.png",
-    "Excalidraw/Drawing 2025-01-28 14.18.25.excalidraw.md",
     "NONLin/Data Structures/Data Structures - Again.md",
     "NONLin/Data Structures"
   ]
