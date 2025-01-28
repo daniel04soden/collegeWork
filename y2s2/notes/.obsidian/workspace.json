@@ -1,31 +1,20 @@
 {
   "main": {
-    "id": "48be9a3ef06bd5a8",
+    "id": "e713624588d03046",
     "type": "split",
     "children": [
       {
-        "id": "861dbcfba4a54320",
+        "id": "8b2f4329b4ef1fef",
         "type": "tabs",
         "children": [
           {
-            "id": "0ec576ad2edfb341",
+            "id": "92a4db488dbeecb0",
             "type": "leaf",
             "state": {
-<<<<<<< HEAD
-              "type": "markdown",
-              "state": {
-                "file": "Statistics/Graphical Methods.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Graphical Methods"
-=======
               "type": "empty",
               "state": {},
               "icon": "lucide-file",
               "title": "New tab"
->>>>>>> 77779d62688d67418b36b2bb7101e453d3938866
             }
           }
         ]
@@ -34,15 +23,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "e7379edfbb77f264",
+    "id": "17ca299db8a65465",
     "type": "split",
     "children": [
       {
-        "id": "1a23d21bd5237872",
+        "id": "e4e95489a250cc3f",
         "type": "tabs",
         "children": [
           {
-            "id": "c27752cb3a675428",
+            "id": "db9ce6b161186083",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -54,7 +43,7 @@
             }
           },
           {
-            "id": "838d10d2574ad8b1",
+            "id": "3d2fa8ab7e7939f5",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -71,7 +60,7 @@
             }
           },
           {
-            "id": "83b76607e2552686",
+            "id": "1c3d3d4fcf9a456b",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -87,20 +76,20 @@
     "width": 300
   },
   "right": {
-    "id": "6d32b2d4bd1a7c13",
+    "id": "c874283fcd7875c4",
     "type": "split",
     "children": [
       {
-        "id": "e7a669fdc1089783",
+        "id": "9f11197026c84c5a",
         "type": "tabs",
         "children": [
           {
-            "id": "8b382f6ed36a003a",
+            "id": "ac90111805fea90d",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Statistics/Grouped Frequency tables.md",
+                "file": "NONLin/Data Structures/Data Structures - Again.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,25 +99,25 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Grouped Frequency tables"
+              "title": "Backlinks for Data Structures - Again"
             }
           },
           {
-            "id": "0ae3d6e1d1cf138e",
+            "id": "a078c235a6c48b5c",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "C/Introduction.md",
+                "file": "NONLin/Data Structures/Data Structures - Again.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Introduction"
+              "title": "Outgoing links from Data Structures - Again"
             }
           },
           {
-            "id": "c71f11a5e90dd710",
+            "id": "7bc16141c63db1f9",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -141,43 +130,32 @@
             }
           },
           {
-            "id": "227f912f3cd52060",
+            "id": "abd9a81e4b59488e",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "C/Introduction.md"
+                "file": "NONLin/Data Structures/Data Structures - Again.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of Introduction"
+              "title": "Outline of Data Structures - Again"
             }
           },
           {
-            "id": "17df1c71603368a5",
+            "id": "ead3b2dde482a9b5",
             "type": "leaf",
             "state": {
               "type": "calendar",
               "state": {},
-              "icon": "lucide-file",
-              "title": "Plugin no longer active"
-            }
-          },
-          {
-            "id": "32a074b4472827d5",
-            "type": "leaf",
-            "state": {
-              "type": "git-view",
-              "state": {},
-              "icon": "git-pull-request",
-              "title": "Source Control"
+              "icon": "calendar-with-checkmark",
+              "title": "Calendar"
             }
           }
-        ],
-        "currentTab": 5
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 200,
+    "width": 300,
     "collapsed": true
   },
   "left-ribbon": {
@@ -193,64 +171,19 @@
       "zenmode:Toggle Zen Mode": false
     }
   },
-  "active": "0ec576ad2edfb341",
+  "active": "92a4db488dbeecb0",
   "lastOpenFiles": [
-<<<<<<< HEAD
-    "Statistics/Drawing 2025-01-21 14.45.59.excalidraw.md",
-    "Pasted image 20250122160816.png",
-    "Statistics/Stats Module Outline.md",
-=======
-    "NoSQL/NoSQL RDBMS.md",
-    "OOP/JavaFX.md",
-    "OOP/Java refresh.md",
-    "OOP/hello.png",
-    "OOP/Screenshot_20250127_090700.png",
-    "C/Lab2 Notes Analysis.md",
-    "C/C Programming Introduction.md",
-    "NoSQL/Screenshot_20250125_000214.png",
-    "NONLin/ldsa Asymptotic Analysis.md",
-    "NONLin/ldsa.md",
-    "SideWork/Text editor Needs.md",
->>>>>>> 77779d62688d67418b36b2bb7101e453d3938866
-    "Statistics/Grouped Frequency tables.md",
-    "Statistics/Presentation of data.md",
-    "Statistics/Intro to Stats and data types.md",
+    "Assignment Notes/OOP/Stage 1/Stage 1 - Planning Phase - Report to be finished.md",
+    "NoSQL/Pasted image 20250122160816.png",
+    "Assignment Notes/OOP/Stage 1",
+    "Assignment Notes/OOP",
+    "Assignment Notes",
     "Statistics/Graphical Methods.md",
-    "NONLin/Asymptotic Notation/ldsa Asymptotic Analysis.md",
-    "NONLin/Asymptotic Notation/Book Analysing Algos.md",
-    "OOAnalysis/OO Sys Analysis and design.md",
-    "OOAnalysis/Modelling.md",
-<<<<<<< HEAD
-    "C/Syntax.md",
-    "C/notes",
-    "C/notes.c",
-    "C/C Programming Introduction.md",
-    "C/C Programming Book.md",
-    "Excalidraw/Drawing 2025-01-22 19.26.26.excalidraw.md",
-    "NONLin/ldsa.md",
-    "NONLin/Asymptotic Notation",
-    "NoSQL/NoSQL RDBMS.md",
-    "NoSQL/Screenshot_20250122_160748.png",
-    "NoSQL/Introduction Nosql.md",
-    "SideWork/Text editor Needs.md",
-    "Statistics/Drawing 2025-01-22 12.10.54.excalidraw.md",
-    "OOP/JavaFX.md",
-=======
->>>>>>> 77779d62688d67418b36b2bb7101e453d3938866
-    "OOP/Interfaces.md",
-    "OOP/OOP lec1.md",
-    "OOP/Design patterns.md",
-    "Excalidraw/Drawing 2025-01-21 14.04.26.excalidraw.md",
-    "Excalidraw",
-    "SideWork",
-    "AgnosticLearning/Center.md",
-<<<<<<< HEAD
-    "NONLin/Asymptotic Notation/Screenshot_20250118_155800.png",
-    "AgnosticLearning"
-=======
-    "NONLin/Screenshot_20250118_155800.png",
-    "AgnosticLearning",
-    "C/book.md"
->>>>>>> 77779d62688d67418b36b2bb7101e453d3938866
+    "OOP/Event Handlers.md",
+    "Statistics/Screenshot_20250128_145450.png",
+    "Statistics/Screenshot_20250128_145428.png",
+    "Excalidraw/Drawing 2025-01-28 14.18.25.excalidraw.md",
+    "NONLin/Data Structures/Data Structures - Again.md",
+    "NONLin/Data Structures"
   ]
 }
