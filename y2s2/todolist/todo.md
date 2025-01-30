@@ -12,7 +12,7 @@
 - [ ] Do NLDSA Lab in advance
 
 ## Week 2
-
+- [] Finish page 71 book for nldsa
 ## Week 3
 
 ## Week 4
