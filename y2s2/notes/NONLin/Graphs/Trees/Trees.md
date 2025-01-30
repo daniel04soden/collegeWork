@@ -36,3 +36,4 @@ Chapters: B.5, 10.3
 
 - The number of children is the degree of a node 
 - This definition differs from the degree of the corresponding graph
+- The depth of a node is the distance from the root
