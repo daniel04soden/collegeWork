@@ -59,10 +59,16 @@
 - A student usually attends any number of lectueres
 - A study group consists of two to three students
 - After submitting a solution it is graded by a tutor who is also a student
+- An employee can also be a customer in a shop or bank, how is that handled?
+- Arrows and notes are left on lines to describe the relationships for associations and relationships
+
+# Constraints
 
 
+- if we have a doctor's ward with male and female sections
+- We may need to take into account our instances of wards depending on its intended use or constraint
 
+# God class
 
-
-
-
+- An object that controls way too many objects in the system and has grown beyond all logic to become the class that does everything 
+- It is a class that centralises the intelligence in a system given it is large and complex and uses data from other classes
