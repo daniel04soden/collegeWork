@@ -122,3 +122,77 @@
 4. Draw a line through the box at the location of the median
 5. Find the length of each whisker by evaluating the min and max
 6. Finish the boxplot by drawing the outliers with circles![[Screenshot_20250128_145428.png]]![[Screenshot_20250128_145450.png]]
+
+
+# Measures of variation
+## Why would you need to know anything more than a mean
+- In many cases data may disperse so much from the mean that the measure may fail to describe well many of the data point
+
+- Using only a measure of centrality we cant determine how data is spread, how close the data set is to the mean and
+    what if the two sets of data have the same mean are, the data sets equal then??
+
+
+- If we consider only the mean we cant recognise any idfference between two samples as they both have a mean of 2 inches
+- However it should be obvious that the samples are very different in the amounts that the bolts vary in length.
+
+
+- The main measures of variation are range, standard deviation, and variance and interquartile range
+
+### Range
+
+- The range is the difference between the max and min 
+- It is easy and quick to calculate and it is useful for comparing two data sets
+- However it can be misleading due to extreme values
+
+### Standard deviation
+
+- The standard deviation of a set of samplke values is a measure of variation of values about the mean
+
+- If the standard deviation is small, the data is close to the mean 
+- If it is large the data is further away from the mean 
+
+
+- Standard deviation forumla 
+    - Square root of sum of data values - sample mean divided by sample size -1
+    -  The variance s^2 equals the standard deviation squared
+    - The variance weighs outliers more heavily than data very near the mean due to the square, a higher variance helps you spot this easier.
+    - However the standard deviation is often preferrred to the variance as a descriptive measure becasue it is in the same units as the data
+
+#### Coefficient of variation
+
+- The coeffecient of variation is used to compare
+    - Relative variation between two or more data sets ie the data set with the largest CV has the greatest spread.
+    - Two or more sets of data that are measured in different units
+
+- Coefficient of variation 
+    CV = Standard Deviation/mean x 100%
+
+### Interquartile RAange
+- Percentile is defnied as the value below which a certain percentage of the data lies
+- The 50th percentile is the value of which half of the lies
+
+- The interquartile range of Q3-Q1 is a measure of variability that commonly is used for skewed data.
+
+#### Finding iqr:
+
+- To find the iqr we:
+
+1. Sort the data values
+2. Find the median
+3. Place brackets around above or below the median
+4. q1 is the median in the lower half and q3 is the median in the upper half 
+5. finally iqr is Q3-Q1
+
+## Coeffecient of Skewness
+
+- The coeffecient of skewness is calcualtes by:
+        3\*(mean-median)/standard deviation(s)
+- This measures the skewness of a distribution
+
+- The direction of skewness is given by the sign of CS:
+    - Negative means the distribution is negatively skewed 
+    - A positive value means the distribution is positively skewed
+    - Zero means no skewness at all
+
+
+
