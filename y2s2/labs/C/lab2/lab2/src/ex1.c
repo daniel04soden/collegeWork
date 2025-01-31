@@ -25,14 +25,14 @@ int main() {
 
     printf("%c", encoded);
 
-    decoded = input - KEY; // Encode by adding key
+    decoded = input - KEY; // Decode by subtracting key
     if (decoded < 'A') {
-      decoded = decoded - 'A' + 'Z' + 1;
+      decoded = decoded - 'A' + 'Z' + 1; // Inverse of previous encoding
     }
     printf("%c", decoded);
     i++; // Processed one character successfully
+    printf("\n");
   }
 
-  printf("\n");
   return 0;
 }

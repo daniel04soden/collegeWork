@@ -100,5 +100,31 @@ $$
 
 What characterisation is most appropriate depends on what's important:
 - The worst case upper bound O(n^2) is a maximum runtime guarantee for all inputs
-- The worst case tight bought tita n squared is more precise guaranteeing the worst case can happen
+- The worst case tight bound tita n squared is more precise guaranteeing the worst case can happen
 - The best case lower bound omega n is the minimum required runtime regardless of the input
+
+
+- Small notation focuses on all whereas most upper notation is for some constant
+- The bound must hold for any constant factor
+- It becomes insignificant compared to g(n) as f(n) becomes larger.
+- "if f is o of g it grows as fsat as g does..."
+- Back to Maths for computer science (Transitivity,Reflexivity,Symmetry)
+
+## Comparing functions asymptotically
+- When characterising runtime of algorithms we usually find Monomials, Logarithms and exponentials
+- 123 = -O-(1), 3(n) = -O-(n), 4n^2 = -O-(n^2)
+- 7logen^4 = -O-(logn)  - Doesn't matter about logen or log10n for runtime
+- After a while ignore constants
+- 5(2^n) = -O-(2^n)
+
+- **Monomials terms are always asymptotically larger than logarithmic terms**
+- **Exponential are larger than almost everything and usually indicate infeasibility**
+- **O(1) > O(logn) > O(nlogn) > O(n^2) > O(n^2) > O(n^2logn) > O(n^3) > O(2^n)**
+
+- For sums of functions we use the above comparison chart  and ignore lower order term
+- We identify the largest term in a sum and ignore all constant factors. 
+- Ignore addition and minuses
+
+- To characterise the worst case performance of an iterative algorithm , we analyse the loop nesting to identify the most dominant line
+- We ignore constants after summing them
+- When looking at an individual line basis, we ignore O(1) as it is a constant in this scenario.

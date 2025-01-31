@@ -13,12 +13,20 @@
             "state": {
               "type": "markdown",
               "state": {
+<<<<<<< HEAD
                 "file": "NONLin/Graphs/Trees/Trees.md",
+=======
+                "file": "NONLin/Asymptotic Notation/ldsa Asymptotic Analysis.md",
+>>>>>>> ab2ea6f (added vp work)
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
+<<<<<<< HEAD
               "title": "Trees"
+=======
+              "title": "ldsa Asymptotic Analysis"
+>>>>>>> ab2ea6f (added vp work)
             }
           }
         ]
@@ -178,6 +186,7 @@
   },
   "active": "7d6ffb80799bf35a",
   "lastOpenFiles": [
+<<<<<<< HEAD
     "NONLin/ldsa.md",
     "NONLin/Graphs/Trees/Trees.md",
     "NONLin/Graphs/Trees",
@@ -185,6 +194,17 @@
     "NONLin/Graphs",
     "NONLin/Data Structures/Data Structures - Again.md",
     "OOAnalysis/Description classes.md",
+=======
+    "TODO/TODO.md",
+    "NoSQL/NoSQL RDBMS.md",
+    "TODO/Untitled",
+    "TODO",
+    "NONLin/Graphs/Graphs.md",
+    "NoSQL/Untitled.md",
+    "NONLin/Asymptotic Notation/ldsa Asymptotic Analysis.md",
+    "NONLin/Graphs",
+    "Statistics/Numerical Methods.md",
+>>>>>>> ab2ea6f (added vp work)
     "OOAnalysis/Domain Model.md",
     "NoSQL/Labs/Analysis Assignment 1.md",
     "NoSQL/Labs/Drawing 2025-01-28 22.52.21.excalidraw.md",

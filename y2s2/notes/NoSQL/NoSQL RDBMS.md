@@ -114,10 +114,6 @@
 <<<<<<< HEAD
 - Write notes from guide slide
 - ![[Screenshot_20250122_160748.png]]
-=======
-
-
->>>>>>> 77779d62688d67418b36b2bb7101e453d3938866
 # Logical design and Normalisation
 
 ## Local Design
@@ -126,6 +122,87 @@
 
 ## Denormalisation
 
+- **Definition:** This is the process of adding redundant data to get rid of complex joins in order to optimise database performance.
+- Increase redundancy in a database in order to improve query performance
+- It would be needed in a highly queried database
+- May move from BCNF to 3NF
+- Data is included in one table from another in order to eliminate the second table which reduces the number of necessary joins in a query and thus achieves higher performance.
+
+### Tips
+- Get conceptual and ERD correct
+- Should be done during database design
+- Last choice to boost performance
+- Do not implement any more denormalisation after performance reached
+- DO best to learn logical design of app to understand what parts of system likely o be affected by denormalisation.
+- Analyse how often data is changed
+- Look at what parts of app is having performance issues
+- Learn about data storage techniques
+
+### When to denormalise 
+
+-  Performance with structure is not acceptable
+- Check on hardware used in server
+- Hard to undo structural changes
+- Be sure willing to trade decreased data integrity for increased performance
+- Consider possible future scenario where apps may place different requirements on the data
+### What is it for?
+#### Storing Derivable data 
+- Situations when storing derivable value is appropriate
+	- When derivable values are frequently needed and when the source values are not
+	- When the source values are infrequently changed
+##### Advantages
+- DO not need to be looked up every time the value is needed
+- Calculation not peroromed
+##### Disadvantages
+- Data duplciation
+- DML against the source data 
+
+#### Using pre joined tables
+- to pre join tables you need t add a non key column to a table when the actual value of the primary key and the foreign key has no business meaning
+- By including a non-key column that has an actual business meaning you can avoid joining tables thus speeding up specific  queiries
+- You need to make sure the de-normalised columns get updated each time the aster column value is altered
+- This technique can be used when you have to make a lot of queries against many different tables and as long as the stale data is acceptable
+
+#### Using Hard coded values
+
+- If there's a reference table with constant records, you can hard code them into your app
+- You don't then need to join tables to fetch the reference values
+- You need to create a check constraint to validate values against references values
+- This constraint must be re-written each time a new value in the table is needed
+##### Advantages
+- No need to implement lookup table
+- No joins to a lookup table
+##### Disadvantages
+- Re-coding and restating are required if look up values are altered
+
+
+#### Keeping details with the master
+- There can be cases when the number of detail records per master is static and fixed
+- There can be cases when detail records are queried with the master
+- In these cases you can denormalize a database by adding detail columns to the master table
+- This technique proves most useful when there are few records in the detail table
+
+##### Advantages
+- No need to use joins
+- Saves space
+
+#### Current indicator Column
+- Indicator to show column at the current date
+#### Repeating a single detail with its master
+
+- When you deal with historical data many queries need a specific single most current record and rarely require other details
+- With this technique you can introduce a new foreign key column for storing this record with its master
+- Situations where this is appropriate:
+	- When detail records per master have a property such that one record can be consiedered current and others historical
+	- When the master often has only one single detail record
+##### Advantages:
+- No need to make joins for queries that need a single record
+##### Disadvantages
+- Data inconsistencies are possible as a record value must be repeated 
+#### End date columns
+
+- To store the end date for periods that are consecutive then the end date for a period can be derived form the start date.
+- Current - start date  - Not this use hard coded end date.
 # Physical Design
 
 ## Optimising Data Retrieval in MySQL
