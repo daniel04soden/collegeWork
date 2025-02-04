@@ -1,32 +1,24 @@
 {
   "main": {
-    "id": "e713624588d03046",
+    "id": "43b1cbbe69c4942f",
     "type": "split",
     "children": [
       {
-        "id": "1caebc17b2cc077b",
+        "id": "4dcfea8ef2ee8758",
         "type": "tabs",
         "children": [
           {
-            "id": "7d6ffb80799bf35a",
+            "id": "1ac5f52ac6284338",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-<<<<<<< HEAD
-                "file": "NONLin/Graphs/Trees/Trees.md",
-=======
-                "file": "NONLin/Asymptotic Notation/ldsa Asymptotic Analysis.md",
->>>>>>> ab2ea6f (added vp work)
+                "file": "OOP/Polymorphism.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-<<<<<<< HEAD
-              "title": "Trees"
-=======
-              "title": "ldsa Asymptotic Analysis"
->>>>>>> ab2ea6f (added vp work)
+              "title": "Polymorphism"
             }
           }
         ]
@@ -35,27 +27,28 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "17ca299db8a65465",
+    "id": "fe48626095f1087d",
     "type": "split",
     "children": [
       {
-        "id": "e4e95489a250cc3f",
+        "id": "f19fa1475b20354c",
         "type": "tabs",
         "children": [
           {
-            "id": "db9ce6b161186083",
+            "id": "be8b216269dc3af9",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical"
+                "sortOrder": "alphabetical",
+                "autoReveal": false
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
             }
           },
           {
-            "id": "3d2fa8ab7e7939f5",
+            "id": "2d6f1dcef5848cb2",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -72,7 +65,7 @@
             }
           },
           {
-            "id": "1c3d3d4fcf9a456b",
+            "id": "4728f0de29373160",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -89,20 +82,19 @@
     "collapsed": true
   },
   "right": {
-    "id": "c874283fcd7875c4",
+    "id": "8eafd8fa697eaf8d",
     "type": "split",
     "children": [
       {
-        "id": "9f11197026c84c5a",
+        "id": "1aedf3e76eb7ab9f",
         "type": "tabs",
         "children": [
           {
-            "id": "ac90111805fea90d",
+            "id": "fc46edacbcca895f",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "NONLin/Data Structures/Data Structures - Again.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,56 +104,59 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Data Structures - Again"
+              "title": "Backlinks"
             }
           },
           {
-            "id": "a078c235a6c48b5c",
+            "id": "4dbae4d0d70e0bfb",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "NONLin/Data Structures/Data Structures - Again.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Data Structures - Again"
+              "title": "Outgoing links"
             }
           },
           {
-            "id": "7bc16141c63db1f9",
+            "id": "59b670af3714d925",
             "type": "leaf",
             "state": {
               "type": "tag",
               "state": {
                 "sortOrder": "frequency",
-                "useHierarchy": true
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-tags",
               "title": "Tags"
             }
           },
           {
-            "id": "abd9a81e4b59488e",
+            "id": "f56b7c45b430bc8d",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "NONLin/Data Structures/Data Structures - Again.md"
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Data Structures - Again"
+              "title": "Outline"
             }
           },
           {
-            "id": "ead3b2dde482a9b5",
+            "id": "cce717b99982ab81",
             "type": "leaf",
             "state": {
               "type": "calendar",
               "state": {},
-              "icon": "lucide-file",
-              "title": "Plugin no longer active"
+              "icon": "calendar-with-checkmark",
+              "title": "Calendar"
             }
           }
         ]
@@ -184,45 +179,11 @@
       "zenmode:Toggle Zen Mode": false
     }
   },
-  "active": "7d6ffb80799bf35a",
+  "active": "1ac5f52ac6284338",
   "lastOpenFiles": [
-<<<<<<< HEAD
-    "NONLin/ldsa.md",
-    "NONLin/Graphs/Trees/Trees.md",
-    "NONLin/Graphs/Trees",
-    "NONLin/Graphs/Graphs - Continued.md",
-    "NONLin/Graphs",
-    "NONLin/Data Structures/Data Structures - Again.md",
-    "OOAnalysis/Description classes.md",
-=======
-    "TODO/TODO.md",
-    "NoSQL/NoSQL RDBMS.md",
-    "TODO/Untitled",
-    "TODO",
-    "NONLin/Graphs/Graphs.md",
-    "NoSQL/Untitled.md",
-    "NONLin/Asymptotic Notation/ldsa Asymptotic Analysis.md",
-    "NONLin/Graphs",
-    "Statistics/Numerical Methods.md",
->>>>>>> ab2ea6f (added vp work)
-    "OOAnalysis/Domain Model.md",
-    "NoSQL/Labs/Analysis Assignment 1.md",
-    "NoSQL/Labs/Drawing 2025-01-28 22.52.21.excalidraw.md",
-    "Excalidraw/Drawing 2025-01-28 14.18.25.excalidraw.md",
-    "Excalidraw/Drawing 2025-01-22 19.26.26.excalidraw.md",
-    "Assignment Notes/OOP/Stage 1/Stage 1 - Planning Phase - Report to be finished.md",
-    "Assignment Notes/OOP/Stage 1/Drawing 2025-01-28 22.04.37.excalidraw.md",
-    "NoSQL/Labs",
-    "Assignment Notes/OOP/Stage 1/Drawing 2025-01-28 22.04.37.excalidraw 1.md",
-    "OOP/Design patterns.md",
-    "NoSQL/Pasted image 20250122160816.png",
-    "Assignment Notes/OOP/Stage 1",
-    "Assignment Notes/OOP",
-    "Assignment Notes",
+    "Statistics/Introduction to probability.md",
+    "OOP/Polymorphism.md",
     "Statistics/Graphical Methods.md",
-    "OOP/Event Handlers.md",
-    "Statistics/Screenshot_20250128_145450.png",
-    "Statistics/Screenshot_20250128_145428.png",
-    "NONLin/Data Structures"
+    "TODO/TODO.md"
   ]
 }

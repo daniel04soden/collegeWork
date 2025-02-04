@@ -10,16 +10,15 @@
 ## Week 1
 - [x] Fix C lab - just java work so no stress really
 ## Week 2
-- [ ] Do NLDSA Lab in advance
-- [ ] Study up on Graphs - NLDSA
-- [ ] Make a solid start on JavaFX project 
-- [ ] Finish Assignment 1 NOSQL
+- [x] Do NLDSA Lab in advance ✅ 2025-02-04
 - [x] Finish Ex2 C ✅ 2025-01-29
 - [x] Have ex4 perfect for C ✅ 2025-01-29
 ## Week 3
 
-- [ ] Start new NoSQL Project early
-- [ ] 
+- [ ] Start new NoSQL Assignment early
+- [ ]  Make a start On NLDSA assignment
+- [ ] Finish OO Analysis labs
+- [ ] Study leetcode/dsa for friday test
 
 
 ## Week 4

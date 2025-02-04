@@ -61,7 +61,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.example.javafxassignment1ds/com.example.javafxassignment1ds.HelloApplication
+                                com.example.javafxassignment1ds/com.example.javafxassignment1ds.ComputerApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
