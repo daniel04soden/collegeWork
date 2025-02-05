@@ -5,25 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f51dc7ca-27ba-4156-a6ed-9dc330a6ebcc" name="Changes" comment="fixed id issues">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Daniel_Soden_Report.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/insertProducts.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/shop.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Agent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Computer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Customer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Database.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Order.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Product.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Shop.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/ShopImp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../y2s2/assignments/nosql/assignment1/fix.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../y2s2/assignments/nosql/assignment1/main.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../y2s2/assignments/nosql/assignment1/nosqlAssignment1.vpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../y2s2/assignments/nosql/assignment1/nosqlAssignment1.vpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../y2s2/assignments/nosql/assignment1/question2.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../y2s2/assignments/nosql/assignment1/question2.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../y2s2/labs/oop/lab2/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../y2s2/labs/oop/lab2/target/classes/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../y2s2/notes/.obsidian/plugins/zenmode/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../y2s2/notes/.obsidian/plugins/zenmode/data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../y2s2/notes/.obsidian/workspace.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../y2s2/notes/.obsidian/workspace.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../y2s2/notes/NoSQL/NoSQL RDBMS.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../y2s2/notes/NoSQL/NoSQL RDBMS.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../y2s2/notes/OOP/Polymorphism.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../y2s2/notes/OOP/Polymorphism.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../y2s2/notes/TODO/TODO.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../y2s2/notes/TODO/TODO.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +29,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -54,17 +45,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/danielsoden/collegeWork/myAssigments/tofinish/A03DS&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.maddyhome.idea.vim.ui.VimEmulationConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/daniels/collegeWork/y2s1/myAssigments/tofinish/A03DanielSoden/A03_R00247215_Java_Application/A03",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.maddyhome.idea.vim.ui.VimEmulationConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.189" />
+        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.189" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -73,6 +74,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1733405584741</updated>
+      <workItem from="1738750098449" duration="37000" />
     </task>
     <task id="LOCAL-00001" summary="added scanning checks and refactored to have id be something the user gives potentially">
       <option name="closed" value="true" />
@@ -100,6 +102,9 @@
     </task>
     <option name="localTasksCounter" value="4" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added scanning checks and refactored to have id be something the user gives potentially" />

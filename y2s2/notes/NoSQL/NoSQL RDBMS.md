@@ -247,6 +247,16 @@ USING BTREE ON order(orderID DESC, modelID);
 
 - Do not index columns that only take a few columns
 - So 1-4, gender, etc
+## Index types in mysql
+
+### Three types of index in mysql
+
+1. BTree Indexes
+2. RTree Indexes
+3. Hash Indexes
+
+
+
 # Transaction - New topic never covered :0
 
 ACID:

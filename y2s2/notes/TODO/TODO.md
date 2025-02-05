@@ -19,8 +19,6 @@
 - [ ]  Make a start On NLDSA assignment
 - [ ] Finish OO Analysis labs
 - [ ] Study leetcode/dsa for friday test
-
-
 ## Week 4
 
 ## Week 5
