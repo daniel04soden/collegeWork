@@ -6,7 +6,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class ComputerApplication extends Application {
     String title;
@@ -16,8 +15,8 @@ public class ComputerApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(ComputerApplication.class.getResource("computer" +
                 "-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 500, 500);
-        String css = Objects.requireNonNull(this.getClass().getResource("computer.css")).toExternalForm();
-        scene.getStylesheets().add(css);
+        // String css = Objects.requireNonNull(this.getClass().getResource("computer.css")).toExternalForm();
+        // scene.getStylesheets().add(css);
         stage.setTitle(title);
         stage.setScene(scene);
         stage.show();
