@@ -108,5 +108,67 @@ $$
 - However for the same test in an adjacency matrix, it only requires a single lookup therefore the runtime for this operation is O(1)
 
 
-- **Adjacency matrices** are more suitable for dense graphs and algorithms with frequent edge lookups. 
+- **Adjacency matrices** are more suitable for dense graphs and algorithms with frequent edge lookup. 
 - Whereas our lists would again be fore more sparse graphs 
+
+# Representation of Trees 
+
+## Sub-trees 
+- **Reminder**: trees are undirected acyclic graphs
+
+- Every Node can be considered the root of a sub-tree induced by its descendants
+- A tree is thus a recursive structure defined by a single root node and its sub trees where the children of the root node are the roots of sub trees.
+
+- We can use these facts to represent trees similar to linked lists wehre
+	- The head of the structure is the pointer to the root node 
+	- Each node itself contains pointers to the root nodes of its respective subtrees.
+```Java
+public class Tree<T>{
+	private class Node<T>{
+	private T value;
+	private Node<T>[] child;
+	
+	}
+	private Node<T> root;
+
+}
+```
+
+
+## Binary trees
+
+- Two descendants in each node
+- An ordered tree is a structure where the order of the children matters
+- If the number of children in each node is the same then it is called a k-ary tree
+
+- A binary tree is an ordered tree with exactly two sub trees in each node which are then referred to as the left and the right child
+```Java
+
+public class BinaryTree<T>{
+	private class Node<T>{
+		private T value;
+		private Node<T> left;
+		private Node<T> right;
+	}
+	private Node<T> root;
+}
+```
+
+## Additional links
+
+- Sometimes it is useful to add additional links to the data structure similar to double linked lsits
+- For example a parent pointer back allows and algorithm to mvoe up andd down in the tree
+
+``` Java
+// Binary trees with extra node going back up 
+public class BinaryTree<T>{
+	private class Node<T>{
+		private T value;
+		private Node<T> parent;
+		private Node<T> right;
+		private Node<T> right;
+	}
+	private Node<T> root;
+}
+```
+
