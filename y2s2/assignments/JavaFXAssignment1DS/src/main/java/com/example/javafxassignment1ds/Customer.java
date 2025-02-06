@@ -46,36 +46,36 @@ public class Customer{
         String sqlStmt = "INSERT INTO customers(username, age, currentBal) VALUES(?, ?, ?)"; // Insert given values
         //SQLite handles default values
 
-            try (var conn = DriverManager.getConnection(Database.url);
-                 var prepStmt = conn.prepareStatement(sqlStmt, Statement.RETURN_GENERATED_KEYS)) {
-                prepStmt.setString(1, _username);
-                prepStmt.setInt(2, _age);
-                prepStmt.setDouble(3, _currentBal);
-                prepStmt.executeUpdate();
+        try (var conn = DriverManager.getConnection(Database.url);
+             var prepStmt = conn.prepareStatement(sqlStmt, Statement.RETURN_GENERATED_KEYS)) {
+            prepStmt.setString(1, _username);
+            prepStmt.setInt(2, _age);
+            prepStmt.setDouble(3, _currentBal);
+            prepStmt.executeUpdate();
 
-                // Retrieve the generated customerID
-                try (var rs = prepStmt.getGeneratedKeys()) {
-                    if (rs.next()) {
-                        int customerID = rs.getInt(1); // Get generated id for output to user
-												this.customerNo = customerID;
-                        System.out.println("Thanks " + _username + " You are now a registered Customer\n");
-                        System.out.println("------------------------------------------------");
-                        System.out.println("Your given id is " + customerID + " ,Remember it!");
-                    } else {
-                        // Handle error: Failed to retrieve generated ID
-                        System.err.println("Failed to retrieve generated customerID");
-                    }
+            // Retrieve the generated customerID
+            try (var rs = prepStmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    int customerID = rs.getInt(1); // Get generated id for output to user
+                    this.customerNo = customerID;
+                    System.out.println("Thanks " + _username + " You are now a registered Customer\n");
+                    System.out.println("------------------------------------------------");
+                    System.out.println("Your given id is " + customerID + " ,Remember it!");
+                } else {
+                    // Handle error: Failed to retrieve generated ID
+                    System.err.println("Failed to retrieve generated customerID");
                 }
-            } catch (SQLException e) {
-                System.err.println(e.getMessage());
             }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
 
         // Standard initialization of values
 
         this.username = _username;
         this.currentBal = _currentBal;
         this.age = _age;
-        }
+    }
 
     //---------------------------------------
     //	GET METHODS
@@ -116,8 +116,8 @@ public class Customer{
      * @return Customer id
      */
     public int getCustomerNo() {
-		return customerNo;
-	}
+        return customerNo;
+    }
 
     //---------------------------------------
     //	getCustomerBalance
@@ -205,7 +205,7 @@ public class Customer{
      * @param amount - Amount to be taken
      * @param customerID - ID of the customers account
      */
-		public static void takeMoneyFromAcc(double amount,int customerID){
+    public static void takeMoneyFromAcc(double amount,int customerID){
         var sql = "UPDATE customers SET currentBal = ? WHERE customerNo=" + customerID +";";
 
         try (var conn = DriverManager.getConnection(Database.url);
@@ -226,5 +226,5 @@ public class Customer{
         }
     }
 
-	}
+}
 
