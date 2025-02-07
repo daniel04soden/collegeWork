@@ -4,67 +4,69 @@ import java.util.LinkedList;
 
 public class GraphAdjMatrix extends AbstractGraph {
 	private final double[][] adjMatrix;
-	int n = len(adjMatrix); // Should this be the length??
 
-	public GraphAdjMatrix(int noOfVertices, boolean directed) {
+	public GraphAdjMatrix(int noOfVertices, boolean directed) {   
 		super(noOfVertices, directed);
-		if (!directed){
-			this.noOfVertices = noOfVertices*2;
-		}
-
-		for (int i = 0; i < n; ++i) { // what is n...
-			for (int j = 0; j < n; ++j) { // n...
-				adjMatrix[i][j] = 0;
-
-				if (!directed){
-					adjMatrix[j][i] = 0;
-				}
-
-			}
-		}
+		adjMatrix = new double[noOfVertices-1][noOfVertices-1];
 	}
 
 	public void addEdge(int source, int destination, double weight) {
-		this.adjMatrix[source][destination] = 1;
-		// Add edge counter
-		if (!this.directed){
-		this.adjMatrix[destination][source] = 1;
-		// Add edge counter - Would Edges  actually be divided by two ?
+		this.adjMatrix[source][destination] = weight;
+		
+		if (!this.directed){ // Undirected
+		this.adjMatrix[destination][source] = weight;
 		}
 	}
 
 	public void removeEdge(int source, int destination) {
-		this.adjMatrix[source][destination] = 0; // 0 or null???
-		// remove edge counter
+		this.adjMatrix[source][destination] = 0; // 0 or null??? isn't it nan if its connected
+			// Remember: counter not needed - archaic way of doing number of edges
 		if (!this.directed){
+
 		this.adjMatrix[destination][source] = 0;
-		// remove edge counter
+
 		}
 	}
 
 	public double getWeight(int source, int destination) {
-		// TODO: Task 1-D
-		throw new RuntimeException("Not yet implemented!");
+		return adjMatrix[source][destination];
 	}
 
 	public int[] getNeighbours(int vertex) {
-		// TODO: Task 1-E
-		throw new RuntimeException("Not yet implemented!");
-	}
+
+}
 
 	public int getDegree(int vertex) {
-		// TODO: Task 1-F
 		throw new RuntimeException("Not yet implemented!");
 	}
 
 	public boolean isPath(int[] nodes) {
-		// TODO: Task 1-G
-		throw new RuntimeException("Not yet implemented!");
+		int n = nodes.length;
+		int pathCount = 1;
+		for (int i = 0; i < n-1; i++) {
+			if (adjMatrix[i][i+1] == nodes[i+1]) {
+				pathCount++;	
+			}else{
+				break;
+			}
+		}
+		return pathCount == n;
 	}
 
 	public int getNoOfEdges() {
-		if (!this.directed){
-
+		int countNoOfEdges = 0;
+		for (int i = 0; i < getNoOfVertices(); i++) {
+			for (int j = 0; j < getNoOfVertices(); j++) {
+				if (adjMatrix[i][j] > 0) {
+					countNoOfEdges++;	
+				} else {
+					continue;
+				}	
+			}
 		}
+		if (!directed) {
+			countNoOfEdges = countNoOfEdges/2;	
+		}
+		return countNoOfEdges;
 	}
 }

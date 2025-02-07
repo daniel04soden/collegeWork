@@ -11,13 +11,30 @@
             "id": "4d56e7449b12fbfd",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "TODO/TODO.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "TODO"
+            }
+          },
+          {
+            "id": "6418f5b77378f0e6",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Assignment Notes/NLDSA/Assignment1/Drawing 2025-02-06 17.11.03.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "Drawing 2025-02-06 17.11.03.excalidraw"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -174,23 +191,30 @@
       "zenmode:Toggle Zen Mode": false
     }
   },
-  "active": "4d56e7449b12fbfd",
+  "active": "6418f5b77378f0e6",
   "lastOpenFiles": [
-    "NoSQL/Nosql Start/Big data.md",
+    "TODO/TODO.md",
+    "Assignment Notes/NLDSA/Assignment1/Drawing 2025-02-06 17.11.03.excalidraw.md",
+    "Assignment Notes/NLDSA/Assignment1/Untitled.canvas",
+    "Assignment Notes/NLDSA/Assignment1",
+    "Assignment Notes/NLDSA",
+    "Statistics/Multiplication Rule.md",
+    "NONLin/Performance/Amortised Analysis.md",
     "NONLin/Performance/Recurrences.md",
+    "NONLin/Performance/Induction Substitution.md",
+    "OOAnalysis/Modelling Roles.md",
+    "NoSQL/Nosql Start/Big data.md",
     "NoSQL/RDBMS",
     "NoSQL/Nosql Start",
     "NONLin/Graphs/Trees/Traversing a Binary tree.md",
     "NONLin/Graphs/Graphs - Continued.md",
     "NONLin/Performance/Book Analysing Algos.md",
     "NONLin/Data Structures/Data Structures - Again.md",
-    "TODO/TODO.md",
     "Untitled.canvas",
     "AgnosticLearning/Center.md",
     "Statistics/Numerical Methods.md",
     "Statistics/Grouped Frequency tables.md",
     "Statistics/Addition Rule.md",
-    "OOAnalysis/Modelling Roles.md",
     "NoSQL/RDBMS/NoSQL RDBMS.md",
     "OOP/Polymorphism.md",
     "OOP/brocodework/target/classes/Main/hello-view.fxml",
@@ -199,8 +223,6 @@
     "OOP/brocodework/target/classes/module-info.class",
     "OOP/brocodework/target/classes/Main",
     "OOP/brocodework/target/test-classes",
-    "OOP/brocodework/target/classes",
-    "OOP/brocodework/target",
     "Statistics/Introduction to probability.md",
     "Statistics/Graphical Methods.md"
   ]

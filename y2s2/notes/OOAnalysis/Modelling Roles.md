@@ -55,16 +55,32 @@
 
 # Role class
 
-
 - This allows you to link any company with any of the roles it may possibly play. Here a role is modelled with a class - as it was in our inheritance solution.
 
- - In delegation an object handles a request by delgating toa second object, the delegate is a helper object.
+ - In delegation an object handles a request by delegating to a second object, the delegate is a helper object.
 # Role class Generalisation
 
-- All roles may be modelled and dynamically asigned to any company at a time. Role specific operations are supported but not erpreated thanks to the UML generalization features
-- These role specific operations simply reside in one place:The role generalisation class. It is the one class that will take care of all delgations to company.
+- All roles may be modelled and dynamically assigned to any company at a time. Role specific operations are supported but not repeated thanks to the UML generalisation features
+- These role specific operations simply reside in one place:The role generalisation class. It is the one class that will take care of all delegations to company.
 
 
 - Only one implementation of its operations is needed and it will serve all class Roles by virtue of inheritance.
-
 # Role association class
+
+
+- When the system is implemented only these roles can be used
+- For instance a company can only assume the role of a vendor a customer or a broker
+- These different roles can certainly be dynamically assigned but not dynamically created
+- We can assign any role to company but it will have to be one of the roles already present in the system ie it will have to be an existing class
+- Classes aren't created dynamically but objects are. 
+
+## Role association class solution
+
+- Roles are created on demand
+- To specify that a company supplies a specific product, then one just needs to create an instance of a role. A link object and link the proper product to the right company.
+- That role link object can be named whatever one desires it to be: Vendor, customer, broker
+
+- The association class role solution is flexible and powerful. Notice that the concept of roles is modelled not the roles themselves. This model is more abstract than models that deal with explicit roles in general we see that the higher levels of abstraction not only bring greater simplicity but also higher power and flexibility. However notice that more abstract models impose greater object manipulation. 
+
+- It allows for all roles and role types to be dynamically created and used. This model is abstract powerful flexible and object intensive as posed to class intensive.
+- In the earlier models you need one class per role whereas here one class takes care of all cases but each role type requires the creation of a role type object.

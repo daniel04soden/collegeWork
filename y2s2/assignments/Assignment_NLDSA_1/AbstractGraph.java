@@ -13,11 +13,11 @@ public abstract class AbstractGraph implements Graph {
         return noOfVertices;
     }
 
-    public enum GraphImpl { AdjList, AdjMatrix }
+    // public enum GraphImpl { AdjList, AdjMatrix }
     public static Graph create(GraphImpl impl, int noOfVertices, boolean directed)
     {
         return switch (impl) {
-            case AdjList -> new GraphAdjList(noOfVertices, directed);
+            // case AdjList -> new GraphAdjList(noOfVertices, directed);
             case AdjMatrix -> new GraphAdjMatrix(noOfVertices, directed);
         };
     }

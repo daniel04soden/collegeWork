@@ -15,10 +15,15 @@
 - [x] Have ex4 perfect for C ✅ 2025-01-29
 ## Week 3
 
-- [ ] Start new NoSQL Assignment early
-- [ ]  Make a start On NLDSA assignment
+- [x] Start new NoSQL Assignment early ✅ 2025-02-06
+- [x] Make a start On NLDSA assignment ✅ 2025-02-06
 - [ ] Finish OO Analysis labs
 - [ ] Study leetcode/dsa for friday test
+### Friday
+
+- [ ] Wake at 7
+- [ ] Do leetcode/leetle
+- [ ] Work on some LDSA
 ## Week 4
 
 ## Week 5
