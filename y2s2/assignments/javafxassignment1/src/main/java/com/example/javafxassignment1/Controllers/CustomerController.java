@@ -5,6 +5,7 @@ import com.example.javafxassignment1.Models.Customer;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -37,7 +38,8 @@ public class CustomerController {
             customerReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
-            System.out.println(e.getStackTrace());
+            System.out.println(Arrays.toString(e.getStackTrace()));
         }
     }
+
     }
