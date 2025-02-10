@@ -5,16 +5,20 @@
 int main() 
 { 
     char temp_array[30]; // a temporary array that is long enough to hold user input 
-    char user_input;  // variable to store each character the user enters 
+    char userInput;  // variable to store each character the user enters 
     int i = 0;
 
     while (true){ 
-        user_input = (char) getchar(); 
-				bool isAlpha = (user_input >= 'a' && user_input <= 'z') || (user_input >= 'A' && user_input <= 'Z');
-				bool isNumeric = (user_input >= '0' && user_input <='9');
-				if (user_input == '\n') break;   
-				if ((isAlpha && isNumeric)){
-					temp_array[i] = user_input; 
+        userInput = (char) getchar(); 
+				bool isAlpha = (userInput >= 'a' && userInput <= 'z') || (userInput >= 'A' && userInput <= 'Z');
+				bool isNumeric = (userInput >= '0' && userInput <='9');
+				if (userInput == '\n') break;   
+				if ((isAlpha || isNumeric)){
+					if (i>=30 ) {
+						printf("Max length reached chill out\n");
+						break;	
+					}
+					temp_array[i] = userInput; 
 					i++; 
 				}else{
 					continue;	
@@ -22,12 +26,12 @@ int main()
     } 
     // the value of i represents the length of the user input 
     // to create a reflected string we need twice the length 
-    char reflected_array[i*2 + 1]; // plus 1 to accommodate the \0 at the end of the string 
+    char duplicatedArrayThree[i*3 + 1]; // plus 1 to accommodate the \0 at the end of the string 
     for (int j=0; j<i; j++){ 
-        reflected_array[j] = temp_array[j]; 
-        reflected_array[i*2-1-j] = temp_array[j]; 
+        duplicatedArrayThree[j] = temp_array[j]; 
+        duplicatedArrayThree[i*3-1-j] = temp_array[j]; 
     } 
-    reflected_array[i*2] = '\0'; // need to add NULL for this to be a valid string 
-    printf("The reflected string is: %s\n", reflected_array);
+    duplicatedArrayThree[i*3] = '\0'; // need to add NULL for this to be a valid string 
+    printf("The reflected string is: %s\n", duplicatedArrayThree);
     return 0; 
 } 
