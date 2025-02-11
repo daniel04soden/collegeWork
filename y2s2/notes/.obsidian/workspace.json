@@ -13,28 +13,15 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "TODO/TODO.md",
+                "file": "NoSQL/Nosql Start/Data Management Systems.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "TODO"
-            }
-          },
-          {
-            "id": "6418f5b77378f0e6",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "Assignment Notes/NLDSA/Assignment1/Drawing 2025-02-06 17.11.03.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "Drawing 2025-02-06 17.11.03.excalidraw"
+              "title": "Data Management Systems"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -91,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "8eafd8fa697eaf8d",
@@ -191,8 +179,11 @@
       "zenmode:Toggle Zen Mode": false
     }
   },
-  "active": "6418f5b77378f0e6",
+  "active": "4d56e7449b12fbfd",
   "lastOpenFiles": [
+    "NoSQL/Nosql Start/Big data.md",
+    "NoSQL/Nosql Start/Data Management Systems.md",
+    "OOP/Exceptions.md",
     "TODO/TODO.md",
     "Assignment Notes/NLDSA/Assignment1/Drawing 2025-02-06 17.11.03.excalidraw.md",
     "Assignment Notes/NLDSA/Assignment1/Untitled.canvas",
@@ -203,7 +194,6 @@
     "NONLin/Performance/Recurrences.md",
     "NONLin/Performance/Induction Substitution.md",
     "OOAnalysis/Modelling Roles.md",
-    "NoSQL/Nosql Start/Big data.md",
     "NoSQL/RDBMS",
     "NoSQL/Nosql Start",
     "NONLin/Graphs/Trees/Traversing a Binary tree.md",

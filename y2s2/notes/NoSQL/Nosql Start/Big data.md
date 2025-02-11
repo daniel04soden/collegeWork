@@ -78,3 +78,15 @@
 - XML,Json documents
 - Images,Audio
 
+# Big models
+
+- Large industrial pipeline engineering products
+- Requires many skilful engineers and is a big investment
+	- Big data
+	- Big computation power
+	- Big money
+	- Big energy consumption
+
+- Originated from co training which was beleived to be only applicable to data with two sets of sufficient features
+- Sufficient and necessary theorems proved: No need to have two sets of features : "diverstiy of two models is vitial"
+	- This also shows that one cannot use it to improve a big model becuase the diversity of the models will dicrease as training proceeds

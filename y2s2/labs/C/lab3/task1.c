@@ -28,10 +28,10 @@ int main()
     // to create a reflected string we need twice the length 
     char duplicatedArrayThree[i*3 + 1]; // plus 1 to accommodate the \0 at the end of the string 
     for (int j=0; j<i; j++){ 
-        duplicatedArrayThree[j] = temp_array[j]; 
+        duplicatedArrayThree[j] = temp_array[i]; 
         duplicatedArrayThree[i*3-1-j] = temp_array[j]; 
     } 
     duplicatedArrayThree[i*3] = '\0'; // need to add NULL for this to be a valid string 
-    printf("The reflected string is: %s\n", duplicatedArrayThree);
+    printf("The triply duplicated string is: %s\n", duplicatedArrayThree);
     return 0; 
 } 
