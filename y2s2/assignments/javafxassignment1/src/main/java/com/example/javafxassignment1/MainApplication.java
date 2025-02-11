@@ -19,242 +19,270 @@ import java.io.File;
 
 public class MainApplication extends Application {
 
-    public Scene homePage(Stage stage){
-        BorderPane root = new BorderPane();
-        // Init the scene
+  public Scene homePage(Stage stage) {
+    BorderPane root = new BorderPane();
+    // Init the scene
 
-        Scene home = new Scene(root,1000,500);
+    Scene home = new Scene(root, 1000, 500);
 
-        // Header Bar
-        Label title= new Label();
-        title.setText("DS Computing: Management");
+    // Header Bar
+    Label title = new Label();
+    title.setText("DS Computing: Management");
 
-        // Customer Register button
-        Button register = new Button();
-        register.setText("Register");
-        register.setOnAction(actionEvent -> stage.setScene(registerPage(stage)));
-        // View Customers button
-        Button view = new Button();
-        view.setText("View other customers");
+    // Customer Register button
+    Button register = new Button();
+    register.setText("Register");
+    register.setOnAction(actionEvent -> stage.setScene(registerPage(stage)));
 
-        // Remove Customers button
+    // View Customers button
+    Button view = new Button();
+    view.setText("View other customers");
+    // view.setOnAction(actionEvent -> stage.setScene(viewCustomers(stage)));
 
-        Button remove = new Button();
-        remove.setText("Remove Customers");
+    // Remove Customers button
 
-        // Load data button
-        Button load = new Button();
-        load.setText("Load Customer Data");
+    Button remove = new Button();
+    remove.setText("Remove Customers");
+    remove.setOnAction(actionEvent -> stage.setScene(removePage(stage)));
 
-        // Positioning the Components
+    // Load data button
+    Button load = new Button();
+    load.setText("Load Customer Data");
+    load.setOnAction(actionEvent -> stage.setScene(loadData(stage)));
 
-        HBox titleBar = new HBox(title);
-        titleBar.setAlignment(Pos.CENTER);
-        VBox vertical = new VBox(titleBar,register,view,remove,load);
-        vertical.setSpacing(25);
-        vertical.setAlignment(Pos.CENTER);
+    // Positioning the Components
 
-        root.setCenter(vertical);
+    HBox titleBar = new HBox(title);
+    titleBar.setAlignment(Pos.CENTER);
+    VBox vertical = new VBox(titleBar, register, view, remove, load);
+    vertical.setSpacing(25);
+    vertical.setAlignment(Pos.CENTER);
 
-        return home;
+    root.setCenter(vertical);
+
+    return home;
+  }
+
+  public Scene registerPage(Stage stage) {
+    BorderPane root = new BorderPane();
+    // Init the scene
+
+    Scene register = new Scene(root, 1000, 500);
+
+    // Header Bar
+    Label title = new Label();
+    title.setText("DS Computing: Register an account");
+    HBox titleBar = new HBox(title);
+    titleBar.setAlignment(Pos.CENTER);
+
+    // Name Hbox label and input
+    Label nameLabel = new Label("Name:");
+    TextField nameInput = new TextField();
+    HBox nameBlock = new HBox(nameLabel, nameInput);
+    nameBlock.setAlignment(Pos.CENTER);
+
+    // Age hbox label and input
+
+    Label ageLabel = new Label("Age:");
+    TextField ageInput = new TextField();
+    HBox ageBlock = new HBox(ageLabel, ageInput);
+    ageBlock.setAlignment(Pos.CENTER);
+
+    // Email hbox label and input
+
+    Label emailLabel = new Label("Email:");
+    TextField emailInput = new TextField();
+    HBox emailBlock = new HBox(emailLabel, emailInput);
+    emailBlock.setAlignment(Pos.CENTER);
+
+    // Balance hbox label and input
+
+    Label balanceLabel = new Label("Balance:");
+    TextField balanceInput = new TextField();
+    HBox balanceBlock = new HBox(balanceLabel, balanceInput);
+    balanceBlock.setAlignment(Pos.CENTER);
+
+    // Buttons
+    // Clear button
+
+    Button clear = new Button();
+    clear.setText("Clear");
+    clear.setOnAction(actionEvent -> {
+      nameInput.clear();
+      ageInput.clear();
+      emailInput.clear();
+      balanceInput.clear();
+    });
+
+    // SubmissionButton
+
+    Button submit = new Button();
+    submit.setText("Submit");
+    submit.setOnAction(actionEvent -> {
+      CustomerController customerController = new CustomerController();
+      String newName = nameInput.getText();
+      int newAge = Integer.parseInt(ageInput.getText());
+      String newEmail = emailInput.getText();
+      double newBal = Double.parseDouble(balanceInput.getText());
+
+      customerController.addCustomer(newName, newEmail, newAge);
+    });
+    // Back button
+    Button backbtn = backBtn(stage, homePage(stage));
+    // Button hbox
+    HBox buttons = new HBox(clear, submit, backbtn);
+    buttons.setAlignment(Pos.CENTER);
+    buttons.setSpacing(25.0);
+
+    // put all into this vbox
+
+    VBox vertical = new VBox(titleBar, nameBlock, ageBlock, emailBlock, balanceBlock, buttons);
+    vertical.setAlignment(Pos.CENTER);
+    vertical.setSpacing(30.0);
+
+    root.setCenter(vertical);
+    return register;
+  }
+
+  public Scene viewCustomers(Stage stage) {
+    BorderPane root = new BorderPane();
+  }
+
+  public Scene removePage(Stage stage) {
+    BorderPane root = new BorderPane();
+    Scene remove = new Scene(root, 1000, 500);
+
+    // Header Bar
+    Label title = new Label();
+    title.setText("DS Computing: Remove a customer");
+    HBox titleBar = new HBox(title);
+    titleBar.setAlignment(Pos.CENTER);
+
+    // Id hbox label and input
+
+    Label idLabel = new Label("Id:");
+    TextField idInput = new TextField();
+    HBox idBlock = new HBox(idLabel, idInput);
+    idBlock.setAlignment(Pos.CENTER);
+
+    // Removal Submit button
+
+    Button submit = new Button();
+    submit.setText("Submit");
+    submit.setOnAction(actionEvent -> {
+      CustomerController customerController = new CustomerController();
+      int removeId = Integer.parseInt(idInput.getText());
+      customerController.deleteCustomer(removeId);
+
+    });
+    // Back button
+    Button backbtn = backBtn(stage, homePage(stage));
+
+    HBox buttonSubmit = new HBox(submit, backbtn);
+
+    buttonSubmit.setAlignment(Pos.CENTER);
+    buttonSubmit.setSpacing(25.0);
+
+    // put all into this vbox
+    VBox vertical = new VBox(titleBar, idBlock, buttonSubmit);
+    vertical.setAlignment(Pos.CENTER);
+    vertical.setSpacing(30.0);
+
+    root.setCenter(vertical);
+
+    return remove;
+  }
+
+  public Scene loadData(Stage stage) {
+    BorderPane root = new BorderPane();
+    Scene load = new Scene(root, 1000, 500);
+
+    // Header
+    Label title = new Label();
+
+    title.setText("DS Computers: Load Customers");
+    HBox titleBox = new HBox(title);
+    titleBox.setAlignment(Pos.CENTER);
+
+    // Button to open file explorer
+    try {
+
+      // set title for the stage
+      stage.setTitle("Load Customers!");
+
+      // create a File chooser
+      FileChooser file_chooser = new FileChooser();
+
+      // create a Label
+      Label label = new Label("no files selected");
+
+      // create a Button
+      Button button = new Button("Select customers file");
+
+      // create an Event Handler
+      EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
+
+        public void handle(ActionEvent e) {
+
+          // get the file selected
+          File file = file_chooser.showOpenDialog(stage);
+
+          if (file != null) {
+            label.setText(file.getAbsolutePath());
+          }
+        }
+      };
+      button.setOnAction(event);
+      // Submission Button
+      Button submitData = new Button();
+      submitData.setText("Submit data");
+      String finalFilePath = label.getText();
+      submitData.setOnAction(actionEvent -> {
+        CustomerController customerController = new CustomerController();
+        customerController.loadCustomers(finalFilePath);
+
+      });
+
+      Button backbtn = backBtn(stage, homePage(stage));
+
+      // create a VBox
+      VBox vbox = new VBox(30, titleBox, label, button, submitData, backbtn);
+
+      // set Alignment
+      vbox.setAlignment(Pos.CENTER);
+      root.setCenter(vbox);
+      // create a scene
     }
 
-    public Scene registerPage(Stage stage){
-        BorderPane root = new BorderPane();
-        // Init the scene
+    catch (Exception e) {
 
-        Scene register = new Scene(root,1000,500);
-
-        // Header Bar
-        Label title= new Label();
-        title.setText("DS Computing: Register an account");
-        HBox titleBar = new HBox(title);
-        titleBar.setAlignment(Pos.CENTER);
-
-        // Name Hbox label and input
-        Label nameLabel = new Label("Name:");
-        TextField nameInput = new TextField();
-        HBox nameBlock = new HBox(nameLabel,nameInput);
-        nameBlock.setAlignment(Pos.CENTER);
-
-        // Age hbox label and input
-
-        Label ageLabel = new Label("Age:");
-        TextField ageInput = new TextField();
-        HBox ageBlock = new HBox(ageLabel,ageInput);
-        ageBlock.setAlignment(Pos.CENTER);
-
-        // Email hbox label and input
-
-        Label emailLabel = new Label("Email:");
-        TextField emailInput = new TextField();
-        HBox emailBlock = new HBox(emailLabel,emailInput);
-        emailBlock.setAlignment(Pos.CENTER);
-
-        // Balance hbox label and input
-
-        Label balanceLabel = new Label("Balance:");
-        TextField balanceInput = new TextField();
-        HBox balanceBlock = new HBox(balanceLabel,balanceInput);
-        balanceBlock.setAlignment(Pos.CENTER);
-
-
-        // Buttons
-        // Clear button
-
-        Button clear = new Button();
-        clear.setText("Clear");
-        clear.setOnAction(actionEvent -> {
-            nameInput.clear();
-            ageInput.clear();
-            emailInput.clear();
-            balanceInput.clear();
-        });
-
-        // SubmissionButton
-
-        Button submit = new Button();
-        submit.setText("Submit");
-        submit.setOnAction(actionEvent -> {
-            CustomerController customerController = new CustomerController();
-            String newName = nameInput.getText();
-            int newAge = Integer.parseInt(ageInput.getText());
-            String newEmail = emailInput.getText();
-            double newBal = Double.parseDouble(balanceInput.getText());
-
-            customerController.addCustomer(newName,newEmail,newAge);
-        });
-        // Button hbox
-        HBox buttons = new HBox(clear,submit);
-        buttons.setAlignment(Pos.CENTER);
-        buttons.setSpacing(25.0);
-
-        // put all into this vbox
-
-        VBox vertical = new VBox(titleBar,nameBlock,ageBlock,emailBlock,balanceBlock,buttons);
-        vertical.setAlignment(Pos.CENTER);
-        vertical.setSpacing(30.0);
-
-        root.setCenter(vertical);
-        return register;
+      System.out.println(e.getMessage());
     }
+    return load;
+  }
 
-    //public Scene listPage(BorderPane root){
+  // Custom buttons
 
-    //}
+  // Back button
 
-    public Scene removePage(BorderPane root,Stage stage){
+  public Button backBtn(Stage stage, Scene previous) {
+    Button backBtn = new Button();
+    backBtn.setText("Back");
 
-        Scene remove = new Scene(root,1000,500);
+    backBtn.setOnAction(actionEvent -> stage.setScene(previous));
+    return backBtn;
+  }
 
-        // Header Bar
-        Label title= new Label();
-        title.setText("DS Computing: Remove a customer");
-        HBox titleBar = new HBox(title);
-        titleBar.setAlignment(Pos.CENTER);
+  @Override
+  public void start(Stage stage) throws Exception {
+    String title = "DS Computing Customer Management Portal";
+    stage.setTitle(title);
+    Scene home = homePage(stage);
+    stage.setScene(home);
+    stage.show();
+  }
 
-        // Id hbox label and input
-
-        Label idLabel = new Label("Id:");
-        TextField idInput = new TextField();
-        HBox idBlock = new HBox(idLabel,idInput);
-        idBlock.setAlignment(Pos.CENTER);
-
-        // Removal Submit button
-
-        Button submit = new Button();
-        submit.setText("Submit");
-        submit.setOnAction(actionEvent -> {
-            CustomerController customerController = new CustomerController();
-            int removeId = Integer.parseInt(idInput.getText());
-            customerController.deleteCustomer(removeId);
-
-        });
-
-        HBox buttonSubmit = new HBox(submit);
-        buttonSubmit.setAlignment(Pos.CENTER);
-        buttonSubmit.setSpacing(25.0);
-
-
-        // put all into this vbox
-        VBox vertical = new VBox(titleBar,idBlock,buttonSubmit);
-        vertical.setAlignment(Pos.CENTER);
-        vertical.setSpacing(30.0);
-
-        root.setCenter(vertical);
-
-        return remove;
-    }
-
-     public Scene loadData(BorderPane root,Stage stage){
-        Scene load = new Scene(root,1000,500);
-
-        // Header
-        Label title = new Label();
-
-        title.setText("DS Computers: Load Customers");
-        HBox titleBox = new HBox(title);
-
-        // Button to open file explorer
-         try {
-
-             // set title for the stage
-             stage.setTitle("Load Customers!");
-
-             // create a File chooser
-             FileChooser fil_chooser = new FileChooser();
-
-             // create a Label
-             Label label = new Label("no files selected");
-
-             // create a Button
-             Button button = new Button("Show open dialog");
-
-             // create an Event Handler
-             EventHandler<ActionEvent> event =
-                     new EventHandler<ActionEvent>() {
-
-                         public void handle(ActionEvent e)
-                         {
-
-                             // get the file selected
-                             File file = fil_chooser.showOpenDialog(stage);
-
-                             if (file != null) {
-
-                                 label.setText(file.getAbsolutePath()
-                                         + "  selected");
-                             }
-                         }
-                     };
-
-             button.setOnAction(event);
-
-             // create a VBox
-             VBox vbox = new VBox(30, label, button);
-
-             // set Alignment
-             vbox.setAlignment(Pos.CENTER);
-             root.setCenter(vbox);
-             // create a scene
-         }
-
-         catch (Exception e) {
-
-             System.out.println(e.getMessage());
-         }
-        return load;
-    }
-    @Override
-    public void start(Stage stage) throws Exception {
-        String title = "DS Computing Customer Management Portal";
-        stage.setTitle(title);
-        Scene home = homePage(stage);
-        stage.setScene(home);
-        stage.show();
-    }
-
-    public static void main(String[] args) {
-        launch();
-    }
+  public static void main(String[] args) {
+    launch();
+  }
 }

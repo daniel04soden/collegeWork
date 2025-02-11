@@ -20,6 +20,7 @@ public class CustomerController {
     }
 
     public void deleteCustomer(int id){
+
         customers.removeIf(customer -> customer.getId() == id);
     }
 
