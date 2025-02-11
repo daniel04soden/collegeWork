@@ -5,12 +5,14 @@ public class Customer {
     private String name;
     private String email;
     private int age;
+    private double balance;
 
-    public Customer(int _id,String _name,String _email, int _age){
+    public Customer(int _id,String _name,String _email, int _age, double _balance){
        this.id = _id;
        this.name = _name;
         this.email = _email;
         this.age = _age;
+        this.balance = _balance;
     }
 
     // Getters
@@ -30,6 +32,10 @@ public class Customer {
         return this.age;
     }
 
+   public double getBalance() {
+        return  this.balance;
+   }
+
     // Setters
     void setName(String newName){
         this.name = newName;
@@ -43,6 +49,13 @@ public class Customer {
             System.out.println("Invalid error");
             // Display GUI error
         }
+    }
+    public void setBalance(double newBalance){
+        this.balance = newBalance;
+    }
+
+    public void setAge(int _age){
+        this.age = _age;
     }
     // Omit idSetter, non-editable value
 

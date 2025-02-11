@@ -1,14 +1,15 @@
 package com.example.javafxassignment1;
 
 import com.example.javafxassignment1.Controllers.CustomerController;
+import com.example.javafxassignment1.Models.Customer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -16,11 +17,13 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class MainApplication extends Application {
 
   public Scene homePage(Stage stage) {
     BorderPane root = new BorderPane();
+
     // Init the scene
 
     Scene home = new Scene(root, 1000, 500);
@@ -28,6 +31,7 @@ public class MainApplication extends Application {
     // Header Bar
     Label title = new Label();
     title.setText("DS Computing: Management");
+    stage.setTitle(title.getText());
 
     // Customer Register button
     Button register = new Button();
@@ -37,7 +41,7 @@ public class MainApplication extends Application {
     // View Customers button
     Button view = new Button();
     view.setText("View other customers");
-    // view.setOnAction(actionEvent -> stage.setScene(viewCustomers(stage)));
+    view.setOnAction(actionEvent -> stage.setScene(viewCustomers(stage)));
 
     // Remove Customers button
 
@@ -74,6 +78,7 @@ public class MainApplication extends Application {
     title.setText("DS Computing: Register an account");
     HBox titleBar = new HBox(title);
     titleBar.setAlignment(Pos.CENTER);
+    stage.setTitle(title.getText());
 
     // Name Hbox label and input
     Label nameLabel = new Label("Name:");
@@ -125,7 +130,7 @@ public class MainApplication extends Application {
       String newEmail = emailInput.getText();
       double newBal = Double.parseDouble(balanceInput.getText());
 
-      customerController.addCustomer(newName, newEmail, newAge);
+      customerController.addCustomer(newName, newEmail, newAge,newBal);
     });
     // Back button
     Button backbtn = backBtn(stage, homePage(stage));
@@ -146,6 +151,76 @@ public class MainApplication extends Application {
 
   public Scene viewCustomers(Stage stage) {
     BorderPane root = new BorderPane();
+    Scene view = new Scene(root,1000,500);
+    CustomerController c = new CustomerController();
+
+    // Heading
+
+    Label title = new Label();
+    title.setText("View All customers");
+    stage.setTitle(title.getText());
+    HBox titleBar = new HBox(title);
+
+    // Table for Viewing
+
+    TableView table = new TableView();
+    table.setEditable(false);
+    TableColumn<Customer, Integer> idColumn = new TableColumn<>("ID");
+    idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+    TableColumn<Customer, String> nameColumn = new TableColumn<>("Name");
+    idColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+    TableColumn<Customer, Integer> ageColumn = new TableColumn<>("Age");
+    idColumn.setCellValueFactory(new PropertyValueFactory<>("age"));
+    TableColumn<Customer, String> emailColumn = new TableColumn<>("Email");
+    idColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+    TableColumn<Customer, Double> balanceColumn = new TableColumn<>("Balance");
+    idColumn.setCellValueFactory(new PropertyValueFactory<>("balance"));
+
+
+    // Buttons to view attributes
+
+    Button backbtn = backBtn(stage, homePage(stage));
+
+    // Listing button
+    Button list = new Button();
+    list.setText("View Customers");
+    list.setOnAction(actionEvent -> {
+      for (Customer customer : c.getCustomers()) {
+        if (customer.getId() == 0) {
+          continue;
+        } else {
+          table.getItems().add(customer);
+        }
+      }
+
+      table.getColumns().addAll(idColumn, nameColumn, ageColumn, balanceColumn, emailColumn);
+    });
+
+    // Search Button : Coming soon: With SQLite
+    Button search = new Button();
+    search.setText("Search");
+    Label idSearch = new Label();
+    idSearch.setText("Enter an id to search:");
+    TextField idSearchInput = new TextField();
+    HBox searchBlock = new HBox(idSearch, idSearchInput,search);
+    searchBlock.setAlignment(Pos.CENTER);
+    search.setOnAction(actionEvent -> {
+      for (Customer customer : c.getCustomers()) {
+        if (customer.getId() == Integer.parseInt(idSearchInput.getText())) {
+          table.getItems().add(customer);
+        } else {
+          continue;
+        }
+      }
+
+      table.getColumns().addAll(idColumn, nameColumn, ageColumn, balanceColumn, emailColumn);
+    });
+
+
+    HBox actionButtons = new HBox(list,searchBlock);
+    VBox main = new VBox(titleBar,actionButtons,table,backbtn);
+    root.setCenter(main);
+    return view;
   }
 
   public Scene removePage(Stage stage) {
@@ -219,12 +294,10 @@ public class MainApplication extends Application {
       // create a Button
       Button button = new Button("Select customers file");
 
-      // create an Event Handler
       EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
 
         public void handle(ActionEvent e) {
 
-          // get the file selected
           File file = file_chooser.showOpenDialog(stage);
 
           if (file != null) {

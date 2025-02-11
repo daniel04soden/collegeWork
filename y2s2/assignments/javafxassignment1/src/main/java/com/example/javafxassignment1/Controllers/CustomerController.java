@@ -6,15 +6,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class CustomerController {
-    private List<Customer> customers= new ArrayList<>();
+    private ArrayList<Customer> customers= new ArrayList<>();
 
-    public void addCustomer(String name, String email,int age){
+    public void addCustomer(String name, String email,int age,double balance){
         int newId = customers.size()+1;
-        Customer currentCustomer = new Customer(newId,name,email,age);
+        Customer currentCustomer = new Customer(newId,name,email,age,balance);
         customers.add(currentCustomer);
         System.out.println("Added customer" + currentCustomer.getName() + currentCustomer.getId());
     }
@@ -34,7 +33,8 @@ public class CustomerController {
                 String name = customerInfo[1];
                 String email = customerInfo[2];
                 int age = Integer.parseInt(customerInfo[3]);
-                addCustomer(name,email,age);
+                double balance = Double.parseDouble(customerInfo[3]);
+                addCustomer(name,email,age,balance);
             }
             customerReader.close();
         } catch (FileNotFoundException e) {
@@ -43,4 +43,7 @@ public class CustomerController {
         }
     }
 
+        public ArrayList<Customer> getCustomers(){
+            return customers;
+        }
     }
