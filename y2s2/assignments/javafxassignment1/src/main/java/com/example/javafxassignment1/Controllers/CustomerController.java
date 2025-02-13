@@ -1,6 +1,7 @@
 package com.example.javafxassignment1.Controllers;
 
 import com.example.javafxassignment1.Models.Customer;
+import javafx.scene.control.Label;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,60 +12,70 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class CustomerController {
-    private ArrayList<Customer> customers= new ArrayList<>();
 
-    public void addCustomer(String name, String email,int age,double balance){
-        int newId = customers.size()+1;
-        Customer currentCustomer = new Customer(newId,name,email,age,balance);
-        customers.add(currentCustomer);
-        System.out.println("Added customer" + currentCustomer.getName() + currentCustomer.getId());
+  private static final String dbPath = "src/main/java/com/example/javafxassignment1/database/customers.txt";
+
+  public void addCustomer(ArrayList<Customer> customers,String name, String email, int age, double balance) {
+    int newId;
+    if (customers.isEmpty()){
+      newId = 1;
+    }else{
+      newId = customers.getLast().getId()+1;
     }
-
-    public void deleteCustomer(int id){
-
-        customers.removeIf(customer -> customer.getId() == id);
+    Customer currentCustomer = new Customer(newId, name, email, age, balance);
+    customers.add(currentCustomer);
+    System.out.println("New Customer:" + currentCustomer);
+    System.out.println("All customers\n");
+    System.out.println("-----------------\n");
+    for (Customer customer : customers) {
+      System.out.println(customer.toString() + "\n");
     }
+  }
 
-    public void loadCustomers(String txtFile){
-        try {
-            File myObj = new File(txtFile);
-            Scanner customerReader = new Scanner(myObj);
-            while (customerReader.hasNextLine()) {
-                String data = customerReader.nextLine();
-                String[] customerInfo = data.split(",");
-                String name = customerInfo[1];
-                String email = customerInfo[2];
-                int age = Integer.parseInt(customerInfo[3]);
-                double balance = Double.parseDouble(customerInfo[3]);
-                addCustomer(name,email,age,balance);
-            }
-            customerReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            System.out.println(Arrays.toString(e.getStackTrace()));
-        }
+  public void deleteCustomer(int id,ArrayList<Customer> customers) {
+    customers.removeIf(customer -> customer.getId() == id);
+  }
+
+  public void loadCustomers(ArrayList<Customer> customers) {
+    File dbFile = new File(dbPath);
+    try (Scanner customerReader = new Scanner(dbFile)){
+      customers.clear();
+      while (customerReader.hasNextLine()) {
+        String data = customerReader.nextLine();
+        String[] customerInfo = data.split(",");
+        String name = customerInfo[1].trim();
+        int age = Integer.parseInt(customerInfo[2].trim());
+        String email = customerInfo[3].trim();
+        double balance = Double.parseDouble(customerInfo[4].trim());
+        addCustomer(customers,name, email, age, balance);
+      }
+    } catch (FileNotFoundException e) {
+      System.out.println("An error occurred.");
+      System.out.println(Arrays.toString(e.getStackTrace()));
     }
+  }
 
-    public String saveCustomers(String txtFile){
-        String res = "";
-        try{
-            FileWriter saver = new FileWriter(txtFile);
-            for (int i = 0; i < customers.size(); i++) {
-              saver.write(customers.toString());
-            }
-            saver.close();
-            res = "Successfully saved to file";
-            System.out.println(res);
 
-        }catch (IOException e){
-            System.out.println("Error saving to file try again");
-            res = "File saving Failed, please try again";
-            e.printStackTrace();
-        }
-        return res;
+  public static void saveCustomers(ArrayList<Customer> customers) {
+    if (customers.isEmpty()){
+     System.out.println("Error nothing to load!");
+    }else{
+
+    try (FileWriter saver = new FileWriter(dbPath)) {
+      for (Customer customer : customers) {
+        saver.write(customer.toString() + System.lineSeparator());
+      }
+      System.out.println("Saved to " + dbPath);
+    } catch (IOException e) {
+      System.out.println("Error saving to file, try again");
+      e.printStackTrace();
     }
+  }
+  }
 
-        public ArrayList<Customer> getCustomers(){
-            return customers;
-        }
+  public void printCustomers(ArrayList<Customer> customers){
+    for(Customer customer: customers){
+      System.out.println(customer.toString());
     }
+  }
+}

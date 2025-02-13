@@ -49,6 +49,6 @@ public class Customer extends Agent{
     // Extra functionality
     @Override
     public String toString(){
-        return super.getName()+":" + super.getId()  + this.email + "\n";
+        return super.getId() + "," + super.getName()+ "," + this.age+ "," + this.email+ "," + this.balance;
     }
 }

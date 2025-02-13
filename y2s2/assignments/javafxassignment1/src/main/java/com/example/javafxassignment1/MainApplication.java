@@ -3,24 +3,22 @@ package com.example.javafxassignment1;
 import com.example.javafxassignment1.Controllers.CustomerController;
 import com.example.javafxassignment1.Models.Customer;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.File;
+import java.util.ArrayList;
 import java.util.Objects;
+import static com.example.javafxassignment1.View.MainView.backBtn;
 
 public class MainApplication extends Application {
+  public ArrayList<Customer> customers = new ArrayList<>();
 
   public Scene homePage(Stage stage) {
     BorderPane root = new BorderPane();
-
     // Init the scene
 
     Scene home = new Scene(root, 1000, 500);
@@ -54,15 +52,13 @@ public class MainApplication extends Application {
     // Save data button
     Button save = new Button();
     save.setText("Save Customer Data");
-    save.setOnAction(_ -> {
-
-    });
+    save.setOnAction(_ -> CustomerController.saveCustomers(customers));
 
     // Positioning the Components
 
     HBox titleBar = new HBox(title);
     titleBar.setAlignment(Pos.CENTER);
-    VBox vertical = new VBox(titleBar, register, view, remove, load);
+    VBox vertical = new VBox(titleBar, register, view, remove, load,save);
     vertical.setSpacing(25);
     vertical.setAlignment(Pos.CENTER);
 
@@ -135,7 +131,7 @@ public class MainApplication extends Application {
       String newEmail = emailInput.getText();
       double newBal = Double.parseDouble(balanceInput.getText());
 
-      customerController.addCustomer(newName, newEmail, newAge,newBal);
+      customerController.addCustomer(customers,newName, newEmail, newAge, newBal);
     });
     // Back button
     Button backbtn = backBtn(stage, homePage(stage));
@@ -156,9 +152,8 @@ public class MainApplication extends Application {
 
   public Scene viewCustomers(Stage stage) {
     BorderPane root = new BorderPane();
-    Scene view = new Scene(root,1000,500);
-    CustomerController c = new CustomerController();
-    applyCSS(view);
+    Scene view = new Scene(root, 1000, 500);
+      applyCSS(view);
     // Heading
 
     Label title = new Label();
@@ -181,48 +176,49 @@ public class MainApplication extends Application {
     TableColumn<Customer, Double> balanceColumn = new TableColumn<>("Balance");
     idColumn.setCellValueFactory(new PropertyValueFactory<>("balance"));
 
-
     // Buttons to view attributes
 
     Button backbtn = backBtn(stage, homePage(stage));
 
     // Listing button
     Button list = new Button();
+
     list.setText("View Customers");
     list.setOnAction(_ -> {
-      for (Customer customer : c.getCustomers()) {
-        if (customer.getId() == 0) {
-          continue;
-        } else {
+      for (Customer customer : customers) {
+        if (customer.getId() != 0) {
           table.getItems().add(customer);
         }
-      }
+       }
 
-      table.getColumns().addAll(idColumn, nameColumn, ageColumn, balanceColumn, emailColumn);
+      table.getColumns().addAll(idColumn, nameColumn, ageColumn, emailColumn,balanceColumn );
     });
 
-    // Search Button : Coming soon: With SQLite
+    // Search button
+
     Button search = new Button();
     search.setText("Search");
+
     Label idSearch = new Label();
     idSearch.setText("Enter an id to search:");
+
     TextField idSearchInput = new TextField();
-    HBox searchBlock = new HBox(idSearch, idSearchInput,search);
+
+    HBox searchBlock = new HBox(idSearch, idSearchInput, search);
     searchBlock.setAlignment(Pos.CENTER);
+
     search.setOnAction(_ -> {
-      for (Customer customer : c.getCustomers()) {
-        if (customer.getId() == Integer.parseInt(idSearchInput.getText())) {
-          table.getItems().add(customer);
-        } else {
+       for (Customer customer : customers) {
+         if (customer.getId() == Integer.parseInt(idSearchInput.getText())) {
+           table.getItems().add(customer);
         }
-      }
+       }
 
       table.getColumns().addAll(idColumn, nameColumn, ageColumn, balanceColumn, emailColumn);
     });
 
-
-    HBox actionButtons = new HBox(list,searchBlock);
-    VBox main = new VBox(titleBar,actionButtons,table,backbtn);
+    HBox actionButtons = new HBox(list, searchBlock);
+    VBox main = new VBox(titleBar, actionButtons, table, backbtn);
     root.setCenter(main);
     return view;
   }
@@ -251,7 +247,7 @@ public class MainApplication extends Application {
     submit.setOnAction(_ -> {
       CustomerController customerController = new CustomerController();
       int removeId = Integer.parseInt(idInput.getText());
-      customerController.deleteCustomer(removeId);
+      customerController.deleteCustomer(removeId,customers);
 
     });
     // Back button
@@ -284,73 +280,37 @@ public class MainApplication extends Application {
     titleBox.setAlignment(Pos.CENTER);
 
     // Button to open file explorer
-    try {
 
       // set title for the stage
       stage.setTitle("Load Customers!");
-
-      // create a File chooser
-      FileChooser file_chooser = new FileChooser();
-
-      // create a Label
-      Label label = new Label("no files selected");
-
-      // create a Button
-      Button button = new Button("Select customers file");
-
-      EventHandler<ActionEvent> event = _ -> {
-
-          File file = file_chooser.showOpenDialog(stage);
-
-          if (file != null) {
-              label.setText(file.getAbsolutePath());
-          }
-      };
-      button.setOnAction(event);
-      // Submission Button
-      Button submitData = new Button();
-      submitData.setText("Submit data");
-      String finalFilePath = label.getText();
-      submitData.setOnAction(_ -> {
+      Label warning = new Label();
+      warning.setText("Warning, loading will delete all newly added customers!!");
+      // Standard file loading
+      // load Button
+      Button loadData = new Button();
+      loadData.setText("Load customers from file");
+      loadData.setOnAction(_ -> {
         CustomerController customerController = new CustomerController();
-        customerController.loadCustomers(finalFilePath);
-
+        customerController.loadCustomers(customers);
       });
 
       Button backbtn = backBtn(stage, homePage(stage));
 
       // create a VBox
-      VBox vbox = new VBox(30, titleBox, label, button, submitData, backbtn);
+      VBox vbox = new VBox(30, titleBox,warning ,loadData,backbtn);
 
       // set Alignment
       vbox.setAlignment(Pos.CENTER);
       root.setCenter(vbox);
       // create a scene
-    }
 
-    catch (Exception e) {
-
-      System.out.println(e.getMessage());
-    }
     return load;
   }
   // Apply css function
 
-  public void applyCSS(Scene styledScene){
+  public void applyCSS(Scene styledScene) {
     String cssSource = "styles.css";
-    styledScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(cssSource)).toExternalForm());
-  }
-
-  // Custom buttons
-
-  // Back button
-
-  public Button backBtn(Stage stage, Scene previous) {
-    Button backBtn = new Button();
-    backBtn.setText("Back");
-
-    backBtn.setOnAction(_ -> stage.setScene(previous));
-    return backBtn;
+    styledScene.getStylesheets().add(Objects.requireNonNull(MainApplication.class.getResource(cssSource)).toExternalForm());
   }
 
   @Override

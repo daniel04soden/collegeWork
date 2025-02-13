@@ -1,4 +1,0 @@
-1,Daniel Soden,dsoden09@gmail.com,20,1234.50
-2,Mark Masiclat,marmas@gmail.com,20,1245.50
-3,Sean Soden,seans@gmail.com,24,1234.50
-5,Old Man,oldie@yahoo.com,89,3.50
