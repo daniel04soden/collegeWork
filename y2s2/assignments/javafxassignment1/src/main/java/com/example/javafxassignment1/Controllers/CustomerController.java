@@ -4,6 +4,8 @@ import com.example.javafxassignment1.Models.Customer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -41,6 +43,25 @@ public class CustomerController {
             System.out.println("An error occurred.");
             System.out.println(Arrays.toString(e.getStackTrace()));
         }
+    }
+
+    public String saveCustomers(String txtFile){
+        String res = "";
+        try{
+            FileWriter saver = new FileWriter(txtFile);
+            for (int i = 0; i < customers.size(); i++) {
+              saver.write(customers.toString());
+            }
+            saver.close();
+            res = "Successfully saved to file";
+            System.out.println(res);
+
+        }catch (IOException e){
+            System.out.println("Error saving to file try again");
+            res = "File saving Failed, please try again";
+            e.printStackTrace();
+        }
+        return res;
     }
 
         public ArrayList<Customer> getCustomers(){

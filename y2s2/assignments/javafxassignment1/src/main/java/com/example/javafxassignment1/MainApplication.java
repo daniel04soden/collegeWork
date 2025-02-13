@@ -4,20 +4,17 @@ import com.example.javafxassignment1.Controllers.CustomerController;
 import com.example.javafxassignment1.Models.Customer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.util.Objects;
 
 public class MainApplication extends Application {
 
@@ -27,7 +24,8 @@ public class MainApplication extends Application {
     // Init the scene
 
     Scene home = new Scene(root, 1000, 500);
-
+    String cssSource = "com/example/javafxassignment1/styles.css";
+    home.getStylesheets().add(MainApplication.requireNonNull(getClass().getResource(cssSource)).toExternalForm());
     // Header Bar
     Label title = new Label();
     title.setText("DS Computing: Management");
@@ -36,23 +34,30 @@ public class MainApplication extends Application {
     // Customer Register button
     Button register = new Button();
     register.setText("Register");
-    register.setOnAction(actionEvent -> stage.setScene(registerPage(stage)));
+    register.setOnAction(_ -> stage.setScene(registerPage(stage)));
 
     // View Customers button
     Button view = new Button();
     view.setText("View other customers");
-    view.setOnAction(actionEvent -> stage.setScene(viewCustomers(stage)));
+    view.setOnAction(_ -> stage.setScene(viewCustomers(stage)));
 
     // Remove Customers button
 
     Button remove = new Button();
     remove.setText("Remove Customers");
-    remove.setOnAction(actionEvent -> stage.setScene(removePage(stage)));
+    remove.setOnAction(_ -> stage.setScene(removePage(stage)));
 
     // Load data button
     Button load = new Button();
     load.setText("Load Customer Data");
-    load.setOnAction(actionEvent -> stage.setScene(loadData(stage)));
+    load.setOnAction(_ -> stage.setScene(loadData(stage)));
+
+    // Save data button
+    Button save = new Button();
+    save.setText("Save Customer Data");
+    save.setOnAction(_ -> {
+
+    });
 
     // Positioning the Components
 
@@ -112,7 +117,7 @@ public class MainApplication extends Application {
 
     Button clear = new Button();
     clear.setText("Clear");
-    clear.setOnAction(actionEvent -> {
+    clear.setOnAction(_ -> {
       nameInput.clear();
       ageInput.clear();
       emailInput.clear();
@@ -123,7 +128,7 @@ public class MainApplication extends Application {
 
     Button submit = new Button();
     submit.setText("Submit");
-    submit.setOnAction(actionEvent -> {
+    submit.setOnAction(_ -> {
       CustomerController customerController = new CustomerController();
       String newName = nameInput.getText();
       int newAge = Integer.parseInt(ageInput.getText());
@@ -184,7 +189,7 @@ public class MainApplication extends Application {
     // Listing button
     Button list = new Button();
     list.setText("View Customers");
-    list.setOnAction(actionEvent -> {
+    list.setOnAction(_ -> {
       for (Customer customer : c.getCustomers()) {
         if (customer.getId() == 0) {
           continue;
@@ -204,12 +209,11 @@ public class MainApplication extends Application {
     TextField idSearchInput = new TextField();
     HBox searchBlock = new HBox(idSearch, idSearchInput,search);
     searchBlock.setAlignment(Pos.CENTER);
-    search.setOnAction(actionEvent -> {
+    search.setOnAction(_ -> {
       for (Customer customer : c.getCustomers()) {
         if (customer.getId() == Integer.parseInt(idSearchInput.getText())) {
           table.getItems().add(customer);
         } else {
-          continue;
         }
       }
 
@@ -233,7 +237,7 @@ public class MainApplication extends Application {
     HBox titleBar = new HBox(title);
     titleBar.setAlignment(Pos.CENTER);
 
-    // Id hbox label and input
+    // ID hbox label and input
 
     Label idLabel = new Label("Id:");
     TextField idInput = new TextField();
@@ -244,7 +248,7 @@ public class MainApplication extends Application {
 
     Button submit = new Button();
     submit.setText("Submit");
-    submit.setOnAction(actionEvent -> {
+    submit.setOnAction(_ -> {
       CustomerController customerController = new CustomerController();
       int removeId = Integer.parseInt(idInput.getText());
       customerController.deleteCustomer(removeId);
@@ -294,23 +298,20 @@ public class MainApplication extends Application {
       // create a Button
       Button button = new Button("Select customers file");
 
-      EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
-
-        public void handle(ActionEvent e) {
+      EventHandler<ActionEvent> event = _ -> {
 
           File file = file_chooser.showOpenDialog(stage);
 
           if (file != null) {
-            label.setText(file.getAbsolutePath());
+              label.setText(file.getAbsolutePath());
           }
-        }
       };
       button.setOnAction(event);
       // Submission Button
       Button submitData = new Button();
       submitData.setText("Submit data");
       String finalFilePath = label.getText();
-      submitData.setOnAction(actionEvent -> {
+      submitData.setOnAction(_ -> {
         CustomerController customerController = new CustomerController();
         customerController.loadCustomers(finalFilePath);
 
@@ -342,7 +343,7 @@ public class MainApplication extends Application {
     Button backBtn = new Button();
     backBtn.setText("Back");
 
-    backBtn.setOnAction(actionEvent -> stage.setScene(previous));
+    backBtn.setOnAction(_ -> stage.setScene(previous));
     return backBtn;
   }
 

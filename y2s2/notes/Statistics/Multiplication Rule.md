@@ -27,3 +27,17 @@ $$
 
 - Probability tree is a diagram that shows all possible outcomes and their associated probabilities in a series of events for example image a tree diagram for a coin toss 
 - Can be used to describe dependent and independent events
+
+# Random Variable
+
+- Mapping between events and numbers
+- Eg toss a coin 10 times and let x be the number of heads
+
+- Not :
+	- Drawing a white marble from a bag of marbles and recording the colour
+
+# Probability Distribution
+
+- A frequency distribution shows us how many times given values in a range occur
+- A probability distribution is similar as it shows us how likely each value of a random  variable is 
+- The notation P(X=x) means the probability that the random variable X attains the value of x

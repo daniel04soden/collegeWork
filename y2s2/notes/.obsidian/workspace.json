@@ -11,10 +11,14 @@
             "id": "4d56e7449b12fbfd",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "NoSQL/Nosql Start/Nosq Emergence.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Nosq Emergence"
             }
           }
         ]
@@ -74,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "8eafd8fa697eaf8d",
@@ -176,6 +181,12 @@
   },
   "active": "4d56e7449b12fbfd",
   "lastOpenFiles": [
+    "NONLin/Performance/Amortised Analysis.md",
+    "NoSQL/Nosql Start/Nosq Emergence.md",
+    "NONLin/Data Structures/Data Structures - Again.md",
+    "Statistics/Multiplication Rule.md",
+    "Statistics/Graphical Methods.md",
+    "OOAnalysis/Aggregation-Composition.md",
     "NoSQL/Nosql Start/Data Management Systems.md",
     "NoSQL/Nosql Start/Big data.md",
     "OOP/Exceptions.md",
@@ -184,8 +195,6 @@
     "Assignment Notes/NLDSA/Assignment1/Untitled.canvas",
     "Assignment Notes/NLDSA/Assignment1",
     "Assignment Notes/NLDSA",
-    "Statistics/Multiplication Rule.md",
-    "NONLin/Performance/Amortised Analysis.md",
     "NONLin/Performance/Recurrences.md",
     "NONLin/Performance/Induction Substitution.md",
     "OOAnalysis/Modelling Roles.md",
@@ -194,7 +203,6 @@
     "NONLin/Graphs/Trees/Traversing a Binary tree.md",
     "NONLin/Graphs/Graphs - Continued.md",
     "NONLin/Performance/Book Analysing Algos.md",
-    "NONLin/Data Structures/Data Structures - Again.md",
     "Untitled.canvas",
     "AgnosticLearning/Center.md",
     "Statistics/Numerical Methods.md",
@@ -208,7 +216,6 @@
     "OOP/brocodework/target/classes/module-info.class",
     "OOP/brocodework/target/classes/Main",
     "OOP/brocodework/target/test-classes",
-    "Statistics/Introduction to probability.md",
-    "Statistics/Graphical Methods.md"
+    "Statistics/Introduction to probability.md"
   ]
 }
