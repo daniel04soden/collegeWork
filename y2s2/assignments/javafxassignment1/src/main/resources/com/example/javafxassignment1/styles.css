@@ -1,5 +1,16 @@
-.root {
-    -fx-font-size: 14px;
-    -fx-font-family: sans-serif;
-    -fx-background-color: #ffffff;
+.button{
+    -fx-background-color: grey;
+    -fx-text-fill: white;
+}
+
+.label{
+    -fx-font-family: "DejaVu Sans Mono";
+    -fx-font-size: var(12);
+}
+
+.root{
+    -fx-background-image: url(minecraft.jpg);
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 750 750;
+    -fx-background-position: center center;
 }

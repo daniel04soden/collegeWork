@@ -24,8 +24,7 @@ public class MainApplication extends Application {
     // Init the scene
 
     Scene home = new Scene(root, 1000, 500);
-    String cssSource = "com/example/javafxassignment1/styles.css";
-    home.getStylesheets().add(MainApplication.requireNonNull(getClass().getResource(cssSource)).toExternalForm());
+    applyCSS(home);
     // Header Bar
     Label title = new Label();
     title.setText("DS Computing: Management");
@@ -77,6 +76,7 @@ public class MainApplication extends Application {
     // Init the scene
 
     Scene register = new Scene(root, 1000, 500);
+    applyCSS(register);
 
     // Header Bar
     Label title = new Label();
@@ -158,7 +158,7 @@ public class MainApplication extends Application {
     BorderPane root = new BorderPane();
     Scene view = new Scene(root,1000,500);
     CustomerController c = new CustomerController();
-
+    applyCSS(view);
     // Heading
 
     Label title = new Label();
@@ -230,7 +230,7 @@ public class MainApplication extends Application {
   public Scene removePage(Stage stage) {
     BorderPane root = new BorderPane();
     Scene remove = new Scene(root, 1000, 500);
-
+    applyCSS(remove);
     // Header Bar
     Label title = new Label();
     title.setText("DS Computing: Remove a customer");
@@ -275,7 +275,7 @@ public class MainApplication extends Application {
   public Scene loadData(Stage stage) {
     BorderPane root = new BorderPane();
     Scene load = new Scene(root, 1000, 500);
-
+    applyCSS(load);
     // Header
     Label title = new Label();
 
@@ -333,6 +333,12 @@ public class MainApplication extends Application {
       System.out.println(e.getMessage());
     }
     return load;
+  }
+  // Apply css function
+
+  public void applyCSS(Scene styledScene){
+    String cssSource = "styles.css";
+    styledScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(cssSource)).toExternalForm());
   }
 
   // Custom buttons

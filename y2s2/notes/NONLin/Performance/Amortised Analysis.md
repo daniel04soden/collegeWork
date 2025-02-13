@@ -114,3 +114,5 @@ Table-Delete(T):
 - a contraction is triggered when the laod factor is the num[T]/size[T] = 1/4
 - In this case size[T] is descreased to bring the load factor down to a[T] = 1/2
 - A dynamic table therefore always keeps the laod factor betweeen 1/4 <=a[T] <= 1
+
+- To show both insert and delete operations on dynamic tables can be performed in an amortised constant time we need a potential function that increases.
