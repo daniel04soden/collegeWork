@@ -34,6 +34,7 @@ public class CustomerController {
 
   public void deleteCustomer(int id,ArrayList<Customer> customers) {
     customers.removeIf(customer -> customer.getId() == id);
+    printCustomers(customers);
   }
 
   public void loadCustomers(ArrayList<Customer> customers) {
@@ -57,10 +58,6 @@ public class CustomerController {
 
 
   public static void saveCustomers(ArrayList<Customer> customers) {
-    if (customers.isEmpty()){
-     System.out.println("Error nothing to load!");
-    }else{
-
     try (FileWriter saver = new FileWriter(dbPath)) {
       for (Customer customer : customers) {
         saver.write(customer.toString() + System.lineSeparator());
@@ -71,9 +68,8 @@ public class CustomerController {
       e.printStackTrace();
     }
   }
-  }
 
-  public void printCustomers(ArrayList<Customer> customers){
+  public static void printCustomers(ArrayList<Customer> customers){
     for(Customer customer: customers){
       System.out.println(customer.toString());
     }

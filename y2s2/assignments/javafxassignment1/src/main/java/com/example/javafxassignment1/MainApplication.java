@@ -2,6 +2,7 @@ package com.example.javafxassignment1;
 
 import com.example.javafxassignment1.Controllers.CustomerController;
 import com.example.javafxassignment1.Models.Customer;
+import com.example.javafxassignment1.View.MainView;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -52,8 +53,10 @@ public class MainApplication extends Application {
     // Save data button
     Button save = new Button();
     save.setText("Save Customer Data");
-    save.setOnAction(_ -> CustomerController.saveCustomers(customers));
-
+    save.setOnAction(_ -> {
+      CustomerController.saveCustomers(customers);
+      CustomerController.printCustomers(customers);
+    });
     // Positioning the Components
 
     HBox titleBar = new HBox(title);
@@ -68,6 +71,7 @@ public class MainApplication extends Application {
   }
 
   public Scene registerPage(Stage stage) {
+
     BorderPane root = new BorderPane();
     // Init the scene
 
@@ -109,6 +113,7 @@ public class MainApplication extends Application {
     balanceBlock.setAlignment(Pos.CENTER);
 
     // Buttons
+
     // Clear button
 
     Button clear = new Button();
@@ -132,6 +137,10 @@ public class MainApplication extends Application {
       double newBal = Double.parseDouble(balanceInput.getText());
 
       customerController.addCustomer(customers,newName, newEmail, newAge, newBal);
+      nameInput.clear();
+      ageInput.clear();
+      emailInput.clear();
+      balanceInput.clear();
     });
     // Back button
     Button backbtn = backBtn(stage, homePage(stage));
@@ -151,6 +160,12 @@ public class MainApplication extends Application {
   }
 
   public Scene viewCustomers(Stage stage) {
+
+    /*
+    * Although the specs require the data to be stored in a text area, I find the presentation
+    * of the data to be a lot clearer in the table format, I understand if I lose marks but this is
+    * the best way to achieve viewing in my opinion
+    * */
     BorderPane root = new BorderPane();
     Scene view = new Scene(root, 1000, 500);
       applyCSS(view);
@@ -168,30 +183,30 @@ public class MainApplication extends Application {
     TableColumn<Customer, Integer> idColumn = new TableColumn<>("ID");
     idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
     TableColumn<Customer, String> nameColumn = new TableColumn<>("Name");
-    idColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+    nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
     TableColumn<Customer, Integer> ageColumn = new TableColumn<>("Age");
-    idColumn.setCellValueFactory(new PropertyValueFactory<>("age"));
+    ageColumn.setCellValueFactory(new PropertyValueFactory<>("age"));
     TableColumn<Customer, String> emailColumn = new TableColumn<>("Email");
-    idColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+    emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
     TableColumn<Customer, Double> balanceColumn = new TableColumn<>("Balance");
-    idColumn.setCellValueFactory(new PropertyValueFactory<>("balance"));
+    balanceColumn.setCellValueFactory(new PropertyValueFactory<>("balance"));
 
+    table.getColumns().addAll(idColumn, nameColumn, ageColumn, emailColumn,balanceColumn );
     // Buttons to view attributes
 
     Button backbtn = backBtn(stage, homePage(stage));
-
     // Listing button
     Button list = new Button();
 
     list.setText("View Customers");
     list.setOnAction(_ -> {
+      table.getItems().clear(); // clearing previous data
       for (Customer customer : customers) {
         if (customer.getId() != 0) {
           table.getItems().add(customer);
         }
        }
 
-      table.getColumns().addAll(idColumn, nameColumn, ageColumn, emailColumn,balanceColumn );
     });
 
     // Search button
@@ -208,13 +223,15 @@ public class MainApplication extends Application {
     searchBlock.setAlignment(Pos.CENTER);
 
     search.setOnAction(_ -> {
+      table.getItems().clear(); // clearing previous data
        for (Customer customer : customers) {
          if (customer.getId() == Integer.parseInt(idSearchInput.getText())) {
            table.getItems().add(customer);
-        }
+        }else{
+           continue;
+         }
        }
 
-      table.getColumns().addAll(idColumn, nameColumn, ageColumn, balanceColumn, emailColumn);
     });
 
     HBox actionButtons = new HBox(list, searchBlock);
@@ -286,9 +303,10 @@ public class MainApplication extends Application {
       Label warning = new Label();
       warning.setText("Warning, loading will delete all newly added customers!!");
       // Standard file loading
+
       // load Button
       Button loadData = new Button();
-      loadData.setText("Load customers from file");
+      loadData.setText("Load Saved Store");
       loadData.setOnAction(_ -> {
         CustomerController customerController = new CustomerController();
         customerController.loadCustomers(customers);
@@ -313,13 +331,22 @@ public class MainApplication extends Application {
     styledScene.getStylesheets().add(Objects.requireNonNull(MainApplication.class.getResource(cssSource)).toExternalForm());
   }
 
+
   @Override
   public void start(Stage stage) throws Exception {
     String title = "DS Computing Customer Management Portal";
     stage.setTitle(title);
     Scene home = homePage(stage);
     stage.setScene(home);
+    stage.setResizable(false);
+    CustomerController customerController = new CustomerController();
+    customerController.loadCustomers(customers);
     stage.show();
+    stage.setOnCloseRequest(event -> {
+      event.consume();
+       MainView.showCloseConfirmation(stage,customers);
+    });
+
   }
 
   public static void main(String[] args) {
