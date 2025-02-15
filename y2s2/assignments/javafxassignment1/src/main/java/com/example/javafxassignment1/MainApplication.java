@@ -344,7 +344,7 @@ public class MainApplication extends Application {
     stage.show();
     stage.setOnCloseRequest(event -> {
       event.consume();
-       MainView.showCloseConfirmation(stage,customers);
+       MainView.closeConfirmation(stage,customers);
     });
 
   }
