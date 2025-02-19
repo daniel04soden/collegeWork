@@ -1,14 +1,18 @@
 #include <stdio.h>
 
 int main(){
-	int sum = 0;
-	char input = 0; 
+	char input;
 	int i = 0;
-	for(input=getchar(); (input != '\n') && (i < 10); i++){ 
-		input -= 0;
-		sum += input;
+	while ((input = getchar())!= '\n') {
+		if ((input >= 'A' ) && (input<= 'Z')) {
+			input = input + 'a' - 'A';
+		}	
+		switch (input) {
+			case 
+			i++;
+			break;
+		}
 	}
-	printf("Sum: %d\n", sum); 
-	return 0; 
-
+	printf("%d\n",i);
+	return 0;
 }

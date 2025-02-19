@@ -1,5 +1,3 @@
-package assignment;
-
 import java.util.LinkedList;
 
 public interface SearchTree<T> {

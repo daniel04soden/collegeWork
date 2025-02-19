@@ -1,5 +1,3 @@
-package assignment;
-
 public interface Graph {
     int getNoOfVertices();
     int getNoOfEdges();

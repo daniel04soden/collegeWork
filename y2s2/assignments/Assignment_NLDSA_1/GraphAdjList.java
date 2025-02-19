@@ -1,15 +1,13 @@
-package assignment;
-
 import java.util.LinkedList;
 
 public class GraphAdjList extends AbstractGraph {
+
     private record Edge(int destination, double weight) {}
+
     private final LinkedList<Edge>[] neighbours;
 
     public GraphAdjList(int noOfVertices, boolean directed) {
         super(noOfVertices, directed);
-        // TODO: Task 2-A
-        throw new RuntimeException("Not yet implemented!");
     }
 
     public void addEdge(int source, int destination, double weight) {
@@ -37,8 +35,7 @@ public class GraphAdjList extends AbstractGraph {
         throw new RuntimeException("Not yet implemented!");
     }
 
-    public boolean isPath(int[] nodes)
-    {
+    public boolean isPath(int[] nodes) {
         // TODO: Task 2-G
         throw new RuntimeException("Not yet implemented!");
     }
