@@ -2,7 +2,9 @@ import java.util.LinkedList;
 
 public class GraphAdjList extends AbstractGraph {
 
-    private record Edge(int destination, double weight) {}
+    private record Edge(int destination, double weight) {
+
+  }
 
     private final LinkedList<Edge>[] neighbours;
 
@@ -12,7 +14,6 @@ public class GraphAdjList extends AbstractGraph {
 
     public void addEdge(int source, int destination, double weight) {
         // TODO: Task 2-B
-        throw new RuntimeException("Not yet implemented!");
     }
 
     public void removeEdge(int source, int destination) {

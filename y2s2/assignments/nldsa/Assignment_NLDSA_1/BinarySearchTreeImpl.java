@@ -19,16 +19,15 @@ public class BinarySearchTreeImpl<T> {
     protected Node<T> root = null;
 
     protected void insert(Node<T> x, int key, T value) {
-        // TODO: Task 3-A
-        if (x == null) { // If the root node is null
+        if (root == null) { // If the root node is null
             x.key = key; // Set the root as our given key
             x.value = value; // And set the given value as the value of the root
         }
 
-        if (key < x.key) { // If the given key is less than our root key
-            insert(x.left, key, value); // Insert is on the left - less than root
+        else if (key < root.key) { // If the given key is less than our root key
+            insert(root.left, key, value); // Insert is on the left - less than root
         } else { // Otherwise
-            insert(x.right, key, value); // Insert it on the right - greater than root
+            insert(root.right, key, value); // Insert it on the right - greater than root
         }
     }
 
