@@ -8,26 +8,26 @@ public class GraphAdjMatrix extends AbstractGraph {
 
   public GraphAdjMatrix(int noOfVertices, boolean directed) {
     super(noOfVertices, directed);
-    adjMatrix = new Double[noOfVertices][noOfVertices];
-    for (int i = 0; i < adjMatrix.length; i++) {
-      for (int j = 0; j < max; j++) {
-       adjMatrix[i][j] = Double.NaN;
+    this.adjMatrix = new Double[noOfVertices][noOfVertices];
+    for (int i = 0; i < this.adjMatrix.length; i++) {
+      for (int j = 0; j < this.adjMatrix.length; j++) {
+       this.adjMatrix[i][j] = Double.NaN;
       }      
     }
   }
 
   public void addEdge(int source, int destination, double weight) { 
-    this.adjMatrix[source][destination] = weight; // If this wasnt a weighted graph value could be 1 or true?
+    adjMatrix[source][destination] = weight; // If this wasnt a weighted graph value could be 1 or true?
     if (!this.directed) { // Undirected
-      this.adjMatrix[destination][source] = weight; // If undirected, set the same as the weight..?
+      adjMatrix[destination][source] = weight; // If undirected, set the same as the weight..?
     }
   }
 
   public void removeEdge(int source, int destination) {
-    this.adjMatrix[source][destination] = Double.NaN; // 0 or null??? isn't it nan if its connected
+    adjMatrix[source][destination] = Double.NaN; // 0 or null??? isn't it nan if its connected
     // Remember: counter not needed - archaic way of doing number of edges
-    if (!this.directed) {
-      this.adjMatrix[destination][source] = Double.NaN;
+    if (!directed) {
+      adjMatrix[destination][source] = Double.NaN;
     }
   }
 
@@ -36,24 +36,40 @@ public class GraphAdjMatrix extends AbstractGraph {
   }
 
   public int[] getNeighbours(int vertex) {
-    List<Integer> neighbours = new ArrayList<Integer>();
-
+    int size = 0;
+    for (int i = 0; i < noOfVertices; i++) {
+     if (adjMatrix[vertex][i]!=Double.NaN) {
+      size++; 
+     } 
+    }
+    int[] neighbours = new int[size];
     int j = 0;
-    for (int i = 0 ; i < noOfVertices - 1; i++) {
-      if (!(Double.isNaN(neighbours.get(j)))) {
-        neighbours.set(j,adjMatrix[vertex][j]);
+    for (int i = 0; i < size; i++) {
+      if (adjMatrix[vertex][i]!=Double.NaN) {
+        neighbours[i] = getWeight(vertex, i);
         j++;
       }else{
         continue;
       }
     }
-
-    Object[] objects = neighbours.toArray();
     return neighbours;
   }
 
   public int getDegree(int vertex) {
-    throw new RuntimeException("Not yet implemented!");
+    int degree = 0;
+
+    for (int i = 0; i < size; i++) {
+      if (adjMatrix[i][vertex]!= Double.NaN) {
+        if(!(adjMatrix[i][vertex] == adjMatrix[i][vertex]))
+        degree++;
+      }else{
+        continue;
+      }
+    }
+      if(!directed){
+        degree = degree / 2;
+      }
+    return degree;
   }
 
   public boolean isPath(int[] nodes) {

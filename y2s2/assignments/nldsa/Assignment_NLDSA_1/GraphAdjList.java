@@ -10,6 +10,7 @@ public class GraphAdjList extends AbstractGraph {
 
     public GraphAdjList(int noOfVertices, boolean directed) {
         super(noOfVertices, directed);
+
     }
 
     public void addEdge(int source, int destination, double weight) {
