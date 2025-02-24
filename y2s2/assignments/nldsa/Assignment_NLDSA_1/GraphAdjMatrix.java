@@ -8,9 +8,9 @@ public class GraphAdjMatrix extends AbstractGraph {
 
   public GraphAdjMatrix(int noOfVertices, boolean directed) {
     super(noOfVertices, directed);
-    adjMatrix = new Double[noOfVertices][noOfVertices];
+    adjMatrix = new double[noOfVertices][noOfVertices];
     for (int i = 0; i < adjMatrix.length; i++) {
-      for (int j = 0; j < max; j++) {
+      for (int j = 0; j < adjMatrix.length; j++) {
        adjMatrix[i][j] = Double.NaN;
       }      
     }
@@ -36,20 +36,30 @@ public class GraphAdjMatrix extends AbstractGraph {
   }
 
   public int[] getNeighbours(int vertex) {
-    List<Integer> neighbours = new ArrayList<Integer>();
+		// Using an array list since we may not know how many neighbours there are
+		int size = 0;
 
-    int j = 0;
-    for (int i = 0 ; i < noOfVertices - 1; i++) {
-      if (!(Double.isNaN(neighbours.get(j)))) {
-        neighbours.set(j,adjMatrix[vertex][j]);
-        j++;
-      }else{
-        continue;
-      }
-    }
+		for (int i = 0; i < noOfVertices; i++) {
+			int currentVal = getWeight(vertex, i);
+			if (currentVal != Double.NaN ) {
+				size++;
+			}else{
+				continue;
+			}
+		}
 
-    Object[] objects = neighbours.toArray();
-    return neighbours;
+		int[] neighbours = new int[size];
+
+		for (int i = 0; i < noOfVertices; i++) {
+			int currentVal = getWeight(vertex, i);
+			if (currentVal != Double.NaN ) {
+				neighbours[i] = currentVal;
+			}else{
+				continue;
+			}
+		}
+		
+		return neighbours;
   }
 
   public int getDegree(int vertex) {
@@ -70,7 +80,7 @@ public class GraphAdjMatrix extends AbstractGraph {
     int countNoOfEdges = 0;
     for (int i = 0; i < noOfVertices; i++) {
       for (int j = 0; j < noOfVertices; j++) {
-        if (adjMatrix[i][j] > 0) {
+        if (adjMatrix[i][j] != Double.NaN) {
           countNoOfEdges++;
         } else {
           continue;
@@ -79,6 +89,8 @@ public class GraphAdjMatrix extends AbstractGraph {
     }
     if (!directed) {
       countNoOfEdges = countNoOfEdges / 2;
+
+			// For undirected do i need to account for the fact self loops are not a thing
     }
     return countNoOfEdges;
   }
