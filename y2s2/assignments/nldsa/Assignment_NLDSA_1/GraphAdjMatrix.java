@@ -24,7 +24,7 @@ public class GraphAdjMatrix extends AbstractGraph {
   }
 
   public void removeEdge(int source, int destination) {
-    this.adjMatrix[source][destination] = Double.NaN; // 0 or null??? isn't it nan if its connected
+    this.adjMatrix[source][destination] = Double.NaN; 
     // Remember: counter not needed - archaic way of doing number of edges
     if (!this.directed) {
       this.adjMatrix[destination][source] = Double.NaN;
@@ -36,7 +36,6 @@ public class GraphAdjMatrix extends AbstractGraph {
   }
 
   public int[] getNeighbours(int vertex) {
-		// Using an array list since we may not know how many neighbours there are
 		int size = 0;
 
 		for (int i = 0; i < noOfVertices; i++) {
