@@ -2,7 +2,7 @@ package com.example.javafxassignment1.Models;
 
 import java.util.ArrayList;
 
-public class Order extends Agent{
+public class Order extends Agent{ //TODO Extend from record
 
     private final ArrayList<Product> products; // Products will contain the functions for calcualting the total
     private final int total;

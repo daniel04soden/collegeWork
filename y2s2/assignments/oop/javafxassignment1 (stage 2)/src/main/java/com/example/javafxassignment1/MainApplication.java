@@ -12,6 +12,8 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import static com.example.javafxassignment1.View.MainView.backBtn;
 
@@ -19,7 +21,23 @@ public class MainApplication extends Application {
   public ArrayList<Customer> customers = new ArrayList<>();
 
   public Scene homePage(Stage stage) {
-    BorderPane root = new BorderPane();
+    // Tab Pane setup
+
+    TabPane tabPane = new TabPane();
+
+    // Disabling tab closing as we need these tabs
+
+    TabPane.TabClosingPolicy unavailable = TabPane.TabClosingPolicy.UNAVAILABLE;
+    tabPane.setTabClosingPolicy(unavailable);
+
+    // Naming and init tabs
+    List<String> nameOfTabs = Arrays.asList("Customers","Ordering","Management");
+    for (String tabName : nameOfTabs) {
+      Tab tab = new Tab(tabName);
+      //TODO tab.setContent(new StackPane(futureStackPane?)); - Switching needs work too
+      tabPane.getTabs().add(tab);
+    }
+    BorderPane root = new BorderPane(tabPane);
     // Init the scene
 
     Scene home = new Scene(root, 1000, 500);
@@ -49,7 +67,6 @@ public class MainApplication extends Application {
     Button load = new Button();
     load.setText("Load Customer Data");
     load.setOnAction(_ -> stage.setScene(loadData(stage)));
-
     // Save data button
     Button save = new Button();
     save.setText("Save Customer Data");
@@ -66,6 +83,7 @@ public class MainApplication extends Application {
     vertical.setAlignment(Pos.CENTER);
 
     root.setCenter(vertical);
+    root.setLeft(tabPane);
 
     return home;
   }
@@ -338,7 +356,6 @@ public class MainApplication extends Application {
     stage.setTitle(title);
     Scene home = homePage(stage);
     stage.setScene(home);
-    stage.setResizable(false);
     CustomerController customerController = new CustomerController();
     customerController.loadCustomers(customers);
     stage.show();
