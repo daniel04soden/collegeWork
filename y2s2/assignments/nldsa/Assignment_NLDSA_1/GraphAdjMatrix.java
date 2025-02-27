@@ -1,7 +1,3 @@
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ArrayList;
-
 public class GraphAdjMatrix extends AbstractGraph {
 
   private final double[][] adjMatrix;
@@ -11,16 +7,21 @@ public class GraphAdjMatrix extends AbstractGraph {
     adjMatrix = new double[noOfVertices][noOfVertices];
     for (int i = 0; i < adjMatrix.length; i++) {
       for (int j = 0; j < adjMatrix.length; j++) {
-       adjMatrix[i][j] = Double.NaN;
+        adjMatrix[i][j] = Double.NaN;
       }      
     }
   }
 
   public void addEdge(int source, int destination, double weight) { 
-    this.adjMatrix[source][destination] = weight; // If this wasnt a weighted graph value could be 1 or true?
-    if (!this.directed) { // Undirected
-      this.adjMatrix[destination][source] = weight; // If undirected, set the same as the weight..?
+    if (!directed) { 
+      if (source != destination) { // Accounting for a self loop 
+        this.adjMatrix[destination][source] = weight;
+      }else{
+        System.out.println("\nSelf loop Detected!\n");
+        return; // Instant break out of function - ie if its undirected and self loop, nothing added
+      }
     }
+    this.adjMatrix[source][destination] = weight;   
   }
 
   public void removeEdge(int source, int destination) {
@@ -36,42 +37,49 @@ public class GraphAdjMatrix extends AbstractGraph {
   }
 
   public int[] getNeighbours(int vertex) {
-		int size = 0;
+    int size = 0; // Initialise the future neighbours array allocation
+    double[] edges = new double[noOfVertices]; // Making the array for all potential edges on vertices
+    for (int vertexNo = 0; vertexNo<noOfVertices; vertexNo++) { // Looping over said array
+      if (!Double.isNaN(adjMatrix[vertex][vertexNo])) { // If its not a NaN increase our neighbour list size
+        edges[vertexNo] = vertexNo;
+        size++;
+      }else{ // Otherwise add to edges but don't increase size, won't be in future list
+        edges[vertexNo] = Double.NaN; 
+      }
+    }
 
-		for (int i = 0; i < noOfVertices; i++) {
-			int currentVal = getWeight(vertex, i);
-			if (currentVal != Double.NaN ) {
-				size++;
-			}else{
-				continue;
-			}
-		}
+    int[] neighbours = new int[size]; // Making list of neighbours here after determining size
+    int j = 0;
+    for (int i = 0; i < noOfVertices; i++) { // Looping over original edge list
+      if (!Double.isNaN(edges[i])) { // If its not a NaN add to neighbours
+        neighbours[j] = i; // Index mathcing the vertexNo
+        j++; // Increasing given the noOfVertices is actually different compared to size of neighbours
+      } else {
+        continue; // Otherwise ignore
+      } 
+    }
 
-		int[] neighbours = new int[size];
-
-		for (int i = 0; i < noOfVertices; i++) {
-			int currentVal = getWeight(vertex, i);
-			if (currentVal != Double.NaN ) {
-				neighbours[i] = currentVal;
-			}else{
-				continue;
-			}
-		}
-		
-		return neighbours;
+    return neighbours;
   }
 
   public int getDegree(int vertex) {
-    throw new RuntimeException("Not yet implemented!");
+    int[] neighbours = getNeighbours(vertex);
+
+    int degree = neighbours.length;
+
+     if (directed) {
+      for (int i = 0; i < noOfVertices; i++) {
+        if (!(Double.isNaN(adjMatrix[i][vertex]))) {
+         degree++; 
+        }else{
+          continue;
+        }
+      }
+    }
+    return degree;
   }
 
   public boolean isPath(int[] nodes) {
-    int n = nodes.length;
-    for (int i = 0; i < n - 1; i++) {
-      if (!(adjMatrix[i][i + 1] == nodes[i + 1])) {
-        return false;
-      } 
-    }
     return true;
   }
 
@@ -79,7 +87,7 @@ public class GraphAdjMatrix extends AbstractGraph {
     int countNoOfEdges = 0;
     for (int i = 0; i < noOfVertices; i++) {
       for (int j = 0; j < noOfVertices; j++) {
-        if (adjMatrix[i][j] != Double.NaN) {
+        if (!(Double.isNaN(adjMatrix[i][j]))) {
           countNoOfEdges++;
         } else {
           continue;
@@ -88,8 +96,6 @@ public class GraphAdjMatrix extends AbstractGraph {
     }
     if (!directed) {
       countNoOfEdges = countNoOfEdges / 2;
-
-			// For undirected do i need to account for the fact self loops are not a thing
     }
     return countNoOfEdges;
   }
