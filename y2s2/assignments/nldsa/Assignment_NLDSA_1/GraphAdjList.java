@@ -29,19 +29,51 @@ public class GraphAdjList extends AbstractGraph {
 
   public void removeEdge(int source, int destination) {
     for (Edge e:neighbours[source]) {
-      
+     if (e.destination == destination) {
+        if (!directed) {
+        neighbours[destination].remove(source);
+        }
+        neighbours[source].remove(destination);
+     } 
     }
   }
 
   public double getWeight(int source, int destination) {
     for (Edge e: neighbours[source]) {
-       
+      if (e.destination == destination) {
+        return e.weight;
+      }else{
+        continue;
+      }
     }
+    return Double.NaN;
   }
 
   public int[] getNeighbours(int vertex) {
-    // TODO: Task 2-E
-    throw new RuntimeException("Not yet implemented!");
+    int size = 0; // Initialise the future neighbours array allocation
+    double[] edges = new double[noOfVertices]; // Making the array for all potential edges on vertices
+    for(Edge e:neighbours[vertex]){
+
+      if (!Double.isNaN(adjMatrix[vertex][vertexNo])) { // If its not a NaN increase our neighbour list size
+        edges[vertexNo] = vertexNo;
+        size++;
+      }else{ // Otherwise add to edges but don't increase size, won't be in future list
+        edges[vertexNo] = Double.NaN; 
+      }
+    }
+
+    int[] realNeighbours = new int[size]; // Making list of neighbours here after determining size
+    int j = 0;
+    for (int i = 0; i < noOfVertices; i++) { // Looping over original edge list
+      if (!Double.isNaN(edges[i])) { // If its not a NaN add to neighbours
+        neighbours[j] = i; // Index mathcing the vertexNo
+        j++; // Increasing given the noOfVertices is actually different compared to size of neighbours
+      } else {
+        continue; // Otherwise ignore
+      } 
+    }
+
+    return neighbours;
   }
 
   public int getDegree(int vertex) {
@@ -50,31 +82,10 @@ public class GraphAdjList extends AbstractGraph {
   }
 
   public boolean isPath(int[] nodes) {
-    int n = nodes.length;
-    for (int i = 0; i < n-1; i++) {
-      int currentSource = nodes[i];
-      int nextDest = nodes[i+1];
-      if (neighbours.get) {
-        return false; 
-      }
-    }
-    return true;
+    throw new RuntimeException("Silly");
   }
 
   public int getNoOfEdges() {
-    int countNoOfEdges = 0;
-    for (int i = 0; i < noOfVertices; i++) {
-      for (int j = 0; j < noOfVertices; j++) {
-        if (!(Double.isNaN(adjMatrix[i][j]))) {
-          countNoOfEdges++;
-        } else {
-          continue;
-        }
-      }
-    }
-    if (!directed) {
-      countNoOfEdges = countNoOfEdges / 2;
-    }
-    return countNoOfEdges;
+    throw new RuntimeException("Silly");
   }
 }
