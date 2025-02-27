@@ -67,10 +67,10 @@ public class GraphAdjMatrix extends AbstractGraph {
 
     int degree = neighbours.length;
 
-     if (directed) {
+    if (directed) {
       for (int i = 0; i < noOfVertices; i++) {
         if (!(Double.isNaN(adjMatrix[i][vertex]))) {
-         degree++; 
+          degree++; 
         }else{
           continue;
         }
@@ -80,6 +80,14 @@ public class GraphAdjMatrix extends AbstractGraph {
   }
 
   public boolean isPath(int[] nodes) {
+    int n = nodes.length;
+    for (int i = 0; i < n-1; i++) {
+      int currentSource = nodes[i];
+      int nextDest = nodes[i+1];
+      if (Double.isNaN(adjMatrix[currentSource][nextDest])) {
+        return false; 
+      }
+    }
     return true;
   }
 
