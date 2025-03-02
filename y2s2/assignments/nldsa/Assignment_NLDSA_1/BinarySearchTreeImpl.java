@@ -20,8 +20,8 @@ public class BinarySearchTreeImpl<T> {
 
     protected void insert(Node<T> x, int key, T value) {
         if (root == null) { // If the root node is null
-            x.key = key; // Set the root as our given key
-            x.value = value; // And set the given value as the value of the root
+            x.key = root.key; // Set the root as our given key
+            x.value = root.value; // And set the given value as the value of the root
         }
 
         else if (key < root.key) { // If the given key is less than our root key

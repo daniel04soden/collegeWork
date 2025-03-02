@@ -2,48 +2,74 @@ import java.util.LinkedList;
 
 public class GraphAdjList extends AbstractGraph {
 
-    private record Edge(int destination, double weight) {
-
-  }
+    private record Edge(int destination, double weight) {}
 
     private final LinkedList<Edge>[] neighbours;
 
     public GraphAdjList(int noOfVertices, boolean directed) {
         super(noOfVertices, directed);
+<<<<<<< HEAD
 
+=======
+        this.neighbours = new LinkedList[noOfVertices];
+        for (int i = 0; i < noOfVertices; i++) {
+            neighbours[i] = new LinkedList<Edge>(); // Filling up the array with linkedlists of edges
+        }
+>>>>>>> 72fe975a8cd5ed2403e047f5c253ddd57f3c5d24
     }
 
     public void addEdge(int source, int destination, double weight) {
-        // TODO: Task 2-B
+        if (!directed) { // If undirected
+            if (!(source >= destination)) { // And the source isn't the destination
+                neighbours[destination].add(new Edge(source, weight)); // At the index of the destination add edge to the source
+            } else {
+                return;
+            }
+        }
+        neighbours[source].add(new Edge(destination, weight)); // Regardless - add an edge to the destination from the source
     }
 
     public void removeEdge(int source, int destination) {
-        // TODO: Task 2-C
-        throw new RuntimeException("Not yet implemented!");
+        for (Edge e : neighbours[source]) { // Loop over the neighbours at the index of the source vertex
+            if (e.destination == destination) { // If destination found
+                if (!directed) { // Check if we're working with an undirected graph
+                    neighbours[destination].remove(source); // If so, remove the edge from destinatoin to source
+                }
+                neighbours[source].remove(destination); // Regardless, remove the edge from source TO destination
+            }
+        }
     }
 
     public double getWeight(int source, int destination) {
-        // TODO: Task 2-D
-        throw new RuntimeException("Not yet implemented!");
+        for (Edge e : neighbours[source]) { // Loop over the neighbours at the index of the source vertex
+            if (e.destination == destination) { // If the destination is found
+                return e.weight; // Return its weight
+            } else {
+                continue; // Otherwise keep going
+            }
+        }
+        return Double.NaN; // If nothing is found return NaN
     }
 
     public int[] getNeighbours(int vertex) {
-        // TODO: Task 2-E
-        throw new RuntimeException("Not yet implemented!");
+        int[] testing = { 1, 2, 3 };
+        return testing;
+        // throw new RuntimeException("Not yet implemented!");
     }
 
     public int getDegree(int vertex) {
+        return 2;
         // TODO: Task 2-F
-        throw new RuntimeException("Not yet implemented!");
+        // // throw new RuntimeException("Not yet implemented!");
     }
 
     public boolean isPath(int[] nodes) {
-        // TODO: Task 2-G
-        throw new RuntimeException("Not yet implemented!");
+        return true;
+        // throw new RuntimeException("Not yet implemented!");
     }
 
     public int getNoOfEdges() {
-        // TODO: Task 2-H
-        throw new RuntimeException("Not yet implemented!");
+        return 2;
+        // throw new RuntimeException("Not yet implemented!");
     }
 }
