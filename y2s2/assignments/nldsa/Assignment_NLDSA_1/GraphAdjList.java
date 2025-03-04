@@ -51,10 +51,12 @@ public class GraphAdjList extends AbstractGraph {
   public int[] getNeighbours(int vertex) {
     int[] testing = { 1, 2, 3 };
     return testing;
+    // throw new RuntimeException("Not yet implemented!");
   }
 
   public int getDegree(int vertex) {
     return 2;
+    // TODO: Task 2-F
     // // throw new RuntimeException("Not yet implemented!");
   }
 
