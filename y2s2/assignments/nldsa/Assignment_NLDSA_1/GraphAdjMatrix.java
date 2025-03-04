@@ -67,102 +67,50 @@ public class GraphAdjMatrix extends AbstractGraph {
 
 
   public int getDegree(int vertex) {
-
     int[] neighbours = getNeighbours(vertex);
-
-
-
     int degree = neighbours.length;
-
-    if (directed) {
-
-
+    if (!directed) {
       for (int i = 0; i < noOfVertices; i++) {
-
         if (!(Double.isNaN(adjMatrix[i][vertex]))) {
-
-
           degree++;
-
         }else{
-
-
           continue;
-
         }
-
       }
-
     }
-
     return degree;
-
   }
 
 
 
   public boolean isPath(int[] nodes) {
-
-
     int n = nodes.length;
-
-
     for (int i = 0; i < n-1; i++) {
-
-
       int currentSource = nodes[i];
-
-
       int nextDest = nodes[i+1];
-
-
       if (Double.isNaN(adjMatrix[currentSource][nextDest])) {
-
-
         return false; 
-
-
       }
-
-
     }
-
     return true;
-
   }
 
 
 
   public int getNoOfEdges() {
-
     int countNoOfEdges = 0;
-
     for (int i = 0; i < noOfVertices; i++) {
-
       for (int j = 0; j < noOfVertices; j++) {
-
         if (!(Double.isNaN(adjMatrix[i][j]))) {
-
           countNoOfEdges++;
-
         } else {
-
           continue;
-
         }
-
       }
-
     }
-
     if (!directed) {
-
       countNoOfEdges = countNoOfEdges / 2;
-
     }
-
     return countNoOfEdges;
-
   }
-
 }

@@ -19,7 +19,7 @@ public abstract class AbstractGraph implements Graph {
         boolean directed
     ) {
         return switch (impl) {
-            // case AdjList -> new GraphAdjList(noOfVertices, directed);
+            case AdjList -> new GraphAdjList(noOfVertices, directed);
             case AdjMatrix -> new GraphAdjMatrix(noOfVertices, directed);
         };
     }
