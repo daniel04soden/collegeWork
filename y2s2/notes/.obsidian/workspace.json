@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "OOP/Serial,cloning etc.md",
+                "file": "OOAnalysis/Sequence Diagrams.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Serial,cloning etc"
+              "title": "Sequence Diagrams"
             }
           }
         ]
@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "8eafd8fa697eaf8d",
@@ -180,8 +181,9 @@
   },
   "active": "c4dcb1b9aa007f50",
   "lastOpenFiles": [
-    "Year 2 Semester 2 Breakdown.md",
     "OOP/Serial,cloning etc.md",
+    "OOAnalysis/Sequence Diagrams.md",
+    "Year 2 Semester 2 Breakdown.md",
     "OOP/brocodework/target/classes/module-info.class",
     "OOAnalysis/The Object Model.md",
     "Statistics/Binomial Distribution.md",
@@ -213,7 +215,6 @@
     "Untitled.canvas",
     "AgnosticLearning/Center.md",
     "Statistics/Numerical Methods.md",
-    "Statistics/Grouped Frequency tables.md",
     "OOP/brocodework/target/classes/Main/hello-view.fxml",
     "OOP/brocodework/target/classes/Main/MainController.class",
     "OOP/brocodework/target/classes/Main/MainApplication.class",
