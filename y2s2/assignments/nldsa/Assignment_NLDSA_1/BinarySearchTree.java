@@ -70,7 +70,7 @@ public class BinarySearchTree<T>
         new Random(4321)
             .ints(20, 1, 20)
             .forEach(k -> {
-                tree.insert(k, String.valueOf(k * 10));
+                tree.insert(k, String.valueOf(k * 10)); // Why k*10??
                 System.out.printf("insert %2d: ", k);
                 tree.inorder().forEach(x -> System.out.printf("%4s", x));
                 System.out.println();
