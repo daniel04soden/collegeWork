@@ -19,17 +19,20 @@ public class BinarySearchTreeImpl<T> {
     protected Node<T> root = null;
 
     protected void insert(Node<T> x, int key, T value) {
-        if (key == x.key) {
-            x.value = value;
-        } else if (key < x.key) {
-            if (x.left == null) {
-                x.left = new Node(key, value);
+        Node<T> node = new Node<T>(key, value);
+        if (key == x.key) { // If the key of the new value is the same from the node we are adding it to (keep recursion in mind)
+            x.value = value; // The value of x is made as the value of the key - ie replacing the new value
+        } else if (key < x.key) { // If our key is less than the key from where we are adding it to 
+            if (x.left == null) { // we go the left 
+                x.left = node;
+                node.parent = x;
             } else {
                 insert(x.left, key, value);
             }
         } else {
             if (x.right == null) {
-                x.right = new Node(key, value);
+                x.right = node;
+                node.parent = x;
             } else {
                 insert(x.right, key, value);
             }
@@ -63,9 +66,14 @@ public class BinarySearchTreeImpl<T> {
     protected int depth(Node<T> x) {
         int depth = 0;
         if (x == null) {
-            return depth; // Early return
+            return depth; // Base
+        } else {
+            if (x.left != null) {
+                return depth(x.left) + 1;
+            } else {
+                return depth(x.right) + 1;
+            }
         }
-        return depth(x.left) + depth(x.right) + 1;
     }
 
     protected Node<T> minimum(Node<T> x) {
@@ -110,19 +118,19 @@ public class BinarySearchTreeImpl<T> {
         return y;
     }
 
-    protected void transplant(Node u, Node v) {
-        if (u.parent == null) {
-            root = v;
-        } else {
-            if (u == u.parent.left) {
-                u.parent.left = v;
-            } else {
-                u.parent.right = v;
-            }
-            if (v != null) {
-                v.parent = u.parent;
-            }
-        }
+    protected void transplant(Node<T> u, Node<T> v) {
+    if (u.parent == null) {
+     root = v; 
+    }else{
+      if (u == u.parent.left) {
+       u.parent.left = v; 
+      } else {
+       u.parent.right = v; 
+      }
+    }
+    if(v !=null) {
+      v.parent = u.parent;
+      }
     }
 
     protected void delete(Node<T> z) {
@@ -135,12 +143,12 @@ public class BinarySearchTreeImpl<T> {
             if (y != z.right) {
                 transplant(y, y.right);
                 y.right = z.right;
-                y.parent.right = y;
+                y.right.parent = y;
             }
 
             transplant(z, y);
             y.left = z.left;
-            y.parent.left = y;
+            y.left.parent = y;
         }
     }
 }

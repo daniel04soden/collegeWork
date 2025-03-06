@@ -20,73 +20,7 @@ import static com.example.javafxassignment1.View.MainView.backBtn;
 public class MainApplication extends Application {
   public ArrayList<Customer> customers = new ArrayList<>();
 
-  public Scene homePage(Stage stage) {
-    // Tab Pane setup
 
-    TabPane tabPane = new TabPane();
-
-    // Disabling tab closing as we need these tabs
-
-    TabPane.TabClosingPolicy unavailable = TabPane.TabClosingPolicy.UNAVAILABLE;
-    tabPane.setTabClosingPolicy(unavailable);
-
-    // Naming and init tabs
-    List<String> nameOfTabs = Arrays.asList("Customers","Ordering","Management");
-    for (String tabName : nameOfTabs) {
-      Tab tab = new Tab(tabName);
-      //TODO tab.setContent(new StackPane(futureStackPane?)); - Switching needs work too
-      tabPane.getTabs().add(tab);
-    }
-    BorderPane root = new BorderPane(tabPane);
-    // Init the scene
-
-    Scene home = new Scene(root, 1000, 500);
-    applyCSS(home);
-    // Header Bar
-    Label title = new Label();
-    title.setText("DS Computing: Management");
-    stage.setTitle(title.getText());
-
-    // Customer Register button
-    Button register = new Button();
-    register.setText("Register");
-    register.setOnAction(_ -> stage.setScene(registerPage(stage)));
-
-    // View Customers button
-    Button view = new Button();
-    view.setText("View other customers");
-    view.setOnAction(_ -> stage.setScene(viewCustomers(stage)));
-
-    // Remove Customers button
-
-    Button remove = new Button();
-    remove.setText("Remove Customers");
-    remove.setOnAction(_ -> stage.setScene(removePage(stage)));
-
-    // Load data button
-    Button load = new Button();
-    load.setText("Load Customer Data");
-    load.setOnAction(_ -> stage.setScene(loadData(stage)));
-    // Save data button
-    Button save = new Button();
-    save.setText("Save Customer Data");
-    save.setOnAction(_ -> {
-      CustomerController.saveCustomers(customers);
-      CustomerController.printCustomers(customers);
-    });
-    // Positioning the Components
-
-    HBox titleBar = new HBox(title);
-    titleBar.setAlignment(Pos.CENTER);
-    VBox vertical = new VBox(titleBar, register, view, remove, load,save);
-    vertical.setSpacing(25);
-    vertical.setAlignment(Pos.CENTER);
-
-    root.setCenter(vertical);
-    root.setLeft(tabPane);
-
-    return home;
-  }
 
   public Scene registerPage(Stage stage) {
 

@@ -5,14 +5,14 @@ import java.util.ArrayList;
 public class Order extends Agent{ //TODO Extend from record
 
     private final ArrayList<Product> products;
-    private final int total;
+    // private final int total;
 
     public Order(ArrayList<Product> _products, int _total,String _name, int _id){
         super(_id,_name);
-        this.total = _products.forEach(product.price -> total+=product.price); // Loop over and calculate total with price
+        // this.total = _products.forEach(product.price -> total+=product.price); // Loop over and calculate total with price
 
         this.products = _products;
-        generateReceipt();
+        // generateReceipt();
     }
 
     public ArrayList<Product> getProducts() {
@@ -20,7 +20,8 @@ public class Order extends Agent{ //TODO Extend from record
     }
 
     public int getTotal() {
-        return total;
+        return 0;
+         // return total;
     }
 
     private void generateReceipt(Customer customer,ArrayList<Product> products){

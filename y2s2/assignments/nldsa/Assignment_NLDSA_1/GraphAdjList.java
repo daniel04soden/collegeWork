@@ -5,7 +5,7 @@ public class GraphAdjList extends AbstractGraph {
     private record Edge(int destination, double weight) {}
 
     private final LinkedList<Edge>[] neighbours;
-
+    
     @SuppressWarnings("unchecked")
     public GraphAdjList(int noOfVertices, boolean directed) {
         super(noOfVertices, directed);
