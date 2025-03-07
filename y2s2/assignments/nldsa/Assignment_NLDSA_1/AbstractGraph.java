@@ -12,7 +12,7 @@ public abstract class AbstractGraph implements Graph {
         return noOfVertices;
     }
 
-    public enum GraphImpl { AdjMatrix }
+    public enum GraphImpl {AdjList, AdjMatrix }
     public static Graph create(
         GraphImpl impl,
         int noOfVertices,

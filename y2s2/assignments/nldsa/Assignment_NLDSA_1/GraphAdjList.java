@@ -4,35 +4,41 @@ public class GraphAdjList extends AbstractGraph {
 
     private record Edge(int destination, double weight) {}
 
-    private final LinkedList<Edge>[] neighbours;
-    
-    @SuppressWarnings("unchecked")
+    private LinkedList<Edge>[] neighbours;
+
     public GraphAdjList(int noOfVertices, boolean directed) {
         super(noOfVertices, directed);
-        this.neighbours = (LinkedList<Edge>[]) new LinkedList[noOfVertices];
+        this.neighbours = new LinkedList[noOfVertices];
         for (int i = 0; i < noOfVertices; i++) {
             neighbours[i] = new LinkedList<Edge>(); // Filling up the array with linkedlists of edges
         }
     }
 
     public void addEdge(int source, int destination, double weight) {
-        if (!directed) { // If undirected
-            if (!(source >= destination)) {
-                neighbours[destination].add(new Edge(source, weight)); // At the index of the destination add an edge towards the source
+        if (!directed) {
+            boolean isDuplicate =
+                neighbours[source].contains(new Edge(destination, weight));
+            if ((source == destination) || isDuplicate) {
+                return;
             } else {
-                return; // If the source is greater than or equal to the destination in a non-directed graph, break
+                neighbours[destination].add(new Edge(source, weight));
             }
         }
-        neighbours[source].add(new Edge(destination, weight)); // Regardless - add an edge to the destination from the source
+        neighbours[source].add(new Edge(destination, weight));
     }
 
     public void removeEdge(int source, int destination) {
         for (Edge e : neighbours[source]) { // Loop over the neighbours at the index of the source vertex
             if (e.destination == destination) { // If destination found
-                if (!directed) { // Check if we're working with an undirected graph
-                    neighbours[destination].remove(source); // If so, remove the edge from destinatoin to source
+                neighbours[source].remove(e); // If so, remove the edge from destinatoin to source
+            }
+        }
+
+        if (!directed) {
+            for (Edge e : neighbours[destination]) {
+                if (e.destination == source) { // If destination found
+                    neighbours[destination].remove(e); // If so, remove the edge from destinatoin to source
                 }
-                neighbours[source].remove(destination); // Regardless, remove the edge from source TO destination
             }
         }
     }
@@ -73,16 +79,20 @@ public class GraphAdjList extends AbstractGraph {
     }
 
     public int getDegree(int vertex) {
+        int degree = 0;
         int[] myNeighbours = getNeighbours(vertex);
-        int degree = myNeighbours.length;
         if (!directed) {
+            degree += myNeighbours.length;
+        } else {
+            int inDegree = 0;
+            int outDegree = myNeighbours.length;
+
             for (int i = 0; i < noOfVertices; i++) {
                 if (!(Double.isNaN(getWeight(i, vertex)))) {
-                    degree++;
-                } else {
-                    continue;
+                    inDegree++;
                 }
             }
+            degree = inDegree + outDegree;
         }
         return degree;
     }
