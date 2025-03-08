@@ -1,6 +1,7 @@
 package com.example.javafxassignment1.View;
 
 import com.example.javafxassignment1.Controllers.CustomerController;
+import com.example.javafxassignment1.MainApplication;
 import com.example.javafxassignment1.Models.Customer;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,6 +14,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class MainView {
 
@@ -118,5 +120,13 @@ public class MainView {
         }else if (finalChoice == saveNoExit){
             stage.close();
         }
+    }
+
+
+    // Apply css function
+
+    public static void applyCSS(Scene styledScene) {
+        String cssSource = "styles.css";
+        styledScene.getStylesheets().add(Objects.requireNonNull(MainApplication.class.getResource(cssSource)).toExternalForm());
     }
 }

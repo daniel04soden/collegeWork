@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+
+import static com.example.javafxassignment1.View.MainView.applyCSS;
 import static com.example.javafxassignment1.View.MainView.backBtn;
 
 public class MainApplication extends Application {
@@ -275,12 +277,6 @@ public class MainApplication extends Application {
       // create a scene
 
     return load;
-  }
-  // Apply css function
-
-  public void applyCSS(Scene styledScene) {
-    String cssSource = "styles.css";
-    styledScene.getStylesheets().add(Objects.requireNonNull(MainApplication.class.getResource(cssSource)).toExternalForm());
   }
 
 

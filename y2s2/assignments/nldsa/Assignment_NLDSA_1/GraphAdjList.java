@@ -4,40 +4,47 @@ public class GraphAdjList extends AbstractGraph {
 
     private record Edge(int destination, double weight) {}
 
-    private LinkedList<Edge>[] neighbours;
+    private LinkedList<Edge>[] neighbours; // Array of linkedlists which
+                                           // conatain different edges
 
+    // Constructor
     public GraphAdjList(int noOfVertices, boolean directed) {
-        super(noOfVertices, directed);
-        this.neighbours = new LinkedList[noOfVertices];
+        super(noOfVertices, directed); // Graph attributes
+        this.neighbours = new LinkedList[noOfVertices]; // Neighbours are the
+                                                        // linkedlist of edges
         for (int i = 0; i < noOfVertices; i++) {
             neighbours[i] = new LinkedList<Edge>(); // Filling up the array with linkedlists of edges
         }
     }
 
     public void addEdge(int source, int destination, double weight) {
-        if (!directed) {
-            boolean isDuplicate =
-                neighbours[source].contains(new Edge(destination, weight));
-            if ((source == destination) || isDuplicate) {
+        if (!directed) { 
+          // Ensuring no duplicate values
+            boolean isDuplicate = neighbours[source].contains(new Edge(destination, weight)); 
+            if ((source == destination) || isDuplicate) {// Prevenitng self
+                                                         // loops
                 return;
             } else {
+              // If all conditions okay, add undirected edge
                 neighbours[destination].add(new Edge(source, weight));
             }
         }
+        // Add directed edge
         neighbours[source].add(new Edge(destination, weight));
     }
 
     public void removeEdge(int source, int destination) {
+      // first do undirected removal, we happen regardless
         for (Edge e : neighbours[source]) { // Loop over the neighbours at the index of the source vertex
             if (e.destination == destination) { // If destination found
-                neighbours[source].remove(e); // If so, remove the edge from destinatoin to source
+                neighbours[source].remove(e); // If so, remove the edge from source to destination
             }
         }
-
+      // Then check for undirected removal
         if (!directed) {
             for (Edge e : neighbours[destination]) {
-                if (e.destination == source) { // If destination found
-                    neighbours[destination].remove(e); // If so, remove the edge from destinatoin to source
+                if (e.destination == source) { // If source found
+                    neighbours[destination].remove(e); // If so, remove the edge from destination to source
                 }
             }
         }
@@ -79,49 +86,52 @@ public class GraphAdjList extends AbstractGraph {
     }
 
     public int getDegree(int vertex) {
-        int degree = 0;
+        int degree = 0; // Init degree
+        // Asserting degree as neighbours for undirected graphs since no
+        // in,out degrees - just whats connected to vertex ie neighbour
         int[] myNeighbours = getNeighbours(vertex);
         if (!directed) {
             degree += myNeighbours.length;
         } else {
             int inDegree = 0;
-            int outDegree = myNeighbours.length;
+            int outDegree = myNeighbours.length; // Outdegree is the neighbours 
 
             for (int i = 0; i < noOfVertices; i++) {
                 if (!(Double.isNaN(getWeight(i, vertex)))) {
-                    inDegree++;
+                    inDegree++; // checking anything coming in
                 }
             }
-            degree = inDegree + outDegree;
+            degree = inDegree + outDegree; // Degree is the sum of in and out
         }
         return degree;
     }
 
     public boolean isPath(int[] nodes) {
-        int n = nodes.length;
+        int n = nodes.length; // Same logic as matrix
         for (int i = 0; i < n - 1; i++) {
             int currentSource = nodes[i];
             int nextDest = nodes[i + 1];
-            if (Double.isNaN(getWeight(currentSource, nextDest))) {
-                return false;
+            // Simply compare weight of current and next node in potential path
+            if (Double.isNaN(getWeight(currentSource, nextDest))) { 
+                return false; // False if not existenet (doublenan)
             }
         }
         return true;
     }
 
     public int getNoOfEdges() {
-        int countNoOfEdges = 0;
+        int countNoOfEdges = 0; // Init as 0
         for (int i = 0; i < noOfVertices; i++) {
             for (Edge e : neighbours[i]) { // Loop over the neighbours at the index of the source vertex
                 if (!(Double.isNaN(e.weight))) {
-                    countNoOfEdges++;
+                    countNoOfEdges++; // If not double nan, increment
                 } else {
-                    continue;
+                    continue; // ignore
                 }
             }
         }
         if (!directed) {
-            countNoOfEdges = countNoOfEdges / 2;
+            countNoOfEdges = countNoOfEdges / 2; // if undirected, divide by 2 
         }
         return countNoOfEdges;
     }
