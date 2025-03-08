@@ -1,13 +1,10 @@
 package com.example.javafxassignment1.View;
 
-import com.example.javafxassignment1.Controllers.CustomerController;
 import com.example.javafxassignment1.MainApplication;
-import com.example.javafxassignment1.Models.Customer;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class MainView {
@@ -30,7 +27,7 @@ public class MainView {
         backBtn.setOnAction(_ -> stage.setScene(previous));
         return backBtn;
     }
-    public static void closeConfirmation(Stage stage, ArrayList<Customer> customers) {
+    public static void closeConfirmation(Stage stage) {
         // Function to prevent instant closing and check if the user has saved or not
         ButtonType saveAndExit = new ButtonType("Save and Exit?");
         ButtonType saveNoExit = new ButtonType("Don\'t save?");
@@ -45,8 +42,8 @@ public class MainView {
 
         ButtonType finalChoice = closeAlert.showAndWait().orElse(ButtonType.CANCEL);
         if (finalChoice == saveAndExit){
-            CustomerController.saveCustomers(customers);
-            CustomerController.printCustomers(customers);
+            //TODO - fix CustomerController.saveCustomers(customers);
+            //TODO - fix CustomerController.printCustomers(customers);
             stage.close();
         }else if (finalChoice == saveNoExit){
             stage.close();
