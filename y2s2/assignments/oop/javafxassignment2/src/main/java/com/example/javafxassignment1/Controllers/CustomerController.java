@@ -10,55 +10,47 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class CustomerController implements CRUDController{
-
-  private static final String adminPass = "758924"; //TODO make this encrypted
-  private final String dbPath;
-
-  public ArrayList<Customer> customers;
-  public CustomerController(){
-    this.customers = new ArrayList<>();
-    this.dbPath = "src/main/java/com/example/javafxassignment1/database/customers.txt";
-    loadCustomers();
+public class CustomerController extends BaseController<Customer> {
+  public CustomerController() {
+    super("src/main/java/com/example/javafxassignment1/database/customers.txt");
   }
 
   @Override
-  public void add(String name, String email, int age, double balance) { //TODO reconsider add
+  public void add(String... params) {
+    String name = params[0];
+    String email = params[1];
+    int age = Integer.parseInt(params[2]);
+    double balance = Double.parseDouble(params[3]);
     int newId;
-    if (customers.isEmpty()){
+    if (storage.isEmpty()) {
       newId = 1;
-    }else{
-      newId = customers.getLast().getId()+1;
+    } else {
+      newId = storage.getLast().getId() + 1;
     }
     Customer currentCustomer = new Customer(newId, name, email, age, balance);
-    customers.add(currentCustomer);
-    System.out.println("New Customer:" + currentCustomer);
-    System.out.println("All customers\n");
-    System.out.println("-----------------\n");
-    for (Customer customer : customers) {
-      System.out.println(customer.toString() + "\n");
-    }
+    storage.add(currentCustomer);
+    System.out.println("New Customer: " + currentCustomer);
+    print(); // Print all customers
   }
 
   @Override
-  public void delete(int id,String password) {
-    customers.removeIf(customer -> customer.getId() == id);
-    //TODO customers.removeIf(customer -> customer.getId() == id && (password.equals(adminPass))); - keep as passfield or?
-    printCustomers();
+  public void delete(int id) {
+    storage.removeIf(customer -> customer.getId() == id);
+    print(); // Print remaining customers
   }
 
   @Override
   public void load() {
     File dbFile = new File(dbPath);
-    try (Scanner customerReader = new Scanner(dbFile)){
-      customers.clear();
+    try (Scanner customerReader = new Scanner(dbFile)) {
+      storage.clear();
       while (customerReader.hasNextLine()) {
         String data = customerReader.nextLine();
         String[] customerInfo = data.split(",");
         String name = customerInfo[1].trim();
-        int age = Integer.parseInt(customerInfo[2].trim());
+        String age = customerInfo[2].trim();
         String email = customerInfo[3].trim();
-        double balance = Double.parseDouble(customerInfo[4].trim());
+        String balance = customerInfo[4].trim();
         add(name, email, age, balance);
       }
     } catch (FileNotFoundException e) {
@@ -70,7 +62,7 @@ public class CustomerController implements CRUDController{
   @Override
   public void save() {
     try (FileWriter saver = new FileWriter(dbPath)) {
-      for (Customer customer : customers) {
+      for (Customer customer : storage) {
         saver.write(customer.toString() + System.lineSeparator());
       }
       System.out.println("Saved to " + dbPath);
@@ -80,9 +72,7 @@ public class CustomerController implements CRUDController{
     }
   }
   @Override
-  public void print(){
-    for(Customer customer: customers){
-      System.out.println(customer.toString());
-    }
-  }
+  public ArrayList<Customer> getStorage(){
+    return storage;
+  };
 }

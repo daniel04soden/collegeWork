@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "TODO/Next Week exams.md",
+                "file": "TODO/TODO.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Next Week exams"
+              "title": "TODO"
             }
           },
           {
@@ -35,8 +35,7 @@
               "title": "TODO"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -193,7 +192,7 @@
       "zenmode:Toggle Zen Mode": false
     }
   },
-  "active": "4e46c0342f966e93",
+  "active": "c4dcb1b9aa007f50",
   "lastOpenFiles": [
     "TODO/Next Week exams.md",
     "TODO/TODO.md",

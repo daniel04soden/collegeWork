@@ -1,14 +1,14 @@
 # OOP Project work
 
-- [ ] Achieve MVC model ⏫ 
-	- [ ] Fix up original with customers,view and controller
-	- [ ] Work on product mvc 
+- [x] Achieve MVC model ⏫ ✅ 2025-03-09
+	- [x] Fix up original with customers,view and controller ✅ 2025-03-09
+	- [x] Work on product mvc ✅ 2025-03-09
 	- No order view??
 - [ ] Create tabpanes and switching
 	- [ ] Tab pane 1 - Same as original just less features
-		- [ ] Add (Register as a customer)
-		- [ ] View other customers 
-		- [ ] Keep removal - password needed
+		- [x] Add (Register as a customer) ✅ 2025-03-09
+		- [x] View other customers ✅ 2025-03-09
+		- [x] Keep removal - password needed ✅ 2025-03-09
 			- [ ] Figure out if incorrect have elements display 
 	- [ ] Tab pane 2 - Purchase page
 		- [ ] Purchase object rather than order
@@ -17,5 +17,5 @@
 		- [ ] Multiple items adding to cart?
 		- [ ] good layout
 	- [ ] Tab pane 3 - Products page
-		- [ ] Same crud operations as customer honestly
-		- [ ] Simply create products, remove, update price
+		- [x] Same crud operations as customer honestly ✅ 2025-03-09
+		- [x] Simply create products, remove, update price ✅ 2025-03-09

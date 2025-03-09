@@ -57,8 +57,7 @@ public class CustomerView {
         Button save = new Button();
         save.setText("Save Customer Data");
         save.setOnAction(_ -> {
-            controller.saveCustomers();
-            controller.printCustomers();
+            controller.save();
         });
         // Positioning the Components
 
@@ -133,13 +132,7 @@ public class CustomerView {
         Button submit = new Button();
         submit.setText("Submit");
         submit.setOnAction(_ -> {
-            CustomerController customerController = new CustomerController();
-            String newName = nameInput.getText();
-            int newAge = Integer.parseInt(ageInput.getText());
-            String newEmail = emailInput.getText();
-            double newBal = Double.parseDouble(balanceInput.getText());
-
-            controller.add(newName, newEmail, newAge, newBal);
+            controller.add(nameInput.getText(), emailInput.getText(), ageInput.getText(), balanceInput.getText());
             nameInput.clear();
             ageInput.clear();
             emailInput.clear();
@@ -204,11 +197,7 @@ public class CustomerView {
         list.setText("View Customers");
         list.setOnAction(_ -> {
             table.getItems().clear(); // clearing previous data
-            for (Customer customer : controller.customers) {
-                if (customer.getId() != 0) {
-                    table.getItems().add(customer);
-                }
-            }
+            table.getItems().addAll(controller.getStorage());
 
         });
 
@@ -227,7 +216,7 @@ public class CustomerView {
 
         search.setOnAction(_ -> {
             table.getItems().clear(); // clearing previous data
-            for (Customer customer : controller.customers) {
+            for (Customer customer : controller.getStorage()) {
                 if (customer.getId() == Integer.parseInt(idSearchInput.getText())) {
                     table.getItems().add(customer);
                 }else{
@@ -257,10 +246,7 @@ public class CustomerView {
 
         Label idLabel = new Label("Id:");
         TextField idInput = new TextField();
-        Label passwordLabel = new Label("Enter Password:");
-        PasswordField passwordField = new PasswordField();
-        passwordField.setPromptText("Admin Password");
-        HBox idBlock = new HBox(idLabel, idInput,passwordLabel,passwordField);
+        HBox idBlock = new HBox(idLabel, idInput);
         idBlock.setAlignment(Pos.CENTER);
 
         // Removal Submit button
@@ -268,10 +254,8 @@ public class CustomerView {
         Button submit = new Button();
         submit.setText("Submit");
         submit.setOnAction(_ -> {
-            CustomerController customerController = new CustomerController();
             int removeId = Integer.parseInt(idInput.getText());
-            String givenPass = passwordField.getText();
-            customerController.deleteCustomer(removeId,givenPass);
+            controller.delete(removeId);
 
         });
         // Back button
@@ -315,8 +299,7 @@ public class CustomerView {
         Button loadData = new Button();
         loadData.setText("Load Saved Store");
         loadData.setOnAction(_ -> {
-            CustomerController customerController = new CustomerController();
-            customerController.loadCustomers();
+            controller.load();
         });
 
         Button backbtn = backBtn(stage, customerHome(stage));
