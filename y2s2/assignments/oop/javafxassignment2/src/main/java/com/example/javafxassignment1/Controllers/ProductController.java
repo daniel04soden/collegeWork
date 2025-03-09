@@ -1,4 +1,4 @@
 package com.example.javafxassignment1.Controllers;
 
-public class ProductController {
+public class ProductController implements CRUDController{
 }

@@ -27,7 +27,6 @@ public class MainApplication extends Application {
     Scene home = startView.customerHome(stage);
     stage.setScene(home);
     stage.setResizable(false);
-    CustomerController customerController = new CustomerController();
     stage.show();
     stage.setOnCloseRequest(event -> {
       event.consume();

@@ -10,18 +10,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class CustomerController {
+public class CustomerController implements CRUDController{
 
-  private static final String adminPass = "758924";
+  private static final String adminPass = "758924"; //TODO make this encrypted
+  private final String dbPath;
+
   public ArrayList<Customer> customers;
-  private static final String dbPath = "src/main/java/com/example/javafxassignment1/database/customers.txt";
   public CustomerController(){
     this.customers = new ArrayList<>();
+    this.dbPath = "src/main/java/com/example/javafxassignment1/database/customers.txt";
     loadCustomers();
   }
 
-
-  public void addCustomer(String name, String email, int age, double balance) {
+  @Override
+  public void add(String name, String email, int age, double balance) { //TODO reconsider add
     int newId;
     if (customers.isEmpty()){
       newId = 1;
@@ -38,12 +40,15 @@ public class CustomerController {
     }
   }
 
-  public void deleteCustomer(int id,String password) {
-    customers.removeIf(customer -> customer.getId() == id && (password.equals(adminPass)));
+  @Override
+  public void delete(int id,String password) {
+    customers.removeIf(customer -> customer.getId() == id);
+    //TODO customers.removeIf(customer -> customer.getId() == id && (password.equals(adminPass))); - keep as passfield or?
     printCustomers();
   }
 
-  public void loadCustomers() {
+  @Override
+  public void load() {
     File dbFile = new File(dbPath);
     try (Scanner customerReader = new Scanner(dbFile)){
       customers.clear();
@@ -54,7 +59,7 @@ public class CustomerController {
         int age = Integer.parseInt(customerInfo[2].trim());
         String email = customerInfo[3].trim();
         double balance = Double.parseDouble(customerInfo[4].trim());
-        addCustomer(name, email, age, balance);
+        add(name, email, age, balance);
       }
     } catch (FileNotFoundException e) {
       System.out.println("An error occurred.");
@@ -62,8 +67,8 @@ public class CustomerController {
     }
   }
 
-
-  public void saveCustomers() {
+  @Override
+  public void save() {
     try (FileWriter saver = new FileWriter(dbPath)) {
       for (Customer customer : customers) {
         saver.write(customer.toString() + System.lineSeparator());
@@ -74,8 +79,8 @@ public class CustomerController {
       e.printStackTrace();
     }
   }
-
-  public void printCustomers(){
+  @Override
+  public void print(){
     for(Customer customer: customers){
       System.out.println(customer.toString());
     }

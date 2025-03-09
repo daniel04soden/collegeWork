@@ -35,6 +35,7 @@ public class Product extends Agent{
     public void setStock(int stock) {
         this.stock = stock;
     }
+
     @Override
     public String toString(){
         return super.getId() + "," + super.getName()+ "," + this.price+ "," + this.stock+ "," + this.inStock;

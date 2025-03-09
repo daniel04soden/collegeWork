@@ -139,7 +139,7 @@ public class CustomerView {
             String newEmail = emailInput.getText();
             double newBal = Double.parseDouble(balanceInput.getText());
 
-            controller.addCustomer(newName, newEmail, newAge, newBal);
+            controller.add(newName, newEmail, newAge, newBal);
             nameInput.clear();
             ageInput.clear();
             emailInput.clear();

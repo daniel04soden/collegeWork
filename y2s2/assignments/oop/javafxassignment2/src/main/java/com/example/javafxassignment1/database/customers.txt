@@ -1,3 +1,4 @@
 1,daniel,12,dsoden09@gmail.com,56.0
 2,another one,45,ds@gm.com,99.99
 3,newuser,45,ds@lmail.com,999.99
+4,Daniel,25,dsoden09@gmail.com,124.54
