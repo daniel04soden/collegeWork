@@ -3,6 +3,7 @@ module com.example.javafxassignment1 {
     requires javafx.fxml;
 
     requires org.kordamp.bootstrapfx.core;
+    requires jdk.compiler;
 
     opens com.example.javafxassignment1 to javafx.fxml;
     exports com.example.javafxassignment1;

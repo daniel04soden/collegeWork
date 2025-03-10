@@ -14,6 +14,7 @@ public abstract class BaseController<T> {
     public BaseController(String dbPath) {
         this.dbPath = dbPath;
         this.storage = new ArrayList<>();
+        this.
         load();
     }
 

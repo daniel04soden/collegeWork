@@ -128,8 +128,7 @@ public class ProductView {
         Button submit = new Button();
         submit.setText("Submit");
         submit.setOnAction(_ -> {
-            ProductController productController = new ProductController();
-            productController.add(
+            controller.add(
                 nameInput.getText(),
                 stockInput.getText(),
                 priceInput.getText()
@@ -159,7 +158,7 @@ public class ProductView {
         return register;
     }
 
-    public Scene viewProducts(Stage stage) {
+    public VBox viewProducts(Stage stage) {
         /*
          * Although the specs require the data to be stored in a text area, I find the presentation
          * of the data to be a lot clearer in the table format, I understand if I lose marks but this is
@@ -269,9 +268,8 @@ public class ProductView {
         Button submit = new Button();
         submit.setText("Submit");
         submit.setOnAction(_ -> {
-            ProductController productController = new ProductController();
             int removeId = Integer.parseInt(idInput.getText());
-            productController.delete(removeId);
+            controller.delete(removeId);
         });
         // Back button
         Button backbtn = backBtn(stage, productHome(stage));
@@ -316,8 +314,7 @@ public class ProductView {
         Button loadData = new Button();
         loadData.setText("Load Saved Products");
         loadData.setOnAction(_ -> {
-            ProductController productController = new ProductController();
-            productController.load();
+            controller.load();
         });
 
         Button backbtn = backBtn(stage, productHome(stage));

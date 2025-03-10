@@ -1,37 +1,34 @@
 package com.example.javafxassignment1.Controllers;
 
-import com.example.javafxassignment1.Models.Customer;
 import com.example.javafxassignment1.Models.Product;
-import com.example.javafxassignment1.Models.Purchase;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
+import com.example.javafxassignment1.View.PurchaseView;
+import javafx.scene.control.TextArea;
 
 import java.util.ArrayList;
 
 public class PurchaseController {
+    public MainController mc;
+    public PurchaseView view;
+    private ArrayList<Product> runningCart;
 
-    private ArrayList<Product> onGoingCart;
-
-    public PurchaseController(){
+    public PurchaseController(MainController mc_){
+       this.mc = mc_;
+       this.view = new PurchaseView(this);
+       this.runningCart = new ArrayList<Product>();
     }
 
-    public void makePurchase(Customer c){
-        Purchase purchase = new Purchase(onGoingCart,c);
-        double total = purchase.getTotal();
-        if (c.getBalance() < total){
-            System.out.println("Not enough money in account");
-            return new Label("Insufficient funds");
+    public ArrayList<Product> getRunningCart() {
+        return runningCart;
+    }
+
+    public void displayCartInfo(TextArea ta){
+        for (Product items: runningCart){
+            ta.appendText("\n"+items.toString());
         }
-        c.setBalance(c.getBalance() - total);
-        for (Product products: cart){
-            int currentStock = products.getStock();
-            products.setStock(currentStock- 1);
-        }
-        return new Label("Customer" + c.getName() + " Paid: "+total + "for " + cart.size() + " items");
+
     }
 
-    public void addToCart(Product p){
-       onGoingCart.add(p);
+    public void setRunningCart(ArrayList<Product> runningCart) {
+        this.runningCart = runningCart;
     }
-
 }

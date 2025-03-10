@@ -40,8 +40,11 @@ public class Product extends Agent{
         return super.getId();
     }
 
+    public String returnToDb(){
+        return super.getId() + "," + super.getName()+ "," + this.price+ "," + this.stock+ "," + this.inStock;
+    }
     @Override
     public String toString(){
-        return super.getId() + "," + super.getName()+ "," + this.price+ "," + this.stock+ "," + this.inStock;
+        return super.getName() + String.valueOf(this.getPrice());
     }
 }

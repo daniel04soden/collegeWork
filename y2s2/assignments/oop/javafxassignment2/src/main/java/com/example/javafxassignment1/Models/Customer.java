@@ -47,8 +47,11 @@ public class Customer extends Agent{
     // Omit idSetter, non-editable value
 
     // Extra functionality
+    public String returnToDb(){
+        return super.getId() + "," + super.getName()+ "," + this.age+ "," + this.email+ "," + this.balance;
+    }
     @Override
     public String toString(){
-        return super.getId() + "," + super.getName()+ "," + this.age+ "," + this.email+ "," + this.balance;
+        return super.getName();
     }
 }

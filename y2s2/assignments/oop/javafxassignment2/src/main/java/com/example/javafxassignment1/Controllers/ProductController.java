@@ -11,8 +11,10 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class ProductController extends BaseController<Product> {
-    public ProductController() {
+    public MainController controller;
+    public ProductController(MainController mc_) {
         super("src/main/java/com/example/javafxassignment1/database/products.txt");
+        this.controller = mc_;
     }
 
     @Override
@@ -61,7 +63,7 @@ public class ProductController extends BaseController<Product> {
     public void save() {
         try (FileWriter saver = new FileWriter(dbPath)) {
             for (Product product : storage) {
-                saver.write(product.toString() + System.lineSeparator());
+                saver.write(product.returnToDb() + System.lineSeparator());
             }
             System.out.println("Saved to " + dbPath);
         } catch (IOException e) {

@@ -1,5 +1,6 @@
 package com.example.javafxassignment1.View;
 
+import com.example.javafxassignment1.Controllers.MainController;
 import com.example.javafxassignment1.MainApplication;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -13,6 +14,10 @@ public class MainView {
     * class simply allows for static use of various different ui elements like
     * buttons and pop-ups
     * */
+    MainController mc ;
+    public MainView(MainController mc_){
+        this.mc = mc_;
+    }
 
     public static void applyCSS(Scene styledScene) {
         String cssSource = "styles.css";
@@ -27,7 +32,7 @@ public class MainView {
         backBtn.setOnAction(_ -> stage.setScene(previous));
         return backBtn;
     }
-    public static void closeConfirmation(Stage stage) {
+    public void closeConfirmation(Stage stage) {
         // Function to prevent instant closing and check if the user has saved or not
         ButtonType saveAndExit = new ButtonType("Save and Exit?");
         ButtonType saveNoExit = new ButtonType("Don\'t save?");
@@ -42,11 +47,12 @@ public class MainView {
 
         ButtonType finalChoice = closeAlert.showAndWait().orElse(ButtonType.CANCEL);
         if (finalChoice == saveAndExit){
-            //TODO - fix CustomerController.saveCustomers(customers);
-            //TODO - fix CustomerController.printCustomers(customers);
             stage.close();
+            mc.cc.save();
+            mc.pc.save();
         }else if (finalChoice == saveNoExit){
             stage.close();
         }
     }
+
 }

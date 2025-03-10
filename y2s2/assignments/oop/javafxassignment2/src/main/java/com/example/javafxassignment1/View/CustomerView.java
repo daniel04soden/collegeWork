@@ -16,15 +16,12 @@ import static com.example.javafxassignment1.View.MainView.backBtn;
 
 public class CustomerView {
     CustomerController controller;
-
     public CustomerView(CustomerController controller_){
         this.controller = controller_;
     }
 
-    public Scene customerHome(Stage stage) {
-        BorderPane root = new BorderPane();
+    public VBox customerHome(Stage stage) {
         // Init the scene
-
         Scene home = new Scene(root, 1000, 500);
         applyCSS(home);
         // Header Bar
@@ -67,12 +64,17 @@ public class CustomerView {
         vertical.setSpacing(25);
         vertical.setAlignment(Pos.CENTER);
 
-        root.setCenter(vertical);
 
-        return home;
+
+        Tab homeCustomerTab = new Tab("Customers",vertical);
+        TabPane myTabs = new TabPane();
+        myTabs.getTabs().addAll(homeCustomerTab);
+
+
+        return vertical;
     }
 
-    public Scene registerPage(Stage stage) {
+    public VBox registerPage(Stage stage) {
 
         BorderPane root = new BorderPane();
         // Init the scene
@@ -155,7 +157,7 @@ public class CustomerView {
         return register;
     }
 
-    public Scene viewCustomers(Stage stage) {
+    public VBox viewCustomers(Stage stage) {
 
         /*
          * Although the specs require the data to be stored in a text area, I find the presentation
@@ -232,7 +234,7 @@ public class CustomerView {
         return view;
     }
 
-    public Scene removePage(Stage stage) {
+    public VBox removePage(Stage stage) {
         BorderPane root = new BorderPane();
         Scene remove = new Scene(root, 1000, 500);
         applyCSS(remove);
@@ -276,7 +278,7 @@ public class CustomerView {
         return remove;
     }
 
-    public Scene loadData(Stage stage) {
+    public VBox loadData(Stage stage) {
         BorderPane root = new BorderPane();
         Scene load = new Scene(root, 1000, 500);
         applyCSS(load);

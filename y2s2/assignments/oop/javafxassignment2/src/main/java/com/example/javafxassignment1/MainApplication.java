@@ -1,12 +1,11 @@
 package com.example.javafxassignment1;
 
 import com.example.javafxassignment1.Controllers.CustomerController;
+import com.example.javafxassignment1.Controllers.MainController;
 import com.example.javafxassignment1.Controllers.ProductController;
-import com.example.javafxassignment1.Controllers.PurchaseController;
 import com.example.javafxassignment1.View.CustomerView;
 import com.example.javafxassignment1.View.MainView;
 import com.example.javafxassignment1.View.ProductView;
-import com.example.javafxassignment1.View.PurchaseView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -20,45 +19,22 @@ public class MainApplication extends Application {
   public void start(Stage stage) throws Exception {
     String title = "DS Computing Customer Management Portal";
     stage.setTitle(title);
+    MainController mc = new MainController();
 
-    CustomerController customerController = new CustomerController();
-    ProductController productController = new ProductController();
+    CustomerController customerController = new CustomerController(mc);
+    ProductController productController = new ProductController(mc);
 
     BorderPane root = new BorderPane();
 
-    TabPane tabPane = new TabPane();
 
-    // Tabs
-    // Product Tab
-    Scene productScene = new ProductView(productController).productHome(stage);
-    Pane productRoot = (Pane) productScene.getRoot(); // Extract root node
-    Tab productTab = new Tab("Products", productRoot);
-
-    // Customer Tab
-    Scene customerScene = new CustomerView(customerController).customerHome(stage);
-    Pane customerRoot = (Pane) customerScene.getRoot(); // Extract root node
-    Tab customerTab = new Tab("Customers", customerRoot);
-
-    // TODO Refactor with borderpanes
-    // Purchase Tab
-    // Scene purchaseScene = new PurchaseView().purchaseHome(stage);
-    // Pane purchaseRoot = (Pane) purchaseScene.getRoot(); // Extract root node
-    // Tab purchaseTab = new Tab("Purchases", purchaseRoot);
-
-    tabPane.getTabs().addAll(productTab, customerTab);
-    root.setCenter(tabPane);
-    PurchaseController purchaseController = new PurchaseController();
-    PurchaseView viewTwo = new PurchaseView(purchaseController,customerController,productController);
-    BorderPane borderpane = viewTwo.mainPurchase(stage);
-
-    Scene home = new Scene(borderpane,1000,500);
+    Scene home = mc.prc.view.mainPurchase(stage);
     applyCSS(home);
     stage.setScene(home);
     stage.setResizable(false);
     stage.show();
     stage.setOnCloseRequest(event -> {
       event.consume();
-       MainView.closeConfirmation(stage);
+      mc.view.closeConfirmation(stage);
     });
 
   }
