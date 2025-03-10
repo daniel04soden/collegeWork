@@ -4,6 +4,7 @@ import com.example.javafxassignment1.Controllers.MainController;
 import com.example.javafxassignment1.MainApplication;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.util.Objects;
@@ -24,14 +25,15 @@ public class MainView {
         styledScene.getStylesheets().add(Objects.requireNonNull(MainApplication.class.getResource(cssSource)).toExternalForm());
     }
 
-    public static Button backBtn(Stage stage, Scene previous) {
+    public static Button backBtn(Stage stage, VBox previous) {
         // Simple repeating button that stops repeating of code, plan on implementing more in Stage 2
         Button backBtn = new Button();
         backBtn.setText("Back");
 
-        backBtn.setOnAction(_ -> stage.setScene(previous));
+        backBtn.setOnAction(_ -> stage.getScene().setRoot(previous));
         return backBtn;
     }
+
     public void closeConfirmation(Stage stage) {
         // Function to prevent instant closing and check if the user has saved or not
         ButtonType saveAndExit = new ButtonType("Save and Exit?");

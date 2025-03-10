@@ -3,15 +3,12 @@ package com.example.javafxassignment1.View;
 import com.example.javafxassignment1.Controllers.CustomerController;
 import com.example.javafxassignment1.Models.Customer;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import static com.example.javafxassignment1.View.MainView.applyCSS;
 import static com.example.javafxassignment1.View.MainView.backBtn;
 
 public class CustomerView {
@@ -21,9 +18,6 @@ public class CustomerView {
     }
 
     public VBox customerHome(Stage stage) {
-        // Init the scene
-        Scene home = new Scene(root, 1000, 500);
-        applyCSS(home);
         // Header Bar
         Label title = new Label();
         title.setText("DS Computing: Management");
@@ -32,30 +26,27 @@ public class CustomerView {
         // Customer Register button
         Button register = new Button();
         register.setText("Register");
-        register.setOnAction(_ -> stage.setScene(registerPage(stage)));
+        register.setOnAction(_ -> stage.getScene().setRoot(registerPage(stage)));
 
         // View Customers button
         Button view = new Button();
         view.setText("View other customers");
-        view.setOnAction(_ -> stage.setScene(viewCustomers(stage)));
+        view.setOnAction(_ -> stage.getScene().setRoot(viewCustomers(stage)));
 
         // Remove Customers button
-
         Button remove = new Button();
         remove.setText("Remove Customers");
-        remove.setOnAction(_ -> stage.setScene(removePage(stage)));
+        remove.setOnAction(_ -> stage.getScene().setRoot(removePage(stage)));
 
         // Load data button
         Button load = new Button();
         load.setText("Load Customer Data");
-        load.setOnAction(_ -> stage.setScene(loadData(stage)));
+        load.setOnAction(_ -> stage.getScene().setRoot(loadData(stage)));
 
         // Save data button
         Button save = new Button();
         save.setText("Save Customer Data");
-        save.setOnAction(_ -> {
-            controller.save();
-        });
+        save.setOnAction(_ -> controller.save());
         // Positioning the Components
 
         HBox titleBar = new HBox(title);
@@ -64,23 +55,10 @@ public class CustomerView {
         vertical.setSpacing(25);
         vertical.setAlignment(Pos.CENTER);
 
-
-
-        Tab homeCustomerTab = new Tab("Customers",vertical);
-        TabPane myTabs = new TabPane();
-        myTabs.getTabs().addAll(homeCustomerTab);
-
-
         return vertical;
     }
 
     public VBox registerPage(Stage stage) {
-
-        BorderPane root = new BorderPane();
-        // Init the scene
-
-        Scene register = new Scene(root, 1000, 500);
-        applyCSS(register);
 
         // Header Bar
         Label title = new Label();
@@ -153,8 +131,7 @@ public class CustomerView {
         vertical.setAlignment(Pos.CENTER);
         vertical.setSpacing(30.0);
 
-        root.setCenter(vertical);
-        return register;
+        return vertical;
     }
 
     public VBox viewCustomers(Stage stage) {
@@ -164,10 +141,6 @@ public class CustomerView {
          * of the data to be a lot clearer in the table format, I understand if I lose marks but this is
          * the best way to achieve viewing in my opinion
          * */
-        BorderPane root = new BorderPane();
-        Scene view = new Scene(root, 1000, 500);
-        applyCSS(view);
-        // Heading
 
         Label title = new Label();
         title.setText("View All customers");
@@ -221,8 +194,6 @@ public class CustomerView {
             for (Customer customer : controller.getStorage()) {
                 if (customer.getId() == Integer.parseInt(idSearchInput.getText())) {
                     table.getItems().add(customer);
-                }else{
-                    continue;
                 }
             }
 
@@ -230,14 +201,13 @@ public class CustomerView {
 
         HBox actionButtons = new HBox(list, searchBlock);
         VBox main = new VBox(titleBar, actionButtons, table, backbtn);
-        root.setCenter(main);
-        return view;
+        main.setAlignment(Pos.CENTER);
+        main.setSpacing(30.0);
+
+        return main;
     }
 
     public VBox removePage(Stage stage) {
-        BorderPane root = new BorderPane();
-        Scene remove = new Scene(root, 1000, 500);
-        applyCSS(remove);
         // Header Bar
         Label title = new Label();
         title.setText("DS Computing: Remove a customer");
@@ -273,15 +243,11 @@ public class CustomerView {
         vertical.setAlignment(Pos.CENTER);
         vertical.setSpacing(30.0);
 
-        root.setCenter(vertical);
 
-        return remove;
+        return vertical;
     }
 
     public VBox loadData(Stage stage) {
-        BorderPane root = new BorderPane();
-        Scene load = new Scene(root, 1000, 500);
-        applyCSS(load);
         // Header
         Label title = new Label();
 
@@ -300,20 +266,17 @@ public class CustomerView {
         // load Button
         Button loadData = new Button();
         loadData.setText("Load Saved Store");
-        loadData.setOnAction(_ -> {
-            controller.load();
-        });
+        loadData.setOnAction(_ -> controller.load());
 
         Button backbtn = backBtn(stage, customerHome(stage));
 
         // create a VBox
         VBox vbox = new VBox(30, titleBox,warning ,loadData,backbtn);
-
         // set Alignment
         vbox.setAlignment(Pos.CENTER);
-        root.setCenter(vbox);
+        vbox.setSpacing(30);
         // create a scene
 
-        return load;
+        return vbox;
     }
 }

@@ -5,12 +5,10 @@ import com.example.javafxassignment1.Models.Customer;
 import com.example.javafxassignment1.Models.Product;
 import com.example.javafxassignment1.Models.Purchase;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -23,7 +21,7 @@ public class PurchaseView {
     public PurchaseView(PurchaseController prc_){
        this.prc = prc_;
     }
-    public Scene mainPurchase(Stage stage) {
+    public VBox mainPurchase(Stage stage) {
         // Header Bar
 
         Label title = new Label();
@@ -96,8 +94,6 @@ public class PurchaseView {
         vertical.setAlignment(Pos.CENTER);
         vertical.setSpacing(30.0);
 
-        BorderPane root = new BorderPane(vertical);
-        root.setCenter(vertical);
-        return new Scene(root, 1000,500);
+        return vertical;
     }
 }

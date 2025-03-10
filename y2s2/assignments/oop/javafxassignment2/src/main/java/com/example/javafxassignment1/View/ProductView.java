@@ -1,18 +1,15 @@
 package com.example.javafxassignment1.View;
 
-import static com.example.javafxassignment1.View.MainView.applyCSS;
-import static com.example.javafxassignment1.View.MainView.backBtn;
-
 import com.example.javafxassignment1.Controllers.ProductController;
 import com.example.javafxassignment1.Models.Product;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import static com.example.javafxassignment1.View.MainView.backBtn;
 
 public class ProductView {
 
@@ -22,12 +19,7 @@ public class ProductView {
         this.controller = controller_;
     }
 
-    public Scene productHome(Stage stage) {
-        BorderPane root = new BorderPane();
-        // Init the scene
-
-        Scene home = new Scene(root, 1000, 500);
-        applyCSS(home);
+    public VBox productHome(Stage stage) {
         // Header Bar
         Label title = new Label();
         title.setText("DS Computing: Products");
@@ -36,30 +28,24 @@ public class ProductView {
         // Item Register button
         Button register = new Button();
         register.setText("Register New Products");
-        register.setOnAction(_ -> stage.setScene(productRegisterPage(stage)));
 
         // View items button
         Button view = new Button();
         view.setText("All products");
-        view.setOnAction(_ -> stage.setScene(viewProducts(stage)));
 
         // Remove product button
 
         Button remove = new Button();
         remove.setText("Remove Products");
-        remove.setOnAction(_ -> stage.setScene(removeProduct(stage)));
 
         // Load data button
         Button load = new Button();
         load.setText("Load Products");
-        load.setOnAction(_ -> stage.setScene(loadProducts(stage)));
 
         // Save data button
         Button save = new Button();
         save.setText("Save Products");
-        save.setOnAction(_ -> {
-            controller.save();
-        });
+        save.setOnAction(_ -> controller.save());
         // Positioning the Components
 
         HBox titleBar = new HBox(title);
@@ -68,17 +54,17 @@ public class ProductView {
         vertical.setSpacing(25);
         vertical.setAlignment(Pos.CENTER);
 
-        root.setCenter(vertical);
+        // Button actions
 
-        return home;
+        register.setOnAction(_ -> stage.getScene().setRoot(productRegisterPage(stage)));
+        view.setOnAction(_ -> stage.getScene().setRoot(viewProducts(stage)));
+        remove.setOnAction(_ -> stage.getScene().setRoot(removeProduct(stage)));
+        load.setOnAction(_ -> stage.getScene().setRoot(loadProducts(stage)));
+
+        return vertical;
     }
 
-    public Scene productRegisterPage(Stage stage) {
-        BorderPane root = new BorderPane();
-        // Init the scene
-
-        Scene register = new Scene(root, 1000, 500);
-        applyCSS(register);
+    public VBox productRegisterPage(Stage stage) {
 
         // Header Bar
         Label title = new Label();
@@ -136,7 +122,7 @@ public class ProductView {
             clearInputFields.run();
         });
         // Back button
-        Button backbtn = backBtn(stage, productHome(stage));
+        Button backbtn = backBtn(stage,productHome(stage));
         // Button hbox
         HBox buttons = new HBox(clear, submit, backbtn);
         buttons.setAlignment(Pos.CENTER);
@@ -154,8 +140,7 @@ public class ProductView {
         vertical.setAlignment(Pos.CENTER);
         vertical.setSpacing(30.0);
 
-        root.setCenter(vertical);
-        return register;
+        return vertical;
     }
 
     public VBox viewProducts(Stage stage) {
@@ -164,9 +149,6 @@ public class ProductView {
          * of the data to be a lot clearer in the table format, I understand if I lose marks but this is
          * the best way to achieve viewing in my opinion
          * */
-        BorderPane root = new BorderPane();
-        Scene view = new Scene(root, 1000, 500);
-        applyCSS(view);
         // Heading
 
         Label title = new Label();
@@ -241,15 +223,13 @@ public class ProductView {
         });
 
         HBox actionButtons = new HBox(list, searchBlock);
-        VBox main = new VBox(titleBar, actionButtons, table, backbtn);
-        root.setCenter(main);
-        return view;
+        VBox vertical = new VBox(titleBar, actionButtons, table, backbtn);
+        vertical.setAlignment(Pos.CENTER);
+        vertical.setSpacing(30.0);
+        return vertical;
     }
 
-    public Scene removeProduct(Stage stage) {
-        BorderPane root = new BorderPane();
-        Scene remove = new Scene(root, 1000, 500);
-        applyCSS(remove);
+    public VBox removeProduct(Stage stage) {
         // Header Bar
         Label title = new Label();
         title.setText("DS Computing: Remove a product");
@@ -283,16 +263,10 @@ public class ProductView {
         VBox vertical = new VBox(titleBar, idBlock, buttonSubmit);
         vertical.setAlignment(Pos.CENTER);
         vertical.setSpacing(30.0);
-
-        root.setCenter(vertical);
-
-        return remove;
+        return vertical;
     }
 
-    public Scene loadProducts(Stage stage) {
-        BorderPane root = new BorderPane();
-        Scene load = new Scene(root, 1000, 500);
-        applyCSS(load);
+    public VBox loadProducts(Stage stage) {
         // Header
         Label title = new Label();
 
@@ -321,12 +295,11 @@ public class ProductView {
 
         // create a VBox
         VBox vbox = new VBox(30, titleBox, warning, loadData, backbtn);
+        vbox.setAlignment(Pos.CENTER);
+        vbox.setSpacing(30.0);
+
 
         // set Alignment
-        vbox.setAlignment(Pos.CENTER);
-        root.setCenter(vbox);
-        // create a scene
-
-        return load;
+        return vbox;
     }
 }

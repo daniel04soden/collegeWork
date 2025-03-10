@@ -1,7 +1,7 @@
 package com.example.javafxassignment1.Controllers;
 
 import com.example.javafxassignment1.Models.Customer;
-import com.sun.tools.javac.Main;
+import com.example.javafxassignment1.View.CustomerView;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,9 +13,11 @@ import java.util.Scanner;
 
 public class CustomerController extends BaseController<Customer> {
   public MainController controller;
+  public CustomerView view;
   public CustomerController(MainController mc_) {
     super("src/main/java/com/example/javafxassignment1/database/customers.txt");
     this.controller = mc_;
+    this.view = new CustomerView(this);
   }
 
   @Override
@@ -67,6 +69,7 @@ public class CustomerController extends BaseController<Customer> {
     try (FileWriter saver = new FileWriter(dbPath)) {
       for (Customer customer : storage) {
         saver.write(customer.returnToDb() + System.lineSeparator());
+        System.out.println(customer.getId()+customer.getName());
       }
       System.out.println("Saved to " + dbPath);
     } catch (IOException e) {
