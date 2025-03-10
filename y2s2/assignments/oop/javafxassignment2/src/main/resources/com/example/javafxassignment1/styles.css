@@ -9,6 +9,13 @@
     -fx-border-width: 2;
 }
 
+.button:hover{
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-border-color: black;
+    -fx-border-width: 2;
+}
+
 
 .root{
     -fx-font-family: "minecraft";

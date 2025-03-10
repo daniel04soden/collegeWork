@@ -1,23 +1,24 @@
 package com.example.javafxassignment1.View;
 
+import static com.example.javafxassignment1.View.MainView.applyCSS;
+import static com.example.javafxassignment1.View.MainView.backBtn;
+
 import com.example.javafxassignment1.Controllers.ProductController;
 import com.example.javafxassignment1.Models.Product;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-        import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import static com.example.javafxassignment1.View.MainView.applyCSS;
-import static com.example.javafxassignment1.View.MainView.backBtn;
-
 public class ProductView {
+
     ProductController controller;
 
-    public ProductView(ProductController controller_){
+    public ProductView(ProductController controller_) {
         this.controller = controller_;
     }
 
@@ -63,7 +64,7 @@ public class ProductView {
 
         HBox titleBar = new HBox(title);
         titleBar.setAlignment(Pos.CENTER);
-        VBox vertical = new VBox(titleBar, register, view, remove, load,save);
+        VBox vertical = new VBox(titleBar, register, view, remove, load, save);
         vertical.setSpacing(25);
         vertical.setAlignment(Pos.CENTER);
 
@@ -73,7 +74,6 @@ public class ProductView {
     }
 
     public Scene productRegisterPage(Stage stage) {
-
         BorderPane root = new BorderPane();
         // Init the scene
 
@@ -97,7 +97,7 @@ public class ProductView {
 
         Label stockLabel = new Label("Stock");
         TextField stockInput = new TextField();
-        HBox stockBlock = new HBox(stockLabel,  stockInput);
+        HBox stockBlock = new HBox(stockLabel, stockInput);
         stockBlock.setAlignment(Pos.CENTER);
 
         // Balance hbox label and input
@@ -129,7 +129,11 @@ public class ProductView {
         submit.setText("Submit");
         submit.setOnAction(_ -> {
             ProductController productController = new ProductController();
-            productController.add(nameInput.getText(),stockInput.getText(), priceInput.getText());
+            productController.add(
+                nameInput.getText(),
+                stockInput.getText(),
+                priceInput.getText()
+            );
             clearInputFields.run();
         });
         // Back button
@@ -141,7 +145,13 @@ public class ProductView {
 
         // put all into this vbox
 
-        VBox vertical = new VBox(titleBar, nameBlock, stockBlock,priceBlock, buttons);
+        VBox vertical = new VBox(
+            titleBar,
+            nameBlock,
+            stockBlock,
+            priceBlock,
+            buttons
+        );
         vertical.setAlignment(Pos.CENTER);
         vertical.setSpacing(30.0);
 
@@ -150,7 +160,6 @@ public class ProductView {
     }
 
     public Scene viewProducts(Stage stage) {
-
         /*
          * Although the specs require the data to be stored in a text area, I find the presentation
          * of the data to be a lot clearer in the table format, I understand if I lose marks but this is
@@ -178,10 +187,22 @@ public class ProductView {
         stockColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         TableColumn<Product, Double> priceColumn = new TableColumn<>("Price");
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-        TableColumn<Product, Boolean> stockBoolColumn = new TableColumn<>("In Stock");
-        stockBoolColumn.setCellValueFactory(new PropertyValueFactory<>("inStock"));
+        TableColumn<Product, Boolean> stockBoolColumn = new TableColumn<>(
+            "In Stock"
+        );
+        stockBoolColumn.setCellValueFactory(
+            new PropertyValueFactory<>("inStock")
+        );
 
-        table.getColumns().addAll(idColumn, nameColumn, stockColumn, priceColumn,stockBoolColumn);
+        table
+            .getColumns()
+            .addAll(
+                idColumn,
+                nameColumn,
+                stockColumn,
+                priceColumn,
+                stockBoolColumn
+            );
         // Buttons to view attributes
 
         Button backbtn = backBtn(stage, productHome(stage));
@@ -192,7 +213,6 @@ public class ProductView {
         list.setOnAction(_ -> {
             table.getItems().clear(); // clearing previous data
             table.getItems().addAll(controller.getStorage());
-
         });
 
         // Search button
@@ -211,13 +231,14 @@ public class ProductView {
         find.setOnAction(_ -> {
             table.getItems().clear(); // clearing previous data
             for (Product product : controller.getStorage()) {
-                if (product.getId() == Integer.parseInt(idSearchInput.getText())) {
+                if (
+                    product.getId() == Integer.parseInt(idSearchInput.getText())
+                ) {
                     table.getItems().add(product);
-                }else{
+                } else {
                     continue;
                 }
             }
-
         });
 
         HBox actionButtons = new HBox(list, searchBlock);
@@ -251,7 +272,6 @@ public class ProductView {
             ProductController productController = new ProductController();
             int removeId = Integer.parseInt(idInput.getText());
             productController.delete(removeId);
-
         });
         // Back button
         Button backbtn = backBtn(stage, productHome(stage));
@@ -287,7 +307,9 @@ public class ProductView {
         // set title for the stage
         stage.setTitle(title.getText());
         Label warning = new Label();
-        warning.setText("Warning, loading will delete all newly added products!!");
+        warning.setText(
+            "Warning, loading will delete all newly added products!!"
+        );
         // Standard file loading
 
         // load Button
@@ -301,7 +323,7 @@ public class ProductView {
         Button backbtn = backBtn(stage, productHome(stage));
 
         // create a VBox
-        VBox vbox = new VBox(30, titleBox,warning ,loadData,backbtn);
+        VBox vbox = new VBox(30, titleBox, warning, loadData, backbtn);
 
         // set Alignment
         vbox.setAlignment(Pos.CENTER);

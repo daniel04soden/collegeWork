@@ -2,9 +2,11 @@ package com.example.javafxassignment1;
 
 import com.example.javafxassignment1.Controllers.CustomerController;
 import com.example.javafxassignment1.Controllers.ProductController;
+import com.example.javafxassignment1.Controllers.PurchaseController;
 import com.example.javafxassignment1.View.CustomerView;
 import com.example.javafxassignment1.View.MainView;
 import com.example.javafxassignment1.View.ProductView;
+import com.example.javafxassignment1.View.PurchaseView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -45,8 +47,11 @@ public class MainApplication extends Application {
 
     tabPane.getTabs().addAll(productTab, customerTab);
     root.setCenter(tabPane);
+    PurchaseController purchaseController = new PurchaseController();
+    PurchaseView viewTwo = new PurchaseView(purchaseController,customerController,productController);
+    BorderPane borderpane = viewTwo.mainPurchase(stage);
 
-    Scene home = new Scene(root,1000,500);
+    Scene home = new Scene(borderpane,1000,500);
     applyCSS(home);
     stage.setScene(home);
     stage.setResizable(false);

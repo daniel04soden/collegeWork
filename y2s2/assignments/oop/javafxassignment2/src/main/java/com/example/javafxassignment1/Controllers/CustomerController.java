@@ -54,7 +54,7 @@ public class CustomerController extends BaseController<Customer> {
         add(name, email, age, balance);
       }
     } catch (FileNotFoundException e) {
-      System.out.println("An error occurred.");
+      System.out.println("An error occurred, file not found");
       System.out.println(Arrays.toString(e.getStackTrace()));
     }
   }
