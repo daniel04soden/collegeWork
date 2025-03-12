@@ -19,9 +19,6 @@ public class MainApplication extends Application {
     stage.setTitle(title);
     MainController mc = new MainController();
 
-    CustomerController customerController = new CustomerController(mc);
-    ProductController productController = new ProductController(mc);
-
     TabPane mainPane = new TabPane();
     Tab tab1 = new Tab("Customers");
     tab1.setClosable(false);
