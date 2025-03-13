@@ -2,8 +2,8 @@ public class GraphAdjMatrix extends AbstractGraph {
 
     private final double[][] adjMatrix;
 
-    public GraphAdjMatrix(int noOfVertices, boolean directed) {
-        super(noOfVertices, directed); // Assigning the universal graph attributes 
+    public GraphAdjMatrix(int noOfVertices, boolean directed) { // Compact way to represent sparse graphs
+        super(noOfVertices, directed); // Assigning the universal graph attributes
         adjMatrix = new double[noOfVertices][noOfVertices];
         for (int i = 0; i < adjMatrix.length; i++) { // Filling up the edges as Double NaN to assert no edges
             for (int j = 0; j < adjMatrix.length; j++) {
@@ -22,22 +22,22 @@ public class GraphAdjMatrix extends AbstractGraph {
         }
         this.adjMatrix[source][destination] = weight; // Natural behaviour assumes directed,from source to destination
     }
+
     public void removeEdge(int source, int destination) {
         this.adjMatrix[source][destination] = Double.NaN; // By default, remove from source to destination
-        if (!this.directed) { // Remove other side if undirected 
+        if (!this.directed) { // Remove other side if undirected
             this.adjMatrix[destination][source] = Double.NaN;
         }
     }
 
     public double getWeight(int source, int destination) {
         return adjMatrix[source][destination]; // Simple return of value from
-                                               // source to destination
+        // source to destination
     }
 
     public int[] getNeighbours(int vertex) {
-        int size = 0; // Used to determine the future neighbours array size
         double[] edges = new double[noOfVertices]; // Making the array for all potential edges on vertices
-                                                   
+
         for (int vertexNo = 0; vertexNo < noOfVertices; vertexNo++) { // Looping over said array
             if (!Double.isNaN(adjMatrix[vertex][vertexNo])) { // If its not a NaN increase our neighbour list size
                 edges[vertexNo] = vertexNo; // Edges vertexNo assigned
@@ -61,28 +61,30 @@ public class GraphAdjMatrix extends AbstractGraph {
     }
 
     public int getDegree(int vertex) {
-        int degree = 0; 
+        int degree = 0;
         if (!directed) { // If undirected
             for (int i = 0; i < noOfVertices; i++) {
                 if (
                     !Double.isNaN(adjMatrix[i][vertex]) ||
-                    !Double.isNaN(adjMatrix[vertex][i])  // Or rather than
-                                                         // individual checks,
-                                                         // works for
-                                                         // undirected
-                ) {           // Either direction - stops double counting
+                    !Double.isNaN(adjMatrix[vertex][i]) // Or rather than
+                    // individual checks,
+                    // works for
+                    // undirected
+                ) { // Either direction - stops double counting
                     degree++;
                 }
             }
         } else {
             for (int i = 0; i < noOfVertices; i++) {
-                if (!Double.isNaN(adjMatrix[vertex][i])) { // Checks source to
-                                                           // destination first
+                // Two separate if checks so that they are independently looked for, ie
+                // say if one is met, it wont ignore the other
+                if (!Double.isNaN(adjMatrix[vertex][i])) { // Checks source to (out degree)
+                    // destination first
                     degree++;
                 }
-                if (!Double.isNaN(adjMatrix[i][vertex])) { // Then increases
-                                                           // only if the
-                                                           // otherside also 
+                if (!Double.isNaN(adjMatrix[i][vertex])) { // Then increases (in degree)
+                    // only if the
+                    // otherside also
                     degree++;
                 }
             }
@@ -91,7 +93,7 @@ public class GraphAdjMatrix extends AbstractGraph {
     }
 
     public boolean isPath(int[] nodes) {
-        int n = nodes.length;  
+        int n = nodes.length;
         for (int i = 0; i < n - 1; i++) {
             int currentSource = nodes[i];
             int nextDest = nodes[i + 1]; // For comparison and readability
@@ -101,7 +103,7 @@ public class GraphAdjMatrix extends AbstractGraph {
             }
         }
         return true; // If double nan never found - through comparison has to
-                     // be a path
+        // be a path
     }
 
     public int getNoOfEdges() {
@@ -109,7 +111,7 @@ public class GraphAdjMatrix extends AbstractGraph {
         for (int i = 0; i < noOfVertices; i++) {
             for (int j = 0; j < noOfVertices; j++) {
                 if (!(Double.isNaN(adjMatrix[i][j]))) { // If not double nan,
-                                                        // has to be an edge
+                    // has to be an edge
                     countNoOfEdges++;
                 } else {
                     continue;
@@ -118,7 +120,7 @@ public class GraphAdjMatrix extends AbstractGraph {
         }
         if (!directed) {
             countNoOfEdges = countNoOfEdges / 2; // if undirected, edges simply
-                                                 // divided by 2
+            // divided by 2
         }
         return countNoOfEdges;
     }

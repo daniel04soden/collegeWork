@@ -5,27 +5,29 @@ public class GraphAdjList extends AbstractGraph {
     private record Edge(int destination, double weight) {}
 
     private LinkedList<Edge>[] neighbours; // Array of linkedlists which
-                                           // conatain different edges
+
+    // conatain different edges
 
     // Constructor
     public GraphAdjList(int noOfVertices, boolean directed) {
         super(noOfVertices, directed); // Graph attributes
         this.neighbours = new LinkedList[noOfVertices]; // Neighbours are the
-                                                        // linkedlist of edges
+        // linkedlist of edges
         for (int i = 0; i < noOfVertices; i++) {
             neighbours[i] = new LinkedList<Edge>(); // Filling up the array with linkedlists of edges
         }
     }
 
     public void addEdge(int source, int destination, double weight) {
-        if (!directed) { 
-          // Ensuring no duplicate values
-            boolean isDuplicate = neighbours[source].contains(new Edge(destination, weight)); 
-            if ((source == destination) || isDuplicate) {// Prevenitng self
-                                                         // loops
+        if (!directed) {
+            // Ensuring no duplicate values
+            boolean isDuplicate =
+                neighbours[source].contains(new Edge(destination, weight));
+            if ((source == destination) || isDuplicate) { // Prevenitng self
+                // loops
                 return;
             } else {
-              // If all conditions okay, add undirected edge
+                // If all conditions okay, add undirected edge
                 neighbours[destination].add(new Edge(source, weight));
             }
         }
@@ -34,13 +36,13 @@ public class GraphAdjList extends AbstractGraph {
     }
 
     public void removeEdge(int source, int destination) {
-      // first do undirected removal, we happen regardless
+        // first do undirected removal, we happen regardless
         for (Edge e : neighbours[source]) { // Loop over the neighbours at the index of the source vertex
             if (e.destination == destination) { // If destination found
                 neighbours[source].remove(e); // If so, remove the edge from source to destination
             }
         }
-      // Then check for undirected removal
+        // Then check for undirected removal
         if (!directed) {
             for (Edge e : neighbours[destination]) {
                 if (e.destination == source) { // If source found
@@ -94,7 +96,7 @@ public class GraphAdjList extends AbstractGraph {
             degree += myNeighbours.length;
         } else {
             int inDegree = 0;
-            int outDegree = myNeighbours.length; // Outdegree is the neighbours 
+            int outDegree = myNeighbours.length; // Outdegree is the neighbours
 
             for (int i = 0; i < noOfVertices; i++) {
                 if (!(Double.isNaN(getWeight(i, vertex)))) {
@@ -112,7 +114,7 @@ public class GraphAdjList extends AbstractGraph {
             int currentSource = nodes[i];
             int nextDest = nodes[i + 1];
             // Simply compare weight of current and next node in potential path
-            if (Double.isNaN(getWeight(currentSource, nextDest))) { 
+            if (Double.isNaN(getWeight(currentSource, nextDest))) {
                 return false; // False if not existenet (doublenan)
             }
         }
@@ -131,7 +133,7 @@ public class GraphAdjList extends AbstractGraph {
             }
         }
         if (!directed) {
-            countNoOfEdges = countNoOfEdges / 2; // if undirected, divide by 2 
+            countNoOfEdges = countNoOfEdges / 2; // if undirected, divide by 2
         }
         return countNoOfEdges;
     }
