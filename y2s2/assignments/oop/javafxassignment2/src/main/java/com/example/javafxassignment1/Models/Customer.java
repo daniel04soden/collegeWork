@@ -1,6 +1,6 @@
 package com.example.javafxassignment1.Models;
 
-public class Customer extends Agent{
+public class Customer extends Agent implements java.io.Serializable{
     private String email;
     private int age;
     private double balance;
@@ -28,7 +28,7 @@ public class Customer extends Agent{
 
     // Setters
 
-    void setEmail(String newEmail){
+    public void setEmail(String newEmail){
         String emailRegex = "/^\\S+@\\S+\\.\\S+$/";
         if (newEmail.matches(emailRegex)){
             this.email = newEmail;

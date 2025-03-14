@@ -2,7 +2,7 @@ package com.example.javafxassignment1.Models;
 
 import java.util.ArrayList;
 
-public class Purchase {
+public class Purchase implements java.io.Serializable{
     ArrayList<Product> cart;
     private Customer buyer;
 

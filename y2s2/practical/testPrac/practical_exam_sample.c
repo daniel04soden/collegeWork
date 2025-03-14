@@ -67,15 +67,19 @@ int *concat(int *arr1,int *arr2, int len1, int len2){
  * parameter.
  */
 
-int* interleave(int **lists, int count,int *sizes){
-  int* res;
+int* interleave(int **lists, int count,int *sizes, int *resultLen){
+  for (int i =0; i < count; i++) {
+    *resultLen += sizes[i];
+  }
+  int *resultArr = malloc(sizeof(int)* (*resultLen));
+
   for (int i = 0; i<count; i++) {
     for (int j = 0; j<*sizes; j++) {
-      res[i] = lists[i][j];
+      resultArr[i] = lists[i][j];
     }     
   }
 
-  return res;
+  return resultArr;
 }
 
 /**
