@@ -1,21 +1,5 @@
-# OOP Project work
+- [ ] NoSQL - Assignment 3
+	- [ ] - Task 1
+	- [ ] Task 2
+	- [ ] Task 3
 
-- [x] Achieve MVC model ⏫ ✅ 2025-03-09
-	- [x] Fix up original with customers,view and controller ✅ 2025-03-09
-	- [x] Work on product mvc ✅ 2025-03-09
-	- No order view??
-- [ ] Create tabpanes and switching
-	- [ ] Tab pane 1 - Same as original just less features
-		- [x] Add (Register as a customer) ✅ 2025-03-09
-		- [x] View other customers ✅ 2025-03-09
-		- [x] Keep removal - password needed ✅ 2025-03-09
-			- [ ] Figure out if incorrect have elements display 
-	- [ ] Tab pane 2 - Purchase page
-		- [ ] Purchase object rather than order
-		- [ ] Use list items in menu drop-down 
-		- [ ] List customers in menu drop down - name attached to id 
-		- [ ] Multiple items adding to cart?
-		- [ ] good layout
-	- [ ] Tab pane 3 - Products page
-		- [x] Same crud operations as customer honestly ✅ 2025-03-09
-		- [x] Simply create products, remove, update price ✅ 2025-03-09

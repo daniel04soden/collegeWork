@@ -1,13 +1,13 @@
 # Monday
-- [ ] Object Oriented Programming - MCQ 
-- [ ] Object Oriented Programming - Assignment
+- [x] Object Oriented Programming - MCQ ✅ 2025-03-19
+- [x] Object Oriented Programming - Assignment ✅ 2025-03-19
 # Tuesday
-- [ ] Object Oriented Analysis  - In lab assessment
+- [x] Object Oriented Analysis  - In lab assessment ✅ 2025-03-19
 # Wednesday
 - None
 # Thursday
-- [ ] Statistics - Paper exam
-- [ ] NLDSA  - Explanation
+- [x] Statistics - Paper exam ✅ 2025-03-19
+- [x] NLDSA  - Explanation ✅ 2025-03-19
 
 # Friday
-- [ ] C programming - Lab exam
+- [x] C programming - Lab exam ✅ 2025-03-19

@@ -1,14 +1,19 @@
 package com.example.javafxassignment1.Models;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class Purchase implements java.io.Serializable{
-    ArrayList<Product> cart;
+    private ArrayList<Product> cart;
     private Customer buyer;
+    private LocalDate purchaseDate;
 
     public Purchase(Customer buyingCustomer,ArrayList<Product> cart_){
         this.buyer = buyingCustomer;
         this.cart = cart_;
+        this.purchaseDate = LocalDate.from(LocalDateTime.now());
     }
 
     public double calcTotal(){
@@ -17,6 +22,11 @@ public class Purchase implements java.io.Serializable{
             total+=products.getPrice();
         }
         return total;
+    }
+    public String getDate(){
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formatDate = this.purchaseDate.format(myFormatObj);
+        return formatDate;
     }
 
     public boolean confirmPurchase(){
@@ -51,6 +61,7 @@ public class Purchase implements java.io.Serializable{
 
     @Override
     public String toString(){
-        return "Buyer: " + buyer.toString() + " bought " + cart.size() + " items for a total of €" + calcTotal();
+        return "Buyer: " + buyer.toString() + " bought " + cart.size() + " items for a total of €" + calcTotal()
+                + "Date/Time of purchase " + getDate();
     }
 }
