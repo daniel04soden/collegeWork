@@ -1,5 +1,7 @@
 package assignment2;
 
+import java.util.Map;
+
 public class LongestCommonSubsequence {
 
     private final String X;
@@ -11,22 +13,11 @@ public class LongestCommonSubsequence {
     }
 
     public String compare() {
-        String res = "";
+        String res;
         int m = X.length();
         int n = Y.length();
 
         int[][] matrix = new int[m + 1][n + 1];
-        if (n == 0 || m == 0) return res;
-
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-               if () {
-
-               }else{
-
-               }
-            }
-        }
 
         return res;
     }
