@@ -2,4 +2,4 @@
 2,Daniel,25,dsoden09@gmail.com,124.54
 3,Daniel,12,dsoden09@gmail.com,6000.02
 4,Bruno,24,bruno@gmail.com,72000.04000000001
-5,DSoden,20,dsoden09@hotmail.com,45000.0
+5,DSoden,20,dsoden09@hotmail.com,43500.020000000004

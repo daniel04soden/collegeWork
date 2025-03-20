@@ -1,19 +1,19 @@
 package com.example.javafxassignment1.Models;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.time.LocalDate;
+import java.util.Date;
+import java.io.*;
 
-public class Purchase implements java.io.Serializable{
+public class Purchase implements Serializable{
     private ArrayList<Product> cart;
     private Customer buyer;
-    private LocalDate purchaseDate;
+    private final Date timeOfPurchase;
 
     public Purchase(Customer buyingCustomer,ArrayList<Product> cart_){
         this.buyer = buyingCustomer;
         this.cart = cart_;
-        this.purchaseDate = LocalDate.from(LocalDateTime.now());
+        this.timeOfPurchase = new Date();
     }
 
     public double calcTotal(){
@@ -23,10 +23,20 @@ public class Purchase implements java.io.Serializable{
         }
         return total;
     }
+
+    public Date getTimeOfPurchase() {
+        return timeOfPurchase;
+    }
+
+    // Separate date and time getters, mainly used to get them as a string
     public String getDate(){
-        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        String formatDate = this.purchaseDate.format(myFormatObj);
-        return formatDate;
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        return formatter.format(this.timeOfPurchase);
+    }
+
+    public String getTime(){
+        SimpleDateFormat formatter = new SimpleDateFormat("hh:mm");
+        return formatter.format(this.timeOfPurchase);
     }
 
     public boolean confirmPurchase(){
@@ -62,6 +72,11 @@ public class Purchase implements java.io.Serializable{
     @Override
     public String toString(){
         return "Buyer: " + buyer.toString() + " bought " + cart.size() + " items for a total of €" + calcTotal()
-                + "Date/Time of purchase " + getDate();
+                + " \nDate/Time of purchase " + getDate() + "\t" + getTime();
     }
+
+    public int compareTo(Purchase other) {
+        return this.timeOfPurchase.compareTo(other.getTimeOfPurchase());
+    }
+}
 }
