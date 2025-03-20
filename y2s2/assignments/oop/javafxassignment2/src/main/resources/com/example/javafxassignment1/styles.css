@@ -10,16 +10,16 @@
 }
 
 .button:hover{
-    -fx-background-color: white;
-    -fx-text-fill: black;
-    -fx-border-color: black;
-    -fx-border-width: 2;
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-border-color: white;
+    -fx-border-width: 4;
 }
 
 
 .root{
     -fx-font-family: "minecraft";
-    -fx-background-image: url(minecraft.jpg);
+    -fx-background-image: url(minetwo.gif);
     -fx-background-repeat: stretch;
     -fx-background-size: 900 506;
     -fx-background-position: center center;
