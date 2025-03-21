@@ -75,8 +75,7 @@ public class Purchase implements Serializable{
                 + " \nDate/Time of purchase " + getDate() + "\t" + getTime();
     }
 
-    public int compareTo(Purchase other) {
-        return this.timeOfPurchase.compareTo(other.getTimeOfPurchase());
-    }
-}
+    // public int compareTo(Purchase other) {
+        // return this.timeOfPurchase.compareTo(other.getTimeOfPurchase());
+    // }
 }

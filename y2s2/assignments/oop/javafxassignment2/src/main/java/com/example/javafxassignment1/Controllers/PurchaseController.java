@@ -25,7 +25,7 @@ public class PurchaseController {
     // public TextArea displayCurrentPurchases();
 
     public void sortPurchases(){
-        Collections.sort(purchases);
+       // Collections.sort(purchases);
     }
 
     public ArrayList<Product> getRunningCart() {
