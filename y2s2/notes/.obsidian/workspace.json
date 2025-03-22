@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "8eafd8fa697eaf8d",
@@ -180,6 +181,14 @@
   },
   "active": "0636d044533224f2",
   "lastOpenFiles": [
+    "OOP/brocodework/target/classes/Main/hello-view.fxml",
+    "OOP/brocodework/target/classes/Main/MainController.class",
+    "OOP/brocodework/target/classes/Main/MainApplication.class",
+    "OOP/brocodework/target/classes/module-info.class",
+    "OOP/brocodework/target/classes/Main",
+    "OOP/brocodework/target/test-classes",
+    "OOP/brocodework/target/classes",
+    "OOP/brocodework/target",
     "TODO/Next Week exams.md",
     "Year 2 Semester 2 Breakdown.md",
     "TODO/TODO.md",
@@ -187,7 +196,6 @@
     "Statistics/Sampling theory.md",
     "OOAnalysis/Sequence Diagrams.md",
     "OOP/Serial,cloning etc.md",
-    "OOP/brocodework/target/classes/module-info.class",
     "OOAnalysis/The Object Model.md",
     "Statistics/Binomial Distribution.md",
     "SideWork/Golang/Go basics.md",
@@ -209,14 +217,7 @@
     "NONLin/Performance/Recurrences.md",
     "NONLin/Performance/Induction Substitution.md",
     "OOAnalysis/Modelling Roles.md",
-    "NoSQL/RDBMS",
-    "NoSQL/Nosql Start",
     "NONLin/Graphs/Trees/Traversing a Binary tree.md",
-    "NONLin/Graphs/Graphs - Continued.md",
-    "Untitled.canvas",
-    "OOP/brocodework/target/classes/Main/hello-view.fxml",
-    "OOP/brocodework/target/classes/Main/MainController.class",
-    "OOP/brocodework/target/classes/Main/MainApplication.class",
-    "OOP/brocodework/target/classes/Main"
+    "Untitled.canvas"
   ]
 }

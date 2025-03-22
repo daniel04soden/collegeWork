@@ -5,15 +5,15 @@ import com.example.javafxassignment1.Models.Customer;
 import com.example.javafxassignment1.Models.Product;
 import com.example.javafxassignment1.Models.Purchase;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+
+import static com.example.javafxassignment1.View.MainView.backBtn;
 
 public class PurchaseView {
     private PurchaseController prc;
@@ -95,5 +95,70 @@ public class PurchaseView {
         vertical.setSpacing(30.0);
 
         return vertical;
+    }
+
+    public VBox purchasingHistory(Stage stage){
+            Label title = new Label();
+            title.setText("View previous Customer Purchases");
+            stage.setTitle(title.getText());
+            HBox titleBar = new HBox(title);
+
+            // Table for Viewing
+
+            TableView table = new TableView();
+            table.setEditable(false);
+            TableColumn<Purchase, Integer> idColumn = new TableColumn<>("ID");
+            idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+            table
+                    .getColumns()
+                    .addAll(
+                            idColumn
+                    );
+            // Buttons to view attributes
+
+            Button backbtn = backBtn(stage, mainPurchase(stage));
+            // Listing button
+            Button list = new Button();
+
+            list.setText("View Products");
+            list.setOnAction(_ -> {
+                table.getItems().clear(); // clearing previous data
+                // table.getItems().addAll(.getStorage()); //TODO add proper purchasing storage
+            });
+
+            // Search button
+
+            Button find = new Button();
+            find.setText("Find");
+
+            Label idSearch = new Label();
+            idSearch.setText("Enter product id to search:");
+
+            TextField idSearchInput = new TextField();
+
+            HBox searchBlock = new HBox(idSearch, idSearchInput, find);
+            searchBlock.setAlignment(Pos.CENTER);
+
+                /*
+            find.setOnAction(_ -> {
+                table.getItems().clear(); // clearing previous data
+                for (Product product : controller.getStorage()) {
+                    if (
+                            product.getId() == Integer.parseInt(idSearchInput.getText())
+                    ) {
+                        table.getItems().add(product);
+                    } else {
+                        continue;
+                    }
+                }
+            });
+            */
+
+            HBox actionButtons = new HBox(list, searchBlock);
+            VBox vertical = new VBox(titleBar, actionButtons, table, backbtn);
+            vertical.setAlignment(Pos.CENTER);
+            vertical.setSpacing(30.0);
+            return vertical;
+        }
     }
 }
