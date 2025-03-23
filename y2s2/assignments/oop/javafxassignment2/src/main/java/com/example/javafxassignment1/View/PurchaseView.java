@@ -4,22 +4,19 @@ import com.example.javafxassignment1.Controllers.PurchaseController;
 import com.example.javafxassignment1.Models.Customer;
 import com.example.javafxassignment1.Models.Product;
 import com.example.javafxassignment1.Models.Purchase;
+import com.example.javafxassignment1.View.MainView;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import java.util.ArrayList;
 
-import static com.example.javafxassignment1.View.MainView.backBtn;
 
 public class PurchaseView {
     private PurchaseController prc;
-    public TextArea area;
     public PurchaseView(PurchaseController prc_){
-       this.prc = prc_;
+        this.prc = prc_;
     }
     public VBox mainPurchase(Stage stage) {
         // Header Bar
@@ -41,8 +38,13 @@ public class PurchaseView {
         ComboBox<Product> productBox = new ComboBox<>();
         productBox.getItems().addAll(products);
         productBox.setPromptText("Pick a PC");
-        HBox dropDowns = new HBox(customersBox, productBox);
-        dropDowns.setAlignment(Pos.CENTER);
+        Button history = new Button("Previous order's history");
+        history.setOnAction(_->{
+            stage.getScene().setRoot(purchasingHistory(stage));
+        });
+        HBox topRow = new HBox(customersBox, productBox,history);
+        topRow.setAlignment(Pos.CENTER);
+        topRow.setSpacing(30);
         // Buttons
 
         Button addProduct = new Button();
@@ -66,8 +68,8 @@ public class PurchaseView {
             total.setText("€"+String.valueOf(purchase.calcTotal()));
             boolean confirmation = purchase.confirmPurchase();
             if (!confirmation){
-               outcome.setText("Payment cannot go through so sad");
-               System.out.println("their balance: €" + purchase.getBuyer().getBalance());
+                outcome.setText("Payment cannot go through so sad");
+                System.out.println("their balance: €" + purchase.getBuyer().getBalance());
             }else{
                 outcome.setText("Purchase confirmed " + purchase.toString());
                 prc.mc.pc.save();
@@ -88,77 +90,47 @@ public class PurchaseView {
         totals.setAlignment(Pos.CENTER);
         totals.setSpacing(25.0);
 
-        // put all into this vbox
-
-        VBox vertical = new VBox(titleBar, dropDowns,cartInfo, buttons,totals);
-        vertical.setAlignment(Pos.CENTER);
+        VBox vertical = new VBox(titleBar, topRow,cartInfo, buttons,totals);
         vertical.setSpacing(30.0);
 
         return vertical;
     }
 
     public VBox purchasingHistory(Stage stage){
-            Label title = new Label();
-            title.setText("View previous Customer Purchases");
-            stage.setTitle(title.getText());
-            HBox titleBar = new HBox(title);
+        Label title = new Label();
+        title.setText("View previous Customer Purchases");
+        stage.setTitle(title.getText());
+        HBox titleBar = new HBox(title);
+        titleBar.setAlignment(Pos.CENTER);
+        Button showAllOrder = new Button("All Orders");
+        Button searchOrder = new Button("Search for order");
+        Label orderInput = new Label();
+        orderInput.setText("Enter an order Id to search:");
+        TextField idSearchInput = new TextField();
 
-            // Table for Viewing
+        HBox actionButtons = new HBox(showAllOrder,searchOrder,orderInput,idSearchInput);
+        actionButtons.setAlignment(Pos.CENTER);
+        actionButtons.setSpacing(15);
 
-            TableView table = new TableView();
-            table.setEditable(false);
-            TableColumn<Purchase, Integer> idColumn = new TableColumn<>("ID");
-            idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-            table
-                    .getColumns()
-                    .addAll(
-                            idColumn
-                    );
-            // Buttons to view attributes
+        TextArea orderInfo = new TextArea();
+        orderInfo.setEditable(false);
+        showAllOrder.setOnAction(_->{
+           orderInfo.clear();
+            //TODO add database list system
+        });
+        HBox orderBox = new HBox(orderInfo);
+        orderBox.setAlignment(Pos.CENTER);
 
-            Button backbtn = backBtn(stage, mainPurchase(stage));
-            // Listing button
-            Button list = new Button();
+        Button sortOrders = new Button("Sort by date");
+        Button back = new Button("Back");
 
-            list.setText("View Products");
-            list.setOnAction(_ -> {
-                table.getItems().clear(); // clearing previous data
-                // table.getItems().addAll(.getStorage()); //TODO add proper purchasing storage
-            });
-
-            // Search button
-
-            Button find = new Button();
-            find.setText("Find");
-
-            Label idSearch = new Label();
-            idSearch.setText("Enter product id to search:");
-
-            TextField idSearchInput = new TextField();
-
-            HBox searchBlock = new HBox(idSearch, idSearchInput, find);
-            searchBlock.setAlignment(Pos.CENTER);
-
-                /*
-            find.setOnAction(_ -> {
-                table.getItems().clear(); // clearing previous data
-                for (Product product : controller.getStorage()) {
-                    if (
-                            product.getId() == Integer.parseInt(idSearchInput.getText())
-                    ) {
-                        table.getItems().add(product);
-                    } else {
-                        continue;
-                    }
-                }
-            });
-            */
-
-            HBox actionButtons = new HBox(list, searchBlock);
-            VBox vertical = new VBox(titleBar, actionButtons, table, backbtn);
-            vertical.setAlignment(Pos.CENTER);
-            vertical.setSpacing(30.0);
-            return vertical;
-        }
+        back.setOnAction(_->{
+            stage.getScene().setRoot(mainPurchase(stage));
+        });
+        HBox bottomButtons = new HBox(sortOrders,back);
+        MainView.styleHbox(bottomButtons,20);
+        VBox vertical = new VBox(titleBar, actionButtons,orderBox,bottomButtons);
+        vertical.setSpacing(30.0);
+        return vertical;
     }
 }

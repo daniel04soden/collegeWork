@@ -1,8 +1,6 @@
 package com.example.javafxassignment1;
 
-import com.example.javafxassignment1.Controllers.CustomerController;
 import com.example.javafxassignment1.Controllers.MainController;
-import com.example.javafxassignment1.Controllers.ProductController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
@@ -13,6 +11,7 @@ import javafx.stage.Stage;
 import static com.example.javafxassignment1.View.MainView.applyCSS;
 
 public class MainApplication extends Application {
+
   @Override
   public void start(Stage stage) throws Exception {
     String title = "DS Computing Customer Management Portal";
@@ -30,8 +29,6 @@ public class MainApplication extends Application {
     tab3.setClosable(false);
     tab3.setContent(mc.prc.view.mainPurchase(stage));
     mainPane.getTabs().addAll(tab1, tab2, tab3); // Add the tabs to the tab pane.
-
-
 
     SplitPane root = new SplitPane(mainPane);
     Scene main = new Scene(root,1000,500);

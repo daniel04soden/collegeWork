@@ -2,8 +2,10 @@ package com.example.javafxassignment1.View;
 
 import com.example.javafxassignment1.Controllers.MainController;
 import com.example.javafxassignment1.MainApplication;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -55,6 +57,10 @@ public class MainView {
         }else if (finalChoice == saveNoExit){
             stage.close();
         }
+    }
+    public static void styleHbox(HBox box,double spacing){
+        box.setSpacing(spacing);
+       box.setAlignment(Pos.CENTER);
     }
 
 }

@@ -8,14 +8,15 @@ import javafx.scene.control.TextArea;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class PurchaseController {
+public class PurchaseController extends BaseController<Purchase>{
     public MainController mc;
     public PurchaseView view;
     private ArrayList<Product> runningCart;
     private ArrayList<Purchase> purchases;
 
     public PurchaseController(MainController mc_){
-       this.mc = mc_;
+        super("src/main/java/com/example/javafxassignment1/database/Purchases.txt");
+        this.mc = mc_;
        this.view = new PurchaseView(this);
        this.runningCart = new ArrayList<Product>();
        this.purchases = new ArrayList<Purchase>();
@@ -39,7 +40,43 @@ public class PurchaseController {
 
     }
 
-    public void setRunningCart(ArrayList<Product> runningCart) {
-        this.runningCart = runningCart;
+    /**
+     * @param params
+     */
+    @Override
+    public void add(String... params) {
+
+    }
+
+    /**
+     * @param id
+     */
+    @Override
+    public void delete(int id) {
+
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void load() {
+
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public ArrayList<Purchase> getStorage() {
+        return null;
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void save() {
+
     }
 }

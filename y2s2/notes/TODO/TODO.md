@@ -14,9 +14,9 @@
 # OOP
 
 - [ ] Stage 3
+	- [x] Create ui for order viewing ✅ 2025-03-23
 	- [ ] Serialise each db
 	- [ ] Make purchases db
-	- [ ] (Optional) Use sqlite
 	- [ ] Create ordering system based on dates added to purchases
 	- [ ] Test case 1
 	- [ ] Test case 2

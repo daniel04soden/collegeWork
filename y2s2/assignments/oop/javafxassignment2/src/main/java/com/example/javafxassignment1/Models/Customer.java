@@ -47,9 +47,6 @@ public class Customer extends Agent implements java.io.Serializable{
     // Omit idSetter, non-editable value
 
     // Extra functionality
-    public String returnToDb(){
-        return super.getId() + "," + super.getName()+ "," + this.age+ "," + this.email+ "," + this.balance;
-    }
     @Override
     public String toString(){
         return super.getName();

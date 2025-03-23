@@ -3,10 +3,7 @@ package com.example.javafxassignment1.Controllers;
 import com.example.javafxassignment1.Models.Customer;
 import com.example.javafxassignment1.View.CustomerView;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -66,9 +63,10 @@ public class CustomerController extends BaseController<Customer> {
 
   @Override
   public void save() {
-    try (FileWriter saver = new FileWriter(dbPath)) {
+    try (FileOutputStream saver = new FileOutputStream(dbPath)) {
       for (Customer customer : storage) {
-        saver.write(customer.returnToDb() + System.lineSeparator());
+        ObjectOutputStream os = new ObjectOutputStream(saver);
+        os.writeObject(customer);
         System.out.println(customer.getId()+customer.getName());
       }
       System.out.println("Saved to " + dbPath);
