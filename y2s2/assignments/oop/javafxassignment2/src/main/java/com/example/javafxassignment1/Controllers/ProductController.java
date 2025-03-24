@@ -3,10 +3,7 @@ package com.example.javafxassignment1.Controllers;
 import com.example.javafxassignment1.Models.Product;
 import com.example.javafxassignment1.View.ProductView;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -45,30 +42,28 @@ public class ProductController extends BaseController<Product> {
 
     @Override
     public void load() {
-        File dbFile = new File(dbPath);
-        try (Scanner productReader = new Scanner(dbFile)) {
-            storage.clear();
-            while (productReader.hasNextLine()) {
-                String data = productReader.nextLine();
-                String[] productInfo = data.split(",");
-                String name = productInfo[1].trim();
-                String price = productInfo[2].trim(); // Will be parsed on add
-                String stock = productInfo[3].trim();
-                add(name, stock, price);
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            System.out.println(Arrays.toString(e.getStackTrace()));
+        System.out.println("Logging current prodNames: "+storage);
+        storage.clear();
+        try {
+            FileInputStream fio = new FileInputStream(dbPath);
+            ObjectInputStream stream = new ObjectInputStream(fio);
+            storage = (ArrayList<Product>)stream.readObject();
+            fio.close();
+            stream.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("Loading product error");
         }
     }
 
     @Override
     public void save() {
-        try (FileWriter saver = new FileWriter(dbPath)) {
-            for (Product product : storage) {
-                saver.write(product.returnToDb() + System.lineSeparator());
-                System.out.println(product.getId()+product.getName());
-            }
+        try (FileOutputStream saver = new FileOutputStream(dbPath)) {
+            ObjectOutputStream os = new ObjectOutputStream(saver);
+            os.writeObject(storage);
+            System.out.println("Storage Of Products: "+storage);
+            System.out.println("Saving products to file");
+
             System.out.println("Saved to " + dbPath);
         } catch (IOException e) {
             System.out.println("Error saving to file, try again");

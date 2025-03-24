@@ -1,20 +1,14 @@
 package com.example.javafxassignment1.Controllers;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
-public abstract class BaseController<T> {
+public abstract class BaseController<T>{
     protected final String dbPath;
     protected ArrayList<T> storage;
 
     public BaseController(String dbPath) {
         this.dbPath = dbPath;
         this.storage = new ArrayList<>();
-        this.
         load();
     }
 

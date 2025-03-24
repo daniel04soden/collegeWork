@@ -14,10 +14,8 @@ public class HDDAllocation {
 
   public int[] generate_allocation(int currFilePtr) {
     if (currFilePtr == files.length) {
-      int[] res = { 1 };
+      int[] res;
       return res; // TODO fix final check
-    }
-    for (int i = 0; i < hdds.length; i++) {
     }
     return res;
   }
@@ -26,7 +24,7 @@ public class HDDAllocation {
     int[] hdds = { 1000, 1000, 2000 };
     int[] files = { 300, 200, 300, 1200, 400, 700, 700 };
     int[] res = new int[hdds.length];
-    int[] allocation = new HDDAllocation(hdds, files).generate_allocation();
+    int[] allocation = new HDDAllocation(hdds, files).generate_allocation(0);
     for (int i = 0; i < allocation.length; i++) {
       System.out.println(
           "File " +

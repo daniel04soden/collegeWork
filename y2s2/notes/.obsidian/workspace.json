@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "8eafd8fa697eaf8d",
@@ -181,6 +180,8 @@
   },
   "active": "0636d044533224f2",
   "lastOpenFiles": [
+    "OOP/JavaDoc+JDBC.md",
+    "TODO/TODO.md",
     "OOP/brocodework/target/classes/Main/hello-view.fxml",
     "OOP/brocodework/target/classes/Main/MainController.class",
     "OOP/brocodework/target/classes/Main/MainApplication.class",
@@ -191,7 +192,6 @@
     "OOP/brocodework/target",
     "TODO/Next Week exams.md",
     "Year 2 Semester 2 Breakdown.md",
-    "TODO/TODO.md",
     "OOP/Testing.md",
     "Statistics/Sampling theory.md",
     "OOAnalysis/Sequence Diagrams.md",
@@ -213,7 +213,6 @@
     "Assignment Notes/NLDSA/Assignment1/Drawing 2025-02-06 17.11.03.excalidraw.md",
     "Assignment Notes/NLDSA/Assignment1/Untitled.canvas",
     "Assignment Notes/NLDSA/Assignment1",
-    "Assignment Notes/NLDSA",
     "NONLin/Performance/Recurrences.md",
     "NONLin/Performance/Induction Substitution.md",
     "OOAnalysis/Modelling Roles.md",

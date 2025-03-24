@@ -1,9 +1,17 @@
 package com.example.javafxassignment1.Models;
 
-public class Product extends Agent implements java.io.Serializable{
+import java.io.*;
+
+public class Product extends Agent implements Serializable{
     private int stock;
     private boolean inStock;
     private double price;
+    @Serial
+    private static final long serialVersionUID = 1;
+
+    public Product(){
+        super();
+    }
 
     public Product(int _id, String _name,int _stock,double _price){
         super(_id,_name);

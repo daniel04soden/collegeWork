@@ -13,10 +13,10 @@ import java.util.Objects;
 
 public class MainView {
     /*
-    * The mainview class does not need any kind of controllers as this
-    * class simply allows for static use of various different ui elements like
-    * buttons and pop-ups
-    * */
+     * The mainview class does not need any kind of controllers as this
+     * class simply allows for static use of various different ui elements like
+     * buttons and pop-ups
+     * */
     MainController mc ;
     public MainView(MainController mc_){
         this.mc = mc_;
@@ -60,7 +60,13 @@ public class MainView {
     }
     public static void styleHbox(HBox box,double spacing){
         box.setSpacing(spacing);
-       box.setAlignment(Pos.CENTER);
+        box.setAlignment(Pos.CENTER);
     }
-
+    public static boolean inputAllower(TextField t) {
+        if (t.getText().trim().isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

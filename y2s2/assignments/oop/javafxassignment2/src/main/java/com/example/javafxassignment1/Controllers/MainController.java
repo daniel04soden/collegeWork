@@ -19,5 +19,6 @@ public class MainController {
 
         cc.load();
         pc.load();
+        prc.loadInPurchases();
     }
 }

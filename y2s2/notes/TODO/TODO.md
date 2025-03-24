@@ -15,7 +15,7 @@
 
 - [ ] Stage 3
 	- [x] Create ui for order viewing ✅ 2025-03-23
-	- [ ] Serialise each db
+	- [x] Serialise each db ✅ 2025-03-24
 	- [ ] Make purchases db
 	- [ ] Create ordering system based on dates added to purchases
 	- [ ] Test case 1

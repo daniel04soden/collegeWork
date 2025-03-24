@@ -9,6 +9,9 @@ public class Purchase implements Serializable{
     private ArrayList<Product> cart;
     private Customer buyer;
     private final Date timeOfPurchase;
+    @Serial
+    private static final long serialVersionUID = 1;
+
 
     public Purchase(Customer buyingCustomer,ArrayList<Product> cart_){
         this.buyer = buyingCustomer;

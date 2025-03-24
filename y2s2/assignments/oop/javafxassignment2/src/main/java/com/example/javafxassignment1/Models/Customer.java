@@ -1,9 +1,18 @@
 package com.example.javafxassignment1.Models;
 
-public class Customer extends Agent implements java.io.Serializable{
+import java.io.*;
+
+public class Customer extends Agent implements Serializable{
     private String email;
     private int age;
     private double balance;
+
+    @Serial
+    private static final long serialVersionUID = 1;
+
+    public Customer(){
+        super();
+    }
 
     public Customer(int _id,String _name,String _email, int _age, double _balance){
         super(_id,_name);
@@ -11,7 +20,6 @@ public class Customer extends Agent implements java.io.Serializable{
         this.age = _age;
         this.balance = _balance;
     }
-
     // Getters
 
     public String getEmail(){

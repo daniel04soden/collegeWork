@@ -116,7 +116,10 @@ public class PurchaseView {
         orderInfo.setEditable(false);
         showAllOrder.setOnAction(_->{
            orderInfo.clear();
-            //TODO add database list system
+            for (Purchase purchases: prc.getPurchases()){
+                orderInfo.appendText("\n"+purchases.toString());
+            }
+
         });
         HBox orderBox = new HBox(orderInfo);
         orderBox.setAlignment(Pos.CENTER);

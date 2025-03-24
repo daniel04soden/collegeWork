@@ -1,11 +1,17 @@
 package com.example.javafxassignment1.Models;
 
-public class Agent {
+import java.io.Serial;
+import java.io.Serializable;
+
+public class Agent implements Serializable {
     private int id;
     private String name;
 
+    @Serial
+    private static final long serialVersionUID = 1;
     // Constructors
-
+    public Agent(){
+    }
     public Agent(int _id,String _name){
         this.id = _id;
         this.name = _name;

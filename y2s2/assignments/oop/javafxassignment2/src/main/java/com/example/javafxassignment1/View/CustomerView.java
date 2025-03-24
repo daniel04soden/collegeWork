@@ -8,6 +8,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import com.example.javafxassignment1.View.MainView;
 
 import static com.example.javafxassignment1.View.MainView.backBtn;
 
@@ -184,11 +185,12 @@ public class CustomerView {
         Label idSearch = new Label();
         idSearch.setText("Enter an id to search:");
 
+
         TextField idSearchInput = new TextField();
-
         HBox searchBlock = new HBox(idSearch, idSearchInput, search);
+        // search.setDisable(MainView.inputAllower(idSearchInput)); // TODO fix input
+        search.setDisable(false); // TODO fix input
         searchBlock.setAlignment(Pos.CENTER);
-
         search.setOnAction(_ -> {
             table.getItems().clear(); // clearing previous data
             for (Customer customer : controller.getStorage()) {

@@ -5,8 +5,6 @@ import com.example.javafxassignment1.View.CustomerView;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
 
 public class CustomerController extends BaseController<Customer> {
   public MainController controller;
@@ -43,32 +41,30 @@ public class CustomerController extends BaseController<Customer> {
 
   @Override
   public void load() {
-    File dbFile = new File(dbPath);
-    try (Scanner customerReader = new Scanner(dbFile)) {
-      storage.clear();
-      while (customerReader.hasNextLine()) {
-        String data = customerReader.nextLine();
-        String[] customerInfo = data.split(",");
-        String name = customerInfo[1].trim();
-        String age = customerInfo[2].trim();
-        String email = customerInfo[3].trim();
-        String balance = customerInfo[4].trim();
-        add(name, email, age, balance);
-      }
-    } catch (FileNotFoundException e) {
-      System.out.println("An error occurred, file not found");
-      System.out.println(Arrays.toString(e.getStackTrace()));
+    System.out.println("Log current names: " + storage);
+    storage.clear();
+    try {
+      FileInputStream fio = new FileInputStream(dbPath);
+      ObjectInputStream stream = new ObjectInputStream(fio);
+      storage = (ArrayList<Customer>) stream.readObject(); // Read only one object
+      stream.close();
+      fio.close();
+      System.out.println(storage);
+    }
+    catch (IOException | ClassNotFoundException e) {
+      e.printStackTrace();
+      System.out.println(storage);
     }
   }
 
   @Override
   public void save() {
     try (FileOutputStream saver = new FileOutputStream(dbPath)) {
-      for (Customer customer : storage) {
         ObjectOutputStream os = new ObjectOutputStream(saver);
-        os.writeObject(customer);
-        System.out.println(customer.getId()+customer.getName());
-      }
+        os.writeObject(storage);
+        System.out.println("Storage Array: "+storage);
+        System.out.println("Saving customers to file");
+
       System.out.println("Saved to " + dbPath);
     } catch (IOException e) {
       System.out.println("Error saving to file, try again");
