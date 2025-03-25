@@ -18,11 +18,6 @@
 	- [x] Serialise each db ✅ 2025-03-24
 	- [ ] Make purchases db
 	- [ ] Create ordering system based on dates added to purchases
-	- [ ] Test case 1
-	- [ ] Test case 2
-		- Ideas for test cases
-			- Creating a customer
-			- Deleting a product
-			- Making a purchase?
-	
-	
+	- [x] Test case 1 ✅ 2025-03-25
+	- [x] Test case 2 ✅ 2025-03-25
+	- [ ]  (Optional) - More test cases

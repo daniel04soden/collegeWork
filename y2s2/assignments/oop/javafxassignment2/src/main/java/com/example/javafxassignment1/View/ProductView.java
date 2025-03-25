@@ -9,6 +9,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 import static com.example.javafxassignment1.View.MainView.backBtn;
 
 public class ProductView {
@@ -46,11 +48,16 @@ public class ProductView {
         Button save = new Button();
         save.setText("Save Products");
         save.setOnAction(_ -> controller.save());
+        // Stock check
+        Button checkStock = new Button();
+        checkStock.setText("Check Stock");
+
+
         // Positioning the Components
 
         HBox titleBar = new HBox(title);
         titleBar.setAlignment(Pos.CENTER);
-        VBox vertical = new VBox(titleBar, register, view, remove, load, save);
+        VBox vertical = new VBox(titleBar, register, view, checkStock,remove, load, save);
         vertical.setSpacing(25);
         vertical.setAlignment(Pos.CENTER);
 
@@ -60,6 +67,7 @@ public class ProductView {
         view.setOnAction(_ -> stage.getScene().setRoot(viewProducts(stage)));
         remove.setOnAction(_ -> stage.getScene().setRoot(removeProduct(stage)));
         load.setOnAction(_ -> stage.getScene().setRoot(loadProducts(stage)));
+        checkStock.setOnAction(_->stage.getScene().setRoot(checkStock(stage)));
 
         return vertical;
     }
@@ -301,5 +309,36 @@ public class ProductView {
 
         // set Alignment
         return vbox;
+    }
+
+    public VBox checkStock(Stage stage){
+        Label title = new Label("Checking Stock of Producys");
+        stage.setTitle(title.getText());
+        HBox titleBar = new HBox(title);
+        MainView.styleHbox(titleBar,10);
+
+        ArrayList<Product> products = controller.getStorage();
+        ComboBox<Product> productBox = new ComboBox<>();
+        productBox.getItems().addAll(products);
+        productBox.setPromptText("Check Stock On Item");
+        TextArea stockDisplay = new TextArea();
+        Button checkStock = new Button("Select Item to check");
+
+        checkStock.setOnAction(_->{
+            stockDisplay.clear();
+            for (Product product: products){
+                if (product.getId() == productBox.getValue().getId()){
+                    String stock = String.valueOf(productBox.getValue().getId());
+                    stockDisplay.appendText(stock);
+                }
+            }
+        });
+
+        HBox stockCheck = new HBox(productBox,stockDisplay);
+        HBox buttons = new HBox(checkStock,MainView.backBtn(stage,productHome(stage)));
+        VBox vertical = new VBox(titleBar,stockCheck,buttons);
+        vertical.setAlignment(Pos.CENTER);
+        vertical.setSpacing(30.0);
+        return vertical;
     }
 }
