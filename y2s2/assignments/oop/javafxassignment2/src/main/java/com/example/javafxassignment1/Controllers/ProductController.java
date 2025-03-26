@@ -2,6 +2,9 @@ package com.example.javafxassignment1.Controllers;
 
 import com.example.javafxassignment1.Models.Product;
 import com.example.javafxassignment1.View.ProductView;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -76,4 +79,13 @@ public class ProductController extends BaseController<Product> {
         return storage;
     }
 
+    public void checkFromBox(ComboBox<Product> box, Label stockDisplay){
+        stockDisplay.setText("");
+        for (Product product:storage){
+            if (product.getId() == box.getValue().getId()){
+                String stock = String.valueOf(box.getValue().getId());
+                stockDisplay.setText(stock);
+            }
+        }
+    }
 }

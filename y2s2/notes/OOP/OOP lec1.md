@@ -49,5 +49,5 @@
 - Pure functions
 - Avoids boilerplate
 
-- See [[Design patterns]]
+- See [[OOP/Design patterns]]
 - Next lecture [[Interfaces]]

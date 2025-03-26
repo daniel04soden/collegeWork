@@ -53,6 +53,6 @@ public class Product extends Agent implements Serializable{
     }
     @Override
     public String toString(){
-        return super.getName() + String.valueOf(this.getPrice());
+        return super.getName() + " € " + String.valueOf(this.getPrice());
     }
 }

@@ -16,7 +16,6 @@
 	-fx-border-width: 4;
 }
 
-
 .root {
 	-fx-font-family: "minecraft";
 	-fx-background-image: url(minetwo.gif);
@@ -30,3 +29,4 @@
 	-fx-text-fill: black;
 	-fx-font-size: 20;
 }
+

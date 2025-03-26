@@ -321,21 +321,18 @@ public class ProductView {
         ComboBox<Product> productBox = new ComboBox<>();
         productBox.getItems().addAll(products);
         productBox.setPromptText("Check Stock On Item");
-        TextArea stockDisplay = new TextArea();
+        Label stockDisplay = new Label("");
         Button checkStock = new Button("Select Item to check");
 
         checkStock.setOnAction(_->{
-            stockDisplay.clear();
-            for (Product product: products){
-                if (product.getId() == productBox.getValue().getId()){
-                    String stock = String.valueOf(productBox.getValue().getId());
-                    stockDisplay.appendText(stock);
-                }
+                controller.checkFromBox(productBox,stockDisplay);
             }
-        });
+        );
 
         HBox stockCheck = new HBox(productBox,stockDisplay);
+        MainView.styleHbox(stockCheck,30);
         HBox buttons = new HBox(checkStock,MainView.backBtn(stage,productHome(stage)));
+        MainView.styleHbox(buttons,10);
         VBox vertical = new VBox(titleBar,stockCheck,buttons);
         vertical.setAlignment(Pos.CENTER);
         vertical.setSpacing(30.0);

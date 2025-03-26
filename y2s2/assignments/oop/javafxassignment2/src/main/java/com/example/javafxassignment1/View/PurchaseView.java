@@ -55,6 +55,7 @@ public class PurchaseView {
             runningCart.add(productBox.getValue());
             area.clear();
             prc.displayCartInfo(area);
+            productBox.setValue(null);
         });
         HBox cartInfo = new HBox(area);
         cartInfo.setAlignment(Pos.CENTER);
