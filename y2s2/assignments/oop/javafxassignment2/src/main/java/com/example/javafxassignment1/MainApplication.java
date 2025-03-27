@@ -13,7 +13,7 @@ import static com.example.javafxassignment1.View.MainView.applyCSS;
 public class MainApplication extends Application {
 
   @Override
-  public void start(Stage stage) throws Exception {
+  public void start(Stage stage) {
     String title = "DS Computing Customer Management Portal";
     stage.setTitle(title);
     MainController mc = new MainController();

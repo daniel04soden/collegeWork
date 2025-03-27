@@ -2,7 +2,7 @@ package com.example.javafxassignment1.Models;
 
 import java.io.*;
 
-public class Customer extends Agent implements Serializable{
+public class Customer extends Agent implements Serializable,Comparable<Customer>{
     private String email;
     private int age;
     private double balance;
@@ -58,5 +58,10 @@ public class Customer extends Agent implements Serializable{
     @Override
     public String toString(){
         return super.getName();
+    }
+
+    @Override
+    public int compareTo(Customer c) {
+        return this.getName().compareTo(c.getName());
     }
 }

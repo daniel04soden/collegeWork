@@ -2,10 +2,11 @@ package com.example.javafxassignment1.Models;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.io.*;
 
-public class Purchase implements Serializable {
+public class Purchase implements Serializable,Comparable<Purchase>{
   private ArrayList<Product> cart;
   private Customer buyer;
   private int customerID;
@@ -52,27 +53,6 @@ public class Purchase implements Serializable {
     this.customerID = customerID;
   }
 
-  public boolean confirmPurchase() {
-    boolean outcome = false;
-    boolean inStock = true;
-    double total = calcTotal();
-    for (Product products : cart) {
-      if (products.getStock() < 1) {
-        inStock = false;
-        System.out.println("Product is out of stock please try again");
-        break;
-      }
-    }
-    if (!(buyer.getBalance() < total) && inStock) {
-      for (Product products : cart) {
-        int currentStock = products.getStock();
-        products.setStock(currentStock - 1);
-      }
-      buyer.setBalance(buyer.getBalance() - total);
-      return true;
-    }
-    return outcome;
-  }
 
   public Customer getBuyer() {
     return buyer;
@@ -85,15 +65,20 @@ public class Purchase implements Serializable {
   public ArrayList<Product> getCart() {
     return cart;
   }
-
-  public void setCart(ArrayList<Product> cart) {
-    this.cart = cart;
-  }
-
   @Override
   public String toString() {
-    return "Buyer: " + buyer.toString() + " bought " + cart.size() + " items for a total of €" + calcTotal()
+    return buyer.getName() + " bought " + cart.size() + " items for a total of €" + calcTotal()
         + " \nDate/Time of purchase " + getDate() + "\t" + getTime();
   }
+  @Override
+  public int compareTo(Purchase p) {
+    return this.getTimeOfPurchase().compareTo(p.getTimeOfPurchase());
+  }
 
+  public static Comparator<Purchase> customerPriceComparator = new Comparator<Purchase>() {
+    @Override
+    public int compare(Purchase p1, Purchase p2) {
+      return Double.compare(p2.calcTotal(),p1.calcTotal());
+    }
+  };
 }

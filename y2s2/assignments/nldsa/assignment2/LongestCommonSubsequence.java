@@ -13,12 +13,26 @@ public class LongestCommonSubsequence {
     }
 
     public String compare() {
-        String res;
+        String res = "";
         int m = X.length();
         int n = Y.length();
-
         int[][] matrix = new int[m + 1][n + 1];
+        for (int i = 0; i < m; i++) {
+          matrix[i][0] = 0;
+        }
+        for (int i = 0; i < n; i++) {
+            matrix[0][i] = 0;
+        }
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (this.X.equals(this.Y)) {
+                    matrix[i][j] = matrix[i][j]+1;
+                }else{
+                    matrix[i][j] = Math.max(matrix[i][j+1],matrix[i+1][j]);
+                }
 
+            }
+        }
         return res;
     }
 

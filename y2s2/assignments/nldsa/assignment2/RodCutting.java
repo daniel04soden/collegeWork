@@ -11,9 +11,17 @@ public class RodCutting {
 
   public LinkedList<Integer> best_cuts() {
     int n = this.prices.length; // get the length of the prices list
-    LinkedList<Integer> res = new LinkedList<>(); // Initialise result linked list
+    LinkedList<Integer> cutting = new LinkedList<>(); // Initialise result linked list - size 0
+    cutting.add(1); // Size
+    for (int j = 1; j < n-1; j++) {
+      int q = (int) Double.NEGATIVE_INFINITY;
+      for (int i = 1; i <= j; i++) {
+        q = Math.max(q,prices[i-1]+cutting.get(j-i));
+      }
+        cutting.add(q);
+    }
 
-    return res;
+    return cutting;
   }
 
   public static void main(String[] args) {

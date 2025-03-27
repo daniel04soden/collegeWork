@@ -14,10 +14,10 @@ public class HDDAllocation {
 
   public int[] generate_allocation(int currFilePtr) {
     if (currFilePtr == files.length) {
-      int[] res;
+      int[] res = {1};
       return res; // TODO fix final check
     }
-    return res;
+      return new int[0];
   }
 
   public static void main(String[] args) {

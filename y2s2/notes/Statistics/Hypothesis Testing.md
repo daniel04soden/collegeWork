@@ -58,3 +58,11 @@ $$
 4. Compare test statistic to critical values and state the conclusion of the test
 - Once you hjave the value of the test stat, it is compared to the critical values
 - We can then say whether the evidence support Ha or roeject Ho
+
+# Main Steps
+1. Given a claim state:
+	1. Null hypothesis
+	2. Alternative hypothesis
+2. Calculate the test statistic
+3. Given a significance level alpha, identify the critical values
+4. Compare test statistic to critical values, and state the conclusion of the hypothesis test

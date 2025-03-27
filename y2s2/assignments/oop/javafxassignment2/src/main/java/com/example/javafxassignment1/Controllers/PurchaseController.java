@@ -1,5 +1,6 @@
 package com.example.javafxassignment1.Controllers;
 
+import com.example.javafxassignment1.Models.Customer;
 import com.example.javafxassignment1.Models.Product;
 import com.example.javafxassignment1.Models.Purchase;
 import com.example.javafxassignment1.View.PurchaseView;
@@ -8,6 +9,7 @@ import javafx.scene.control.TextArea;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 
 public class PurchaseController {
 
@@ -29,22 +31,45 @@ public class PurchaseController {
     return runningCart;
   }
 
-  public void displayCartInfo(TextArea ta) {
+  public void displayPurchaseInfo(TextArea ta,boolean forCart) {
     ta.clear();
-    for (Product items : runningCart) {
-      ta.appendText("\n" + items.toString());
+    if (forCart){
+      for (Product items : runningCart) {
+        ta.appendText("\n" + items.toString());
+      }
+    }else{
+      for (Purchase purchase : purchases) {
+        ta.appendText("\n" + purchase.toString());
+      }
     }
 
   }
 
-  public void execSort(TextArea t, boolean byName) {
-    if (byName) {
-      Collections.sort(runningCart); // TODO change to sort by name too
+  public void execSort(TextArea t, boolean byDate) {
+    if (byDate) {
+      Collections.sort(purchases);
+      displayPurchaseInfo(t,false);
     } else {
       Collections.sort(runningCart);
-      displayCartInfo(t);
+      displayPurchaseInfo(t,true);
     }
   }
+
+  public void execSort(TextArea t) {
+    t.clear();
+    purchases.sort(Purchase.customerPriceComparator);
+    displayPurchaseInfo(t,false);
+  }
+
+  public void searchForOrderByName(TextArea t,String name){
+    for (Purchase purchase : purchases) {
+      if (Objects.equals(purchase.getBuyer().getName().trim().toLowerCase(), name.trim().toLowerCase())) {
+        t.clear();
+        t.appendText(purchase.toString());
+      }
+    }
+  }
+
 
   public void recordPurchase(Purchase p) {
     purchases.add(p);
@@ -77,6 +102,26 @@ public class PurchaseController {
       System.out.println("Error saving to file, try again");
       e.printStackTrace();
     }
+  }
+
+  public boolean confirmPurchase(Purchase p) {
+    Customer c = p.getBuyer();
+    double total = p.calcTotal();
+    for (Product products : p.getCart()) {
+      if (!(products.isInStock())) {
+        System.out.println("Product is out of stock please try again");
+        break;
+      }else{
+        if (!(c.getBalance() < total)) {
+          double balance = c.getBalance();
+          int currentStock = products.getStock();
+          products.setStock(currentStock - 1);
+          c.setBalance(balance - total);
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   public void displayPurchase(){};

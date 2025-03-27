@@ -4,7 +4,6 @@ import com.example.javafxassignment1.Controllers.PurchaseController;
 import com.example.javafxassignment1.Models.Customer;
 import com.example.javafxassignment1.Models.Product;
 import com.example.javafxassignment1.Models.Purchase;
-import com.example.javafxassignment1.View.MainView;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -56,7 +55,7 @@ public class PurchaseView {
         addProduct.setOnAction(_->{
             runningCart.add(productBox.getValue());
             area.clear();
-            prc.displayCartInfo(area);
+            prc.displayPurchaseInfo(area,true);
             total.setText("€ " + runningTotal);
             productBox.setValue(null);
         });
@@ -65,18 +64,15 @@ public class PurchaseView {
 
         Button checkout = new Button();
         Button sortByPrice = new Button();
-        Button sortByName = new Button();
         Label outcome = new Label();
 
         sortByPrice.setText("Sort by Price");
-        sortByName.setText("Sort by Name");
 
         sortByPrice.setOnAction(_->{
             prc.execSort(area,false);
         });
-        sortByPrice.setOnAction(_->{
-            prc.execSort(area,true);
-        });
+
+
 
         checkout.setText("Checkout");
         checkout.setOnAction(_->{
@@ -88,7 +84,7 @@ public class PurchaseView {
             }else {
                 Purchase purchase = new Purchase(customersBox.getValue(), runningCart);
                 total.setText("€" + String.valueOf(purchase.calcTotal()));
-                boolean confirmation = purchase.confirmPurchase();
+                boolean confirmation = prc.confirmPurchase(purchase);
                 if (!confirmation) {
                     outcome.setText("Payment failed due to balance or stock issue");
                     System.out.println("their balance: €" + purchase.getBuyer().getBalance());
@@ -106,7 +102,7 @@ public class PurchaseView {
                 }
             }});
 
-        HBox buttons = new HBox(addProduct,checkout,sortByPrice,sortByName);
+        HBox buttons = new HBox(addProduct,checkout,sortByPrice);
         buttons.setAlignment(Pos.CENTER);
         buttons.setSpacing(25.0);
         // Displaying info
@@ -133,10 +129,10 @@ public class PurchaseView {
         Button showAllOrder = new Button("All Orders");
         Button searchOrder = new Button("Search for order");
         Label orderInput = new Label();
-        orderInput.setText("Enter an order Id to search:");
-        TextField idSearchInput = new TextField();
+        orderInput.setText("Enter a name to search:");
+        TextField nameSearchInput = new TextField();
 
-        HBox actionButtons = new HBox(showAllOrder,searchOrder,orderInput,idSearchInput);
+        HBox actionButtons = new HBox(showAllOrder,searchOrder,orderInput,nameSearchInput);
         actionButtons.setAlignment(Pos.CENTER);
         actionButtons.setSpacing(15);
 
@@ -147,21 +143,38 @@ public class PurchaseView {
             for (Purchase purchases: prc.getPurchases()){
                 orderInfo.appendText("\n"+purchases.toString());
             }
-
         });
+
+        searchOrder.setOnAction(_->{
+            prc.searchForOrderByName(orderInfo,nameSearchInput.getText());
+        });
+
         HBox orderBox = new HBox(orderInfo);
         orderBox.setAlignment(Pos.CENTER);
 
-        Button sortOrders = new Button("Sort by date");
-        Button back = new Button("Back");
 
-        back.setOnAction(_->{
-            stage.getScene().setRoot(mainPurchase(stage));
-        });
-        HBox bottomButtons = new HBox(sortOrders,back);
+        HBox bottomButtons = historyButtons(stage, orderInfo);
         MainView.styleHbox(bottomButtons,20);
         VBox vertical = new VBox(titleBar, actionButtons,orderBox,bottomButtons);
         vertical.setSpacing(30.0);
         return vertical;
+    }
+
+    private HBox historyButtons(Stage stage, TextArea orderInfo) {
+        Button sortOrders = new Button("Sort by date");
+        Button sortByTotal = new Button("Sort by name");
+        Button back = new Button("Back");
+        sortOrders.setOnAction(_->{
+            prc.execSort(orderInfo,true);
+        });
+
+        sortByTotal.setOnAction(_->{
+            prc.execSort(orderInfo);
+        });
+
+        back.setOnAction(_->{
+            stage.getScene().setRoot(mainPurchase(stage));
+        });
+        return new HBox(sortOrders,sortByTotal,back);
     }
 }
