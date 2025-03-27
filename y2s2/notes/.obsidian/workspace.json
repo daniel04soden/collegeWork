@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "8eafd8fa697eaf8d",
@@ -173,7 +174,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -190,10 +192,10 @@
   },
   "active": "2f8ae87509e7fb4e",
   "lastOpenFiles": [
-    "Statistics/Hypothesis Testing.md",
-    "NONLin/Dynamic Programming.md",
-    "OOAnalysis/Design patterns.md",
     "TODO/TODO.md",
+    "NONLin/Dynamic Programming.md",
+    "Statistics/Hypothesis Testing.md",
+    "OOAnalysis/Design patterns.md",
     "OOP/Databases.md",
     "OOP/JavaDoc+JDBC.md",
     "OOP/brocodework/target/classes/Main/hello-view.fxml",

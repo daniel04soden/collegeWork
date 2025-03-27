@@ -67,7 +67,8 @@ public class CustomerView {
         HBox titleBar = new HBox(title);
         titleBar.setAlignment(Pos.CENTER);
         stage.setTitle(title.getText());
-
+        // Error value field
+        Label result = new Label("");
         // Name Hbox label and input
         Label nameLabel = new Label("Name:");
         TextField nameInput = new TextField();
@@ -80,7 +81,6 @@ public class CustomerView {
         TextField ageInput = new TextField();
         HBox ageBlock = new HBox(ageLabel, ageInput);
         ageBlock.setAlignment(Pos.CENTER);
-
         // Email hbox label and input
 
         Label emailLabel = new Label("Email:");
@@ -113,6 +113,11 @@ public class CustomerView {
         Button submit = new Button();
         submit.setText("Submit");
         submit.setOnAction(_ -> {
+            // TODO - have this prevent button pressing if all fields not filled out
+            MainView.validateText(nameInput,result);
+            MainView.validateText(ageInput,result);
+            MainView.validateText(emailInput,result);
+            MainView.validateText(balanceInput,result);
             controller.add(nameInput.getText(), emailInput.getText(), ageInput.getText(), balanceInput.getText());
             nameInput.clear();
             ageInput.clear();
@@ -128,7 +133,7 @@ public class CustomerView {
 
         // put all into this vbox
 
-        VBox vertical = new VBox(titleBar, nameBlock, ageBlock, emailBlock, balanceBlock, buttons);
+        VBox vertical = new VBox(titleBar, nameBlock, ageBlock, emailBlock, balanceBlock, buttons,result);
         vertical.setAlignment(Pos.CENTER);
         vertical.setSpacing(30.0);
 

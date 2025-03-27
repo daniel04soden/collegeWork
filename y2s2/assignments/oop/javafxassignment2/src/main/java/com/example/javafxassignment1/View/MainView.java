@@ -69,4 +69,12 @@ public class MainView {
             return false;
         }
     }
+    public static void validateText(TextField t,Label display){
+        String myVal = t.getText().trim();
+        if (myVal.isEmpty()){
+            display.setText("Fields cannot be empty");
+        }else{
+           display.setText("");
+        }
+    }
 }

@@ -22,12 +22,12 @@ public class MainApplication extends Application {
     Tab tab1 = new Tab("Customers");
     tab1.setClosable(false);
     tab1.setContent(mc.cc.view.customerHome(stage));
-    Tab tab2 = new Tab("Products");
+    Tab tab2 = new Tab("Purchase");
     tab2.setClosable(false);
-    tab2.setContent(mc.pc.view.productHome(stage));
-    Tab tab3 = new Tab("Purchase");
+    tab2.setContent(mc.prc.view.mainPurchase(stage));
+    Tab tab3 = new Tab("Maintenance");
     tab3.setClosable(false);
-    tab3.setContent(mc.prc.view.mainPurchase(stage));
+    tab3.setContent(mc.pc.view.productHome(stage));
     mainPane.getTabs().addAll(tab1, tab2, tab3); // Add the tabs to the tab pane.
 
     SplitPane root = new SplitPane(mainPane);

@@ -7,79 +7,86 @@ import javafx.scene.control.TextArea;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 
-public class PurchaseController{
-    public MainController mc;
-    public PurchaseView view;
-    private ArrayList<Product> runningCart;
-    private ArrayList<Purchase> purchases;
+public class PurchaseController {
 
-    public ArrayList<Purchase> getPurchases() {
-        return purchases;
+  public MainController mc;
+  public PurchaseView view;
+  private ArrayList<Product> runningCart;
+  private ArrayList<Purchase> purchases;
+
+  private final String dbPath = "src/main/java/com/example/javafxassignment1/database/Purchases.txt";
+
+  public PurchaseController(MainController mc_) {
+    this.mc = mc_;
+    this.view = new PurchaseView(this);
+    this.runningCart = new ArrayList<Product>();
+    this.purchases = new ArrayList<Purchase>();
+  }
+
+  public ArrayList<Product> getRunningCart() {
+    return runningCart;
+  }
+
+  public void displayCartInfo(TextArea ta) {
+    ta.clear();
+    for (Product items : runningCart) {
+      ta.appendText("\n" + items.toString());
     }
 
-    public void setPurchases(ArrayList<Purchase> purchases) {
-        this.purchases = purchases;
+  }
+
+  public void execSort(TextArea t, boolean byName) {
+    if (byName) {
+      Collections.sort(runningCart); // TODO change to sort by name too
+    } else {
+      Collections.sort(runningCart);
+      displayCartInfo(t);
     }
+  }
 
-    private final String dbPath = "src/main/java/com/example/javafxassignment1/database/Purchases.txt";
+  public void recordPurchase(Purchase p) {
+    purchases.add(p);
+    System.out.println(p);
+  }
 
-    public PurchaseController(MainController mc_){
-        this.mc = mc_;
-       this.view = new PurchaseView(this);
-       this.runningCart = new ArrayList<Product>();
-       this.purchases = new ArrayList<Purchase>();
+  public void loadInPurchases() {
+    purchases.clear();
+    try {
+      FileInputStream fio = new FileInputStream(dbPath);
+      ObjectInputStream stream = new ObjectInputStream(fio);
+      purchases = (ArrayList<Purchase>) stream.readObject(); // Read only one object
+      stream.close();
+      fio.close();
+      System.out.println(purchases);
+    } catch (Exception e) {
+      e.printStackTrace();
     }
+  }
 
+  public void savePurchase() {
+    try (FileOutputStream saver = new FileOutputStream(dbPath)) {
+      ObjectOutputStream os = new ObjectOutputStream(saver);
+      os.writeObject(purchases);
+      System.out.println("Purchases: " + purchases);
+      System.out.println("Saving purchases to file");
 
-    // public TextArea displayCurrentPurchases();
-
-    public void sortPurchases(){
-       // Collections.sort(purchases);
+      System.out.println("Saved to " + dbPath);
+    } catch (IOException e) {
+      System.out.println("Error saving to file, try again");
+      e.printStackTrace();
     }
+  }
 
-    public ArrayList<Product> getRunningCart() {
-        return runningCart;
-    }
+  public void displayPurchase(){};
 
-    public void displayCartInfo(TextArea ta){
-        for (Product items: runningCart){
-            ta.appendText("\n"+items.toString());
-        }
+  public ArrayList<Purchase> getPurchases() {
+    return purchases;
+  }
 
-    }
-
-    public void recordPurchase(Purchase p) {
-        purchases.add(p);
-        System.out.println(p);
-    }
-
-    public void loadInPurchases(){
-       purchases.clear();
-       try {
-           FileInputStream fio = new FileInputStream(dbPath);
-           ObjectInputStream stream = new ObjectInputStream(fio);
-           purchases = (ArrayList<Purchase>) stream.readObject(); // Read only one object
-           stream.close();
-           fio.close();
-           System.out.println(purchases);
-       } catch (Exception e) {
-           e.printStackTrace();
-       }
-    }
-
-    public void savePurchase(){
-        try (FileOutputStream saver = new FileOutputStream(dbPath)) {
-            ObjectOutputStream os = new ObjectOutputStream(saver);
-            os.writeObject(purchases);
-            System.out.println("Purchases: "+purchases);
-            System.out.println("Saving purchases to file");
-
-            System.out.println("Saved to " + dbPath);
-        } catch (IOException e) {
-            System.out.println("Error saving to file, try again");
-            e.printStackTrace();
-        }
-    }
+  public void setPurchases(ArrayList<Purchase> purchases) {
+    this.purchases = purchases;
+  }
 
 }

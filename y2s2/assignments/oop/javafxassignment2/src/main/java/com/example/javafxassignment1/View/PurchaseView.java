@@ -48,6 +48,8 @@ public class PurchaseView {
         // Buttons
 
         Button addProduct = new Button();
+        Label total = new Label();
+        double runningTotal = 0.0;
         TextArea area = new TextArea();
         area.setEditable(false);
         addProduct.setText("Select product to add");
@@ -55,31 +57,56 @@ public class PurchaseView {
             runningCart.add(productBox.getValue());
             area.clear();
             prc.displayCartInfo(area);
+            total.setText("€ " + runningTotal);
             productBox.setValue(null);
         });
         HBox cartInfo = new HBox(area);
         cartInfo.setAlignment(Pos.CENTER);
 
         Button checkout = new Button();
+        Button sortByPrice = new Button();
+        Button sortByName = new Button();
         Label outcome = new Label();
-        Label total = new Label();
-        checkout.setText("Checkout");
-        checkout.setOnAction(_->{
-            Purchase purchase = new Purchase(customersBox.getValue(),runningCart);
-            total.setText("€"+String.valueOf(purchase.calcTotal()));
-            boolean confirmation = purchase.confirmPurchase();
-            if (!confirmation){
-                outcome.setText("Payment cannot go through so sad");
-                System.out.println("their balance: €" + purchase.getBuyer().getBalance());
-            }else{
-                outcome.setText("Purchase confirmed " + purchase.toString());
-                prc.mc.pc.save();
-                prc.mc.cc.save();
-                System.out.println(purchase.toString());
-            }
+
+        sortByPrice.setText("Sort by Price");
+        sortByName.setText("Sort by Name");
+
+        sortByPrice.setOnAction(_->{
+            prc.execSort(area,false);
+        });
+        sortByPrice.setOnAction(_->{
+            prc.execSort(area,true);
         });
 
-        HBox buttons = new HBox(addProduct,checkout);
+        checkout.setText("Checkout");
+        checkout.setOnAction(_->{
+            if (runningCart.isEmpty() || customersBox.getValue() == null ){
+                Alert a = new Alert(Alert.AlertType.INFORMATION);
+                a.setContentText("No products/customers selected");
+                a.setTitle("Product/Customer not selected");
+                a.show();
+            }else {
+                Purchase purchase = new Purchase(customersBox.getValue(), runningCart);
+                total.setText("€" + String.valueOf(purchase.calcTotal()));
+                boolean confirmation = purchase.confirmPurchase();
+                if (!confirmation) {
+                    outcome.setText("Payment failed due to balance or stock issue");
+                    System.out.println("their balance: €" + purchase.getBuyer().getBalance());
+                    for (Product stockCheck:products){
+                       System.out.println(stockCheck.toString() + " " + stockCheck.getStock());
+                    }
+                } else {
+                    outcome.setText("Purchase confirmed " + purchase.toString());
+                    area.clear();
+                    prc.mc.pc.save();
+                    prc.mc.cc.save();
+                    prc.recordPurchase(purchase);
+                    prc.savePurchase();
+                    System.out.println(purchase.toString());
+                }
+            }});
+
+        HBox buttons = new HBox(addProduct,checkout,sortByPrice,sortByName);
         buttons.setAlignment(Pos.CENTER);
         buttons.setSpacing(25.0);
         // Displaying info

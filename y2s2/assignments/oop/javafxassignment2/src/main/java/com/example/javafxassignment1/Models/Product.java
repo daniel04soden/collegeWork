@@ -2,7 +2,7 @@ package com.example.javafxassignment1.Models;
 
 import java.io.*;
 
-public class Product extends Agent implements Serializable{
+public class Product extends Agent implements Serializable,Comparable<Product>{
     private int stock;
     private boolean inStock;
     private double price;
@@ -54,5 +54,10 @@ public class Product extends Agent implements Serializable{
     @Override
     public String toString(){
         return super.getName() + " € " + String.valueOf(this.getPrice());
+    }
+
+    @Override
+    public int compareTo(Product otherProd) {
+        return Double.compare(this.price,otherProd.price);
     }
 }
