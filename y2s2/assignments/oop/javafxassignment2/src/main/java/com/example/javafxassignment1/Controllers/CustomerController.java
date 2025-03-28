@@ -2,6 +2,8 @@ package com.example.javafxassignment1.Controllers;
 
 import com.example.javafxassignment1.Models.Customer;
 import com.example.javafxassignment1.View.CustomerView;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -75,4 +77,12 @@ public class CustomerController extends BaseController<Customer> {
   public ArrayList<Customer> getStorage(){
     return storage;
   };
+  public void balanceAdj(TextField t, ComboBox<Customer> cb){
+    double amountAdding = Double.parseDouble(t.getText());
+    Customer customer = cb.getValue();
+    System.out.println("Old" + customer.getName() + " balance €" + customer.getBalance());
+    customer.setBalance(customer.getBalance()+amountAdding);
+    System.out.println("New" + customer.getName() + " balance €" + customer.getBalance());
+    t.clear();
+  }
 }

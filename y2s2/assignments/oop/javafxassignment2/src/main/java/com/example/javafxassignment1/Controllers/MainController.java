@@ -1,9 +1,8 @@
 package com.example.javafxassignment1.Controllers;
 
-import com.example.javafxassignment1.Models.Purchase;
 import com.example.javafxassignment1.View.MainView;
 
-import java.util.ArrayList;
+import java.io.File;
 
 public class MainController {
     public MainView view;
@@ -17,8 +16,13 @@ public class MainController {
         this.pc = new ProductController(this);
         this.prc = new PurchaseController(this);
 
-        cc.load();
         pc.load();
+        cc.load();
         prc.loadInPurchases();
+    }
+
+    public static boolean checkFile(String dbpath){
+       File file = new File(dbpath);
+        return file.exists();
     }
 }

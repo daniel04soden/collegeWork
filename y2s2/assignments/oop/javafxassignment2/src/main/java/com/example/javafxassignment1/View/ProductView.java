@@ -48,16 +48,12 @@ public class ProductView {
         Button save = new Button();
         save.setText("Save Products");
         save.setOnAction(_ -> controller.save());
-        // Stock check
-        Button checkStock = new Button();
-        checkStock.setText("Check Stock");
-
 
         // Positioning the Components
 
         HBox titleBar = new HBox(title);
         titleBar.setAlignment(Pos.CENTER);
-        VBox vertical = new VBox(titleBar, register, view, checkStock,remove, load, save);
+        VBox vertical = new VBox(titleBar, register, view,remove, load, save);
         vertical.setSpacing(25);
         vertical.setAlignment(Pos.CENTER);
 
@@ -67,7 +63,6 @@ public class ProductView {
         view.setOnAction(_ -> stage.getScene().setRoot(viewProducts(stage)));
         remove.setOnAction(_ -> stage.getScene().setRoot(removeProduct(stage)));
         load.setOnAction(_ -> stage.getScene().setRoot(loadProducts(stage)));
-        checkStock.setOnAction(_->stage.getScene().setRoot(checkStock(stage)));
 
         return vertical;
     }
@@ -311,31 +306,5 @@ public class ProductView {
         return vbox;
     }
 
-    public VBox checkStock(Stage stage){
-        Label title = new Label("Checking Stock of Producys");
-        stage.setTitle(title.getText());
-        HBox titleBar = new HBox(title);
-        MainView.styleHbox(titleBar,10);
 
-        ArrayList<Product> products = controller.getStorage();
-        ComboBox<Product> productBox = new ComboBox<>();
-        productBox.getItems().addAll(products);
-        productBox.setPromptText("Check Stock On Item");
-        Label stockDisplay = new Label("");
-        Button checkStock = new Button("Select Item to check");
-
-        checkStock.setOnAction(_->{
-                controller.checkFromBox(productBox,stockDisplay);
-            }
-        );
-
-        HBox stockCheck = new HBox(productBox,stockDisplay);
-        MainView.styleHbox(stockCheck,30);
-        HBox buttons = new HBox(checkStock,MainView.backBtn(stage,productHome(stage)));
-        MainView.styleHbox(buttons,10);
-        VBox vertical = new VBox(titleBar,stockCheck,buttons);
-        vertical.setAlignment(Pos.CENTER);
-        vertical.setSpacing(30.0);
-        return vertical;
-    }
 }

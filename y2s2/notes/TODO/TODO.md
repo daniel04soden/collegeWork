@@ -13,7 +13,7 @@
 
 # OOP
 
-- [ ] Stage 3
+- [x] Stage 3 ✅ 2025-03-28
 	- [x] Create ui for order viewing ✅ 2025-03-25
 	- [x] Serialise each db ✅ 2025-03-25
 	- [x] Add alert for checkout ✅ 2025-03-26
@@ -21,10 +21,8 @@
 	- [x] Test case 1 ✅ 2025-03-25
 	- [x] Test case 2 ✅ 2025-03-25
 	- [x] (Optional) - More test cases ✅ 2025-03-25
-	- [ ] Make purchases db
-	- [ ]  Add more alerts
-	- [ ]  Make sure tabs don't disappear
-	- [ ] Create ordering system based on dates added to purchases
-	- [ ] Ordered based on the by the Product name (in alphabetical order). 
-	- [ ]  Select a product and see how many are in stock; 
+	- [x] Make purchases db ✅ 2025-03-27
+	- [x] Create ordering system based on dates added to purchases ✅ 2025-03-27
+	- [x] Ordered based on the by the Product name (in alphabetical order). ✅ 2025-03-27
+	- [x] Move stock over to purchases page; ✅ 2025-03-28
 	

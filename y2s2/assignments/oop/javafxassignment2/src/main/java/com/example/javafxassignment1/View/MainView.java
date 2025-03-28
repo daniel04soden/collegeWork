@@ -54,6 +54,7 @@ public class MainView {
             stage.close();
             mc.cc.save();
             mc.pc.save();
+            mc.prc.savePurchase();
         }else if (finalChoice == saveNoExit){
             stage.close();
         }

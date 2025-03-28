@@ -79,13 +79,4 @@ public class ProductController extends BaseController<Product> {
         return storage;
     }
 
-    public void checkFromBox(ComboBox<Product> box, Label stockDisplay){
-        stockDisplay.setText("");
-        for (Product product:storage){
-            if (product.getId() == box.getValue().getId()){
-                String stock = String.valueOf(box.getValue().getId());
-                stockDisplay.setText(stock);
-            }
-        }
-    }
 }

@@ -48,7 +48,7 @@ public class PurchaseView {
 
         Button addProduct = new Button();
         Label total = new Label();
-        double runningTotal = 0.0;
+        final double[] runningTotal = {0.0};
         TextArea area = new TextArea();
         area.setEditable(false);
         addProduct.setText("Select product to add");
@@ -56,7 +56,8 @@ public class PurchaseView {
             runningCart.add(productBox.getValue());
             area.clear();
             prc.displayPurchaseInfo(area,true);
-            total.setText("€ " + runningTotal);
+            runningTotal[0] += productBox.getValue().getPrice();
+            total.setText("€ " + runningTotal[0]);
             productBox.setValue(null);
         });
         HBox cartInfo = new HBox(area);
@@ -82,8 +83,9 @@ public class PurchaseView {
                 a.setTitle("Product/Customer not selected");
                 a.show();
             }else {
+                area.clear();
                 Purchase purchase = new Purchase(customersBox.getValue(), runningCart);
-                total.setText("€" + String.valueOf(purchase.calcTotal()));
+                total.setText("€" + String.valueOf(purchase.getTotal()));
                 boolean confirmation = prc.confirmPurchase(purchase);
                 if (!confirmation) {
                     outcome.setText("Payment failed due to balance or stock issue");
@@ -93,11 +95,10 @@ public class PurchaseView {
                     }
                 } else {
                     outcome.setText("Purchase confirmed " + purchase.toString());
-                    area.clear();
-                    prc.mc.pc.save();
-                    prc.mc.cc.save();
                     prc.recordPurchase(purchase);
                     prc.savePurchase();
+                    prc.mc.pc.save();
+                    prc.mc.cc.save();
                     System.out.println(purchase.toString());
                 }
             }});
@@ -114,10 +115,22 @@ public class PurchaseView {
         totals.setAlignment(Pos.CENTER);
         totals.setSpacing(25.0);
 
-        VBox vertical = new VBox(titleBar, topRow,cartInfo, buttons,totals);
+        VBox vertical = new VBox(titleBar, topRow,cartInfo, buttons,totals,checkStock(stage,productBox));
         vertical.setSpacing(30.0);
 
         return vertical;
+    }
+
+    public HBox checkStock(Stage stage,ComboBox<Product> productBox){
+        Label stockDisplay = new Label("");
+        Button checkStock = new Button("Select Item to check");
+        checkStock.setOnAction(_->{
+                    prc.checkFromBox(productBox,stockDisplay);
+                }
+        );
+        HBox stockCheckBox = new HBox(productBox,stockDisplay,checkStock);
+        MainView.styleHbox(stockCheckBox,30);
+        return stockCheckBox;
     }
 
     public VBox purchasingHistory(Stage stage){

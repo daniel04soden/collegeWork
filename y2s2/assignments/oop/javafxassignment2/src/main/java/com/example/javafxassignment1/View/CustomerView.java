@@ -2,13 +2,17 @@ package com.example.javafxassignment1.View;
 
 import com.example.javafxassignment1.Controllers.CustomerController;
 import com.example.javafxassignment1.Models.Customer;
+import com.example.javafxassignment1.Models.Product;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import com.example.javafxassignment1.View.MainView;
+
+import java.util.ArrayList;
 
 import static com.example.javafxassignment1.View.MainView.backBtn;
 
@@ -38,6 +42,11 @@ public class CustomerView {
         Button remove = new Button();
         remove.setText("Remove Customers");
         remove.setOnAction(_ -> stage.getScene().setRoot(removePage(stage)));
+        // Increase balance button
+
+        Button balanceIncr = new Button();
+        balanceIncr.setText("Increase customer balance");
+        balanceIncr.setOnAction(_-> stage.getScene().setRoot(addToBalance(stage)));
 
         // Load data button
         Button load = new Button();
@@ -52,7 +61,7 @@ public class CustomerView {
 
         HBox titleBar = new HBox(title);
         titleBar.setAlignment(Pos.CENTER);
-        VBox vertical = new VBox(titleBar, register, view, remove, load,save);
+        VBox vertical = new VBox(titleBar, register, view, remove, balanceIncr,load,save);
         vertical.setSpacing(25);
         vertical.setAlignment(Pos.CENTER);
 
@@ -113,7 +122,6 @@ public class CustomerView {
         Button submit = new Button();
         submit.setText("Submit");
         submit.setOnAction(_ -> {
-            // TODO - have this prevent button pressing if all fields not filled out
             MainView.validateText(nameInput,result);
             MainView.validateText(ageInput,result);
             MainView.validateText(emailInput,result);
@@ -253,6 +261,33 @@ public class CustomerView {
 
         return vertical;
     }
+
+    public VBox addToBalance(Stage stage) {
+        Label title = new Label("Adding to a customer's balance");
+        stage.setTitle(title.getText());
+        HBox titleBar = new HBox(title);
+        MainView.styleHbox(titleBar, 10);
+
+        ArrayList<Customer> customers = controller.getStorage();
+        ComboBox<Customer> customerComboBox = new ComboBox<>();
+        customerComboBox.getItems().addAll(customers);
+        customerComboBox.setPromptText("Add balance to which account:");
+        Button confirmAmount = new Button("Confirm amount");
+        Button backBtn = backBtn(stage, customerHome(stage));
+        TextField amountToAdd = new TextField();
+        confirmAmount.setOnAction(_->{
+            controller.balanceAdj(amountToAdd,customerComboBox);
+        });
+        HBox combo = new HBox(customerComboBox,amountToAdd);
+        MainView.styleHbox(combo, 10);
+        HBox buttons = new HBox(backBtn,confirmAmount);
+        MainView.styleHbox(buttons, 10);
+        VBox vertical = new VBox(titleBar,combo,buttons);
+        vertical.setAlignment(Pos.CENTER);
+        vertical.setSpacing(30.0);
+        return vertical;
+    }
+
 
     public VBox loadData(Stage stage) {
         // Header

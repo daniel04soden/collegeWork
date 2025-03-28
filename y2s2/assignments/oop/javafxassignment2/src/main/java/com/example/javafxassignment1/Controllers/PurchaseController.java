@@ -4,6 +4,8 @@ import com.example.javafxassignment1.Models.Customer;
 import com.example.javafxassignment1.Models.Product;
 import com.example.javafxassignment1.Models.Purchase;
 import com.example.javafxassignment1.View.PurchaseView;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
 import java.io.*;
@@ -70,43 +72,51 @@ public class PurchaseController {
     }
   }
 
-
   public void recordPurchase(Purchase p) {
     purchases.add(p);
     System.out.println(p);
   }
 
   public void loadInPurchases() {
-    purchases.clear();
-    try {
-      FileInputStream fio = new FileInputStream(dbPath);
-      ObjectInputStream stream = new ObjectInputStream(fio);
-      purchases = (ArrayList<Purchase>) stream.readObject(); // Read only one object
-      stream.close();
-      fio.close();
-      System.out.println(purchases);
-    } catch (Exception e) {
-      e.printStackTrace();
+    if (MainController.checkFile(dbPath)){
+      purchases.clear();
+      try {
+        FileInputStream fio = new FileInputStream(dbPath);
+        ObjectInputStream stream = new ObjectInputStream(fio);
+        purchases = (ArrayList<Purchase>) stream.readObject(); // Read only one object
+        stream.close();
+        fio.close();
+        System.out.println(purchases);
+      } catch (IOException | ClassNotFoundException e ) {
+        String error = e.toString();
+        System.out.println(error);
+      }
+    }else{
+     System.out.println("File not found or is empty");
     }
   }
 
   public void savePurchase() {
-    try (FileOutputStream saver = new FileOutputStream(dbPath)) {
-      ObjectOutputStream os = new ObjectOutputStream(saver);
-      os.writeObject(purchases);
-      System.out.println("Purchases: " + purchases);
-      System.out.println("Saving purchases to file");
+    if (MainController.checkFile(dbPath)){
+      try (FileOutputStream saver = new FileOutputStream(dbPath)) {
+        ObjectOutputStream os = new ObjectOutputStream(saver);
+        os.writeObject(purchases);
+        System.out.println("Purchases: " + purchases);
+        System.out.println("Saving purchases to file");
 
-      System.out.println("Saved to " + dbPath);
-    } catch (IOException e) {
-      System.out.println("Error saving to file, try again");
-      e.printStackTrace();
+        System.out.println("Saved to " + dbPath);
+      } catch (IOException e) {
+        System.out.println("Error saving to file, try again");
+        e.printStackTrace();
+      }
+    }else{
+      System.out.println("Issue with file");
     }
   }
 
   public boolean confirmPurchase(Purchase p) {
     Customer c = p.getBuyer();
-    double total = p.calcTotal();
+    double total = p.getTotal();
     for (Product products : p.getCart()) {
       if (!(products.isInStock())) {
         System.out.println("Product is out of stock please try again");
@@ -124,14 +134,23 @@ public class PurchaseController {
     return false;
   }
 
-  public void displayPurchase(){};
-
   public ArrayList<Purchase> getPurchases() {
     return purchases;
   }
 
   public void setPurchases(ArrayList<Purchase> purchases) {
     this.purchases = purchases;
+  }
+
+  public void checkFromBox(ComboBox<Product> box, Label stockDisplay){
+    String res;
+    if (box.getValue() != null){
+      Product selectedValue = box.getValue();
+      res = String.valueOf(box.getValue().getStock());
+    }else{
+      res = "";
+    }
+    stockDisplay.setText(res);
   }
 
 }
