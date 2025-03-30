@@ -17,18 +17,20 @@ struct item {
   int quantity;
 };
 
-struct item findMostVal(struct item *items, int listSize) {
-  int mostExpensive = 0;
-  struct item expenSiveItem;
-  struct item *itemPtr = &expenSiveItem;
+
+
+struct item *findMostVal(struct item *items, int listSize) {
+  int mostExpensive = -1;
+  struct item *expenSiveItem = NULL;
   for (int i = 0; i < listSize; i++) {
     int currPrice = (items[i].cost) * (items[i].quantity);
+    printf("%d\n", currPrice);
     if (currPrice > mostExpensive) {
       mostExpensive = currPrice;
-      *itemPtr = items[i];
+      expenSiveItem = &items[i];
     }
   }
-  return *itemPtr;
+  return expenSiveItem;
 }
 
 int main() {
@@ -40,6 +42,6 @@ int main() {
   inventory[0] = item1;
   inventory[1] = item2;
   inventory[2] = item3;
-  struct item res = findMostVal(inventory, 3);
-  printf("%d", res.cost);
+  struct item *res = findMostVal(inventory, 3);
+  printf("%s", res->name);
 }
