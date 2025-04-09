@@ -18,7 +18,6 @@ struct item {
 };
 
 
-
 struct item *findMostVal(struct item *items, int listSize) {
   int mostExpensive = -1;
   struct item *expenSiveItem = NULL;

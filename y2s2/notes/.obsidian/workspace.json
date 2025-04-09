@@ -11,10 +11,14 @@
             "id": "ca9ad8a151712834",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "Statistics/Regression.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "Regression"
             }
           }
         ]
@@ -186,17 +190,21 @@
   },
   "active": "ca9ad8a151712834",
   "lastOpenFiles": [
+    "NONLin/AssignmentWork/HDD Allocation thoughts.md",
+    "Statistics/Regression.md",
+    "OOP/brocodework/target/classes/Main/hello-view.fxml",
+    "NONLin/Dynamic Programming.md",
+    "NONLin/AssignmentWork",
+    "OOP/MutliThreading.md",
     "TODO/SIdeWork/TODO Personal.md",
     "TODO/TODO.md",
     "TODO/Next Week exams.md",
     "Untitled.md",
     "TODO/SIdeWork",
     "Statistics/Hypothesis Testing.md",
-    "NONLin/Dynamic Programming.md",
     "OOAnalysis/Design patterns.md",
     "OOP/Databases.md",
     "OOP/JavaDoc+JDBC.md",
-    "OOP/brocodework/target/classes/Main/hello-view.fxml",
     "OOP/brocodework/target/classes/Main/MainController.class",
     "OOP/brocodework/target/classes/Main/MainApplication.class",
     "OOP/brocodework/target/classes/module-info.class",
@@ -213,15 +221,11 @@
     "Statistics/Binomial Distribution.md",
     "SideWork/Golang/Go basics.md",
     "SideWork/Golang/Htmx + Golang.md",
-    "SideWork/Golang",
     "NONLin/Performance/Amortised Analysis.md",
     "NoSQL/Nosql Start/Nosq Emergence.md",
     "NONLin/Data Structures/Data Structures - Again.md",
     "Statistics/Multiplication Rule.md",
     "Statistics/Graphical Methods.md",
-    "OOAnalysis/Aggregation-Composition.md",
-    "NoSQL/Nosql Start/Data Management Systems.md",
-    "NoSQL/Nosql Start/Big data.md",
     "Assignment Notes/NLDSA/Assignment1/Untitled.canvas",
     "Untitled.canvas"
   ]

@@ -1,53 +1,104 @@
 package assignment2;
-
-import java.util.Map;
+import java.util.*;
 
 public class LongestCommonSubsequence {
-
     private final String X;
     private final String Y;
 
-    public LongestCommonSubsequence(String X, String Y) {
+    public LongestCommonSubsequence(String X, String Y)
+    {
         this.X = X;
         this.Y = Y;
     }
 
-    public String compare() {
-        String res = "";
-        int m = X.length();
-        int n = Y.length();
-        int[][] matrix = new int[m + 1][n + 1];
-        for (int i = 0; i < m; i++) {
-          matrix[i][0] = 0;
+    private void printMatrix(int[][] matrix){
+        System.out.println("Current Matrix \n");
+        for (int[] row : matrix) {
+            System.out.println(Arrays.toString(row));
         }
-        for (int i = 0; i < n; i++) {
-            matrix[0][i] = 0;
-        }
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (this.X.equals(this.Y)) {
-                    matrix[i][j] = matrix[i][j]+1;
-                }else{
-                    matrix[i][j] = Math.max(matrix[i][j+1],matrix[i+1][j]);
-                }
+        System.out.println();
+    }
 
+
+    public String reconstruct(int[][] matrix, int row, int column){
+        String res = "";
+        while ((row>0)&&(column>0)){
+            if (X.charAt(row-1) == Y.charAt(column-1)) {
+                res += X.charAt(row-1);
+                row--;
+                column--;
+            }else if(matrix[row - 1][column] >= matrix[row][column - 1]){
+                row--;
+            }
+            else {
+                column--;
             }
         }
-        return res;
+         return new StringBuilder(res).reverse().toString();
+    }
+
+    public String compare() {
+        int m = X.length(); // getting these lengths for convenieces
+        System.out.println("Length of " + this.X + " = " + m);
+        int n = Y.length();
+        System.out.println("Length of " + this.Y + " = " + n);
+        System.out.println("keep in mind reason rows and columns bigger n+1 and m+1");
+        int trackMatrix[][] = new int[m+1][n+1]; // Init matrix to keep track of longest subsequence
+
+        // Fill first column with 0s
+        for (int i = 0; i<m; i++) {
+           trackMatrix[i][0] = 0;
+        }
+        // Fill first row with 0s
+        for (int j = 0; j<n; j++) {
+           trackMatrix[0][j] = 0;
+        }
+
+
+        for (int k = 1; k <= m; k++) {
+           for (int p = 1; p <= n; p++) {
+               if(X.charAt(k-1) == Y.charAt(p-1)){ // Check for common characters at row to column
+                   trackMatrix[k][p] = 1 + trackMatrix[k-1][p-1]; // If so set the current matrix pos to 1+length at X and Y
+               }else{
+                   trackMatrix[k][p] = Math.max(trackMatrix[k][p-1],trackMatrix[k-1][p]);
+                   // Otherwise set current matrix pos to larger between two strings (row is X, column is Y)
+               }
+
+           /* Final Matrix for reference
+              -  B  D  C  A  B  A
+            -[0, 0, 0, 0, 0, 0, 0]
+            A[0, 0, 0, 0, 1, 1, 1]
+            B[0, 1, 1, 1, 1, 2, 2]
+            C[0, 1, 1, 2, 2, 2, 2]
+            B[0, 1, 1, 2, 2, 3, 3]
+            D[0, 1, 2, 2, 2, 3, 3]
+            A[0, 1, 2, 2, 3, 3, 4]
+            B[0, 1, 2, 2, 3, 4, 4]
+            *
+             X = "ABCBDAB";
+             Y = "BDCABA";
+            */
+           }
+        }
+            printMatrix(trackMatrix); // Printing current status of matrix - Helps see the progress of it
+
+        int row = m;
+        int column = n;
+        return reconstruct(trackMatrix, row, column);
     }
 
     public static void main(String[] args) {
         String X = "ABCBDAB";
         String Y = "BDCABA";
-        String Z = new LongestCommonSubsequence(X, Y).compare();
-        System.out.println(
-            "The longest common subsequence of '" +
-            X +
-            "' and '" +
-            Y +
-            "' is '" +
-            Z +
-            "'."
-        );
+        String Z = new LongestCommonSubsequence(X,Y).compare();
+        System.out.println("The longest common subsequence of '" +X + "' and '" + Y + "' is '" + Z + "'.");
+         String A = "HELLOWORLD";
+         String B = "WORLDHELLO";
+         String C = "DANIELSODEN";
+         String D = "SODENDANIEL";
+         String O = new LongestCommonSubsequence(A,B).compare();
+         String P = new LongestCommonSubsequence(C,D).compare();
+         System.out.println("The longest common subsequence of '" +A + "' and '" + B + "' is '" + O + "'.");
+         System.out.println("The longest common subsequence of '" +C + "' and '" + D + "' is '" + P + "'.");
     }
 }

@@ -1,3 +1,4 @@
+DROP DATABASE firm;
 CREATE DATABASE firm;
 
 USE firm;
@@ -21,8 +22,8 @@ CREATE TABLE department (
 CREATE TABLE performance (
 	departmentID int,
 	employeeID int,
-	rank double,
-	FOREIGN KEY(employeeID) REFERENCES employee(employeeID),
+	rank DECIMAL(5,2),
+	FOREIGN KEY(employeeID) REFERENCES Employee_T(employeeID),
 	FOREIGN KEY(departmentID) REFERENCES department(departmentID),
 	PRIMARY KEY(departmentID,employeeID) -- Presume this shouldn't be the key... - Could it,could it not ? We can't have an employee with two diff dept
 );
@@ -51,10 +52,6 @@ INSERT INTO performance (employeeID, departmentID, rank) VALUES
 (5, 2, 1.0), -- Eve in Marketing, rank 1.0
 (1, 2, 2.0); -- Alice in Marketing, rank 2.0 (to test multiple departments for one employee)
 
--- Index on employeeID in performance table 
-
-CREATE INDEX employeeID_idx1
-	USING BTREE ON performance(employeeID);
 
 -- Employee name table
 

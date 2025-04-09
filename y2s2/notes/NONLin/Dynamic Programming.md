@@ -38,3 +38,22 @@ Does this formulation exhibit optimal substructures?
 - then the overall optimal solution can be constructred from the optimal solutions for hte two sub chains A1x...An and Ak+1...An
 - Why? - Because if any of the two sub cahins would be computable with less atomic multiplications then we should have used this in the optimal solution in the first place.
 
+# Longest common subsequence
+
+## How to implement a simple plagiarism detection tool
+
+- To evaluate the similarity of two documents a simple approach is to determine the lengths of passages shared between two texts
+- We are given two input sequences that share a common subsequence and if there are two strictly increasing sequences of indices so that 
+
+## Optimal substructure
+
+- The prefixes are the seuqneces where the last character is removed
+- If the last character of the two input sequences match, then this last character must be a part of the longest common subsequences
+- The length of lcs can be calculated from the length of the lcs of the prefixes by adding one more character
+- If the two characters at the end do not match then at least one of these two characters is not the same as the one last character of the LCS
+- If zk != xm then the lcs Z must be a lcs of Xm-1 and Y
+
+
+- Symmetrically if zk !+ yn then the lcs z must be a lcs of X and Yn-1
+- If xm != yn the length of the lcs is the max of the length of either the lcs of Xm-1 and Y or the LCS of X and Yn-1.
+- c[m,n] = max{c[m-1,n],c[m,n-1]}
