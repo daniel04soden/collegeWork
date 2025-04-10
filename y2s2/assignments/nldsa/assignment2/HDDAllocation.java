@@ -1,6 +1,5 @@
 package assignment2;
 
-import java.util.Arrays;
 
 public class HDDAllocation {
 	private final int[] hdds;
@@ -17,16 +16,15 @@ public class HDDAllocation {
 		}
 	}
 
-	public boolean verify(int fileIdx, int hddIdx){
+	public boolean verify(int hddIdx){
 		int allocation = 0;
-		for (int i = 0; i < res.length-1; i++) {
+		for (int i = 0; i < res.length; i++) {
 			if (res[i] == hddIdx) {
 				allocation += files[i];
-			}	
+			}
 		}
         return allocation <= hdds[hddIdx];
     }
-
 
 	public int[] generate_allocation(int fileIdx) {
 		// Checking if solution reached
@@ -36,16 +34,17 @@ public class HDDAllocation {
 		// Making our choice
         for (int i = 0; i < hdds.length; i++) {
                 res[fileIdx] = i;
-				fileIdx++;
-                if (verify(fileIdx, i)) {
-					return generate_allocation(fileIdx);
+                if (verify( i)) {
+					int[] penis = generate_allocation(fileIdx+1);
+					if (penis != null ) {
+						return penis;
+					}
                 }else{
 					res[fileIdx] = -1; //  Backtracking/constraints
-					fileIdx--;
 					System.out.println("Epic backtrack");
 				}
         }
-        return res;
+        return null;
 	}
 
 	public static void main(String[] args) {
