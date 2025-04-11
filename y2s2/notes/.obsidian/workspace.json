@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Statistics/Regression.md",
+                "file": "TODO/TODO.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Regression"
+              "title": "TODO"
             }
           }
         ]
@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "8eafd8fa697eaf8d",
@@ -173,7 +174,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -190,8 +192,8 @@
   },
   "active": "ca9ad8a151712834",
   "lastOpenFiles": [
-    "NONLin/AssignmentWork/HDD Allocation thoughts.md",
     "Statistics/Regression.md",
+    "NONLin/AssignmentWork/HDD Allocation thoughts.md",
     "OOP/brocodework/target/classes/Main/hello-view.fxml",
     "NONLin/Dynamic Programming.md",
     "NONLin/AssignmentWork",

@@ -22,17 +22,15 @@ public class RodCutting {
            cutLengths.add(0);
            bestPrices.add(0);
        }
-       // O(n^2)
-       for (int i = 1; i < n+1; i++) {
+       for (int i = 1; i < n+1; i++) { // Loop over prices array for comparison 
            int max_price = -1; // Smallest price for comparsion - could be -infinity
-          for (int j = 1; j <=i; j++) {
+          for (int j = 1; j <=i; j++) { // Looking at next price ahead, depending on value of i ie 1-2,1-8 etc
               int curr_price = Math.max(max_price,prices[j-1]+bestPrices.get(i-j));  // Current price through iteration in comparison to store best prices
 
               if (curr_price>max_price) { // if our new current price is greater than the loop max price
-                  max_price = curr_price;
+                  max_price = curr_price; 
                   cutLengths.add(i,j); // Add the cut of j at the index i
               }
-
           }
           bestPrices.add(i,max_price);
        }

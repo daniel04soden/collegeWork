@@ -1,6 +1,9 @@
 package assignment2;
 import java.util.*;
 
+/**
+ * LongestCommonSubsequence
+ */
 public class LongestCommonSubsequence {
     private final String X;
     private final String Y;
@@ -11,30 +14,40 @@ public class LongestCommonSubsequence {
         this.Y = Y;
     }
 
+    /**
+     * @param matrix
+		 *Takes in a matrix and prints it out for logging purposes 
+     */
     private void printMatrix(int[][] matrix){
         System.out.println("Current Matrix \n");
         for (int[] row : matrix) {
-            System.out.println(Arrays.toString(row));
-        }
-        System.out.println();
+            System.out.println(Arrays.toString(row));         }
+        System.out.println(); // Printing out 
     }
 
 
+    /**
+     * @param matrix - Matrix with the corresponding common subsequence values filled
+     * @param row - corner row to start from
+     * @param column - corner column to start from
+		 * 
+     * @return Longest common subsequence
+     */
     public String reconstruct(int[][] matrix, int row, int column){
-        String res = "";
-        while ((row>0)&&(column>0)){
-            if (X.charAt(row-1) == Y.charAt(column-1)) {
-                res += X.charAt(row-1);
-                row--;
-                column--;
-            }else if(matrix[row - 1][column] >= matrix[row][column - 1]){
-                row--;
+        String res = ""; // String to start from
+        while ((row>0)&&(column>0)){ // Loop until we hit our zeros, indicating no commmon substring present
+            if (X.charAt(row-1) == Y.charAt(column-1)) { // If the character at their respective rows and columns are common
+                res += X.charAt(row-1); // Set new string as character above row
+                row--; // Move up once
+                column--;  // Move left
+            }else if(matrix[row - 1][column] >= matrix[row][column - 1]){ // If value above current matrix pos is greater/equal to left of current matrix pos
+                row--; // Move up
             }
             else {
-                column--;
+                column--; // Move left
             }
         }
-         return new StringBuilder(res).reverse().toString();
+         return new StringBuilder(res).reverse().toString(); // Reconstructed string - can be done without stringbuilder, just easier for this
     }
 
     public String compare() {
@@ -49,15 +62,17 @@ public class LongestCommonSubsequence {
         for (int i = 0; i<m; i++) {
            trackMatrix[i][0] = 0;
         }
+
         // Fill first row with 0s
         for (int j = 0; j<n; j++) {
            trackMatrix[0][j] = 0;
         }
 
 
-        for (int k = 1; k <= m; k++) {
-           for (int p = 1; p <= n; p++) {
-               if(X.charAt(k-1) == Y.charAt(p-1)){ // Check for common characters at row to column
+        for (int k = 1; k <= m; k++) { // Looping over rows
+           for (int p = 1; p <= n; p++) { // looping over columns
+               if(X.charAt(k-1) == Y.charAt(p-1)){ // Check for common characters at row to column between X and y  
+																									// X is evaluated via the rows and Y the columns
                    trackMatrix[k][p] = 1 + trackMatrix[k-1][p-1]; // If so set the current matrix pos to 1+length at X and Y
                }else{
                    trackMatrix[k][p] = Math.max(trackMatrix[k][p-1],trackMatrix[k-1][p]);
@@ -82,9 +97,7 @@ public class LongestCommonSubsequence {
         }
             printMatrix(trackMatrix); // Printing current status of matrix - Helps see the progress of it
 
-        int row = m;
-        int column = n;
-        return reconstruct(trackMatrix, row, column);
+        return reconstruct(trackMatrix, m, n);
     }
 
     public static void main(String[] args) {
