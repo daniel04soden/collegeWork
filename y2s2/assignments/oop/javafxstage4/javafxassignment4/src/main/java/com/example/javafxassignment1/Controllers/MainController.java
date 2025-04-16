@@ -14,7 +14,7 @@ public class MainController {
     private MainController() {
         this.view = new MainView(this);
         this.cc = CustomerController.getC();
-        this.pc = new ProductController(this);
+        this.pc = ProductController.getPc();
         this.prc = new PurchaseController(this);
 
         pc.load();

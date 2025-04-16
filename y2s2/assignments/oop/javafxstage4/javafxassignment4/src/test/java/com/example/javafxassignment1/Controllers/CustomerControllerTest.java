@@ -11,16 +11,15 @@ class CustomerControllerTest {
     @Test
     @DisplayName("Testing adding a customer to the db")
     void add() {
-        MainController mc = new MainController();
         // All attributes strings as done in the implementation
 
         String age = "12";
         String name = "Daniel Soden";
         String email = "dsoden09@gmail.com";
         String balance = "12.2";
-        CustomerController cc = new CustomerController(mc);
-        int id = cc.getStorage().size();
-        Customer testCustomer = new Customer(id+1, name, email, Integer.parseInt(age), Double.parseDouble(balance));
+        CustomerController cc = CustomerController.getC();
+        int id = cc.getStorage().size()+1;
+        Customer testCustomer = new Customer(id, name, email, Integer.parseInt(age), Double.parseDouble(balance));
         cc.add(name, email, age, balance);
         assertEquals(cc.getStorage().getLast().getId(),testCustomer.getId());
     }
@@ -28,8 +27,7 @@ class CustomerControllerTest {
     @Test
     @DisplayName("Testing deleting a customer")
     void delete() {
-        MainController mc = new MainController();
-        CustomerController cc = new CustomerController(mc);
+        CustomerController cc = CustomerController.getC();
         int originalSize = cc.getStorage().size();
         cc.delete(cc.getStorage().getLast().getId());
         int newSize = cc.getStorage().size();

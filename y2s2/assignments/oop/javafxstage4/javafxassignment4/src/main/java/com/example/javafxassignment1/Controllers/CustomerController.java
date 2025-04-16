@@ -16,7 +16,7 @@ public class CustomerController extends BaseController<Customer>{
   private static final CustomerController c = new CustomerController(controller);
   private CustomerController(MainController mc_) {
     super("src/main/java/com/example/javafxassignment1/database/customers.txt");
-    this.controller = mc_;
+    controller = mc_;
     this.view = new CustomerView(this);
   }
 
@@ -89,13 +89,12 @@ public class CustomerController extends BaseController<Customer>{
     t.clear();
   }
 
+  // Needed for singleton pattern
   public static CustomerController getC() {
     return c;
   }
 
   /**
    *
-   * Thread needed for serialising and saving at the same time
-   * And for de-serialising and loading at the same time
    */
 }

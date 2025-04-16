@@ -11,12 +11,9 @@ import javafx.stage.Stage;
 import static com.example.javafxassignment1.View.MainView.applyCSS;
 
 public class MainApplication extends Application {
-  private double spacing = 0.35;
-  @Override
-  public void start(Stage stage) {
-    String title = "DS Computing Customer Management Portal";
-    stage.setTitle(title);
-    MainController mc = MainController.getMc(); // Singleton Pattern
+  private final MainController mc = MainController.getMc(); // Singleton Pattern
+
+  public SplitPane init(Stage stage){
     TabPane mainPane = new TabPane();
     Tab tab1 = new Tab("Customers");
     tab1.setClosable(false);
@@ -29,16 +26,21 @@ public class MainApplication extends Application {
     Tab tab3 = new Tab("Maintenance");
     tab3.setClosable(false);
     SplitPane initProduct = mc.pc.view.splitInit(stage);
+    double spacing = 0.35;
     initCustomer.setDividerPositions(spacing);
     initPurchase.setDividerPositions(spacing); // TODO - move styling like this elsewhere
     initProduct.setDividerPositions(spacing);
     tab3.setContent(initProduct);
     mainPane.getTabs().addAll(tab1, tab2, tab3); // Add the tabs to the tab pane.
 
-    SplitPane root = new SplitPane(mainPane);
+    return new SplitPane(mainPane);
+  }
+    @Override
+  public void start(Stage stage) {
+    String title = "DS Computing Customer Management Portal";
+    stage.setTitle(title);
+    SplitPane root = init(stage);
     Scene main = new Scene(root,1000,500);
-
-
     applyCSS(main);
     stage.setScene(main);
     stage.setResizable(false);

@@ -17,7 +17,7 @@ class PurchaseControllerTest {
         ArrayList<Product> ap = new ArrayList<>();
         ap.add(pr);
         Purchase p = new Purchase(c,ap);
-        MainController mc = new MainController();
+        MainController mc = MainController.getMc();
         PurchaseController pc = new PurchaseController(mc);
         assertTrue(pc.confirmPurchase(p));
     }

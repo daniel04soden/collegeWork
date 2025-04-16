@@ -7,12 +7,17 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class ProductController extends BaseController<Product> {
-    public MainController controller;
+    public static MainController controller;
     public ProductView view;
-    public ProductController(MainController mc_) {
+    private static final ProductController pc = new ProductController(controller);
+    private ProductController(MainController mc_) {
         super("src/main/java/com/example/javafxassignment1/database/products.txt");
         this.controller = mc_;
         this.view = new ProductView(this);
+    }
+
+    public static ProductController getPc() {
+        return pc;
     }
 
     @Override
