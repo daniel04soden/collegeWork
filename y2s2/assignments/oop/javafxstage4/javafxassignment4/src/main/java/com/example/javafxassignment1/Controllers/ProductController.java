@@ -31,7 +31,11 @@ public class ProductController extends BaseController<Product> {
         } else {
             newId = storage.getLast().getId() + 1; // Get the last product's ID
         }
-        Product newProduct = new Product(newId, name, stock, price);
+        Product newProduct = new Product
+                .ProductBuilder(newId,name,price)
+                .stock(stock)
+                .inStock()
+                .build();
         storage.add(newProduct);
         System.out.println("New Product: " + newProduct);
         print(); // Print all products

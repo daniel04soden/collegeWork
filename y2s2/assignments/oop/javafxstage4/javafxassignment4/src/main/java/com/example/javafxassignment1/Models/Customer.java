@@ -13,16 +13,20 @@ public class Customer implements Serializable,Comparable<Customer>{
 	private static final long serialVersionUID = 1;
 
 	private Customer(CustomerBuilder builder){
-		this.email = builder.email(email);
+		this.email = builder.email;
 		this.name = builder.name;
 		this.id = builder.id;
 		this.balance = builder.balance;
 		this.age = builder.age;
 
 		}
+
+	public static CustomerBuilder builder(int id_,String name_,int age_, double balance_){
+		return new CustomerBuilder(id_,name_,age_,balance_);
+	}
 		// Getters
 
-		public String getEmail(){
+	public String getEmail(){
 		return this.email;
 	}
 
@@ -84,10 +88,10 @@ public class Customer implements Serializable,Comparable<Customer>{
 	// Builder pattern
 	public static class CustomerBuilder {
 		private String email;
-		private int id;
-		private String name;
-		private int age;
-		private double balance;
+		private final int id;
+		private final String name;
+		private final int age;
+		private final double balance;
 
 		public CustomerBuilder(int id_,String name_,int age_, double balance_){
 			this.id = id_;

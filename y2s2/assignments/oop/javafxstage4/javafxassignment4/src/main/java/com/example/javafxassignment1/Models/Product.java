@@ -7,7 +7,7 @@ public class Product implements Serializable,Comparable<Product>{
     private String name;
     private int stock;
     private boolean inStock;
-    private double cost;
+    private double price;
     @Serial
     private static final long serialVersionUID = 1;
 
@@ -15,20 +15,24 @@ public class Product implements Serializable,Comparable<Product>{
         this.id = builder.id;
         this.name = builder.name;
         this.stock = builder.stock;
-        this.cost = builder.cost;
+        this.price = builder.price;
         this.inStock = builder.inStock;
+    }
+
+    public static ProductBuilder builder(int id_,String name_,double price_){
+        return new ProductBuilder(id_,name_,price_);
     }
 
     public int getStock() {
         return stock;
     }
 
-    public double getCost() {
-        return cost;
+    public double getPrice() {
+        return price;
     }
 
-    public void setCost(double cost) {
-        this.cost = cost;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public boolean isInStock() {
@@ -48,16 +52,16 @@ public class Product implements Serializable,Comparable<Product>{
     }
 
     public String returnToDb(){ // TODO eval if needed for postgresql
-        return getId() + "," + getName()+ "," + this.cost + "," + this.stock+ "," + this.inStock;
+        return getId() + "," + getName()+ "," + this.price + "," + this.stock+ "," + this.inStock;
     }
     @Override
     public String toString(){
-        return getName() + " € " + this.getCost();
+        return getName() + " € " + this.getPrice();
     }
 
     @Override
     public int compareTo(Product otherProd) {
-        return Double.compare(this.cost,otherProd.cost);
+        return Double.compare(this.price,otherProd.price);
     }
 
     public String getName() {
@@ -73,16 +77,16 @@ public class Product implements Serializable,Comparable<Product>{
     }
 
     public static class ProductBuilder {
-        private int id;
-        private String name;
+        private final int id;
+        private final String name;
         private int stock;
         private boolean inStock;
-        private double cost;
+        private final double price;
 
-        public ProductBuilder(int id_,String name_,double cost_){
+        public ProductBuilder(int id_,String name_,double price_){
             this.id = id_;
             this.name = name_;
-            this.cost = cost_;
+            this.price = price_;
         }
 
         public ProductBuilder stock(int stock_){

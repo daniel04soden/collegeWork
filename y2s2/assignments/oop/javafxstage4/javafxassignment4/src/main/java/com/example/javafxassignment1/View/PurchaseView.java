@@ -80,7 +80,7 @@ public class PurchaseView {
                 runningCart.add(productBox.getValue());
                 area.clear();
                 prc.displayPurchaseInfo(area,true);
-                runningTotal[0] += productBox.getValue().getCost();
+                runningTotal[0] += productBox.getValue().getPrice();
                 total.setText("€ " + runningTotal[0]);
                 productBox.setValue(null);
             }

@@ -12,7 +12,6 @@ public class CustomerController extends BaseController<Customer>{
   public static MainController controller;
   public CustomerView view;
 
-
   private static final CustomerController c = new CustomerController(controller);
   private CustomerController(MainController mc_) {
     super("src/main/java/com/example/javafxassignment1/database/customers.txt");
@@ -32,7 +31,11 @@ public class CustomerController extends BaseController<Customer>{
     } else {
       newId = storage.getLast().getId() + 1;
     }
-    Customer currentCustomer = new Customer(newId, name, email, age, balance);
+    Customer currentCustomer = new Customer
+            .CustomerBuilder(newId,name,age,balance)
+            .email(email)
+            .build();
+
     storage.add(currentCustomer);
     System.out.println("New Customer: " + currentCustomer);
     print(); // Print all customers
@@ -76,6 +79,7 @@ public class CustomerController extends BaseController<Customer>{
       e.printStackTrace();
     }
   }
+
   @Override
   public ArrayList<Customer> getStorage(){
     return storage;
@@ -94,7 +98,4 @@ public class CustomerController extends BaseController<Customer>{
     return c;
   }
 
-  /**
-   *
-   */
 }

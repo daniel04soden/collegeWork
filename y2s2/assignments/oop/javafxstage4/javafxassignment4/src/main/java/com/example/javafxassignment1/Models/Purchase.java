@@ -25,7 +25,7 @@ public class Purchase implements Serializable,Comparable<Purchase>{
     this.cart = cart_;
     this.timeOfPurchase = new Date();
     for (Product product : cart_) {
-     total+=product.getCost();
+     total+=product.getPrice();
     }
   }
 

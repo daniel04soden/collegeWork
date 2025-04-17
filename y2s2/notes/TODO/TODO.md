@@ -22,12 +22,13 @@
 ## Overall goals
 - [ ] Improve documentation - JavaDoc+Report
 - [ ] Improve error handling in frontend - Using validatorfx
+- [ ] Report eeeee scary
 - [x] Fix tab pane issues - move over to split panes fully ✅ 2025-04-15
 
 
 
 ## Ass4 Stage 1
-- [ ] Menu item to. save/serialise the store data and another item to load/deserialise data
+- [x] Menu item to. save/serialise the store data and another item to load/deserialise data ✅ 2025-04-17
 - [x] Popup window, alert ✅ 2025-04-15
 - [ ] One filename - Db.txt??? - db.db
 - [ ] Handle filenotfound
@@ -46,15 +47,18 @@
 - [ ] Implement check data correct ie test case - does this mean that we're comparing to other saved data?????????
 
 - [ ] Data Access Object pattern in separate layers
-- [ ] Builder pattern, why is it used 
+- [x] Builder pattern ✅ 2025-04-17
 
 ## Ass4 Stage 3
-- [ ] Make new experimental project??
-- [ ] Method with infinite loop
+- [x] Make new experimental project?? ✅ 2025-04-17
+- [x] Method with infinite loop ✅ 2025-04-17
+- [ ] Create graph displaying results
+- [ ] Evaluate the accuracy of the results
 ### Measure
 - [ ] How many objects to be created for heaps/stacks
 - [ ] How long it takes to throw memory and stack exceptions
 - [ ] When the creation starts slowing down
+
 
 # OOA
 - [ ] Oak valley domain Model 

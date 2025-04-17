@@ -12,11 +12,18 @@ import static org.junit.jupiter.api.Assertions.*;
 class PurchaseControllerTest {
     @Test
     void confirmPurchase() {
-        Customer c = new Customer(1,"Dan","dsoden09@gmail.com",21,250.00);
-        Product pr = new Product(1,"Computer",10,200.00);
+        Customer currentCustomer = new Customer
+                .CustomerBuilder(1,"Dan",12,5000000.00)
+                .email("dsoden09@gmail.com")
+                .build();
+        Product newProduct = new Product
+                .ProductBuilder(1,"Computer",200.00)
+                .stock(10)
+                .inStock()
+                .build();
         ArrayList<Product> ap = new ArrayList<>();
-        ap.add(pr);
-        Purchase p = new Purchase(c,ap);
+        ap.add(newProduct);
+        Purchase p = new Purchase(currentCustomer,ap);
         MainController mc = MainController.getMc();
         PurchaseController pc = new PurchaseController(mc);
         assertTrue(pc.confirmPurchase(p));

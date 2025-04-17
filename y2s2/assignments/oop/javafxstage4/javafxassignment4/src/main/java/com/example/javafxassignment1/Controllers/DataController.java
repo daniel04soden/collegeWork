@@ -1,12 +1,19 @@
 package com.example.javafxassignment1.Controllers;
 
-public class DataController {
-    private final String url = "jdbc:postgresql://localhost:5432/postgres";
-    private final DataController d = new DataController(url);
-    private DataController(String url_){ // Singleton pattern
-    }
+import com.example.javafxassignment1.Models.Customer;
+import com.example.javafxassignment1.Models.Product;
+import com.example.javafxassignment1.Models.Purchase;
 
-    public DataController getD() {
-        return d;
-    }
+public interface DataController {
+    Customer getCustomer(int customerID);
+    Product getProduct(int productID);
+    Purchase getPurchase(int purchaseID);
+    void deleteCustomer(int customerID);
+    void deleteProduct(int customerID);
+    //  No deleting purchases, final values
+    void saveCustomer (Customer c);
+    void saveProduct(Product p);
+    void savePurchase(Purchase prc);
+    Customer updateCustomer(int customerID);
+    Product updateProduct(int productID);
 }

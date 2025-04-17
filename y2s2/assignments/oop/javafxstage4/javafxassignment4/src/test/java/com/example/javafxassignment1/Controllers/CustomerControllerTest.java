@@ -16,12 +16,15 @@ class CustomerControllerTest {
         String age = "12";
         String name = "Daniel Soden";
         String email = "dsoden09@gmail.com";
-        String balance = "12.2";
+        String balance = "12.2"; // As strings as this reflects in real scenarios
         CustomerController cc = CustomerController.getC();
         int id = cc.getStorage().size()+1;
-        Customer testCustomer = new Customer(id, name, email, Integer.parseInt(age), Double.parseDouble(balance));
+        Customer currentCustomer = new Customer
+                .CustomerBuilder(id,name,Integer.parseInt(age),Double.parseDouble(balance))
+                .email(email)
+                .build();
         cc.add(name, email, age, balance);
-        assertEquals(cc.getStorage().getLast().getId(),testCustomer.getId());
+        assertEquals(cc.getStorage().getLast().getId(),currentCustomer.getId());
     }
 
     @Test
