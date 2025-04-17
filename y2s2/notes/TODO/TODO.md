@@ -55,3 +55,14 @@
 - [ ] How many objects to be created for heaps/stacks
 - [ ] How long it takes to throw memory and stack exceptions
 - [ ] When the creation starts slowing down
+
+# OOA
+- [ ] Oak valley domain Model 
+- [ ] System sequence diagrams
+	- [ ] Delivery address
+	- [ ] Order status 
+	- [ ] Journey time for delivery schedule 
+	- [ ] Current location of a driver on delivery of customer order
+- [ ] Extend class diagram to allow for customer returns ordered delivered
+- [ ] Operations signatures required 
+- [ ] Sequence diagram happy scenario 

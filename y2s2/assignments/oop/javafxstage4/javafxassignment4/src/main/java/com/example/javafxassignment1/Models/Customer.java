@@ -2,66 +2,110 @@ package com.example.javafxassignment1.Models;
 
 import java.io.*;
 
-public class Customer extends Agent implements Serializable,Comparable<Customer>{
-    private String email;
-    private int age;
-    private double balance;
+public class Customer implements Serializable,Comparable<Customer>{
+	private String email;
+	private int id;
+	private String name;
+	private int age;
+	private double balance;
 
-    @Serial
-    private static final long serialVersionUID = 1;
+	@Serial
+	private static final long serialVersionUID = 1;
 
-    public Customer(){
-        super();
-    }
+	private Customer(CustomerBuilder builder){
+		this.email = builder.email(email);
+		this.name = builder.name;
+		this.id = builder.id;
+		this.balance = builder.balance;
+		this.age = builder.age;
 
-    public Customer(int _id,String _name,String _email, int _age, double _balance){
-        super(_id,_name);
-        this.email = _email;
-        this.age = _age;
-        this.balance = _balance;
-    }
-    // Getters
+		}
+		// Getters
 
-    public String getEmail(){
-        return this.email;
-    }
+		public String getEmail(){
+		return this.email;
+	}
 
-    public int getAge(){
-        return this.age;
-    }
+	public int getAge(){
+		return this.age;
+	}
 
-   public double getBalance() {
-        return  this.balance;
-   }
+	public double getBalance() {
+		return  this.balance;
+	}
 
-    // Setters
+	// Setters
 
-    public void setEmail(String newEmail){
-        String emailRegex = "/^\\S+@\\S+\\.\\S+$/";
-        if (newEmail.matches(emailRegex)){
-            this.email = newEmail;
-        }else{
-            System.out.println("Invalid email");
-            // Display GUI error
-        }
-    }
-    public void setBalance(double newBalance){
-        this.balance = newBalance;
-    }
+	public void setEmail(String newEmail){
+		String emailRegex = "/^\\S+@\\S+\\.\\S+$/";
+		if (newEmail.matches(emailRegex)){
+			this.email = newEmail;
+		}else{
+			System.out.println("Invalid email");
+			// Display GUI error
+		}
+	}
+	public void setBalance(double newBalance){
+		this.balance = newBalance;
+	}
 
-    public void setAge(int _age){
-        this.age = _age;
-    }
-    // Omit idSetter, non-editable value
+	public void setAge(int _age){
+		this.age = _age;
+	}
+	// Omit idSetter, non-editable value
 
-    // Extra functionality
-    @Override
-    public String toString(){
-        return super.getName();
-    }
+	// Extra functionality
+	@Override
+	public String toString(){
+		return getName();
+	}
 
-    @Override
-    public int compareTo(Customer c) {
-        return this.getName().compareTo(c.getName());
-    }
+	@Override
+	public int compareTo(Customer c) {
+		return this.getName().compareTo(c.getName());
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	// Builder pattern
+	public static class CustomerBuilder {
+		private String email;
+		private int id;
+		private String name;
+		private int age;
+		private double balance;
+
+		public CustomerBuilder(int id_,String name_,int age_, double balance_){
+			this.id = id_;
+			this.name = name_;
+			this.age = age_;
+			this.balance = balance_;
+		}
+
+		public CustomerBuilder email(String email){
+			this.email = email;
+			return this;
+		}
+
+		public Customer build(){
+			return new Customer(this);
+		}
+
+	}
 }
+
+
