@@ -30,9 +30,9 @@
 ## Ass4 Stage 1
 - [x] Menu item to. save/serialise the store data and another item to load/deserialise data ✅ 2025-04-17
 - [x] Popup window, alert ✅ 2025-04-15
-- [ ] One filename - Db.txt??? - db.db
-- [ ] Handle filenotfound
-- [ ] Use diff threads for serial and de-serial
+- [x] One filename - Db.txt??? - db.db ✅ 2025-04-17
+- [x] Handle filenotfound ✅ 2025-04-17
+- [x] Use diff threads for serial and de-serial ✅ 2025-04-17
 - [x] Singleton pattern - bare minimum done, use it in intelligent way ✅ 2025-04-15
 	- Idea - new saving class or maybe even use data controller
 	- if bare min, maybe just in customer controller..
@@ -40,12 +40,9 @@
 - [ ] Implement Postgresql or sqlite
 - [ ] Check connection
 - [ ] Give db save feedback
-
-- [ ] Handle autoincrid  
 - [ ] Make connection
 - [x] Singleton pattern here ✅ 2025-04-10
 - [ ] Implement check data correct ie test case - does this mean that we're comparing to other saved data?????????
-
 - [ ] Data Access Object pattern in separate layers
 - [x] Builder pattern ✅ 2025-04-17
 

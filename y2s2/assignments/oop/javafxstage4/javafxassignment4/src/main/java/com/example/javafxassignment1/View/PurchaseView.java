@@ -9,10 +9,12 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class PurchaseView {
+public class PurchaseView implements Serializable{
     private PurchaseController prc;
     public PurchaseView(PurchaseController prc_){
         this.prc = prc_;
@@ -208,7 +210,6 @@ public class PurchaseView {
     private HBox historyButtons(Stage stage, TextArea orderInfo) {
         Button sortOrders = new Button("Sort by date");
         Button sortByTotal = new Button("Sort by name");
-        Button back = new Button("Back");
         Button clear = new Button("Clear");
         clear.setOnAction(_->{
             orderInfo.setText("");
@@ -221,9 +222,6 @@ public class PurchaseView {
             prc.execSort(orderInfo);
         });
 
-        back.setOnAction(_->{
-            stage.getScene().setRoot(mainPurchase(stage));
-        });
-        return new HBox(sortOrders,sortByTotal,clear,back);
+        return new HBox(sortOrders,sortByTotal,clear);
     }
 }

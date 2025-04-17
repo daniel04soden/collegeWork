@@ -18,7 +18,6 @@ public class Customer implements Serializable,Comparable<Customer>{
 		this.id = builder.id;
 		this.balance = builder.balance;
 		this.age = builder.age;
-
 		}
 
 	public static CustomerBuilder builder(int id_,String name_,int age_, double balance_){
@@ -73,7 +72,7 @@ public class Customer implements Serializable,Comparable<Customer>{
 		return id;
 	}
 
-	public static long getSerialversionuid() {
+	public static long getSerialVersionuid() {
 		return serialVersionUID;
 	}
 

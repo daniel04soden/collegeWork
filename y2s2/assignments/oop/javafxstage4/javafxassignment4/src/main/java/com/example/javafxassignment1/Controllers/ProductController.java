@@ -6,7 +6,7 @@ import com.example.javafxassignment1.View.ProductView;
 import java.io.*;
 import java.util.ArrayList;
 
-public class ProductController extends BaseController<Product> {
+public class ProductController extends BaseController<Product>{
     public static MainController controller;
     public ProductView view;
     private static final ProductController pc = new ProductController(controller);

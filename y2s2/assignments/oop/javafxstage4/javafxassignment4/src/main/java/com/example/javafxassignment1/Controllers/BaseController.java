@@ -1,10 +1,15 @@
 package com.example.javafxassignment1.Controllers;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class BaseController<T>{
+public abstract class BaseController<T>implements Serializable {
     protected final String dbPath;
     protected ArrayList<T> storage;
+
+    @Serial
+    private static final long serialVersionUID = 1;
 
     public BaseController(String dbPath) {
         this.dbPath = dbPath;

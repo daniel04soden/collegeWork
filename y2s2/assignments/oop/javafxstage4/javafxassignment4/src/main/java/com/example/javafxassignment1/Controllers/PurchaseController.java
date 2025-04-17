@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
 
-public class PurchaseController {
+public class PurchaseController implements Serializable{
 
   public MainController mc;
   public PurchaseView view;

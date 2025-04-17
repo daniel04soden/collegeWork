@@ -4,6 +4,7 @@ module com.example.javafxassignment {
 
     requires org.kordamp.bootstrapfx.core;
     requires jdk.compiler;
+    requires java.sql;
 
     opens com.example.javafxassignment1 to javafx.fxml;
     exports com.example.javafxassignment1;
@@ -11,4 +12,6 @@ module com.example.javafxassignment {
     opens com.example.javafxassignment1.Models to javafx.fxml;
     exports com.example.javafxassignment1.Controllers;
     opens com.example.javafxassignment1.Controllers to javafx.fxml;
+    exports com.example.javafxassignment1.Controllers.Threads;
+    opens com.example.javafxassignment1.Controllers.Threads to javafx.fxml;
 }

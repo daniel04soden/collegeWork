@@ -1,5 +1,6 @@
 package com.example.javafxassignment1.View;
 
+import com.example.javafxassignment1.Controllers.MainController;
 import com.example.javafxassignment1.Controllers.ProductController;
 import com.example.javafxassignment1.Models.Product;
 import javafx.geometry.Pos;
@@ -8,9 +9,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import com.example.javafxassignment1.Controllers.Threads.*;
+
+import java.io.Serializable;
 
 
-public class ProductView {
+public class ProductView implements Serializable {
 
     ProductController controller;
 
@@ -43,14 +47,62 @@ public class ProductView {
 
         Button load = new Button();
         load.setText("Manage Product Data");
-        load.setOnAction(_ -> MainView.updateContent(splitPane, loadProducts(stage)));
+        load.setOnAction(_ -> MainView.updateContent(splitPane, loadSaveProducts(stage)));
+
+        Button saveStore = new Button();
+        saveStore.setText("Save and Load store state");
+        saveStore.setOnAction(_->MainView.updateContent(splitPane,storeStateLoadSave(stage)));
 
 
-        VBox sidebar = new VBox(register, view,removePageButton,load);
+        VBox sidebar = new VBox(register, view,removePageButton,load,saveStore);
         sidebar.setSpacing(15);
         sidebar.setAlignment(Pos.CENTER);
 
         return sidebar;
+    }
+
+    public VBox storeStateLoadSave(Stage stage){
+        // Header
+        Label title = new Label();
+
+        title.setText("Save store State");
+        HBox titleBox = new HBox(title);
+        titleBox.setAlignment(Pos.CENTER);
+
+        stage.setTitle(title.getText());
+        Label warning = new Label();
+        warning.setText(
+                "Warning, loading will delete entire store state"
+        );
+
+        loadStoreThread lT = new loadStoreThread(MainController.getMc());
+        saveStoreThread sT = new saveStoreThread(MainController.getMc());
+
+        // load Button
+        Button loadStoreState = new Button();
+        loadStoreState.setText("Load Store state");
+        loadStoreState.setOnAction(_ -> {
+            Thread loadStoreThread = new Thread(lT);
+            loadStoreThread.start();
+            MainView.displayLoad(true);
+        });
+
+        Button saveStoreStateButton = new Button();
+        saveStoreStateButton .setText("Save store state");
+        saveStoreStateButton.setOnAction(_ -> {
+            Thread saveThread = new Thread(sT);
+            saveThread.start();
+            MainView.displaySave(true);
+        });
+
+        // create a VBox
+        VBox vbox = new VBox(30, titleBox, warning, loadStoreState,saveStoreStateButton);
+        vbox.setAlignment(Pos.CENTER);
+        vbox.setSpacing(30.0);
+
+
+        // set Alignment
+        return vbox;
     }
 
     public VBox productRegisterPage(Stage stage) {
@@ -129,13 +181,7 @@ public class ProductView {
     }
 
     public VBox viewProducts(Stage stage) {
-        /*
-         * Although the specs require the data to be stored in a text area, I find the presentation
-         * of the data to be a lot clearer in the table format, I understand if I lose marks but this is
-         * the best way to achieve viewing in my opinion
-         * */
         // Heading
-
         Label title = new Label();
         title.setText("View All products");
         stage.setTitle(title.getText());
@@ -248,7 +294,7 @@ public class ProductView {
         return vertical;
     }
 
-    public VBox loadProducts(Stage stage) {
+    public VBox loadSaveProducts(Stage stage) {
         // Header
         Label title = new Label();
 
@@ -271,7 +317,7 @@ public class ProductView {
         loadData.setText("Load Saved Products");
         loadData.setOnAction(_ -> {
             controller.load();
-            MainView.displayLoad(true); //TODO - make boolean check in controller
+            MainView.displayLoad(true);
         });
 
         Button saveButton = new Button();

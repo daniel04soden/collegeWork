@@ -9,9 +9,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class MainView {
+public class MainView implements Serializable {
     /*
      * The mainview class does not need any kind of controllers as this
      * class simply allows for static use of various different ui elements like
@@ -27,14 +28,6 @@ public class MainView {
         styledScene.getStylesheets().add(Objects.requireNonNull(MainApplication.class.getResource(cssSource)).toExternalForm());
     }
 
-    public static Button backBtn(Stage stage, VBox previous) {
-        // Simple repeating button that stops repeating of code, plan on implementing more in Stage 2
-        Button backBtn = new Button();
-        backBtn.setText("Back");
-
-        backBtn.setOnAction(_ -> stage.getScene().setRoot(previous));
-        return backBtn;
-    }
     public static void updateContent(SplitPane splitPane, VBox newContent) {
         splitPane.getItems().set(1, newContent);
     }
@@ -77,7 +70,7 @@ public class MainView {
     }
     public static void displaySave(boolean saveHappened){
         Alert a = new Alert(Alert.AlertType.INFORMATION);
-        String successMsg = "Successfully saved and deserialized data";
+        String successMsg = "Successfully saved and serialized data";
         String failMsg = "Data didn't save, file not found or deserialization failed";
         a.setContentText("");
         if (saveHappened){
@@ -91,7 +84,7 @@ public class MainView {
     }
     public static void displayLoad(boolean loadHappened){
         Alert a = new Alert(Alert.AlertType.INFORMATION);
-        String successMsg = "Loaded data, any unsaved data has been lost";
+        String successMsg = "Loaded data and deserialized, any unsaved data has been lost";
         String failMsg = "Could not load our data, please try again later";
         if (loadHappened){
             a.setTitle(successMsg);

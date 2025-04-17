@@ -9,11 +9,15 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class CustomerView {
+public class CustomerView implements Serializable {
     CustomerController controller;
+    @Serial
+    private static final long serialVersionUID = 1;
     public CustomerView(CustomerController controller_){
         this.controller = controller_;
     }
