@@ -1,17 +1,27 @@
 {
-  "enrollee":{
-    "id":1,
-    "city":"cork",
-    "city_development_index":33.45,
-    "gender":"F",
-    "experience":3,
-    "last_new_job":1
-  },
-  "education":{
-    "relevant_experience":"Has relevent experience",
-    "experience":3,
-    "last_new_job":1
+  "enrollee": {
+    "id": 1,
+    "city": "cork",
+    "city_development_index": 33.45,
+    "gender": "F",
+    "experience": 3,
+    "last_new_job": 1,
+    "education": [
+      {
+        "relevant_experience": "Has relevent experience",
+        "experience": 3,
+        "last_new_job": 1
+      }
+    ],
+    "profile": {
+      "target": 1,
+      "experience": [
+        {
+          "relevant_experience": "Has relevant experience",
+          "experience": 3,
+          "last_new_job": 1
+        }
+      ]
+    }
   }
-
 }
-
