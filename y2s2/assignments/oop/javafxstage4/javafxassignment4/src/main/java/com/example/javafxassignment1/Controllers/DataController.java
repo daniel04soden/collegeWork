@@ -12,6 +12,6 @@ public interface DataController {
     void deleteCustomer(int customerID);
     //  No deleting purchases, final values
     void saveCustomer (Customer c);
-    Customer updateCustomer(int customerID);
+    Customer updateCustomer(int customerID,String name,int age,String email, double balance);
     Connection establishConnection() throws SQLException;
 }

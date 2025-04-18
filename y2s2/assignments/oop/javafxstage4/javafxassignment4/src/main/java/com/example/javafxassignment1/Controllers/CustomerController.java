@@ -37,6 +37,7 @@ public class CustomerController extends BaseController<Customer>{
             .build();
 
     storage.add(currentCustomer);
+    controller.dbController.saveCustomer(currentCustomer);
     System.out.println("New Customer: " + currentCustomer);
     print(); // Print all customers
   }
@@ -84,11 +85,13 @@ public class CustomerController extends BaseController<Customer>{
   public ArrayList<Customer> getStorage(){
     return storage;
   }
+
   public void balanceAdj(TextField t, ComboBox<Customer> cb){
     double amountAdding = Double.parseDouble(t.getText());
     Customer customer = cb.getValue();
     System.out.println("Old" + customer.getName() + " balance €" + customer.getBalance());
     customer.setBalance(customer.getBalance()+amountAdding);
+    controller.dbController.updateBalance(customer.getId(), customer.getBalance()+amountAdding);
     System.out.println("New" + customer.getName() + " balance €" + customer.getBalance());
     t.clear();
   }
