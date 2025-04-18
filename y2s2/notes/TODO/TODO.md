@@ -37,18 +37,18 @@
 	- Idea - new saving class or maybe even use data controller
 	- if bare min, maybe just in customer controller..
 ## Ass4 Stage 2
-- [ ] Implement Postgresql or sqlite
-- [ ] Check connection
-- [ ] Give db save feedback
-- [ ] Make connection
+- [x] Implement Postgresql or sqlite ✅ 2025-04-18
+- [x] Check connection ✅ 2025-04-18
+- [x] Give db save feedback ✅ 2025-04-18
+- [x] Make connection ✅ 2025-04-18
 - [x] Singleton pattern here ✅ 2025-04-10
-- [ ] Implement check data correct ie test case - does this mean that we're comparing to other saved data?????????
-- [ ] Data Access Object pattern in separate layers
+- [x] Implement check data correct ie test case - does this mean that we're comparing to other saved data????????? ✅ 2025-04-18
+- [x] Data Access Object pattern in separate layers ✅ 2025-04-18
 - [x] Builder pattern ✅ 2025-04-17
 
 ## Ass4 Stage 3
-- [x] Make new experimental project?? ✅ 2025-04-17
-- [x] Method with infinite loop ✅ 2025-04-17
+- [ ] Make new experimental project??
+- [ ] Method with infinite loop
 - [ ] Create graph displaying results
 - [ ] Evaluate the accuracy of the results
 ### Measure

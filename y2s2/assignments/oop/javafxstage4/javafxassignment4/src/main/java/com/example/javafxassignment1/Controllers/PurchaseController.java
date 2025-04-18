@@ -127,6 +127,7 @@ public class PurchaseController implements Serializable{
           int currentStock = products.getStock();
           products.setStock(currentStock - 1);
           c.setBalance(balance - total);
+          mc.dbController.updateBalance(c.getId(),c.getBalance()-total);  // Update balance in database
           return true;
         }
       }

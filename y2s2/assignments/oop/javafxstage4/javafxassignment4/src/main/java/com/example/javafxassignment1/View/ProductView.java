@@ -116,7 +116,7 @@ public class ProductView implements Serializable {
         loadStoreState.setOnAction(_ -> {
             Thread loadStoreThread = new Thread(lT);
             loadStoreThread.start();
-            MainView.displayLoad(true);
+            MainView.displayLoad();
         });
 
         Button saveStoreStateButton = new Button();
@@ -124,7 +124,7 @@ public class ProductView implements Serializable {
         saveStoreStateButton.setOnAction(_ -> {
             Thread saveThread = new Thread(sT);
             saveThread.start();
-            MainView.displaySave(true);
+            MainView.displaySave();
         });
 
         // create a VBox
@@ -349,14 +349,14 @@ public class ProductView implements Serializable {
         loadData.setText("Load Saved Products");
         loadData.setOnAction(_ -> {
             controller.load();
-            MainView.displayLoad(true);
+            MainView.displayLoad();
         });
 
         Button saveButton = new Button();
         saveButton.setText("Save Product Data");
         saveButton.setOnAction(_ -> {
             controller.save();
-            MainView.displaySave(true); //TODO - make boolean check in controller
+            MainView.displaySave(); 
         });
 
         // create a VBox

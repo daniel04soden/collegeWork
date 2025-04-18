@@ -53,11 +53,11 @@ public class CustomerView implements Serializable {
         management.setOnAction(_ -> MainView.updateContent(splitPane, loadOrSaveData(stage)));
 
         Button editCustomerDbData = new Button();
-        management.setText("Edit Customers");
-        management.setOnAction(_ -> MainView.updateContent(splitPane, updatePageViewPage(stage)));
+        editCustomerDbData.setText("Edit Customers");
+        editCustomerDbData.setOnAction(_ -> MainView.updateContent(splitPane, updatePageViewPage(stage)));
 
 
-        VBox sidebar = new VBox(register, view,removePage,balanceIncr,management);
+        VBox sidebar = new VBox(register, view,removePage,balanceIncr,management,editCustomerDbData);
         sidebar.setSpacing(15);
         sidebar.setAlignment(Pos.CENTER);
 
@@ -299,15 +299,15 @@ public class CustomerView implements Serializable {
         Button loadData = new Button();
         loadData.setText("Load Saved Store");
         loadData.setOnAction(_ -> {
-            controller.load();
-            MainView.displayLoad(true); //TODO - make boolean check in controller
+            controller.loadCustomersFromDb();
+            MainView.displayLoad(); 
         });
 
         Button saveButton = new Button();
         saveButton.setText("Save Customer Data");
         saveButton.setOnAction(_ -> {
             controller.save();
-            MainView.displaySave(true); //TODO - make boolean check in controller
+            MainView.displaySave(); 
         });
 
         // create a VBox

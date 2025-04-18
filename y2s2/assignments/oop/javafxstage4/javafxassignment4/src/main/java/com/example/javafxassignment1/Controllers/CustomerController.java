@@ -117,8 +117,14 @@ public class CustomerController extends BaseController<Customer>{
   }
 
   public String getDbCustomer(int id){
-   Customer c = controller.dbController.getCustomer(id);
+   Customer c = controller.dbController.getCustomer(id); // TODO if time restructure to where combobox not needed, id instead
       return c.editableDisplay();
   }
+
+  public void loadCustomersFromDb(){
+    storage = controller.dbController.getAllCustomers();
+    System.out.println("Loaded customers from sql database, overwritten from serialised dataset");
+  }
+
 
 }

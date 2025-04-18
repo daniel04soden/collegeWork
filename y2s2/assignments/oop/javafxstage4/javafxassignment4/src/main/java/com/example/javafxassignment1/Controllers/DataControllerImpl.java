@@ -5,6 +5,7 @@ import com.example.javafxassignment1.Models.Customer;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 public class DataControllerImpl implements DataController{
     public static String url = "jdbc:sqlite:src/main/java/com/example/javafxassignment1/database/shop.db";
     private static final DataControllerImpl dbController;
@@ -158,5 +159,34 @@ public class DataControllerImpl implements DataController{
             conn = createConn();
         }
         return conn;
+    }
+    @Override
+    public ArrayList<Customer>getAllCustomers(){
+            ArrayList<Customer> databaseCustomers = new ArrayList<>();
+                String sqlStmt = """
+        SELECT customerID, email, name, age, amount
+        FROM Customer;
+    """;
+
+        try (var pstmt = getConn().prepareStatement(sqlStmt)) { // Use the existing connection
+
+            try (var rs = pstmt.executeQuery()) {
+                while (rs.next()){
+                    int id = rs.getInt("customerID");
+                    String email = rs.getString("email");
+                    String name = rs.getString("name");
+                    int age = rs.getInt("age");
+                    double amount = rs.getDouble("amount");
+                    Customer c = new Customer.CustomerBuilder(id, name, age, amount)
+                            .email(email)
+                            .build();
+                   databaseCustomers.add(c); 
+                }
+                return databaseCustomers;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return new ArrayList<>(); // If failure
+        }
     }
 }

@@ -68,31 +68,18 @@ public class MainView implements Serializable {
            display.setText("");
         }
     }
-    public static void displaySave(boolean saveHappened){
+    public static void displaySave(){
         Alert a = new Alert(Alert.AlertType.INFORMATION);
         String successMsg = "Successfully saved and serialized data";
-        String failMsg = "Data didn't save, file not found or deserialization failed";
-        a.setContentText("");
-        if (saveHappened){
             a.setTitle(successMsg);
             a.setContentText(successMsg);
-        }else{
-            a.setTitle(failMsg);
-            a.setContentText(failMsg);
-        }
         a.show();
     }
-    public static void displayLoad(boolean loadHappened){
+    public static void displayLoad(){
         Alert a = new Alert(Alert.AlertType.INFORMATION);
         String successMsg = "Loaded data and deserialized, any unsaved data has been lost";
-        String failMsg = "Could not load our data, please try again later";
-        if (loadHappened){
             a.setTitle(successMsg);
             a.setContentText(successMsg);
-        }else{
-            a.setTitle(failMsg);
-            a.setContentText(failMsg);
-        }
         a.show();
     }
 
