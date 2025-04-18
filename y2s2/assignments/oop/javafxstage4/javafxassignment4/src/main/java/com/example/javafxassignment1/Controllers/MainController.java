@@ -29,12 +29,10 @@ public class MainController implements Serializable {
 
     private MainController() throws SQLException {
         this.view = new MainView(this);
-        this.cc = CustomerController.getC();
+        this.cc = CustomerController.getC(this);
         this.pc = ProductController.getPc();
         this.prc = new PurchaseController(this);
-        Connection conn = dbController.establishConnection();
         dbController.createTable();
-        conn.close();
         cc.load();
         pc.load();
         prc.loadInPurchases();

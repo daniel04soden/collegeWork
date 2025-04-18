@@ -12,7 +12,7 @@ public class CustomerController extends BaseController<Customer>{
   public static MainController controller;
   public CustomerView view;
 
-  private static final CustomerController c = new CustomerController(controller);
+  private static CustomerController c;
   private CustomerController(MainController mc_) {
     super("src/main/java/com/example/javafxassignment1/database/customers.txt");
     controller = mc_;
@@ -45,6 +45,7 @@ public class CustomerController extends BaseController<Customer>{
   @Override
   public void delete(int id) {
     storage.removeIf(customer -> customer.getId() == id);
+    controller.dbController.deleteCustomer(id);
     print(); // Print remaining customers
   }
 
@@ -97,8 +98,27 @@ public class CustomerController extends BaseController<Customer>{
   }
 
   // Needed for singleton pattern
-  public static CustomerController getC() {
+  public static CustomerController getC(MainController mc) {
+    if (c == null) {
+      c = new CustomerController(mc);
+    }
     return c;
+  }
+
+  public void editCustomer(ComboBox<Customer> customers, int age, String name, String email, double balance){
+    Customer c = customers.getValue();
+    c.setAge(age);
+    c.setBalance(balance);
+    c.setName(name);
+    c.setEmail(email);
+    controller.dbController.updateCustomer(c.getId(),name,age,email,balance);
+    System.out.println("Saving new customer details");
+    save();
+  }
+
+  public String getDbCustomer(int id){
+   Customer c = controller.dbController.getCustomer(id);
+      return c.editableDisplay();
   }
 
 }

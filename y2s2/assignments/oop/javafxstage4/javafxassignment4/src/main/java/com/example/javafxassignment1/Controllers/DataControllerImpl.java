@@ -5,11 +5,10 @@ import com.example.javafxassignment1.Models.Customer;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-// TODO - re-eval ids system
 public class DataControllerImpl implements DataController{
-    public static String url = "jdbc:sqlite:./database/shop.db"; // Url created based on linux ext4 fs, Windows uses
+    public static String url = "jdbc:sqlite:src/main/java/com/example/javafxassignment1/database/shop.db";
     private static final DataControllerImpl dbController;
-
+    private static Connection conn;
     static {
         try {
             dbController = new DataControllerImpl();
@@ -17,16 +16,12 @@ public class DataControllerImpl implements DataController{
             throw new RuntimeException(e);
         }
     }
-
-    private final Connection conn;
-
     //---------------------------------------
     //	Constructor
     //---------------------------------------
 
     private DataControllerImpl() throws SQLException {
-        url = "jdbc:sqlite:src/main/java/com/example/javafxassignment1/database/shop.db";
-        this.conn = createConn();
+        conn = createConn();
     }
 
     private Connection createConn() throws SQLException {
@@ -38,11 +33,10 @@ public class DataControllerImpl implements DataController{
     //---------------------------------------
 
     public void createTable() {
-        try (var conn = getConn();
-             var stmt = conn.createStatement()) {
+        try (var stmt = getConn().createStatement()) { // Use the existing connection
             String sqlStmt= """
                     CREATE TABLE IF NOT EXISTS Customer(
-                           customerID INTEGER PRIMARY KEY, -- Autoincrement automatically
+                           customerID INTEGER PRIMARY KEY, -- Autoincrement automatically via og id situation
                            email VARCHAR(25),
                            name VARCHAR(30),
                            age INTEGER,
@@ -51,63 +45,66 @@ public class DataControllerImpl implements DataController{
                    """;
             stmt.execute(sqlStmt);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
-    /**
-     * @param customerID
-     * @return
-     */
     @Override
     public Customer getCustomer(int customerID) {
-        try (var conn = getConn();
-             var stmt = conn.createStatement()) {
+        String sqlStmt = """
+        SELECT customerID, email, name, age, amount
+        FROM Customer
+        WHERE customerID = ?;
+    """;
 
-            stmt.execute("");
+        try (var pstmt = getConn().prepareStatement(sqlStmt)) { // Use the existing connection
+            pstmt.setInt(1, customerID);
+
+            try (var rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    int id = rs.getInt("customerID");
+                    String email = rs.getString("email");
+                    String name = rs.getString("name");
+                    int age = rs.getInt("age");
+                    double amount = rs.getDouble("amount");
+
+                    return new Customer.CustomerBuilder(id, name, age, amount)
+                            .email(email)
+                            .build();
+                }
+            }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
         return null;
     }
 
-    /**
-     * @param customerID
-     */
     @Override
     public void deleteCustomer(int customerID) {
-        try (var conn = getConn();
-             var stmt = conn.createStatement()) {
-            // create a new table
-
-            stmt.execute("");
+        String sqlStmt = "DELETE FROM Customer WHERE customerID = ?";
+        try (var stmt = getConn().prepareStatement(sqlStmt)) { // Use the existing connection
+            stmt.setInt(1,customerID);
+            stmt.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
-    /**
-     * @param c
-     */
     @Override
     public void saveCustomer(Customer c) {
-        String sql = "INSERT INTO Customer(email, name, age, amount) VALUES (?, ?, ?, ?)";
-        try (var conn = getConn();
-             var pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, c.getEmail());
-            pstmt.setString(2, c.getName());
-            pstmt.setInt(3, c.getAge());
-            pstmt.setDouble(4, c.getBalance());
+        String sql = "INSERT INTO Customer(customerID,email, name, age, amount) VALUES (?,?, ?, ?, ?)";
+        try (var pstmt = getConn().prepareStatement(sql)) { // Use the existing connection
+            pstmt.setInt(1, c.getId());
+            pstmt.setString(2, c.getEmail());
+            pstmt.setString(3, c.getName());
+            pstmt.setInt(4, c.getAge());
+            pstmt.setDouble(5, c.getBalance());
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
-    /**
-     * @param customerID
-     * @return
-     */
     @Override
     public Customer updateCustomer(int customerID,String name,int age,String email, double balance) {
         String sql = """
@@ -119,23 +116,20 @@ public class DataControllerImpl implements DataController{
         WHERE customerID = ?;
     """;
 
-        try (var conn = getConn();
-             var pstmt = conn.prepareStatement(sql)) {
+        try (var pstmt = getConn().prepareStatement(sql)) { // Use the existing connection
             pstmt.setString(1, email);
             pstmt.setString(2, name);
             pstmt.setInt(3, age);
             pstmt.setDouble(4, balance);
             pstmt.setInt(5, customerID);
-
             pstmt.executeUpdate();
-
             return new Customer
                     .CustomerBuilder(customerID,name,age,balance)
                     .email(email)
                     .build();
         } catch (SQLException e) {
-           e.printStackTrace();
-           return null;
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -146,8 +140,7 @@ public class DataControllerImpl implements DataController{
         WHERE customerID = ?;
     """;
 
-        try (var conn = getConn();
-             var pstmt = conn.prepareStatement(sql)) {
+        try (var pstmt = getConn().prepareStatement(sql)) { // Use the existing connection
             pstmt.setDouble(1, balance);
             pstmt.setInt(2, customerID);
             pstmt.executeUpdate();
@@ -155,16 +148,15 @@ public class DataControllerImpl implements DataController{
             e.printStackTrace();
         }
     }
-    @Override
-    public Connection establishConnection() throws SQLException {
-       return DriverManager.getConnection(url);
-    }
 
     public static DataControllerImpl getDbController() {
         return dbController;
     }
 
-    public Connection getConn() {
+    public Connection getConn() throws SQLException {
+        if (conn==null){
+            conn = createConn();
+        }
         return conn;
     }
 }

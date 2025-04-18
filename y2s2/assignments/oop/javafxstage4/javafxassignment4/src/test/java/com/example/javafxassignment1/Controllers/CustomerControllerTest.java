@@ -17,7 +17,7 @@ class CustomerControllerTest {
         String name = "Daniel Soden";
         String email = "dsoden09@gmail.com";
         String balance = "12.2"; // As strings as this reflects in real scenarios
-        CustomerController cc = CustomerController.getC();
+        CustomerController cc = CustomerController.getC(MainController.getMc());
         int id = cc.getStorage().size()+1;
         Customer currentCustomer = new Customer
                 .CustomerBuilder(id,name,Integer.parseInt(age),Double.parseDouble(balance))
@@ -30,7 +30,7 @@ class CustomerControllerTest {
     @Test
     @DisplayName("Testing deleting a customer")
     void delete() {
-        CustomerController cc = CustomerController.getC();
+        CustomerController cc = CustomerController.getC(MainController.getMc());
         int originalSize = cc.getStorage().size();
         cc.delete(cc.getStorage().getLast().getId());
         int newSize = cc.getStorage().size();

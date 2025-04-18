@@ -58,6 +58,14 @@ public class Customer implements Serializable,Comparable<Customer>{
 	// Omit idSetter, non-editable value
 
 	// Extra functionality
+	public String editableDisplay(){
+		return "Customer:\n"
+				+"Name:"+ getName() + "\n"
+				+"Age:"+Integer.toString(getAge()) + "\n"
+				+"Balance:"+ Double.toString(getBalance()) + "\n"
+				+"Email:"+ getEmail();
+	}
+
 	@Override
 	public String toString(){
 		return getName();

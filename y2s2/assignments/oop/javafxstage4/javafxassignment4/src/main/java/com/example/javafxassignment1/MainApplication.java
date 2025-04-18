@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import static com.example.javafxassignment1.View.MainView.applyCSS;
 
 public class MainApplication extends Application {
-  private MainController mc = MainController.getMc(); // Singleton Pattern
+  private final MainController mc = MainController.getMc(); // Singleton Pattern
 
   public SplitPane init(Stage stage){
     TabPane mainPane = new TabPane();

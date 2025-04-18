@@ -52,7 +52,7 @@
 	-fx-font-weight: bold;
 }
 
-.split-pane{
-
+.hyperlink{
+	-fx-text-fill: white;
+	-fx-font-weight: bold;
 }
-

@@ -3,15 +3,24 @@ package com.example.javafxassignment1.View;
 import com.example.javafxassignment1.Controllers.MainController;
 import com.example.javafxassignment1.Controllers.ProductController;
 import com.example.javafxassignment1.Models.Product;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import com.example.javafxassignment1.Controllers.Threads.*;
 
+import java.awt.*;
+import java.io.IOException;
 import java.io.Serializable;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 
 public class ProductView implements Serializable {
@@ -53,12 +62,35 @@ public class ProductView implements Serializable {
         saveStore.setText("Save and Load store state");
         saveStore.setOnAction(_->MainView.updateContent(splitPane,storeStateLoadSave(stage)));
 
+        Hyperlink link = getHyperlink();
 
-        VBox sidebar = new VBox(register, view,removePageButton,load,saveStore);
+        VBox sidebar = new VBox(register, view,removePageButton,load,saveStore,link);
         sidebar.setSpacing(15);
         sidebar.setAlignment(Pos.CENTER);
 
         return sidebar;
+    }
+
+    private static Hyperlink getHyperlink() {
+        Hyperlink link = new Hyperlink();
+        String url = "https://www.tiktok.com/@satoruhm2/video/7457291318276934917?is_from_webapp=1&sender_device=pc&web_id=7488292820903233046";
+        link.setText("Really important To the project");
+        link.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                if (Desktop.isDesktopSupported()) {
+                    Desktop desktop = Desktop.getDesktop();
+                    try {
+                        desktop.browse(new URI(url));
+                    } catch (IOException | URISyntaxException ex) {
+                        ex.printStackTrace();
+                    }
+                } else {
+                    System.out.println("Skill issue browser no worky");
+                }
+            }
+        });
+        return link;
     }
 
     public VBox storeStateLoadSave(Stage stage){

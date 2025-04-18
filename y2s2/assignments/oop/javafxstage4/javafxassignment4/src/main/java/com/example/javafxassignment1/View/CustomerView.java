@@ -52,6 +52,10 @@ public class CustomerView implements Serializable {
         management.setText("Manage Customer Data");
         management.setOnAction(_ -> MainView.updateContent(splitPane, loadOrSaveData(stage)));
 
+        Button editCustomerDbData = new Button();
+        management.setText("Edit Customers");
+        management.setOnAction(_ -> MainView.updateContent(splitPane, updatePageViewPage(stage)));
+
 
         VBox sidebar = new VBox(register, view,removePage,balanceIncr,management);
         sidebar.setSpacing(15);
@@ -314,5 +318,93 @@ public class CustomerView implements Serializable {
         // create a scene
 
         return vbox;
+    }
+
+    public VBox updatePageViewPage(Stage stage) {
+        Label title = new Label("SQL Data Interaction");
+        stage.setTitle(title.getText());
+        HBox titleBar = new HBox(title);
+        ArrayList<Customer> customers = controller.getStorage();
+        ComboBox<Customer> customerComboBox = new ComboBox<>();
+        customerComboBox.getItems().addAll(customers);
+        customerComboBox.setPromptText("Which Customer do you want to edit");
+
+        HBox checkOnCustomer = viewDbData(customerComboBox);
+
+
+        Label nameLabel = new Label("New Name:");
+        TextField nameInput = new TextField();
+        HBox nameBlock = new HBox(nameLabel, nameInput);
+        nameBlock.setAlignment(Pos.CENTER);
+
+        // Age hbox label and input
+
+        Label ageLabel = new Label("New Age:");
+        TextField ageInput = new TextField();
+        HBox ageBlock = new HBox(ageLabel, ageInput);
+        ageBlock.setAlignment(Pos.CENTER);
+        // Email hbox label and input
+
+        Label emailLabel = new Label("New Email:");
+        TextField emailInput = new TextField();
+        HBox emailBlock = new HBox(emailLabel, emailInput);
+        emailBlock.setAlignment(Pos.CENTER);
+
+        // Balance hbox label and input
+
+        Label balanceLabel = new Label("New Balance:");
+        TextField balanceInput = new TextField();
+        HBox balanceBlock = new HBox(balanceLabel, balanceInput);
+        balanceBlock.setAlignment(Pos.CENTER);
+
+        // Buttons
+
+        // Clear button
+
+        Button clear = new Button();
+        clear.setText("Clear");
+        clear.setOnAction(_ -> {
+            nameInput.clear();
+            ageInput.clear();
+            emailInput.clear();
+            balanceInput.clear();
+        });
+
+        // SubmissionButton
+
+        Button submit = new Button();
+        submit.setText("Submit");
+        submit.setOnAction(_ -> {
+            controller.editCustomer(
+                    customerComboBox,
+                    Integer.parseInt(ageInput.getText()),
+                    nameInput.getText(),
+                    emailInput.getText(),
+                    Double.parseDouble(balanceInput.getText())
+            );
+            nameInput.clear();
+            ageInput.clear();
+            emailInput.clear();
+            balanceInput.clear();
+        });
+        HBox buttonBlock = new HBox(submit,clear);
+
+
+        return new VBox(
+                titleBar,customerComboBox,checkOnCustomer,nameBlock,ageBlock,balanceBlock,emailBlock,buttonBlock
+        );
+    }
+
+    private HBox viewDbData(ComboBox<Customer> cb){
+        Button currentData = new Button("Check Selected Customer data");
+        TextArea display = new TextArea();
+        display.setEditable(false);
+
+        currentData.setOnAction(_->{
+            int id = cb.getValue().getId();
+            display.clear();
+            display.appendText(controller.getDbCustomer(id));
+        });
+        return new HBox(currentData,display);
     }
 }

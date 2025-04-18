@@ -8,10 +8,10 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public interface DataController {
+    // Interface for dao
     Customer getCustomer(int customerID);
     void deleteCustomer(int customerID);
     //  No deleting purchases, final values
     void saveCustomer (Customer c);
     Customer updateCustomer(int customerID,String name,int age,String email, double balance);
-    Connection establishConnection() throws SQLException;
 }
