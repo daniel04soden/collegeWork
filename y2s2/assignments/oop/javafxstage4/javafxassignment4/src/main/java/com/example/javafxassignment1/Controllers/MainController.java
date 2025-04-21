@@ -33,7 +33,7 @@ public class MainController implements Serializable {
         this.pc = ProductController.getPc();
         this.prc = new PurchaseController(this);
         dbController.createTable();
-        cc.load();
+        cc.storage = dbController.getAllCustomers();
         pc.load();
         prc.loadInPurchases();
     }

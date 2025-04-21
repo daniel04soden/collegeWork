@@ -2,14 +2,20 @@ package com.example.javafxassignment1.Controllers;
 
 import com.example.javafxassignment1.Models.Customer;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
-public class DataControllerImpl implements DataController{
+public class DataControllerImpl implements DataController,Serializable{
+    @Serial
+    private static final long serialVersionUID = 1;
     public static String url = "jdbc:sqlite:src/main/java/com/example/javafxassignment1/database/shop.db";
     private static final DataControllerImpl dbController;
+
     private static Connection conn;
+
     static {
         try {
             dbController = new DataControllerImpl();
