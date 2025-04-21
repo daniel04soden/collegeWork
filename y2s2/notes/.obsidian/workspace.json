@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "TODO/TODO.md",
+                "file": "Assignment Notes/C.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "TODO"
+              "title": "C"
             }
           }
         ]
@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "8eafd8fa697eaf8d",
@@ -174,8 +173,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -192,6 +190,10 @@
   },
   "active": "ca9ad8a151712834",
   "lastOpenFiles": [
+    "Year 2 Semester 2 Breakdown.md",
+    "Assignment Notes/C.md",
+    "TODO/TODO.md",
+    "NoSQL/Nosql Start/Big data.md",
     "Statistics/Regression.md",
     "NONLin/AssignmentWork/HDD Allocation thoughts.md",
     "OOP/brocodework/target/classes/Main/hello-view.fxml",
@@ -199,7 +201,6 @@
     "NONLin/AssignmentWork",
     "OOP/MutliThreading.md",
     "TODO/SIdeWork/TODO Personal.md",
-    "TODO/TODO.md",
     "TODO/Next Week exams.md",
     "Untitled.md",
     "TODO/SIdeWork",
@@ -214,7 +215,6 @@
     "OOP/brocodework/target/test-classes",
     "OOP/brocodework/target/classes",
     "OOP/brocodework/target",
-    "Year 2 Semester 2 Breakdown.md",
     "OOP/Testing.md",
     "Statistics/Sampling theory.md",
     "OOAnalysis/Sequence Diagrams.md",
@@ -226,8 +226,6 @@
     "NONLin/Performance/Amortised Analysis.md",
     "NoSQL/Nosql Start/Nosq Emergence.md",
     "NONLin/Data Structures/Data Structures - Again.md",
-    "Statistics/Multiplication Rule.md",
-    "Statistics/Graphical Methods.md",
     "Assignment Notes/NLDSA/Assignment1/Untitled.canvas",
     "Untitled.canvas"
   ]
