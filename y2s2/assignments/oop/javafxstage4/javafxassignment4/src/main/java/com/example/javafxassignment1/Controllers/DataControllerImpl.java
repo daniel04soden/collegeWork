@@ -1,6 +1,7 @@
 package com.example.javafxassignment1.Controllers;
 
 import com.example.javafxassignment1.Models.Customer;
+import com.example.javafxassignment1.Models.Product;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -36,10 +37,10 @@ public class DataControllerImpl implements DataController,Serializable{
     }
 
     //---------------------------------------
-    //	createTable
+    //	createCustomerTable
     //---------------------------------------
 
-    public void createTable() {
+    public void createCustomerTable() {
         try (var stmt = getConn().createStatement()) { // Use the existing connection
             String sqlStmt= """
                     CREATE TABLE IF NOT EXISTS Customer(
@@ -140,6 +141,7 @@ public class DataControllerImpl implements DataController,Serializable{
         }
     }
 
+
     public void updateBalance(int customerID, double balance) {
         String sql = """
         UPDATE Customer
@@ -192,7 +194,146 @@ public class DataControllerImpl implements DataController,Serializable{
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            return new ArrayList<>(); // If failure
+            return new ArrayList<Customer>(); // If failure
         }
+    }
+    
+    //---------------------------------------
+    //	createProductTable
+    //---------------------------------------
+
+    public void createProductTable() {
+        try (var stmt = getConn().createStatement()) { // Use the existing connection
+            String sqlStmt= """
+                    CREATE TABLE IF NOT EXISTS Product(
+                           productID INTEGER PRIMARY KEY, -- Autoincrement automatically via og id situation
+                           name VARCHAR(25),
+                           stock INTEGER,
+                           price REAL
+                       );
+                   """;
+            stmt.execute(sqlStmt);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public ArrayList<Product> getAllProducts() {
+        ArrayList<Product> databaseProducts = new ArrayList<>();
+        String sqlStmt = """
+        SELECT productID,name, stock, price
+        FROM Product;
+    """;
+
+        try (var pstmt = getConn().prepareStatement(sqlStmt)) {
+
+            try (var rs = pstmt.executeQuery()) {
+                while (rs.next()){
+                    int id = rs.getInt("productID");
+                    String name = rs.getString("name");
+                    int stock = rs.getInt("stock");
+                    double price = rs.getDouble("price");
+                    Product p = new Product
+                            .ProductBuilder(id,name,price)
+                            .stock(stock)
+                            .inStock()
+                            .build();
+                    databaseProducts.add(p);
+                }
+                return databaseProducts;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return new ArrayList<Product>(); // If failure
+        }
+    }
+
+    /**
+     * @param productID
+     * @return
+     */
+    @Override
+    public Product getProduct(int productID) {
+        String sqlStmt = """
+        SELECT productID, name, stock, inStock, price
+        FROM Product
+        WHERE productID = ?;
+    """;
+
+        try (var pstmt = getConn().prepareStatement(sqlStmt)) { // Use the existing connection
+            pstmt.setInt(1, productID);
+
+            try (var rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    int id = rs.getInt("productID");
+                    String name = rs.getString("name");
+                    int stock = rs.getInt("stock");
+                    double price = rs.getDouble("price");
+
+                    return new Product
+                            .ProductBuilder(id,name,price)
+                            .stock(stock)
+                            .inStock()
+                            .build();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * @param productID
+     */
+    @Override
+    public void deleteProduct(int productID) {
+        String sqlStmt = "DELETE FROM Product WHERE productID = ?";
+        try (var stmt = getConn().prepareStatement(sqlStmt)) { // Use the existing connection
+            stmt.setInt(1,productID);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * @param p - Product object to save
+     */
+    @Override
+    public void saveProduct(Product p) {
+        String sql = "INSERT INTO Product(productID,name,stock,price) VALUES (?,?,?,?)";
+        try (var pstmt = getConn().prepareStatement(sql)) { // Use the existing connection
+            pstmt.setInt(1, p.getId());
+            pstmt.setString(2, p.getName());
+            pstmt.setInt(3, p.getStock());
+            pstmt.setDouble(4, p.getPrice());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * @param productID
+     * @param name
+     * @param stock
+     * @param price
+     * @param inStock
+     * @return
+     */
+    @Override
+    public Product updateProduct(int productID, String name, int stock, double price, boolean inStock) {
+        return null;
+    }
+
+    @Override
+    public void initTables(){
+        createCustomerTable();
+        createProductTable();
     }
 }

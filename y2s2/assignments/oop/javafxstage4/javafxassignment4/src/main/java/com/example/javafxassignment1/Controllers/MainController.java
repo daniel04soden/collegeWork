@@ -1,11 +1,11 @@
 package com.example.javafxassignment1.Controllers;
 
+import com.example.javafxassignment1.Models.Store;
 import com.example.javafxassignment1.View.MainView;
 
 import java.io.File;
 import java.io.Serial;
 import java.io.Serializable;
-import java.sql.Connection;
 import java.sql.SQLException;
 
 public class MainController implements Serializable {
@@ -13,16 +13,10 @@ public class MainController implements Serializable {
     public CustomerController cc;
     public ProductController pc;
     public PurchaseController prc;
-    private static final MainController mc; // Needed for singleton pattern
-    public DataControllerImpl dbController = DataControllerImpl.getDbController();
+    private static MainController mc;
 
-    static {
-        try {
-            mc = new MainController();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    public DataControllerImpl dbController;
+    public Store s;
 
     @Serial
     private static final long serialVersionUID = 1;
@@ -30,18 +24,29 @@ public class MainController implements Serializable {
     private MainController() throws SQLException {
         this.view = new MainView(this);
         this.cc = CustomerController.getC(this);
-        this.pc = ProductController.getPc();
+        this.pc = ProductController.getP(this);
         this.prc = new PurchaseController(this);
-        dbController.createTable();
+        dbController = DataControllerImpl.getDbController();
+        dbController.initTables();
         cc.storage = dbController.getAllCustomers();
         pc.load();
         prc.loadInPurchases();
+        s = Store.getStore(this); // Pass the MainController instance
     }
-    public static boolean checkFile(String dbpath){
-       File file = new File(dbpath);
-        return file.exists();
-    }
+
     public static MainController getMc() {
+        if (mc == null) {
+            try {
+                mc = new MainController();
+            } catch (SQLException e) {
+                throw new RuntimeException("Error initializing MainController", e);
+            }
+        }
         return mc;
+    }
+
+    public static boolean checkFile(String dbpath){
+        File file = new File(dbpath);
+        return file.exists();
     }
 }

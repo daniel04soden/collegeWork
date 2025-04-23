@@ -28,7 +28,7 @@ public class MainApplication extends Application {
     SplitPane initProduct = mc.pc.view.splitInit(stage);
     double spacing = 0.35;
     initCustomer.setDividerPositions(spacing);
-    initPurchase.setDividerPositions(spacing); // TODO - move styling like this elsewhere
+    initPurchase.setDividerPositions(spacing); 
     initProduct.setDividerPositions(spacing);
     tab3.setContent(initProduct);
     mainPane.getTabs().addAll(tab1, tab2, tab3); // Add the tabs to the tab pane.

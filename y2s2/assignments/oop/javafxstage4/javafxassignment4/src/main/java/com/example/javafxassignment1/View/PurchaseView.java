@@ -10,11 +10,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class PurchaseView implements Serializable{
+public class PurchaseView {
     private PurchaseController prc;
     public PurchaseView(PurchaseController prc_){
         this.prc = prc_;

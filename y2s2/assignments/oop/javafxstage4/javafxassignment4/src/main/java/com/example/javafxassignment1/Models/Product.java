@@ -94,7 +94,7 @@ public class Product implements Serializable,Comparable<Product>{
             return this;
         }
         public ProductBuilder inStock(){
-            this.inStock = this.stock >0;
+            this.inStock = this.stock > 0;
             return this;
         }
 

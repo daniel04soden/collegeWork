@@ -9,11 +9,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface DataController {
-    // Interface for dao
+    // Interface for dao for customers
     ArrayList<Customer> getAllCustomers();
     Customer getCustomer(int customerID);
     void deleteCustomer(int customerID);
-    //  No deleting purchases, final values
     void saveCustomer (Customer c);
     Customer updateCustomer(int customerID,String name,int age,String email, double balance);
+    // DAO Interface for Products
+    ArrayList<Product> getAllProducts();
+    Product getProduct(int productID);
+    void deleteProduct(int productID);
+    void saveProduct(Product p);
+    Product updateProduct(int productID,String name,int stock,double price, boolean inStock);
+    void initTables();
+    //  No deleting purchases, final values
 }

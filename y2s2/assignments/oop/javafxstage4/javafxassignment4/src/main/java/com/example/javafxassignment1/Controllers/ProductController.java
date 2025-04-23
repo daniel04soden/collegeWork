@@ -9,15 +9,12 @@ import java.util.ArrayList;
 public class ProductController extends BaseController<Product>{
     public static MainController controller;
     public ProductView view;
-    private static final ProductController pc = new ProductController(controller);
+
+    private static ProductController pc;
     private ProductController(MainController mc_) {
         super("src/main/java/com/example/javafxassignment1/database/products.txt");
-        this.controller = mc_;
+        controller = mc_;
         this.view = new ProductView(this);
-    }
-
-    public static ProductController getPc() {
-        return pc;
     }
 
     @Override
@@ -37,14 +34,16 @@ public class ProductController extends BaseController<Product>{
                 .inStock()
                 .build();
         storage.add(newProduct);
+        controller.dbController.saveProduct(newProduct);
         System.out.println("New Product: " + newProduct);
         print(); // Print all products
     }
 
     @Override
     public void delete(int id) {
-            storage.removeIf(product -> product.getId() == id);
             print();
+            storage.removeIf(product -> product.getId() == id);
+            controller.dbController.deleteProduct(id);
     }
 
     @Override
@@ -77,10 +76,19 @@ public class ProductController extends BaseController<Product>{
             e.printStackTrace();
         }
     }
-
+    public static ProductController getP(MainController mc) {
+        if (pc == null) {
+            pc = new ProductController(mc);
+        }
+        return pc;
+    }
     @Override
     public ArrayList<Product> getStorage(){
         return storage;
     }
 
+    public void loadProductsFromDb(){
+        storage = controller.dbController.getAllProducts();
+        System.out.println("Loaded all products from sql db, overwritten from serialised dataset");
+    }
 }

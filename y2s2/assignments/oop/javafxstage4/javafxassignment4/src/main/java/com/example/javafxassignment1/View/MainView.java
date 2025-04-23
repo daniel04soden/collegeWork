@@ -9,10 +9,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.Serializable;
 import java.util.Objects;
 
-public class MainView implements Serializable {
+public class MainView {
     /*
      * The mainview class does not need any kind of controllers as this
      * class simply allows for static use of various different ui elements like

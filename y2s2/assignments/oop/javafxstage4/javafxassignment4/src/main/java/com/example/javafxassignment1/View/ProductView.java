@@ -3,6 +3,8 @@ package com.example.javafxassignment1.View;
 import com.example.javafxassignment1.Controllers.MainController;
 import com.example.javafxassignment1.Controllers.ProductController;
 import com.example.javafxassignment1.Models.Product;
+import com.example.javafxassignment1.Models.Store;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -18,12 +20,11 @@ import com.example.javafxassignment1.Controllers.Threads.*;
 
 import java.awt.*;
 import java.io.IOException;
-import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
 
 
-public class ProductView implements Serializable {
+public class ProductView {
 
     ProductController controller;
 
@@ -107,8 +108,8 @@ public class ProductView implements Serializable {
                 "Warning, loading will delete entire store state"
         );
 
-        loadStoreThread lT = new loadStoreThread(MainController.getMc());
-        saveStoreThread sT = new saveStoreThread(MainController.getMc());
+        loadStoreThread lT = new loadStoreThread(Store.getStore());
+        saveStoreThread sT = new saveStoreThread(Store.getStore());
 
         // load Button
         Button loadStoreState = new Button();
@@ -190,6 +191,7 @@ public class ProductView implements Serializable {
                 stockInput.getText(),
                 priceInput.getText()
             );
+
             clearInputFields.run();
         });
         // Button hbox
@@ -348,7 +350,7 @@ public class ProductView implements Serializable {
         Button loadData = new Button();
         loadData.setText("Load Saved Products");
         loadData.setOnAction(_ -> {
-            controller.load();
+            controller.loadProductsFromDb();
             MainView.displayLoad();
         });
 
