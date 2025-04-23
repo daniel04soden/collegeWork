@@ -327,8 +327,46 @@ public class DataControllerImpl implements DataController,Serializable{
      * @return
      */
     @Override
-    public Product updateProduct(int productID, String name, int stock, double price, boolean inStock) {
-        return null;
+    public Product updateProduct(int productID, String name, int stock, double price) {
+        String sql = """
+        UPDATE Product
+        SET name = ?,
+            stock = ?,
+            price = ?,
+        WHERE productID = ?;
+    """;
+
+        try (var pstmt = getConn().prepareStatement(sql)) { // Use the existing connection
+            pstmt.setString(1,name);
+            pstmt.setInt(2,stock);
+            pstmt.setDouble(3,price);
+            pstmt.setInt(4,productID);
+            return new Product
+                .ProductBuilder(productID,name,price)
+                .stock(stock)
+                .inStock()
+                .build();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void updateStock(int productID, int stock) {
+        String sql = """
+        UPDATE Product
+        SET stock = ?
+        WHERE productID = ?;
+    """;
+
+        try (var pstmt = getConn().prepareStatement(sql)) { // Use the existing connection
+            pstmt.setInt(1, stock);
+            pstmt.setInt(2, productID);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

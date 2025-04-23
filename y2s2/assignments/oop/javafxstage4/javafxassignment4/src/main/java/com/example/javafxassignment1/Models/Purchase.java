@@ -9,8 +9,6 @@ import java.io.*;
 public class Purchase implements Serializable,Comparable<Purchase>{
   private ArrayList<Product> cart;
   private Customer buyer;
-
-
   private Date timeOfPurchase;
   private double total;
   @Serial

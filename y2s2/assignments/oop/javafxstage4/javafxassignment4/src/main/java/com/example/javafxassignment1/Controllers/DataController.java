@@ -20,7 +20,7 @@ public interface DataController {
     Product getProduct(int productID);
     void deleteProduct(int productID);
     void saveProduct(Product p);
-    Product updateProduct(int productID,String name,int stock,double price, boolean inStock);
+    Product updateProduct(int productID,String name,int stock,double price);
     void initTables();
     //  No deleting purchases, final values
 }

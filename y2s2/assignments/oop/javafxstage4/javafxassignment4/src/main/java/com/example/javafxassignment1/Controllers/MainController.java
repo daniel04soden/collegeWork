@@ -28,8 +28,8 @@ public class MainController implements Serializable {
         this.prc = new PurchaseController(this);
         dbController = DataControllerImpl.getDbController();
         dbController.initTables();
-        cc.storage = dbController.getAllCustomers();
-        pc.load();
+        cc.loadCustomersFromDb();
+        pc.loadProductsFromDb();
         prc.loadInPurchases();
         s = Store.getStore(this); // Pass the MainController instance
     }
