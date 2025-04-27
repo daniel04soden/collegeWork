@@ -1,10 +1,7 @@
 # Author: Daniel Soden
 # I declare all of this work as my own
 
-# Library
-
 library(BSDA)
-
 # Importing our dataset
 
 baby_data <- read.csv("project_data_2025.csv")
@@ -47,10 +44,10 @@ print(paste("Sample SD:", population_sd_known))
 print(paste("Sample Size:", n))
 print(paste(" Size:", n))
 print(paste("Z-test statistic:", z_test_stat))
-if
+
 print(paste("Rejection:",ans))
 
-png(file="histogram_q1.png") # Png file created on run for report
+png(file="figure1-1.png") # Png file created on run for report
 hist(baby_data$bwt, main="Histogram of Birth Weights", xlab="Birth Weight (grams)", ylab="Frequency", col="lightblue")
 abline(v=3000, col="red", lty=2) 
 dev.off()
@@ -67,10 +64,37 @@ print(paste("95% chance that the population weight lies in(", res_add,",",res_su
 # Question 3: Box plot for correlation between baby weight and smoking 
 
 
+print("Baby weight for non mother smokers")
+non_smoking_mothers_bwt <- baby_data[baby_data$smoke == 0,]$bwt
+mean_non_smoke <- mean(non_smoking_mothers_bwt)
+median_non_smoke <- median(non_smoking_mothers_bwt) 
+sd_non_smoke <- sd(non_smoking_mothers_bwt)
+print(mean_non_smoke)
+print(sd_non_smoke)
+print(median_non_smoke)
 
-png(filename = "boxplot_q2.png") # Save boxplot for demonstration
+print("Baby weight for mother smokers")
+smoking_mothers_bwt<- baby_data[baby_data$smoke == 1,]$bwt
+mean_smoke <- mean(smoking_mothers_bwt)
+median_smoke <- median(smoking_mothers_bwt) 
+sd_smoke <- sd(smoking_mothers_bwt)
+print(mean_smoke)
+print(sd_smoke)
+print(median_smoke)
+
+png(filename = "figure3-1.png") # Save box plot for demonstration
 boxplot(bwt ~ smoke, data = baby_data,
         main = "Effect of smoking on baby weight",
         xlab = "Smoking Mothers", 
+        ylab = "Baby Weight")
+dev.off()
+
+
+# Question 4
+
+png(filename = "figure4-1.png") # Save box plot for demonstration
+boxplot(bwt ~ ht, data = baby_data,
+        main = "Effect of hypertension on baby weight",
+        xlab = "Hypertension Mothers", 
         ylab = "Baby Weight")
 dev.off()
