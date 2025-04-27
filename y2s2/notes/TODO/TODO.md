@@ -1,4 +1,4 @@
-# Statistics 
+# Statistics - April 28th
 ## Question 1
 - [x] Question 1 ✅ 2025-04-23
 - [ ] Polish off Question 1
@@ -27,4 +27,15 @@
 - Confidence Interval for the Difference in Means (from the chosen test)
 - P-value (to assess statistical significance)
 - P-value therefore hypothesis test maybe -
+# C programming Project - May 11th
 
+- [ ] Brute force solution for understanding purposes
+- [ ] Brute force solution with oscilation fixes
+- [ ] Devised solution, dijkstras potentially 
+# NLDSA
+
+- [ ] Remind how Rod cutting works
+- [ ] Remind how LCS works
+- [ ] Remind how HDD Alloc works
+
+- [ ] Start asymptotic study
