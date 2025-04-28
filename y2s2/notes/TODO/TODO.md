@@ -1,7 +1,7 @@
 # Statistics - April 28th
 ## Question 1
 - [x] Question 1 ✅ 2025-04-23
-- [ ] Polish off Question 1
+- [x] Polish off Question 1 ✅ 2025-04-27
 - From a previous study we know that the birth weights of babies are normally distributed with a mean of  3,000g and a standard deviation of 500g. We believe that babies in this study have a mean birth weight greater than 3,000g. Perform an appropriate statistical test to test this hypothesis.  
 
 ## Question 2
