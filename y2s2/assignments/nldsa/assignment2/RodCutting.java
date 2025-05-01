@@ -1,60 +1,82 @@
 package assignment2;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 
 public class RodCutting {
-    private final int[] prices;
+  private final int[] prices;
 
-    public RodCutting(int[] prices)
-    {
-        this.prices = prices;
+  public RodCutting(int[] prices) {
+    this.prices = prices;
+  }
+
+  public LinkedList<Integer> best_cuts() {
+    System.out.println(Arrays.toString(prices));
+    int n = prices.length; // Length of cuts list for reuse
+
+    LinkedList<Integer> cutLengths = new LinkedList<>(); // Tracking best length of cuts for optimal revenue -
+                                                         // constantly changing
+    LinkedList<Integer> bestPrices = new LinkedList<>(); // Best prices after iterating through prices calculated at
+                                                         // particular cuts
+    LinkedList<Integer> res = new LinkedList<>(); // Final linkedlist of cuts made for optimal price to return
+
+    for (int i = 0; i < n; i++) { // Fill up LinkedList with 0s for indexing looping reasons
+      cutLengths.add(0);
+      bestPrices.add(0);
+      res.add(0);
     }
 
-    public LinkedList<Integer> best_cuts()
-    {
-        int n = prices.length; // Length of cuts list for reuse
+    for (int i = 1; i < n + 1; i++) { // Loop over prices array for comparison
 
-        LinkedList<Integer> cutLengths = new LinkedList<>(); // Tracking best length of cuts for optimal revenue - constantly changing
-        LinkedList<Integer> bestPrices = new LinkedList<>(); // Best prices after iterating through prices calculated at particular cuts
-        LinkedList<Integer> res = new LinkedList<>(); // Final linkedlist of cuts made for optimal price to return
+      System.out.println("Max decided, continue");
 
-       for (int i = 0; i < n; i++) { // Fill up LinkedList with 0s for indexing looping reasons
-           cutLengths.add(0);
-           bestPrices.add(0);
-       }
+      int maxPrice = -1; // Smallest price for comparsion - could be -infinity
+      for (int j = 1; j <= i; j++) { // Looking at next price ahead, depending on value of i ie 1-2,1-8 etc
+        // Current price through iteration in comparison to store best prices
 
-       for (int i = 1; i < n+1; i++) { // Loop over prices array for comparison 
-           int max_price = -1; // Smallest price for comparsion - could be -infinity
-          for (int j = 1; j <=i; j++) { // Looking at next price ahead, depending on value of i ie 1-2,1-8 etc
-				// Current price through iteration in comparison to store best prices
-              int curr_price = Math.max(max_price,prices[j-1]+bestPrices.get(i-j));  
-              if (curr_price>max_price) { // if our new current price is greater than the loop max price
-                  max_price = curr_price; 
-                  cutLengths.add(i,j); // Add the cut of j at the index i
-              }
-          }
-          bestPrices.add(i,max_price);
-       }
+        System.out.println("-----------");
+        System.out.println("max price: " + maxPrice);
+        System.out.println("Price list price " + prices[j - 1]);
+        System.out.println("Best prices price " + prices[j - 1]);
+        System.out.println("comparison price " + prices[j - 1] + bestPrices.get(i - j));
 
-        int finalLength = n;
-        while (finalLength > 0){
-            int cut = cutLengths.get(finalLength);
-            finalLength -= cut;
-            res.add(cut);
+        int currPrice = Math.max(maxPrice, prices[j - 1] + bestPrices.get(i - j));
+        System.out.println("current price " + currPrice);
+        if (currPrice > maxPrice) { // if our new current price is greater than the loop max price
+          maxPrice = currPrice;
+          cutLengths.add(i, j); // Add the cut of j at the index i
         }
-        return res;
+      }
+      bestPrices.add(i, maxPrice);
     }
 
-    public static void main(String[] args) {
-        int[] prices = {  1, 5, 8, 9, 12, 14, 17, 19, 20, 21 };
-        LinkedList<Integer> cuts = new RodCutting(prices).best_cuts();
-        System.out.println("The best cuts for a rod of length " + prices.length + "m are");
-        int total_price=0;
-        for (Integer cut : cuts)
-        {
-            System.out.println(" - " + cut + "m selling at €"+prices[cut-1]);
-            total_price += prices[cut-1];
-        }
-        System.out.println("The overall price is €"+total_price+".");
+    int finalLength = n; // Final length is the size of the prices array - until prices array 0, keep
+                         // going
+    System.out.println("Deciding on cuts");
+    int i = 0;
+    while (finalLength > 0) {
+      int cut = cutLengths.get(finalLength);
+      System.out.println(cut);
+      finalLength -= cut;
+      res.set(i, cut);
+      i++;
     }
+    System.out.println("Lengths to achieve price");
+    System.out.println(cutLengths);
+    System.out.println("Price achieved at specific cut length");
+    System.out.println(bestPrices);
+    return res;
+  }
+
+  public static void main(String[] args) {
+    int[] prices = { 1, 5, 8, 9, 12, 14, 17, 19, 20, 21 };
+    LinkedList<Integer> cuts = new RodCutting(prices).best_cuts();
+    System.out.println("The best cuts for a rod of length " + prices.length + "m are");
+    int total_price = 0;
+    for (Integer cut : cuts) {
+      System.out.println(" - " + cut + "m selling at €" + prices[cut - 1]);
+      total_price += prices[cut - 1];
+    }
+    System.out.println("The overall price is €" + total_price + ".");
+  }
 }
