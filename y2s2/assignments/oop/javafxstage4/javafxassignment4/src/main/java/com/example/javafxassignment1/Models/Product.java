@@ -6,7 +6,6 @@ public class Product implements Serializable,Comparable<Product>{
     private int id;
     private String name;
     private int stock;
-    private boolean inStock;
     private double price;
     @Serial
     private static final long serialVersionUID = 1;
@@ -16,7 +15,6 @@ public class Product implements Serializable,Comparable<Product>{
         this.name = builder.name;
         this.stock = builder.stock;
         this.price = builder.price;
-        this.inStock = builder.inStock;
     }
 
     public static ProductBuilder builder(int id_,String name_,double price_){
@@ -35,14 +33,6 @@ public class Product implements Serializable,Comparable<Product>{
         this.price = price;
     }
 
-    public boolean isInStock() {
-        return inStock;
-    }
-
-    public void setInStock(boolean inStock) {
-        this.inStock = inStock;
-    }
-
     public void setStock(int stock) {
         this.stock = stock;
     }
@@ -52,7 +42,7 @@ public class Product implements Serializable,Comparable<Product>{
     }
 
     public String returnToDb(){ // TODO eval if needed for postgresql
-        return getId() + "," + getName()+ "," + this.price + "," + this.stock+ "," + this.inStock;
+        return getId() + "," + getName()+ "," + this.price + "," + this.stock;
     }
     @Override
     public String toString(){
@@ -80,7 +70,6 @@ public class Product implements Serializable,Comparable<Product>{
         private final int id;
         private final String name;
         private int stock;
-        private boolean inStock;
         private final double price;
 
         public ProductBuilder(int id_,String name_,double price_){
@@ -94,7 +83,6 @@ public class Product implements Serializable,Comparable<Product>{
             return this;
         }
         public ProductBuilder inStock(){
-            this.inStock = this.stock > 0;
             return this;
         }
 

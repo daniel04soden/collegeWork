@@ -40,14 +40,9 @@ public class Customer implements Serializable,Comparable<Customer>{
 	// Setters
 
 	public void setEmail(String newEmail){
-		String emailRegex = "/^\\S+@\\S+\\.\\S+$/";
-		if (newEmail.matches(emailRegex)){
 			this.email = newEmail;
-		}else{
-			System.out.println("Invalid email");
-			// Display GUI error
-		}
 	}
+
 	public void setBalance(double newBalance){
 		this.balance = newBalance;
 	}

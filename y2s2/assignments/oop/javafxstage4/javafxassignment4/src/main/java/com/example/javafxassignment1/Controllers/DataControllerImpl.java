@@ -353,6 +353,7 @@ public class DataControllerImpl implements DataController,Serializable{
         }
     }
 
+    @Override
     public void updateStock(int productID, int stock) {
         String sql = """
         UPDATE Product

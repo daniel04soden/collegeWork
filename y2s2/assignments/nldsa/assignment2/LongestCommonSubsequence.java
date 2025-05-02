@@ -39,7 +39,7 @@ public class LongestCommonSubsequence {
     while ((row > 0) && (column > 0)) { // Loop until we hit our zeros, indicating no commmon substring present
       if (X.charAt(row - 1) == Y.charAt(column - 1)) { // If the character at their respective rows and columns are
                                                        // common
-        res += X.charAt(row - 1); // Set new string as character above row
+        res += X.charAt(row - 1); // Set new string as character above row - Works with Y at column -1
         row--; // Move up once
         column--; // Move left
       } else if (matrix[row - 1][column] >= matrix[row][column - 1]) { // If value above current matrix pos is
@@ -71,8 +71,8 @@ public class LongestCommonSubsequence {
       trackMatrix[0][j] = 0;
     }
 
-    for (int k = 1; k <= m; k++) { // Looping over columns
-      for (int p = 1; p <= n; p++) { // looping over rows
+    for (int k = 1; k <= m; k++) { // Looping over rows
+      for (int p = 1; p <= n; p++) { // looping over columns
         if (X.charAt(k - 1) == Y.charAt(p - 1)) { // Check for common characters at row to column between X and y
                                                   // X is evaluated via the rows and Y the columns
           trackMatrix[k][p] = 1 + trackMatrix[k - 1][p - 1]; // If so set the current matrix pos to 1+length at X and Y
@@ -113,9 +113,13 @@ public class LongestCommonSubsequence {
     String B = "WORLDHELLO";
     String C = "DANIELSODEN";
     String D = "SODENDANIEL";
+    String G = "Ancient Sparta has been held up for the last two and a half millennia as the unmatched warrior city-state, where every male was raised from infancy to fight to the death. This view, as ingrained as it is alluring, is almost entirely false";
+    String F = "For the last 2,500 years, Ancient Sparta has been considered the unmatched warrior city-state in popular imagination. The idea that every male was raised from infancy to fight to the death, as ingrained as it is alluring, is actually not true.";
     String O = new LongestCommonSubsequence(A, B).compare();
     String P = new LongestCommonSubsequence(C, D).compare();
+    String realLife = new LongestCommonSubsequence(G, F).compare();
     System.out.println("The longest common subsequence of '" + A + "' and '" + B + "' is '" + O + "'.");
     System.out.println("The longest common subsequence of '" + C + "' and '" + D + "' is '" + P + "'.");
+    System.out.println("Longest: " + realLife);
   }
 }

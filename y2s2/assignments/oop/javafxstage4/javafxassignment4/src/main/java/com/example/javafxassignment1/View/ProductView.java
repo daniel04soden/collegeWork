@@ -233,12 +233,6 @@ public class ProductView {
         stockColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         TableColumn<Product, Double> priceColumn = new TableColumn<>("Price");
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-        TableColumn<Product, Boolean> stockBoolColumn = new TableColumn<>(
-            "In Stock"
-        );
-        stockBoolColumn.setCellValueFactory(
-            new PropertyValueFactory<>("inStock")
-        );
 
         table
             .getColumns()
@@ -246,8 +240,7 @@ public class ProductView {
                 idColumn,
                 nameColumn,
                 stockColumn,
-                priceColumn,
-                stockBoolColumn
+                priceColumn
             );
         // Buttons to view attributes
 

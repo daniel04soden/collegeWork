@@ -22,5 +22,6 @@ public interface DataController {
     void saveProduct(Product p);
     Product updateProduct(int productID,String name,int stock,double price);
     void initTables();
+    void updateStock(int productID, int newStock);
     //  No deleting purchases, final values
 }

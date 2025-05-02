@@ -175,10 +175,10 @@ public class PurchaseView {
         Button showAllOrder = new Button("All Orders");
         Button searchOrder = new Button("Search for order");
         Label orderInput = new Label();
-        orderInput.setText("Enter a name to search:");
-        TextField nameSearchInput = new TextField();
+        orderInput.setText("Enter a customer ID to search:");
+        TextField idSearchInput = new TextField();
 
-        HBox actionButtons = new HBox(showAllOrder,searchOrder,orderInput,nameSearchInput);
+        HBox actionButtons = new HBox(showAllOrder,searchOrder,orderInput,idSearchInput);
         actionButtons.setAlignment(Pos.CENTER);
         actionButtons.setSpacing(15);
 
@@ -192,7 +192,7 @@ public class PurchaseView {
         });
 
         searchOrder.setOnAction(_->{
-            prc.searchForOrderByName(orderInfo,nameSearchInput.getText());
+            prc.searchForOrderById(orderInfo,Integer.parseInt(idSearchInput.getText()));
         });
 
         HBox orderBox = new HBox(orderInfo);

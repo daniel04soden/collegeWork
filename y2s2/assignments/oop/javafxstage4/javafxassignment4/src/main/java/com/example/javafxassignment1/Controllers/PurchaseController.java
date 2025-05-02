@@ -11,6 +11,7 @@ import javafx.scene.control.TextArea;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 public class PurchaseController implements Serializable{
@@ -63,11 +64,14 @@ public class PurchaseController implements Serializable{
     displayPurchaseInfo(t,false);
   }
 
-  public void searchForOrderByName(TextArea t,String name){
+  public void searchForOrderById(TextArea t,int id){
     for (Purchase purchase : purchases) {
-      if (Objects.equals(purchase.getBuyer().getName().trim().toLowerCase(), name.trim().toLowerCase())) {
+      if (Objects.equals(purchase.getBuyer().getId(), id)) {
         t.clear();
         t.appendText(purchase.toString());
+      }else{
+        t.clear();
+        t.appendText("No purchase found");
       }
     }
   }
@@ -115,25 +119,29 @@ public class PurchaseController implements Serializable{
   }
 
   public boolean confirmPurchase(Purchase p) {
-    Customer c = p.getBuyer();
+     Customer c = p.getBuyer();
     double total = p.getTotal();
-    for (Product products : p.getCart()) {
-      if (!(products.isInStock())) {
-        System.out.println("Product is out of stock please try again");
-        break;
-      }else{
-        if (!(c.getBalance() < total)) {
-          double balance = c.getBalance();
-          int currentStock = products.getStock();
-          // products.setStock(currentStock - 1); - may not be needed
-          mc.dbController.updateStock(products.getId(),currentStock-1);
-          c.setBalance(balance - total);
-          mc.dbController.updateBalance(c.getId(),c.getBalance()-total);  // Update balance in database
-          return true;
+    List<Product> cart = p.getCart();
+    for (Product product : cart) {
+        if (product.getStock() < 1) {
+            System.out.println("Product " + product.getName() + " is out of stock. Please try again.");
+            return false;
         }
-      }
     }
-    return false;
+    if (c.getBalance() < total) {
+        System.out.println("Insufficient balance.");
+        return false;
+    }
+    for (Product product : cart) {
+        int currentStock = product.getStock();
+        mc.dbController.updateStock(product.getId(), currentStock - 1);
+    }
+
+    double newBalance = c.getBalance() - total;
+    c.setBalance(newBalance);
+    mc.dbController.updateBalance(c.getId(), newBalance);
+
+    return true;
   }
 
   public ArrayList<Purchase> getPurchases() {

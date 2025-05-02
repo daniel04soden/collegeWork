@@ -168,9 +168,9 @@ public class RodCutting {
 ### Main code
 
 ```java
-    for (int i = 1; i < n + 1; i++) { // Loop over prices array for comparison
+    for (int i = 1; i < n + 1; i++) { // Look at the lengths of the rods
       int maxPrice = -1; // Smallest price for comparsion - could be -infinity
-      for (int j = 1; j <= i; j++) { // Looking at next price ahead, depending on value of i ie 1-2,1-8 etc
+      for (int j = 1; j <= i; j++) { // Looking at the cuts made at size of log
         // Current price through iteration in comparison to store best prices
         int currPrice = Math.max(maxPrice, prices[j - 1] + bestPrices.get(i - j));
         if (currPrice > maxPrice) { // if our new current price is greater than the loop max price
@@ -190,6 +190,31 @@ public class RodCutting {
 - Once a best price is decided on each loop, we add that to the price list
 - Think a lot of the lists in the fact that
 
+```java
+
+    int finalLength = n; // Final length is the size of the prices array - until prices array 0, keep
+                         // going
+    System.out.println("Deciding on cuts");
+    int i = 0;
+    while (finalLength > 0) {
+      int cut = cutLengths.get(finalLength);
+      System.out.println(cut);
+      finalLength -= cut;
+      res.set(i, cut);
+      i++;
+    }
+    System.out.println("Lengths to achieve price");
+    System.out.println(cutLengths);
+    System.out.println("Price achieved at specific cut length");
+    System.out.println(bestPrices);
+    return res;
+  }
+```
+
+- In the above code by grabbing the prices list which corresponds to the cut lengths we can decide what cuts to make through what we have stored
+- We are looping at the size of the lgo through the cut lengths and we get our decided cutlengths at that index and move backwards that amount
+- Then we set our res to be that cut which is fully determined on its price in the main
+
 ### Result
 
 ```sh
@@ -206,3 +231,89 @@ public class RodCutting {
 # 3m selling at €8
 # The overall price is €26
 ```
+
+## Longest common subsequence
+
+### Constructor/Setup
+
+```java
+public class LongestCommonSubsequence {
+  private final String X;
+  private final String Y;
+
+  public LongestCommonSubsequence(String X, String Y) {
+    this.X = X;
+    this.Y = Y;
+  }
+```
+
+```java
+  public String compare() {
+    int m = X.length(); // getting these lengths for convenieces
+    System.out.println("Length of " + this.X + " = " + m);
+    int n = Y.length();
+    System.out.println("Length of " + this.Y + " = " + n);
+    System.out.println("keep in mind reason rows and columns bigger n+1 and m+1");
+    int trackMatrix[][] = new int[m + 1][n + 1]; // Init matrix to keep track of longest subsequence
+
+    // Fill first column with 0s
+    for (int i = 0; i < m; i++) {
+      trackMatrix[i][0] = 0;
+    }
+
+    // Fill first row with 0s
+    for (int j = 0; j < n; j++) {
+      trackMatrix[0][j] = 0;
+    }
+```
+
+- The above code is the primary set up for lcs, where we have two strings which are
+  represented in the trackmatrix 2d array. We fill up the track matrix's outside columns with X length 0s and with Y length 0s
+- this format will then be used for the filling up of the 2d array and for comparisons
+
+### Filling matrix with relevant values
+
+```java
+    for (int k = 1; k <= m; k++) { // Looping over columns
+      for (int p = 1; p <= n; p++) { // looping over rows
+        if (X.charAt(k - 1) == Y.charAt(p - 1)) { // Check for common characters at row to column between X and y
+                                                  // X is evaluated via the rows and Y the columns
+          trackMatrix[k][p] = 1 + trackMatrix[k - 1][p - 1]; // If so set the current matrix pos to 1+length at X and Y
+        } else {
+          trackMatrix[k][p] = Math.max(trackMatrix[k][p - 1], trackMatrix[k - 1][p]);
+          // Otherwise set current matrix pos to larger between two strings (row is X,
+          // column is Y)
+        }
+```
+
+- In the above code, we go through the 2d array, compare the values at X and Y from the outside and if they are equal, we assign their
+  number of occurences so far. The occurences so far is taken into account by adding 1 to their previous no of occurences
+- If they're not equal, we take the large out of the previous right and bottom position in the matrix ie:
+- 1 2
+  3 4
+
+### Reconstruction through our 2d array
+
+```java
+  public String reconstruct(int[][] matrix, int row, int column) {
+    String res = ""; // String to start from
+    while ((row > 0) && (column > 0)) { // Loop until we hit our zeros, indicating no commmon substring present
+      if (X.charAt(row - 1) == Y.charAt(column - 1)) { // If the character at their respective rows and columns are
+                                                       // common
+        res += X.charAt(row - 1); // Set new string as character above row
+        row--; // Move up once
+        column--; // Move left
+      } else if (matrix[row - 1][column] >= matrix[row][column - 1]) { // If value above current matrix pos is
+                                                                       // greater/equal to left of current matrix pos
+        row--; // Move up
+      } else {
+        column--; // Move left
+      }
+    }
+    return new StringBuilder(res).reverse().toString(); // Reconstructed string - can be done without stringbuilder,
+                                                        // just easier for this
+  }
+```
+
+- Using the lengths of row and column, we move from the absolute corner.
+- The main decision points are:
