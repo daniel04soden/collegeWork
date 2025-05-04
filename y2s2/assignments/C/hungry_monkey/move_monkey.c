@@ -16,24 +16,7 @@ struct monkey_action move_monkey(int field[][FIELD_WIDTH], void *monkey_state) {
     retval.state = monkey_state;
   }
   monkey_pos = (int)(uintptr_t)(monkey_state);
-  if (expression) {
-    retval.move = MOVE_LEFT;
-  } else if (expression) {
-    retval.move = MOVE_RIGHT;
-  } else {
-    retval.move = MOVE_FWD;
-  }
+  retval.move = MOVE_FWD;
 
   return retval;
 };
-
-int calcBestPath(int field[][FIELD_WIDTH], void *monkey_state) {
-  int res;
-  for (int i = 0; i < FIELD_HEIGHT; i++) {
-    for (int j = 0; j < FIELD_WIDTH; j++) {
-      if () {
-      }
-    }
-  }
-  return res;
-}

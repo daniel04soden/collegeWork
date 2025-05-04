@@ -5,7 +5,7 @@ CC = gcc
 CFLAGS = -g
 
 # Source to target
-SRCS = hungry_monkey_printf.c move_monkey.c
+SRCS = ./hungry_monkey_nogui.c move_monkey.c
 
 TARGET = hungry_monkey
 

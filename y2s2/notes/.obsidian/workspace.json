@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "TODO/SIdeWork/TODO Personal.md",
+                "file": "TODO/TODO.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "TODO Personal"
+              "title": "TODO"
             }
           }
         ]
@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "8eafd8fa697eaf8d",
@@ -183,8 +184,8 @@
   },
   "active": "ca9ad8a151712834",
   "lastOpenFiles": [
-    "TODO/TODO.md",
     "TODO/SIdeWork/TODO Personal.md",
+    "TODO/TODO.md",
     "Assignment Notes/C.md",
     "Year 2 Semester 2 Breakdown.md",
     "NoSQL/Nosql Start/Big data.md",

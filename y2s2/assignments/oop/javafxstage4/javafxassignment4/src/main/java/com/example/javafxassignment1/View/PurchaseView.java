@@ -133,6 +133,7 @@ public class PurchaseView {
                     prc.mc.pc.save();
                     prc.mc.cc.save();
                     System.out.println(purchase.toString());
+                    runningCart.clear();
                 }
             }});
 
