@@ -30,10 +30,9 @@ MATCH (personOne:Person)-[:ACTED_IN]->(firstMovie:Movie)<-[:ACTED_IN]-(personTwo
 return personOne,firstMovie,secondMovie,personTwo;
 
 -- Q4
-MATCH (m:Movie)<-[:ACTED_IN]-(p:Person)
-WITH m, collect(p) as actors
-WHERE NONE (actor in actors WHERE actor.name = "Keanu Reeves" 
-RETURN m
+MATCH (keanu:Person {name: "Keanu Reeves"})-[:ACTED_IN]->(m:Movie)<-[:ACTED_IN]-(co_actor:Person)
+WITH m.title AS movieTitle, collect(DISTINCT co_actor.name) AS coActors
+RETURN movieTitle, coActors
 
 -- Q5
 MATCH (m:Movie) 

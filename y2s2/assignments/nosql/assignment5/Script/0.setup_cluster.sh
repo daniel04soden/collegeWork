@@ -7,6 +7,11 @@
 #-------------------------------------------------#
 
 mkdir logFiles
+# Dublin north
+# Cork south
+# Galway east
+# Limerick west
+
 
 mkdir north0 # Substitute with Dublin
 mkdir north1

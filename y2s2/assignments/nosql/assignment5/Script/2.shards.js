@@ -29,15 +29,15 @@ db = connect("localhost:27000/my_database");
 // 5.2.2. 
 //
 db = mongosConn;
-res = sh.addShard("dublin/localhost:27000");
+res = sh.addShard("north/localhost:27000");
 while (res.ok != 1){
     sleep(60);
     if (res.ok != 1){
         print("Adding Shard Failed. Trying it again");
-        res = sh.addShard("dublin/localhost:27000");
+        res = sh.addShard("north/localhost:27000");
     }
 }
-print("Dublin Added!");
+print("north Added!");
 //
 //------------------------------------------------
 // 5.3. 
@@ -50,15 +50,15 @@ db = connect("localhost:27100/my_database");
 // 5.3.2. 
 //
 db = mongosConn;
-res = sh.addShard("cork/localhost:27100");
+res = sh.addShard("south/localhost:27100");
 while (res.ok != 1){
     sleep(60);
     if (res.ok != 1){
         print("Adding Shard Failed. Trying it again");
-        res = sh.addShard("cork/localhost:27100");
+        res = sh.addShard("south/localhost:27100");
     }
 }
-print("Cork Added!");
+print("south Added!");
 //
 //------------------------------------------------
 // 5.4. 
@@ -71,15 +71,15 @@ db = connect("localhost:27200/my_database");
 // 5.4.2. Add the shard
 //
 db = mongosConn;
-res = sh.addShard("galway/localhost:27200");
+res = sh.addShard("east/localhost:27200");
 while (res.ok != 1){
     sleep(60);
     if (res.ok != 1){
         print("Adding Shard Failed. Trying it again");
-        res = sh.addShard("galway/localhost:27200");
+        res = sh.addShard("east/localhost:27200");
     }
 }
-print("Galway Added!");
+print("east Added!");
 //
 //------------------------------------------------
 // 5.5. 
@@ -92,15 +92,15 @@ db = connect("localhost:27300/my_database");
 // 5.5.2. 
 //
 db = mongosConn;
-res = sh.addShard("limerick/localhost:27300");
+res = sh.addShard("west/localhost:27300");
 while (res.ok != 1){
     sleep(60);
     if (res.ok != 1){
         print("Adding Shard Failed. Trying it again");
-        res = sh.addShard("limerick/localhost:27300");
+        res = sh.addShard("west/localhost:27300");
     }
 }
-print("Limerick Added!");
+print("west Added!");
 //
 //------------------------------------------------
 // 5.6. Quit

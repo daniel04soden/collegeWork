@@ -63,7 +63,7 @@ db = connect("localhost:27000/my_database");
 // 3.3.2. Initiate the replica set
 //
 res = rs.initiate({
-  _id: "dublin",
+  _id: "north",
   members: [
     { _id: 0, host: "localhost:" + "27000" },
     { _id: 1, host: "localhost:" + "27001" },
@@ -97,7 +97,7 @@ db = connect("localhost:27100/my_database");
 // 3.4.2.
 //
 res = rs.initiate({
-  _id: "cork",
+  _id: "south",
   members: [
     { _id: 0, host: "localhost:" + "27100" },
     { _id: 1, host: "localhost:" + "27101" },
@@ -131,7 +131,7 @@ db = connect("localhost:27200/my_database");
 // 3.5.2.
 //
 res = rs.initiate({
-  _id: "galway",
+  _id: "east",
   members: [
     { _id: 0, host: "localhost:" + "27200" },
     { _id: 1, host: "localhost:" + "27201" },
@@ -165,7 +165,7 @@ db = connect("localhost:27300/my_database");
 // 3.6.2.
 //
 res = rs.initiate({
-  _id: "limerick",
+  _id: "west",
   members: [
     { _id: 0, host: "localhost:" + "27300" },
     { _id: 1, host: "localhost:" + "27301" },
