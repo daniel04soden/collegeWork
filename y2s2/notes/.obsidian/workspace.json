@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Assignment Notes/C.md",
+                "file": "Study/OOA/Models/Domain Models.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "C"
+              "title": "Domain Models"
             }
           }
         ]
@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "8eafd8fa697eaf8d",
@@ -183,12 +184,25 @@
   },
   "active": "ca9ad8a151712834",
   "lastOpenFiles": [
-    "Study/OOA/Modelling.md",
+    "Study/OOA/Models/Modelling.md",
+    "Study/OOA/Models/Domain Models.md",
+    "Study/OOA/Models",
+    "Study/OOA/Models/OO Systems.md",
+    "Pasted image 20250506143541.png",
+    "Pasted image 20250506143458.png",
+    "Pasted image 20250506143436.png",
+    "Study/OOA/Models/Screenshot 2025-05-06 at 14.14.08.png",
+    "Pasted image 20250506141410.png",
+    "Study/OOA/Models/Screenshot 2025-05-06 at 14.13.46.png",
+    "Study/OOA/Models/Screenshot 2025-05-06 at 14.12.47.png",
+    "Study/OOA/Models/Screenshot 2025-05-06 at 14.11.19.png",
+    "Study/OOA/Models/Screenshot 2025-05-06 at 14.09.10.png",
+    "Screenshot 2025-05-06 at 14.09.10.png",
+    "Assignment Notes/C.md",
     "TODO/TODO.md",
     "Study/OOA",
     "Study",
     "TODO/SIdeWork/TODO Personal.md",
-    "Assignment Notes/C.md",
     "Year 2 Semester 2 Breakdown.md",
     "NoSQL/Nosql Start/Big data.md",
     "Statistics/Regression.md",
@@ -208,7 +222,6 @@
     "OOP/brocodework/target/classes/Main/MainApplication.class",
     "OOP/brocodework/target/classes/module-info.class",
     "OOP/brocodework/target/classes/Main",
-    "OOP/brocodework/target/test-classes",
     "OOP/Testing.md",
     "Statistics/Sampling theory.md",
     "OOAnalysis/Sequence Diagrams.md",
@@ -217,8 +230,6 @@
     "Statistics/Binomial Distribution.md",
     "SideWork/Golang/Go basics.md",
     "SideWork/Golang/Htmx + Golang.md",
-    "NONLin/Performance/Amortised Analysis.md",
-    "NoSQL/Nosql Start/Nosq Emergence.md",
     "Assignment Notes/NLDSA/Assignment1/Untitled.canvas",
     "Untitled.canvas"
   ]
