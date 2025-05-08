@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Study/OOA/Exam papers/Paper 1.md",
+                "file": "Study/OOA/Models/Roles.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Paper 1"
+              "title": "Roles"
             }
           }
         ]
@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "8eafd8fa697eaf8d",
@@ -184,6 +185,7 @@
   "active": "ca9ad8a151712834",
   "lastOpenFiles": [
     "Study/OOA/Models/Domain Models.md",
+    "Study/OOA/Models/Roles.md",
     "Study/OOA/Exam papers/Paper 1.md",
     "Study/OOA/Untitled/zz",
     "Study/OOA/Exam papers",
@@ -228,7 +230,6 @@
     "OOP/Serial,cloning etc.md",
     "OOAnalysis/The Object Model.md",
     "Statistics/Binomial Distribution.md",
-    "SideWork/Golang/Go basics.md",
     "Assignment Notes/NLDSA/Assignment1/Untitled.canvas",
     "Untitled.canvas"
   ]
