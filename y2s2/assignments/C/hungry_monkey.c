@@ -83,7 +83,7 @@ void update_screen(int field[][FIELD_WIDTH]){
                 mvwaddch(stdscr, i, j, chars[field[i][j]]);
 }
 
-void main(){
+int main(){
     int monkey_col = FIELD_WIDTH>>1;
     void *monkey_state = NULL;
     struct monkey_action nxt_action;
@@ -146,4 +146,5 @@ void main(){
     endwin();
     // Free prng
     free(prng.numbers);
+    return 0;
 }

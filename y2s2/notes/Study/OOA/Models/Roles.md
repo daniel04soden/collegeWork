@@ -2,7 +2,7 @@
 
 ## OO analysis 
 
-- In OOA for requirements we:
+- In OOA for requirements we
 1. Elicit: Define what does the software need to do and what's the problem the software is trying to solve.
 2. Specify: Describe the requirements, usually with use cases/user stories 
 3. Identify (Creating a conceptual model): Identify the important concepts attributes and relationships. 

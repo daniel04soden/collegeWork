@@ -72,7 +72,7 @@ static int update_field(int field[][FIELD_WIDTH], int monkey_col, struct prng_s 
     return ret;
 }
 
-void main(){
+int main(){
     int monkey_col;
     void *monkey_state = NULL;
     struct monkey_action nxt_action;
@@ -134,4 +134,5 @@ void main(){
 
     printf("Avg score: %0.2f\n", ((float)score_sum)/100);
     free(prng.numbers);
+    return 0;
 }
