@@ -62,11 +62,9 @@ struct monkey_action move_monkey(int field[][FIELD_WIDTH], void *monkey_state) {
                                       // ie maximum treats collectible to reach each cell.
         } 
     }
-    /*
     printf("-----------------\n");
      printMatrix(dp);
     printf("-----------------\n");
-    */
 
     int treats_up = (row > 0) ? dp[row - 1][first_col] : TINY_VAL; // if still within bounds, treats over monkey simply becomes value above in dp matrix - different worth for matrix gen
     // if within bounds, treats left to monkey becomes value above and to left in dp matrix 

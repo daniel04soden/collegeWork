@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Study/OOA/Models/Domain Models.md",
+                "file": "Study/OOA/Models/Roles.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Domain Models"
+              "title": "Roles"
             }
           }
         ]
@@ -74,12 +74,12 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "8eafd8fa697eaf8d",
@@ -182,10 +182,14 @@
       "zenmode:Toggle Zen Mode": false
     }
   },
-  "active": "4728f0de29373160",
+  "active": "ca9ad8a151712834",
   "lastOpenFiles": [
-    "Untitled.md",
+    "Study/OOA/OO Analysis & Design/Object Model.md",
+    "Study/OOA/OO Analysis & Design/Modelling.md",
+    "Study/OOA/OO Analysis & Design/UML (Unified Modelling Language).md",
+    "Study/OOA/OO Analysis & Design/Object Oriented Systems.md",
     "Study/OOA/Models/Domain Models.md",
+    "Untitled.md",
     "Study/OOA/Models/OO Systems.md",
     "Study/OOA/Models/Modelling.md",
     "Study/OOA/Models/Roles.md",
@@ -226,10 +230,6 @@
     "OOP/brocodework/target/classes/Main/MainApplication.class",
     "OOP/Testing.md",
     "Statistics/Sampling theory.md",
-    "OOAnalysis/Sequence Diagrams.md",
-    "OOP/Serial,cloning etc.md",
-    "OOAnalysis/The Object Model.md",
-    "Statistics/Binomial Distribution.md",
     "Assignment Notes/NLDSA/Assignment1/Untitled.canvas",
     "Untitled.canvas"
   ]
