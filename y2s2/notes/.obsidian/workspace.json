@@ -74,7 +74,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
@@ -181,7 +182,7 @@
       "zenmode:Toggle Zen Mode": false
     }
   },
-  "active": "ca9ad8a151712834",
+  "active": "4728f0de29373160",
   "lastOpenFiles": [
     "Untitled.md",
     "Study/OOA/Models/Domain Models.md",
