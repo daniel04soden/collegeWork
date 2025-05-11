@@ -20,8 +20,21 @@
               "icon": "lucide-file",
               "title": "Modelling"
             }
+          },
+          {
+            "id": "ce33f37c5c57d56c",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.8.10"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.8.10"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -78,8 +91,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "8eafd8fa697eaf8d",
@@ -182,7 +194,7 @@
       "zenmode:Toggle Zen Mode": false
     }
   },
-  "active": "ca9ad8a151712834",
+  "active": "ce33f37c5c57d56c",
   "lastOpenFiles": [
     "Study/OOA/OO Analysis & Design/Design Principles.md",
     "Study/OOA/Models/Roles.md",
