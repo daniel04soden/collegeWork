@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Study/OOA/Models/Roles.md",
+                "file": "Study/OOA/OO Analysis & Design/Modelling.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Roles"
+              "title": "Modelling"
             }
           }
         ]
@@ -184,6 +184,8 @@
   },
   "active": "ca9ad8a151712834",
   "lastOpenFiles": [
+    "Study/OOA/OO Analysis & Design/Design Principles.md",
+    "Study/OOA/Models/Roles.md",
     "Study/OOA/OO Analysis & Design/Object Model.md",
     "Study/OOA/OO Analysis & Design/Modelling.md",
     "Study/OOA/OO Analysis & Design/UML (Unified Modelling Language).md",
@@ -192,7 +194,6 @@
     "Untitled.md",
     "Study/OOA/Models/OO Systems.md",
     "Study/OOA/Models/Modelling.md",
-    "Study/OOA/Models/Roles.md",
     "Study/OOA/Exam papers/Paper 1.md",
     "Study/OOA/Untitled/zz",
     "Study/OOA/Exam papers",
@@ -229,7 +230,6 @@
     "OOP/brocodework/target/classes/Main/MainController.class",
     "OOP/brocodework/target/classes/Main/MainApplication.class",
     "OOP/Testing.md",
-    "Statistics/Sampling theory.md",
     "Assignment Notes/NLDSA/Assignment1/Untitled.canvas",
     "Untitled.canvas"
   ]
