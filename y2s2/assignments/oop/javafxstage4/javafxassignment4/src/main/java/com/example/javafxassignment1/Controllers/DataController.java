@@ -2,10 +2,6 @@ package com.example.javafxassignment1.Controllers;
 
 import com.example.javafxassignment1.Models.Customer;
 import com.example.javafxassignment1.Models.Product;
-import com.example.javafxassignment1.Models.Purchase;
-
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface DataController {
