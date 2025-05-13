@@ -3,6 +3,7 @@
 
 struct monkey_action move_monkey(int field[][FIELD_WIDTH], void *monkey_state) {
     struct monkey_action retval;
+    retval.move = MOVE_FWD; // Default movement
     int final_move;
     int monkey_col;
     for (int j = 0; j < FIELD_WIDTH; j++) {
@@ -21,11 +22,6 @@ struct monkey_action move_monkey(int field[][FIELD_WIDTH], void *monkey_state) {
       monkey_state = malloc(sizeof(int));
     }
     
-    
-
-    
-    
-
     
     return retval;
 }

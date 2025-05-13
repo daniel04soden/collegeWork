@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Assignment Notes/C.md",
+                "file": "TODO/TODO.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "C"
+              "title": "TODO"
             }
           }
         ]
@@ -183,12 +183,15 @@
   },
   "active": "ca9ad8a151712834",
   "lastOpenFiles": [
+    "Study/Statistics",
+    "Study/C Programming",
+    "Study/NLDSA",
+    "Assignment Notes/C.md",
     "Study/OOA/Modelling.md",
     "TODO/TODO.md",
     "Study/OOA",
     "Study",
     "TODO/SIdeWork/TODO Personal.md",
-    "Assignment Notes/C.md",
     "Year 2 Semester 2 Breakdown.md",
     "NoSQL/Nosql Start/Big data.md",
     "Statistics/Regression.md",
@@ -207,8 +210,6 @@
     "OOP/brocodework/target/classes/Main/MainController.class",
     "OOP/brocodework/target/classes/Main/MainApplication.class",
     "OOP/brocodework/target/classes/module-info.class",
-    "OOP/brocodework/target/classes/Main",
-    "OOP/brocodework/target/test-classes",
     "OOP/Testing.md",
     "Statistics/Sampling theory.md",
     "OOAnalysis/Sequence Diagrams.md",
@@ -218,7 +219,6 @@
     "SideWork/Golang/Go basics.md",
     "SideWork/Golang/Htmx + Golang.md",
     "NONLin/Performance/Amortised Analysis.md",
-    "NoSQL/Nosql Start/Nosq Emergence.md",
     "Assignment Notes/NLDSA/Assignment1/Untitled.canvas",
     "Untitled.canvas"
   ]
