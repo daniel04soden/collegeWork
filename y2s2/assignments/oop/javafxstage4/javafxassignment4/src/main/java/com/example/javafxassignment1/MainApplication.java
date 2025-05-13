@@ -12,7 +12,7 @@ import static com.example.javafxassignment1.View.MainView.applyCSS;
 
 public class MainApplication extends Application {
   private final MainController mc = MainController.getMc(); // Singleton Pattern
-
+  
   public SplitPane init(Stage stage){
     TabPane mainPane = new TabPane();
     Tab tab1 = new Tab("Customers");

@@ -1,0 +1,103 @@
+<h1 id="what-are-models">What are models?</h1>
+<ul>
+<li>Simplifications of reality
+<ul>
+<li>Structural - Simple class diagram - compile time - blueprint</li>
+<li>Behavioural - Object diagram ie runtime - includes the operations ##
+Aims of models</li>
+</ul></li>
+<li>Visualise systems</li>
+<li>Specify structure and behaviour of a system</li>
+<li>Template to construct a system</li>
+<li>Document decisions we made - assumptions ## Why models</li>
+<li>Abstracts reality and filters out non-essential details</li>
+<li>This helps us deal with complexity and deal with human limitations
+## Why objects?</li>
+<li>Reflect reality more accurately</li>
+<li>Reduce semantic gap between reality and a model # Principles of
+modelling</li>
+</ul>
+<ol type="1">
+<li>The <strong>choice</strong> of what models to create has a profound
+impact on how a problem is attacked and thus a solution is formed</li>
+<li>Every model may be expressed at different levels of
+<strong>precision</strong> (generally in a blueprint form, more exact
+showing everything from the fields to the constructor and method
+parameters)</li>
+<li>Best models are connected to <strong>reality</strong>. Structured
+analyssi techniques fails to birdge the gap between the analysis model
+and system design model andas a result, the system conceived will
+diverge over time.</li>
+<li><strong>No single model is sufficient.</strong> To model a system
+accurately, why can’t we just make a domain model, doesn’t it cover the
+entire system?.</li>
+</ol>
+<h2 id="choice">1. Choice</h2>
+<ul>
+<li><p>The models you choose to make profoundly influence how the
+problem is attacked and how a solution is shaped.</p>
+<ul>
+<li>In software, the models you choose greatly affect your world
+view.</li>
+<li>This view leads to a different kind of system ## 2. Precision</li>
+</ul></li>
+<li><p>Every model may be expected to be expressed at a different level
+of precision.</p></li>
+<li><p>The best kinds of models, let you choose the degree of detail</p>
+<ul>
+<li>Who is viewing the model?</li>
+<li>Why they need to view it. ## Reality</li>
+</ul></li>
+<li><p>All models simplify reality</p></li>
+<li><p>A good model reflects potentially fatal characteristics ## No
+single model</p></li>
+<li><p>Every non-trivial system is best approached through a small set
+of nearly independent models.</p></li>
+<li><p>Create models that can be built, studied separately but still are
+interrelated. # UML</p></li>
+<li><p>UML or unified modelling language is a modelling structure used
+for:</p>
+<ol type="1">
+<li>Visualise</li>
+<li>Specify</li>
+<li>Construct</li>
+<li>Document</li>
+</ol></li>
+<li><p>The artifacts of a software intensive system</p></li>
+<li><p>It provides common vocab of OO terms and diagramming techniques
+rich enough to model any systems development project fro analysis
+through implementation ## UML Structure diagrams</p></li>
+<li><p>We can represent the data and static relationships in an info
+system:</p>
+<ul>
+<li>Classes</li>
+<li>Objects</li>
+<li>Packages</li>
+<li>Deployments</li>
+<li>Components</li>
+<li>Composite structures</li>
+</ul></li>
+</ul>
+<h2 id="uml-behaviour-diagrams">UML Behaviour Diagrams</h2>
+<ul>
+<li>Depict the dynamic relationships among the instances or objects that
+represent the business information system. ## Class Diagrams</li>
+<li>Class diagrams describe the structure of an OO System by showing the
+classes in that system and the relationships between the classes
+![[Study/OOA/Models/Screenshot 2025-05-06 at 14.09.10.png]] ## Sequence
+diagram</li>
+<li>Describes the interaction among a set of objects participated in a
+collab and arranged in chronological order ![[Screenshot 2025-05-06 at
+14.11.19.png]] ## Component diagram:</li>
+<li>Classifying groups of classes into components. These kinds of
+diagrams support the interchangeability and reuse of code ![[Screenshot
+2025-05-06 at 14.12.47.png]] ## Package diagram</li>
+<li>Used to simplify complex class diagrams. This allows us to group
+classes into packages. ![[Screenshot 2025-05-06 at 14.13.46.png]] ##
+State machine diagram</li>
+<li>Typically used to describe state-dependent behaviour for an
+object</li>
+<li>For example having an order progressing through state -
+placed,processed, dispatched, en-route, delivered ![[Screenshot
+2025-05-06 at 14.14.08.png]]</li>
+</ul>
