@@ -135,7 +135,7 @@ public class BinarySearchTreeImpl<T> {
                 u.parent.right = v; // Otherwise, make v te value u's right
             }
         }
-        if (v != null) { // if v isnt null, just make the parent of u, the parent of
+        if (v != null) { // if v isnt null, just make the parent of u, the parent of 
             // v
             v.parent = u.parent;
         }

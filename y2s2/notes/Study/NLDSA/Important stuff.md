@@ -1,0 +1,72 @@
+- Adjacency list
+- Adjacency matrix
+	- Representations
+	- Drawing them
+- Asymptotic anal
+	- Assigning omega,o or tita to two elements
+	- determining from an algo
+	- Tight,Lower, upper = Average, worst, best
+- Binary search tree:
+	- Post,pre,inorder
+	- Insert
+	- Delete
+	- Transplant
+	- Search
+	- Successor
+	- Pre-decesor
+- Red black trees
+	- Properties:
+		- Black node for root
+		- Red has black children
+		- Black weight the same across descendants
+		- Leaf nodes always black
+- Backtracking:
+	- N-queens
+	- Colouring? - old paper
+	- HDD Allocation  
+		- Explanation:
+			- NP hard problems 	
+			- Choice
+			- Verify
+			- Back track 
+			- or Return
+- Graph traversal
+	- DFS - Stack based
+	- BFS -  Queue based  - can be used for shortest path unweighted graph
+- Connected components:
+	- Where you can get from one node to another - un-directed graph
+	- Disjoint sets
+		- make-set
+		- find-set
+		- union - representatives
+		- Two ways to represent disjoint set
+			- Linked-list back to first and next
+			- Tree - root node is rep - keep track of rank
+				- Rank is how DEEP the tree is
+	- Strongly connected components
+		- Directed graphs where you can get to every vertex from one component to another 
+
+- Dynamic Programming
+	- Conditions
+		- Recursive formulation
+		- Overlapping subproblems
+		- Optimal substructure
+	- Bottom up  - Rod cutting
+	- Top to bottom
+	- Tabulation - Hungry monkey, LCS
+- Shortest paths
+	- Dijkstras - no negative weights
+		- Init q with infinty
+		- 
+	- Bellman fords - stop infinite loops of negativity
+	- Bellman DAG? - no need to check for infinite (negative circle weight) - Directed acyclic graph
+- Min span trees
+	- Spanning tree - euler path - no cycles  
+	- Min kruskals tree - multiple smaller ones to get the biggest spanning tree
+	- Pimms - one go building spanning tree
+	- Kruskals - make set from graph and then sorts edges non-descending, go through in new-increasing order,if not connected via reps, union and add to A set
+	- Prims - Graph - go through vertices - root null - rest infinite - while Q is not empty, loop through neighbours - if distance between u and v is less than v, let v be w(u,v), then reduce key - using min heap
+- All pairs shortest path
+	- Matrix multiplication
+	- Floyd- algorithm - dense graphs
+	- Johnson's algorithm - sparse graphs
