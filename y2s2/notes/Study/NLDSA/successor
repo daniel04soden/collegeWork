@@ -1,0 +1,12 @@
+def sucessor(x){
+    if x.right!=nil{
+        return min(x.right)
+    }else{
+        y = x.parent
+            while y!=nil && x == y.right{
+                x = y
+                y = y.parent
+            }
+            return y
+    }
+}

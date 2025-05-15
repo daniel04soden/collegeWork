@@ -1,0 +1,11 @@
+def kruskalls(){
+    A = {}
+    for each vertices:
+        make-set(v)
+    for each edge:
+        order-by-weight
+    for each u,v is an element of E:
+        if find-set(u) != find-set(v):
+            A = A U (u,v)
+            union-set(u,v)
+}

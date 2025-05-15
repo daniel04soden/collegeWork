@@ -1,0 +1,5 @@
+for vertices in graph:
+    make-set(vertices)
+for edges in vertices:
+    if find-set(u) != find-set(v)
+        union(edges)

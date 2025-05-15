@@ -1,0 +1,10 @@
+def bellmanFord(g,w,v){
+    initShortestPath(g)
+    for each v - 1:
+        for each edge:
+            relax(g,w,e)
+    for each edge:
+        if d[v] > d[v] + w(u,v):
+            return false
+    return true
+}

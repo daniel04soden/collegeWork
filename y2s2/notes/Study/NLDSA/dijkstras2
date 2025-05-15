@@ -1,0 +1,11 @@
+def dijkstras(w,g,s){
+    q = createq(g.length)
+    init-shortestpath(q)
+    q.append(s)
+    while !(q.isEmpty()){
+        u = min(d[u,v], d[u])
+        Q = q - u        
+        for neighbours in u:
+            relax(neighbour)
+    }
+}

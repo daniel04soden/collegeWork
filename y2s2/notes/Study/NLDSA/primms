@@ -1,0 +1,13 @@
+def prims(g){
+    Q = createQ(size.g) // Heap TECHNICALLY
+    for each vertex - r:
+        w(vertex) = infinity
+    w(r) = 0
+    insert(Q,r)
+    while Q!=0:
+        u = extract-min()
+        for v each neighbour:
+            if v E q and w(v) > w(u,v)
+                w(v) = w(u,v)
+                reducekey(v)
+}
