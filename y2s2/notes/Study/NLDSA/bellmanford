@@ -7,4 +7,5 @@ def bellmanFord(g,w,v){
         if d[v] > d[v] + w(u,v):
             return false
     return true
+    // If dag no need to check for infinite negative circle loops 
 }

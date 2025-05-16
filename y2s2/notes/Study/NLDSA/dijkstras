@@ -1,8 +1,6 @@
 def dijkstras(G,w,s){
     q = createQ()
-    for vertices in q: // init shortest path
-        q.weight = infintity
-        q.append(v)
+    init-shortest-path(q)
     while Q!=0
         u = d[u] > min(d[y])
         Q = Q - u

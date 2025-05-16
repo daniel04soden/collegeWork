@@ -6,7 +6,7 @@ def prims(g){
     insert(Q,r)
     while Q!=0:
         u = extract-min()
-        for v each neighbour:
+        for v each neighbour(0):
             if v E q and w(v) > w(u,v)
                 w(v) = w(u,v)
                 reducekey(v)
