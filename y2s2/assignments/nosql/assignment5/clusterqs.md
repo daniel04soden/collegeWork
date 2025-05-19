@@ -1,3 +1,12 @@
+# Clusters
+
+- Clusters are composed of three main components:
+  1. Shards
+  2. Config server
+  3. Interface aka router
+
+- Clusters work with both replication and sharding while balancing read and write operation
+
 # Properly explain what a shard is, what a shard is used for
 
 - A shard is a subset of the sharded data
@@ -7,11 +16,11 @@
 
 # How many shards we should have in a cluster?
 
-- We should have 12 shards
+- We should have 12 shards in total, 3 for each region in the USA.
 
 # What is a config server?
 
-- Replica set that persistently stores metadata and config settings in the sharded cluster
+- Replica set that persistently stores metadata and config settings in the sharded cluster.
 
 # How many nodes we should have in a config server?
 
@@ -24,7 +33,7 @@
 # What problem we will have if the config server has only one node?
 
 - Less consistency for other servers/shards
-- No redundancy
+- No redundancy.
 
 # Does the config server hold any data? If it does, what kind of data it should have?
 
@@ -37,17 +46,23 @@
 
 # Does interface have any data? If it does, what kind of data it holds?
 
--
-
 # How many interfaces we should have in a cluster?
 
 # What problems will we have if there is only one interface for the cluster?
 
 # What is a chunk?
 
+- Chunks are the basic unit of data stored in multiple servers ie in this case the data stored in shards. Each chunk has their own read and write operations
+
 # How to change the size of a chunk in the cluster?
+```js
+
+db.settings.updateOne({_id:"chunksize"},{$set:{_id:"chunksize",value:1}},{upsert:true})
+
+```
 
 # Demonstrate the cluster is fully functioning
+- Do in video
 
 # Explain how the cluster shards a collection
 

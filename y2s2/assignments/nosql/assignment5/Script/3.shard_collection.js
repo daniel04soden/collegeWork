@@ -3,74 +3,37 @@
 //  7. Shard the collection
 //
 //----------------------------------------------------
-//
-//
-//------------------------------------------------
-// 7.1. Variables
-//------------------------------------------------
-//
-db = db.getSisterDB("my_database");
+
+db = db.getSiblingDB("diabetes");
 var res = null;
-//
-//------------------------------------------------
-// 7.2.
-//------------------------------------------------
-//
-db.settings.save({ _id: "chunksize", value: 1 });
-//
-//------------------------------------------------
-// 7.3.
-//------------------------------------------------
-//
-res = sh.enableSharding("my_database");
+
+db.settings.updateOne({_id:"chunksize"},{$set:{_id:"chunksize",value:1}},{upsert:true})
+
+print("Log 1")
+res = db.healthIndicators.createIndex({ Income: 1, Age: 1 , BMI:1}); 
 while (res.ok != 1) {
   sleep(10);
   if (res.ok != 1) {
-    print("Enable my_database for Sharding Failed. Trying it again");
-    res = sh.enableSharding("my_database");
+    print("Creating index for health indicators collection failed. Trying it again");
+    res = db.healthIndicators.createIndex({ Income: 1, Age: 1 , BMI:1});
   }
 }
-print("my_database Enable for Sharding!");
-//
-//------------------------------------------------
-// 7.4.
-//------------------------------------------------
-//
-res = db.restaurants.createIndex({ cuisine: 1, borough: 1 });
+print("healthIndicators Collection Index Created!");
+
+
+res = sh.shardCollection("diabetes.healthIndicators", { Income: 1, Age: 1 , BMI:1}); 
 while (res.ok != 1) {
   sleep(10);
   if (res.ok != 1) {
-    print("Creating index for restaurants collection failed. Trying it again");
-    res = db.restaurants.createIndex({ cuisine: 1, borough: 1 });
+    print("Sharding healthIndicators collection failed. Trying it again");
+    res = sh.shardCollection("test.healthIndicators", { Income: 1, Age: 1 , BMI:1}); 
   }
 }
-print("restaurant Collection Index Created!");
-//
-//------------------------------------------------
-// 7.5.
-//------------------------------------------------
-//
-res = sh.shardCollection("my_database.restaurants", { cuisine: 1, borough: 1 });
-while (res.ok != 1) {
-  sleep(10);
-  if (res.ok != 1) {
-    print("Sharding restaurants collection failed. Trying it again");
-    res = sh.shardCollection("test.restaurants", { cuisine: 1, borough: 1 });
-  }
-}
-print("restaurant Collection Sharded!");
-//
-//------------------------------------------------
-// 7.6. Print the sharding evolution
-//------------------------------------------------
-//
+print("health Indicators Collection Sharded!");
+
 for (i = 0; i < 10; i++) {
   sh.status();
   sleep(10000);
 }
-//
-//------------------------------------------------
-// 7.7. Quit
-//------------------------------------------------
-//
+
 quit();

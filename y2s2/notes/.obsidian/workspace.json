@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Study/NLDSA/Important stuff.md",
+                "file": "NoSQL/Clustering.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Important stuff"
+              "title": "Clustering"
             }
           }
         ]
@@ -184,6 +184,10 @@
   },
   "active": "f9debaab0a28687a",
   "lastOpenFiles": [
+    "Study/STATS/Probability.md",
+    "NoSQL/Clustering.md",
+    "Study/STATS/Stats.md",
+    "Study/NLDSA/Important stuff.md",
     "Study/NLDSA/bellmanford",
     "Study/NLDSA/dijkstras2",
     "Study/NLDSA/dijkstras",
@@ -194,9 +198,7 @@
     "Study/NLDSA/kruskalls",
     "Study/NLDSA/transplant2",
     "Study/NLDSA/transplant",
-    "Study/NLDSA/dfs2",
     "Study/NLDSA/Trees.md",
-    "Study/NLDSA/Important stuff.md",
     "Study/NLDSA/Red Black trees.md",
     "Study/NLDSA/Asymptotic Analysis.md",
     "Pasted image 20250514140946.png",

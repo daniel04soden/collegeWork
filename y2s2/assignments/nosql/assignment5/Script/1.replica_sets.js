@@ -8,7 +8,7 @@
 // 3.1. Variables
 //------------------------------------------------
 //
-db = db.getSisterDB("config");
+db = db.getSiblingDB("config");
 var mongosConn = db;
 var res = null;
 //
@@ -16,7 +16,6 @@ var res = null;
 // 7.2.
 //------------------------------------------------
 //
-db.settings.save({ _id: "chunksize", value: 1 });
 //
 //------------------------------------------------
 // 3.2.
@@ -24,7 +23,7 @@ db.settings.save({ _id: "chunksize", value: 1 });
 //
 // 3.2.1.
 //
-db = connect("localhost:26050/my_database");
+db = connect("localhost:26050/diabetes");
 //
 // 3.2.2.
 //
@@ -58,7 +57,7 @@ print("Replica Set metadata Up!");
 //
 // 3.3.1.
 //
-db = connect("localhost:27000/my_database");
+db = connect("localhost:27000/diabetes");
 //
 // 3.3.2. Initiate the replica set
 //
@@ -92,7 +91,7 @@ print("Replica Set replset1 Up!");
 //
 // 3.4.1.
 //
-db = connect("localhost:27100/my_database");
+db = connect("localhost:27100/diabetes");
 //
 // 3.4.2.
 //
@@ -126,7 +125,7 @@ print("Replica Set replset2 Up!");
 //
 // 3.5.1.
 //
-db = connect("localhost:27200/my_database");
+db = connect("localhost:27200/diabetes");
 //
 // 3.5.2.
 //
@@ -160,7 +159,7 @@ print("Replica Set replset3 Up!");
 //
 // 3.6.1.
 //
-db = connect("localhost:27300/my_database");
+db = connect("localhost:27300/diabetes");
 //
 // 3.6.2.
 //
