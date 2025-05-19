@@ -11,6 +11,7 @@ db.settings.updateOne({_id:"chunksize"},{$set:{_id:"chunksize",value:1}},{upsert
 
 print("Log 1")
 res = db.healthIndicators.createIndex({ Income: 1, Age: 1 , BMI:1}); 
+/*
 while (res.ok != 1) {
   sleep(10);
   if (res.ok != 1) {
@@ -18,10 +19,12 @@ while (res.ok != 1) {
     res = db.healthIndicators.createIndex({ Income: 1, Age: 1 , BMI:1});
   }
 }
+*/
 print("healthIndicators Collection Index Created!");
 
 
 res = sh.shardCollection("diabetes.healthIndicators", { Income: 1, Age: 1 , BMI:1}); 
+/*
 while (res.ok != 1) {
   sleep(10);
   if (res.ok != 1) {
@@ -29,6 +32,7 @@ while (res.ok != 1) {
     res = sh.shardCollection("test.healthIndicators", { Income: 1, Age: 1 , BMI:1}); 
   }
 }
+*/
 print("health Indicators Collection Sharded!");
 
 for (i = 0; i < 10; i++) {

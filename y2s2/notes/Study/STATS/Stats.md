@@ -1,4 +1,3 @@
-
 # Frequency Tables
 - There are both frequency tables and grouped frequency tables
 ## Frequency tables

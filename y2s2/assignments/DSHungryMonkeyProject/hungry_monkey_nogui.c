@@ -1,6 +1,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "hungry_monkey.h"
+#include "config_seccomp.h"
 
 #undef srand
 
@@ -72,7 +73,7 @@ static int update_field(int field[][FIELD_WIDTH], int monkey_col, struct prng_s 
     return ret;
 }
 
-int main(){
+void main(){
     int monkey_col;
     void *monkey_state = NULL;
     struct monkey_action nxt_action;
@@ -80,17 +81,43 @@ int main(){
     int step;
     int treats_eaten;
 
-    int field[FIELD_HEIGHT][FIELD_WIDTH];
+    int *dummies_score[4];
+    int *other_dummies_score[4];
 
-    int test_run = 0;
-    int score_sum = 0;
+    for (int i=0;i<4;i++){
+        dummies_score[i] = malloc(sizeof(int)*FIELD_HEIGHT*FIELD_WIDTH);
+        *dummies_score[i] = i%2;
+    }
+    for (int i=0;i<4;i++){
+        other_dummies_score[i] = malloc(sizeof(int)*FIELD_HEIGHT*FIELD_WIDTH);
+        *other_dummies_score[i] = i%2;
+    }
+    int *test_run = dummies_score[2];
+    int *score_sum = other_dummies_score[2];
+    int (*user_field)[FIELD_WIDTH] = malloc(sizeof(int)*FIELD_HEIGHT*FIELD_WIDTH);
+
     int num_steps = 100+FIELD_HEIGHT;
     // hold random numbers < 100
     struct prng_s prng;
     prng.size = num_steps*FIELD_WIDTH;
     prng.numbers = malloc(sizeof(unsigned char)*prng.size);
 
-    while (test_run < 100){
+    int *dummies[4];
+    int *other_dummies[4];
+
+    for (int i=0;i<4;i++){
+        dummies[i] = malloc(sizeof(int)*FIELD_HEIGHT*FIELD_WIDTH);
+        *dummies[i] = i%2;
+    }
+    for (int i=0;i<4;i++){
+        other_dummies[i] = malloc(sizeof(int)*FIELD_HEIGHT*FIELD_WIDTH);
+        *other_dummies[i] = i%2;
+    }
+    int (*field)[FIELD_WIDTH] = (int(*)[FIELD_WIDTH])other_dummies[2];
+
+    configure_seccomp();
+
+    while (*test_run < 100){
         // Reset state
         treats_eaten = 0;
         step = 0;
@@ -98,7 +125,7 @@ int main(){
         monkey_state = NULL;
 
         // Single run. Initialise PRNG
-        srand(1234+test_run);
+        srand(1234+*test_run);
         prng.nxt_number = 0;
         for (int i=0;i<prng.size;i++){
             prng.numbers[i] = random()%100;
@@ -107,10 +134,16 @@ int main(){
         // Initially the field is empty
         memset(field, 0, sizeof(int)*FIELD_WIDTH*FIELD_HEIGHT);
 
-
         while (step < 100+FIELD_HEIGHT){
             treats_eaten += update_field(field, monkey_col, &prng);
-            nxt_action = move_monkey(field, monkey_state);
+            // Give the user a copy of the field
+            memcpy(user_field, field, sizeof(int)*FIELD_WIDTH*FIELD_HEIGHT);
+            nxt_action = move_monkey(user_field, monkey_state);
+            // Check the canary
+            if (*dummies[2]){
+                printf("Avg score: -1000000\n");
+                return;
+            }
             // Clear current monkey position
             field[FIELD_HEIGHT-1][monkey_col] = 0;
 
@@ -127,12 +160,18 @@ int main(){
         }
 
         // Add score to total
-        score_sum += treats_eaten;
+        (*score_sum) += treats_eaten;
 
-        test_run ++;
+        (*test_run)++;
     }
 
-    printf("Avg score: %0.2f\n", ((float)score_sum)/100);
+    printf("Avg score: %0.2f\n", ((float)(*score_sum))/100);
     free(prng.numbers);
-    return 0;
+    for (int i=0;i<4;i++){
+        free(other_dummies[i]);
+        free(other_dummies_score[i]);
+        free(dummies[i]);
+        free(dummies_score[i]);
+    }
+    free(user_field);
 }

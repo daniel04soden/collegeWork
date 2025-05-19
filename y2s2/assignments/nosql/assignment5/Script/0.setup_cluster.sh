@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # In my code i use mongosh as opposed to mongo as mongo is deprecated and I am using the latest version 8.0.9
 
 mkdir logFiles  # General logging directory
@@ -76,7 +77,8 @@ sleep 10s
 
 mongosh --shell --port 26060 2.shards.js
 
-mongoimport --db diabetes --collection healthIndicators --type=csv --headerline --drop --file diabetes_012_health_indicators_BRFSS2015.csv
+mongoimport --port 26060 --db diabetes --collection healthIndicators --type=csv --headerline --drop --file diabetes_012_health_indicators_BRFSS2015.csv
+
 
 sleep 10s
 

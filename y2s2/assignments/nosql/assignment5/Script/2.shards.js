@@ -12,6 +12,7 @@ db = connect("localhost:27000/diabetes");
 
 
 db = mongosConn;
+
 res = sh.addShard("north/localhost:27000");
 while (res.ok != 1){
     sleep(60);
@@ -44,6 +45,20 @@ while (res.ok != 1){
 print("south Added!");
 //
 //------------------------------------------------
+db = connect("localhost:27300/diabetes");
+//
+// 5.5.2. 
+//
+db = mongosConn;
+res = sh.addShard("west/localhost:27300");
+while (res.ok != 1){
+    sleep(60);
+    if (res.ok != 1){
+        print("Adding Shard Failed. Trying it again");
+        res = sh.addShard("west/localhost:27300");
+    }
+}
+print("west Added!");
 // 5.4. 
 //------------------------------------------------
 //
@@ -70,20 +85,6 @@ print("east Added!");
 //
 // 5.5.1. 
 //
-db = connect("localhost:27300/diabetes");
-//
-// 5.5.2. 
-//
-db = mongosConn;
-res = sh.addShard("west/localhost:27300");
-while (res.ok != 1){
-    sleep(60);
-    if (res.ok != 1){
-        print("Adding Shard Failed. Trying it again");
-        res = sh.addShard("west/localhost:27300");
-    }
-}
-print("west Added!");
 //
 //------------------------------------------------
 // 5.6. Quit

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "NoSQL/Clustering.md",
+                "file": "Study/STATS/Stats.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Clustering"
+              "title": "Stats"
             }
           }
         ]
@@ -184,8 +184,9 @@
   },
   "active": "f9debaab0a28687a",
   "lastOpenFiles": [
-    "Study/STATS/Probability.md",
+    "Study/STATS/Prob distributions.md",
     "NoSQL/Clustering.md",
+    "Study/STATS/Probability.md",
     "Study/STATS/Stats.md",
     "Study/NLDSA/Important stuff.md",
     "Study/NLDSA/bellmanford",
