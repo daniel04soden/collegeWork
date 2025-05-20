@@ -1,6 +1,6 @@
 #!/bin/bash
-
-# In my code i use mongosh as opposed to mongo as mongo is deprecated and I am using the latest version 8.0.9
+./cleanup.sh
+# In my code i use mongo as opposed to mongo as mongo is deprecated and I am using the latest version 8.0.9
 
 mkdir logFiles  # General logging directory
 
@@ -30,6 +30,8 @@ mkdir usa_west0
 mkdir usa_west1
 mkdir usa_west2 
 
+sleep 3s
+
 # Shard as replica sets
 
 # 3 shards for North
@@ -58,14 +60,19 @@ mkdir cfg1
 mkdir cfg2
 
 # Config server replica set 
+
+
 mongod --configsvr --replSet cfg --dbpath cfg0 --port 26050 --logpath logFiles/node13.log --fork >>logFiles/log.file
 mongod --configsvr --replSet cfg --dbpath cfg1 --port 26051 --logpath logFiles/node14.log --fork >>logFiles/log.file
 mongod --configsvr --replSet cfg --dbpath cfg2 --port 26052 --logpath logFiles/node15.log --fork >>logFiles/log.file
 
-sleep 20s
-
 # Open shell to be able to input queries
+
+sleep 60s
+
 mongosh --port 26050 --shell 1.replica_sets.js 
+
+sleep 45s
 
 # Mongos interface being setup for logging  
 mongos --configdb cfg/localhost:26050,localhost:26051,localhost:26052 --port 26060 --logpath logFiles/mongos0.log --fork >>logFiles/log.file
@@ -73,13 +80,15 @@ mongos --configdb cfg/localhost:26050,localhost:26051,localhost:26052 --port 260
 mongos --configdb cfg/localhost:26050,localhost:26051,localhost:26052 --port 26062 --logpath logFiles/mongos2.log --fork >>logFiles/log.file
 mongos --configdb cfg/localhost:26050,localhost:26051,localhost:26052 --port 26063 --logpath logFiles/mongos3.log --fork >>logFiles/log.file
 
-sleep 10s
+sleep 30s
 
 mongosh --shell --port 26060 2.shards.js
+
+sleep 30s
 
 mongoimport --port 26060 --db diabetes --collection healthIndicators --type=csv --headerline --drop --file diabetes_012_health_indicators_BRFSS2015.csv
 
 
-sleep 10s
+sleep 45s
 
 mongosh --shell --port 26060 3.shard_collection.js

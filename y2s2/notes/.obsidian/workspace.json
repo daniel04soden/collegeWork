@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Study/STATS/Stats.md",
+                "file": "Study/STATS/Prob distributions.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Stats"
+              "title": "Prob distributions"
             }
           }
         ]
@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "eebcdefdb72ece66",
@@ -184,10 +183,17 @@
   },
   "active": "f9debaab0a28687a",
   "lastOpenFiles": [
-    "Study/STATS/Prob distributions.md",
-    "NoSQL/Clustering.md",
     "Study/STATS/Probability.md",
+    "Pasted image 20250520175233.png",
+    "Pasted image 20250520175059.png",
+    "Pasted image 20250520172638.png",
+    "Pasted image 20250520171212.png",
+    "Study/STATS/Prob distributions.md",
+    "Pasted image 20250520170458.png",
+    "Pasted image 20250520170325.png",
     "Study/STATS/Stats.md",
+    "Study/STATS/Sampling theory.md",
+    "NoSQL/Clustering.md",
     "Study/NLDSA/Important stuff.md",
     "Study/NLDSA/bellmanford",
     "Study/NLDSA/dijkstras2",
@@ -211,11 +217,6 @@
     "Pasted image 20250513193316.png",
     "Pasted image 20250513192417.png",
     "NONLin/Performance/Recurrences.md",
-    "NONLin/Performance/ldsa Asymptotic Analysis.md",
-    "Pasted image 20250513184355.png",
-    "Pasted image 20250513184338.png",
-    "Pasted image 20250513184318.png",
-    "Pasted image 20250513171857.png",
-    "Pasted image 20250513171807.png"
+    "NONLin/Performance/ldsa Asymptotic Analysis.md"
   ]
 }

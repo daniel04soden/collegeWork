@@ -1,32 +1,11 @@
-//----------------------------------------------------
-//
-//  3. Set up data and config servers as replica sets
-//
-//----------------------------------------------------
-//
-//------------------------------------------------
-// 3.1. Variables
-//------------------------------------------------
-//
 db = db.getSiblingDB("config");
+
 var mongosConn = db;
+
 var res = null;
-//
-//------------------------------------------------
-// 7.2.
-//------------------------------------------------
-//
-//
-//------------------------------------------------
-// 3.2.
-//------------------------------------------------
-//
-// 3.2.1.
-//
+
 db = connect("localhost:26050/diabetes");
-//
-// 3.2.2.
-//
+
 res = rs.initiate({
   _id: "cfg",
   members: [
@@ -35,9 +14,7 @@ res = rs.initiate({
     { _id: 2, host: "localhost:" + "26052" },
   ],
 });
-//
-// 3.2.3.
-//
+
 while (res.ok != 1) {
   sleep(10);
 }
@@ -50,17 +27,9 @@ while (
   sleep(10);
 }
 print("Replica Set metadata Up!");
-//
-//------------------------------------------------
-// 3.3.
-//------------------------------------------------
-//
-// 3.3.1.
-//
+
 db = connect("localhost:27000/diabetes");
-//
-// 3.3.2. Initiate the replica set
-//
+
 res = rs.initiate({
   _id: "north",
   members: [
@@ -69,13 +38,11 @@ res = rs.initiate({
     { _id: 2, host: "localhost:" + "27002" },
   ],
 });
-//
-// 3.3.3. Wait until all nodes of the replica set are up and running
-//
+
 while (res.ok != 1) {
   sleep(10);
 }
-print("Replica Set replset1 Created!");
+print("Replica Set for North Created!");
 while (
   (rs.status().members[0].state != 1 && rs.status().members[0].state != 2) ||
   (rs.status().members[1].state != 1 && rs.status().members[1].state != 2) ||
@@ -84,17 +51,9 @@ while (
   sleep(10);
 }
 print("Replica Set replset1 Up!");
-//
-//------------------------------------------------
-// 3.4.
-//------------------------------------------------
-//
-// 3.4.1.
-//
+
 db = connect("localhost:27100/diabetes");
-//
-// 3.4.2.
-//
+
 res = rs.initiate({
   _id: "south",
   members: [
@@ -103,9 +62,7 @@ res = rs.initiate({
     { _id: 2, host: "localhost:" + "27102" },
   ],
 });
-//
-// 3.4.3. Wait until all nodes of the replica set are up and running
-//
+
 while (res.ok != 1) {
   sleep(10);
 }
@@ -118,17 +75,11 @@ while (
   sleep(10);
 }
 print("Replica Set replset2 Up!");
-//
-//------------------------------------------------
-// 3.5.
-//------------------------------------------------
-//
-// 3.5.1.
-//
+
 db = connect("localhost:27200/diabetes");
-//
-// 3.5.2.
-//
+
+
+
 res = rs.initiate({
   _id: "east",
   members: [
@@ -137,9 +88,7 @@ res = rs.initiate({
     { _id: 2, host: "localhost:" + "27202" },
   ],
 });
-//
-// 3.5.3. Wait until all nodes of the replica set are up and running
-//
+
 while (res.ok != 1) {
   sleep(10);
 }
@@ -152,17 +101,9 @@ while (
   sleep(10);
 }
 print("Replica Set replset3 Up!");
-//
-//------------------------------------------------
-// 3.6.
-//------------------------------------------------
-//
-// 3.6.1.
-//
+
 db = connect("localhost:27300/diabetes");
-//
-// 3.6.2.
-//
+
 res = rs.initiate({
   _id: "west",
   members: [
@@ -171,12 +112,13 @@ res = rs.initiate({
     { _id: 2, host: "localhost:" + "27302" },
   ],
 });
-//
-// 3.6.3. Wait until all nodes of the replica set are up and running
-//
+
+
 while (res.ok != 1) {
   sleep(10);
 }
+sleep(200)
+
 print("Replica Set replset4 Created!");
 while (
   (rs.status().members[0].state != 1 && rs.status().members[0].state != 2) ||
@@ -186,9 +128,6 @@ while (
   sleep(10);
 }
 print("Replica Set replset4 Up!");
-//
-//------------------------------------------------
-// 3.7. Quit
-//------------------------------------------------
-//
+
+// Quit
 quit();

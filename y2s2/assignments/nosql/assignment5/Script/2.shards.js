@@ -1,24 +1,17 @@
 //----------------------------------------------------
-//
 //  Set up the Shards
-//
 //----------------------------------------------------
 
 db = db.getSiblingDB("config");
 var mongosConn = db;
 var res = null;
 
-db = connect("localhost:27000/diabetes");
-
-
-db = mongosConn;
-
-res = sh.addShard("north/localhost:27000");
+res = sh.addShard("north/localhost:27000,localhost:27001,localhost:27002");
 while (res.ok != 1){
     sleep(60);
     if (res.ok != 1){
         print("Adding Shard Failed. Trying it again");
-        res = sh.addShard("north/localhost:27000");
+        res = sh.addShard("north/localhost:27000,localhost:27001,localhost:27002");
     }
 }
 print("north Added!");
@@ -29,55 +22,55 @@ print("north Added!");
 //
 // 5.3.1. 
 //
-db = connect("localhost:27100/diabetes");
 //
 // 5.3.2. 
 //
 db = mongosConn;
-res = sh.addShard("south/localhost:27100");
+res = sh.addShard("south/localhost:27100,localhost:27101,localhost:27102");
 while (res.ok != 1){
     sleep(60);
     if (res.ok != 1){
         print("Adding Shard Failed. Trying it again");
-        res = sh.addShard("south/localhost:27100");
+        res = sh.addShard("north/localhost:27100,localhost:27101,localhost:27102");
     }
 }
 print("south Added!");
 //
 //------------------------------------------------
-db = connect("localhost:27300/diabetes");
-//
-// 5.5.2. 
-//
+
 db = mongosConn;
-res = sh.addShard("west/localhost:27300");
+res = sh.addShard("east/localhost:27200,localhost:27201,localhost:27202");
 while (res.ok != 1){
     sleep(60);
     if (res.ok != 1){
         print("Adding Shard Failed. Trying it again");
-        res = sh.addShard("west/localhost:27300");
+        res = sh.addShard("east/localhost:27200,localhost:27201,localhost:27202");
+    }
+}
+print("east Added!");
+
+//
+// 5.5.2. 
+//
+db = mongosConn;
+res = sh.addShard("west/localhost:27300,localhost:27301,localhost:27302");
+while (res.ok != 1){
+    sleep(60);
+    if (res.ok != 1){
+        print("Adding Shard Failed. Trying it again");
+        res = sh.addShard("west/localhost:27300,localhost:27301,localhost:27302");
     }
 }
 print("west Added!");
+sleep(60)
 // 5.4. 
 //------------------------------------------------
 //
 // 5.4.1. 
 //
-db = connect("localhost:27200/diabetes");
 //
 // 5.4.2. Add the shard
 //
-db = mongosConn;
-res = sh.addShard("east/localhost:27200");
-while (res.ok != 1){
-    sleep(60);
-    if (res.ok != 1){
-        print("Adding Shard Failed. Trying it again");
-        res = sh.addShard("east/localhost:27200");
-    }
-}
-print("east Added!");
 //
 //------------------------------------------------
 // 5.5. 
@@ -90,4 +83,5 @@ print("east Added!");
 // 5.6. Quit
 //------------------------------------------------
 //
+db.getSiblingDB("config").settings.updateOne({_id:"chunksize"},{$set:{_id:"chunksize",value:1}},{upsert:true})
 quit()
