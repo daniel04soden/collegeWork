@@ -70,7 +70,7 @@ mongod --configsvr --replSet cfg --dbpath cfg2 --port 26052 --logpath logFiles/n
 
 sleep 60s
 
-mongosh --port 26050 --shell 1.replica_sets.js 
+mongo --port 26050 --shell 1.replica_sets.js 
 
 sleep 45s
 
@@ -82,7 +82,7 @@ mongos --configdb cfg/localhost:26050,localhost:26051,localhost:26052 --port 260
 
 sleep 30s
 
-mongosh --shell --port 26060 2.shards.js
+mongo --shell --port 26060 2.shards.js
 
 sleep 30s
 
@@ -91,4 +91,4 @@ mongoimport --port 26060 --db diabetes --collection healthIndicators --type=csv 
 
 sleep 45s
 
-mongosh --shell --port 26060 3.shard_collection.js
+mongo --shell --port 26060 3.shard_collection.js

@@ -8,31 +8,32 @@ db = db.getSiblingDB("diabetes");
 var res = null;
 
 
-res = db.healthIndicators.createIndex({ "Income": 1, "Age": 1 , "BMI":1}); 
+// Index for shard key
+res = db.healthIndicators.createIndex({ "Income": "hashed","GenHlth":1,"BMI":1}); 
 
-/*
+// Fail safe
 while (res.ok != 1) {
   sleep(10);
   if (res.ok != 1) {
     print("Creating index for health indicators collection failed. Trying it again");
-    res = db.healthIndicators.createIndex({ "Income": 1, "Age": 1 , "BMI":1});
+    res = db.healthIndicators.createIndex({ "Income": "hashed","GenHlth":1,"BMI":1});
   }
 }
-*/
 
 print("healthIndicators Collection Index Created!");
 
 
-res = sh.shardCollection("diabetes.healthIndicators", { "Income": 1, "Age": 1 , "BMI":1}); 
-/*
+// Creation of shard
+res = sh.shardCollection("diabetes.healthIndicators", { "Income": "hashed","GenHlth":1,"BMI":1}); 
+
+// Fail safe
 while (res.ok != 1) {
   sleep(10);
   if (res.ok != 1) {
     print("Sharding healthIndicators collection failed. Trying it again");
-    res = sh.shardCollection("diabetes.healthIndicators", { "Income": 1, "Age": 1 , "BMI":1}); 
+    res = sh.shardCollection("diabetes.healthIndicators", { "Income": "hashed","GenHlth":1,"BMI":1}); 
   }
 }
-*/
 
 print("health Indicators Collection Sharded!");
 

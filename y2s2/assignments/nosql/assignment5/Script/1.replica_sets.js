@@ -1,11 +1,12 @@
-db = db.getSiblingDB("config");
+db = db.getSiblingDB("config"); // Connecting to config server
 
 var mongosConn = db;
 
 var res = null;
 
-db = connect("localhost:26050/diabetes");
+db = connect("localhost:26050/diabetes"); // Connect to location of config server
 
+// Init replica set for config server
 res = rs.initiate({
   _id: "cfg",
   members: [
@@ -28,6 +29,7 @@ while (
 }
 print("Replica Set metadata Up!");
 
+// North replica set to be sharded
 db = connect("localhost:27000/diabetes");
 
 res = rs.initiate({
@@ -52,6 +54,7 @@ while (
 }
 print("Replica Set replset1 Up!");
 
+// South replica set to be sharded
 db = connect("localhost:27100/diabetes");
 
 res = rs.initiate({
@@ -76,8 +79,9 @@ while (
 }
 print("Replica Set replset2 Up!");
 
-db = connect("localhost:27200/diabetes");
+// East replica set to be sharded
 
+db = connect("localhost:27200/diabetes");
 
 
 res = rs.initiate({
@@ -102,6 +106,7 @@ while (
 }
 print("Replica Set replset3 Up!");
 
+// West replica set to be sharded
 db = connect("localhost:27300/diabetes");
 
 res = rs.initiate({
