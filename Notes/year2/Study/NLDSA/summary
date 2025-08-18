@@ -1,0 +1,16 @@
+bfs - q with marks,pop,visit, look at neighbours and add to q, redo again until nothing in q
+
+dfs - marked array, viist, loop through neighbours, recurse
+
+- dijkstras - q, shortest path, u is the smaller distance at root
+    Q = Q- u, loop over us neighbours and relax
+
+- kruskalls - loop thorugh vertices makeset, loop through edges,
+order by weight, loop through, if findset both sides, a=auuv union
+
+- Primms - snake, binary heap, store min extract, look through mins
+- ford - shortest path, loop through vertices bar root, loop through edges relax, go back and check
+
+- Predecessor, min or look at parent y and while y!=nil and x is the left child.
+x becomes y 
+y becomes y.parent - hops up 

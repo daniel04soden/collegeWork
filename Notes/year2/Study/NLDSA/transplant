@@ -1,0 +1,13 @@
+def transplant(u,v){
+    if (u.parent = nil){// If root
+        root = v
+    }else{
+        if (u.parent.left == u){ // if left child
+            u.parent.left = v
+        }else{ // if right child
+            u.parent.right = v
+        }
+    }if v!=nil{ // reattach step
+        v.parent = u.parent // parent of v, becomes u parent
+    }
+}

@@ -1,0 +1,12 @@
+------------------------------
+
+   TESTING FIRST CONSTRUCTOR OF DOG
+
+------------------------------
+
+Ron
+8
+Greyhound
+Different toy
+3
+5

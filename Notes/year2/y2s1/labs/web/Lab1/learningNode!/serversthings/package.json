@@ -1,0 +1,12 @@
+{
+  "name": "testnode",
+  "version": "1.0.0",
+  "description": "Test node.js functionality",
+  "main": "start.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node start.js"
+  },
+  "author": "Oonagh",
+  "license": "ISC"
+}

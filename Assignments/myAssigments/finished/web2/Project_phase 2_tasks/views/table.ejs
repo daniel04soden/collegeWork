@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<html>
+
+<head>
+    <title>MTU Phone Usage Monitor</title>
+    <link rel="stylesheet" href="/stylesheets/styleTable.css"></link>
+</head>
+
+
+<body>
+    <div class="banner">
+        <div class="navbar">
+    
+            <ul>
+                <li><a href="/">Home</a></li>
+        
+            </ul>
+        </div>
+        <div class="content">
+            </form>
+        </div>
+        <div class="table-wrapper">
+            <table class="tableData">
+                <caption>The List is HERE</caption>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Education Usage</th>
+                        <th>Shopping Usage</th>
+                        <th>Searching/Browsing usage</th>
+                        <th>Social Media usage</th>
+                        <th>Date and Time</th>
+                        <th></th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% for(var i=0; i < phonelist.length; i++) { %>
+                        <tr>
+
+                            <td>
+                                <%= phonelist[i].name %>
+                            </td>
+                            <td>
+                                <%= phonelist[i].timeEducation %>
+                            </td>
+                            <td>
+                                <%= phonelist[i].timeShopping %>
+                            </td>
+                            <td>
+                                <%= phonelist[i].timeBrowsing %>
+                            </td>
+                            <td>
+                                <%= phonelist[i].timeSocial %>
+                            </td>
+                            <td>
+                                <%= phonelist[i].createdAt.toLocaleDateString() %>
+                            </td>
+                            <td>
+                                <div class="secret">
+                                    <form action="/phone/delete" method="post"> <input type="String" value="<%= phonelist[i].id%>" name="id" readonly><button type="Submit"><span></span>Delete</button></form>
+                                    <form action="/phone/update" method="post"> <input type="String" value="<%=phonelist[i].id%>" name="id" readonly><button type="Submit"><span></span>Update</button></form>
+                                </div>
+                            </td>
+
+
+                        </tr>
+                        <% } %>
+        </div>
+
+        </tbody>
+        <div class="avg"></div>
+</body>
+
+</html>

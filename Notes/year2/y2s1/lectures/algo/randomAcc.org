@@ -1,0 +1,73 @@
+#+title: Random Acc
+
+* What is an alogorithm?
+
+- There are lots of different definitions for what an algorithm actually is, however the best definition would be:
+
+ #+begin_example
+        An algorithm is a finite set of rules that gives a sequence of operations for solving a specific type
+        of problem.
+ #+end_example
+
+
+** Five Features of Algorithms
+
+1. Finiteness: An algorithm must always terminate after a finite number of steps.
+  A while loop keeps iterate over and over however a sorting algorithm would eventually stop with the final output
+
+2. Definiteness: Each step must be precisely defined. the actions carried out must be specified for each case.
+
+3. Input: An algorithm has zero or more inputs;These inputs come from a specified set of objects.These quantites are given
+  into it initially or dynamically change as the algorithm runs. If an invalid input is given it may not terminate
+
+4. Output: Algorithms have one or more outputs and their quantities have a specified relation to the inputs.
+
+5. Effectiveness: An algorithm is expected to be generally effective in that its operations must all be sufficiently basic
+  that they can in principle be done in a finite length of time by someone using pencil and paper. If someome is unable to
+  complete this algorithm with pen and paper, the algorithm would not be very effective.
+
+- Computational Problems: a descriptive relationship between all possible inputs and corresponding
+        expected outputs
+
+        - Inputs have a specific format to satisft pre-conditions
+        - Outputs are specified by some post-conditions
+        - An instance of a problem is a specific valid input that satisfies all pre-conditons and for which
+          the problem therefore defines some output.
+
+** Algorithms vs computer programs
+
+- An alogrithm must be specified as a finite length string over a finite alphabet
+- It can be english, in a formal programming language or a combination of both ("pseudo-code")
+- The only limitation is that the instructions must be rigorously specified and executable in a finite
+  amount of time by some abstract machine.
+- Programs on the other hand are strings in a specific formal language such as Java or C and they are
+  designed to be compiled and executed on a specific machine model such as ARM x86 or even the JVM.
+- Programs must be able to sovle all the engineering problems arising from limitation not covered by the
+  abstract machine model (ie limited memeory [You may be consistently requesting more memory that isn't there],
+  io devices, exception handling)
+
+* Random Access Machines
+
+** Abstract machine models
+- Computer engineering uses abstraction to cope with different levels of complexity.
+- Operating systems implement hardware abstraction layers and create unified software interfaces.
+- VMs are abstract execution environments that guarantee specific system characterists and behaviours to the programs
+
+- While understanding of all these levels is benefiial to understand software performance, most devs target even more abstract models.
+
+***** For example it is common to:
+- Assume linear execution of code, despite multi-core,multi processing capabilities of most systems.
+- You usually allocate memory without considering memory caching or virtual memory limitations.
+- We tend to ignore limited range and/or precision of basic data types such as integers and floats.
+** A random access machine is an abstract model that
+
+- Operates on an arbitrary size - We asssume the logarithm of the largest number is bound by the lenght of the input
+- Has infinitely many addressable memory cells - Since an algorithm must terminate in a finnite number of steps, only a finite number can be
+  accessed anyway
+- Executes its instruction in order and one at a time - As long as instructions are basic and executable in constant time, we don't over
+  specify what exactly they are.
+
+- Each instruction and memory access is asssumed to take the same constant amount of time, so that we can evaluate the expected runtime by
+  "counting " operations
+- In most cases random access machines are great approximations of real computers for the purpose analysing algorithm correctness and asymptotic
+  performance

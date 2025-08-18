@@ -1,0 +1,8 @@
+marked = {false,falsefalse...}}
+def dfs(g,r){
+    visit(r)
+    marked[r] = true
+    for neighbours in r:
+        if marked[neighbours]!=marked
+            dfs(g,neighbours)
+}

@@ -1,0 +1,54 @@
+#+title: Lab 5 Answers
+
+* Task 1
+
+- Functional requirements describe what a
+software system should do, while non-functional
+requirements place constraints on how the
+system will do so.
+Execution qualities, such as security and usability, which are observable at
+run time.
+Evolution qualities, such as testability, maintainability, extensibility and
+scalability, which are embodied in the static structure of the software
+system.
+
+1. Users must be able to browse for events by name or date or venue
+
+   - Functional Requirement "be able to browse"
+   - Non-functional "By name or date or venue" - Execution qualities
+
+2. Searching for events by keywords should also be possible
+   - Non functional requirement "Events by keywords should also be possible"
+     - Category: executable
+
+3. User will select ticket price from those offered and specify the
+   number of tickets they require
+   - Functional Requirement
+
+4. The system should display availability of the tickets within five seconds.
+   - Non functional - Execution quality "within five seconds"
+   - Functional - "Display availability of the tickets"
+5. Users must be able to choose their seats and purchase tickets 24/7.
+   - Functional - "able to choose their seats"
+   - Functional - "Purchase tickets"
+   - Non functional - Evolution quality "24/7"
+
+6. Only registered customers can buy tickets.
+   - Non functional
+     - Evolutionary
+
+7. Daily reports of ticket sales must be generated. These must be retained for two
+years.
+- Functional "reports of ticket sales must be generated"
+  - Non-functional - Evolution - "must be retained for two years"
+
+8. All data to be backed up at night
+   - Functional requirement
+9. It should not be possible to double book a ticket (ticket already bought)
+   - Non functional - Evolutionary
+
+10. Ad hoc reporting will be required, showing ticket sales over a week. It should
+be possible to vary that time span and look at any duration up to six months.
+
+- Functional requirement "Ad hoc reporting, showing ticket sales over a week"
+- Non functional - Executionary - "Possible to vary that time span and look at any duration up to six months"

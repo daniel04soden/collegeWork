@@ -1,0 +1,27 @@
+------------------------------
+
+   TESTING CLASS DOG 
+
+------------------------------
+
+Tom
+5
+Thomas
+7
+6
+0
+null
+DogToy@5305068a
+DogToy@5305068a
+1
+1
+2
+3
+3
+3
+3
+4
+4
+5
+woof woof 
+woof woof woof woof 

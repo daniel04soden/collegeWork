@@ -1,0 +1,13 @@
+6
+7	Sapiens	Yuval_Noah_Harari	2011	Non-fiction	443
+null
+8	Sophie's_World	Jostein_Gaarder	1991	Novel	518
+14	2	8	5
+9	Ulyses	James_Joyce	1920	Novel	732
+18	1	9	7
+10	Be_Here_Now	Oasis	1997	Rock	true
+17	1	10	7
+11	Motomami	Rosalia	2022	Reggaeton	false
+null
+12	Let_It_Be	The_Beatles	1970	Rock	true
+null

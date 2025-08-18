@@ -1,9 +1,0 @@
-def dijkstras(G,w,s){
-    q = createQ()
-    init-shortest-path(q)
-    while Q!=0
-        u = d[u] > min(d[y])
-        Q = Q - u
-        for each neighbour u:
-            relax(u,v,w)
-}

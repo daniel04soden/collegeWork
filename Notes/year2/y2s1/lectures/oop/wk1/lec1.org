@@ -1,0 +1,59 @@
+#+title: Lec1
+
+* Module Introduction & Java basic syntax
+
+#+begin_src java
+// Simple hello world program
+public class myMain {
+    public static void main(String[] args){
+        System.out.println("Hello, world!")
+    }
+}
+
+#+end_src
+
+
+** Background: Java Programs execution
+        - Most computers with Java know things such as for loops,booleans, data types, if statements etc
+        - However it doesn't know things such as logarithms so we need to import certain libraries
+
+#+begin_src java
+// Importing files (sample not 100% accurate)
+
+import Java.Math
+    Math.log()
+
+#+end_src
+
+*** Type system
+
+- Python is a dynamically typed language
+
+ #+begin_src python
+
+x=12
+print(x)
+
+ #+end_src
+- Java is a statically typed language
+ #+begin_src java
+int x = 12;
+boolean c = true;
+ArrayList<Integer> e = new ArrayList<~>();
+e.add(1);
+
+System.out.println(x);
+
+ #+end_src
+*** Operators:
+- Python: and, or, >,< ,>= etc
+- Java: &&, ||, >,<,>- etc
+
+
+*** Functions in Java
+- In programming, modularity refers to the separation of the functionality of a program into independent interchangeable
+  pieces, each of them fully repsonsible of a concrete task
+
+  - Advantages of Modularity:
+        - As size and complexity grows, tasks may become difficult but the decomposition of a
+          problem into multiple small and independent pieces allows to better model the problem domain

@@ -1,0 +1,20 @@
+<%- include('partials/head') %>
+  <h2>Check your bookings below!</h2>
+  <div>
+    <h3>Please provide Personal details below:</h3>
+    <hr>
+
+    <form action="/session/manage" , method="post">
+      <label for="idCheck">Enter your given ID (10 Characters long) below:</label><br>
+      <input type="text" id="idCheck" name="idCheck">
+      <label for="startingDate">Date:</label>
+      <input type="Date" id="startingDate" name="startingDate" required>
+
+      <label for="endingDate">Date:</label>
+      <input type="Date" id="endingDate" name="endingDate" required>
+      <br>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <%- include('partials/foot') %>

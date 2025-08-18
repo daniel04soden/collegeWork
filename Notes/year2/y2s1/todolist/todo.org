@@ -1,0 +1,15 @@
+#+title: Todo
+
+* This is my college todolist of things currently on my agenda
+
+* TODO Object Oriented Assignment - 8th Dec
+
+* TODO Databases Assignment - 1 Dec
+
+* TODO LDSA Assignment - 29th Nov
+
+* TODO Req Engin Work - Monday 18th
+
+* TODO Op Sys Project Part 2 - Thursday 21st
+
+* TODO Server side - Dec 1st

@@ -1,0 +1,38 @@
+#+title: Lec1
+
+* First req engineering lecture
+
+
+** Grade Breakdown
+- Group projects final project - 40% (Group not made ourselves??)
+- 1% per lab (10% total) (contributes to the project grade)
+- MCQ
+- SAQ
+*** Software used:
+- Visual Paradigm (Aur package there)
+- Justinmind
+
+* Lab structure
+
+- Have to show up for labs
+- 1% per lab
+
+** What does requirements engineering entail:
+- Less code, more communication
+- Collaboration, oral communication
+- Who, wants what and why?
+
+
+* What is requirements engin
+- The process of defining, documenting and maintaining requirements in the engineering design process
+- Process of establishing the services that the customer requires from a
+  system and the constraints under wich it opreates and is developed
+- To also make sure that a software solution correctly solves a particular problem, first correctly understand
+  and define what problem needs to be solved
+- What problem to be solved, why it needs to be solved and who should be involved in the responsibility of solving that problem?
+- This means there is two versions of the same system ie the system as it exists before tha machine is built on.
+- The system to be, the system as it should be once the machine will be built on it.
+
+*** Requirements engin breakdown
+- Engineering -> Requirements Management & Requirements developments.
+- Requirements development -> Elicitation, Analysis, specification and Validation.

@@ -1,0 +1,58 @@
+#+title: Lecture (Mainly module descrip)
+
+* Server side web dev learning outcomes
+
+1. Design an develop web apps with nodejs
+2. Integrate and validate data from different databases into real web apps with mongodb
+
+** What is expected of us?
+- Very broad module, applied way to get the fundamentals working.
+- Invest time outside class and labs to achieve goals.
+- Just projects, no end of semester exam☺️.
+- Try to learn more outside of lecture material (maybe react??).
+
+*** Assesment Schedule:
+- 1 project different phases
+- Module descriptor weeks not accurate
+- 1 week on Javascript (cringe😞)
+- Week 5 Phase 1 25%
+- MCQ week 9 30%
+- Week 11 phase 2 35%
+- Week 12 Presentation 10% Questions, presentation, knowledge (mainly to stop cheating)
+
+*** Policies
+- Late submissions
+- Plagiarism
+- Explain project code
+
+
+* Real Notes
+
+- Sever Side web dev is the creation and management of the back-end
+  processes that handle HTTP requests and generate responses in a web app
+- The code we will generate will be run on a web server that processes data,
+  interacts with databases, manages user sessions and dynamically generates web pages
+  before sending them to client's browser
+- What we need:
+        - Nodejs
+        - Javascript
+        - EJS- Embedded javascript template engine
+        - Mongodb database to store data
+
+
+** Key elements
+**** Four layers of web apps:
+- Client
+- Server
+- Business
+- Data
+- Web servers (Htttp)
+- Static sites  - One that returns the same hard coded content form the server whenever a resource is requested
+- Dynamic sites - One that where some of the response content is dynamically generated,
+  only when needed using server side programming
+
+
+** Server side web dev:
+
+- Sample languages: PHP, nodejs, Python
+- AKA the back end

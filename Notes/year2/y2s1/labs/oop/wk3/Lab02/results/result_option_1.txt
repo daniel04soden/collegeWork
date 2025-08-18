@@ -1,0 +1,54 @@
+------------------------------
+
+   TESTING CLASS DOG
+
+------------------------------
+
+
+----------- 1. Dog instances creation -----------
+
+----------- 2. Dog test for getMethods -----------
+
+--- The value of the field 'name' in o1 is = 
+Ron
+
+--- The value of the field 'boldnessLevel' in o1 is = 
+10
+
+--- The value of the field 'breed' in o1 is = 
+Greyhound
+
+--- The value of the field 'name' in o2 is = 
+Jessy
+
+--- The value of the field 'boldnessLevel' in o2 is = 
+5
+
+--- The value of the field 'breed' in o2 is = 
+Golden Retriever
+
+----------- 3. Dog test for setMethods -----------
+
+--- The value of the field 'name' in o1 is = 
+Ronchi
+
+--- The value of the field 'boldnessLevel' in o1 is = 
+9
+
+--- The value of the field 'breed' in o1 is = 
+Podenco
+
+----------- 4. Dog test extra methods -----------
+
+--- The value of the field 'boldnessLevel' in o2 is = 
+5
+
+--- The value of the field 'boldnessLevel' in o2 is = 
+6
+
+--- The way o2 barks in this situation is = 
+woof 
+
+--- The way o2 barks in this situation is = 
+woof woof woof woof 
+
