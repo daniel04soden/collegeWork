@@ -1,0 +1,90 @@
+** Learning outcomes
+:PROPERTIES:
+:CUSTOM_ID: learning-outcomes
+:END:
+- Memory management
+- Heap and Stack
+- Pointers
+- Arrays, complex data types.
+- IO to files.
+
+** Assessment Breakdown
+:PROPERTIES:
+:CUSTOM_ID: assessment-breakdown
+:END:
+1. Lab work - 10%
+
+- Live coding tasks in lab (Basic editor, no internet)
+- 8 Labs to get
+
+2. [@2] Midterm Practical - 30%
+
+- Evaluated in Lab on desktops
+- Set of coding tasks
+
+3. [@3] End of Semester Project - 20%
+
+- With programming competition
+
+4. [@4] SAQ - 40% End of semester
+
+- In lab
+- MCQ, code snippets, debugging
+
+** Useful Resources
+:PROPERTIES:
+:CUSTOM_ID: useful-resources
+:END:
+- Man pages
+- C programming Language book
+- The web.
+
+* What is C?
+:PROPERTIES:
+:CUSTOM_ID: what-is-c
+:END:
+- A systems programming language used for:
+  - Operating systems
+  - Firmware
+  - Compilers, Drivers
+  - Other programming languages
+  - Network appliances, servers
+
+** Why use C?
+:PROPERTIES:
+:CUSTOM_ID: why-use-c
+:END:
+- Features, functionality, programming aids.
+- Memory management,type checking.
+- Speed of execution, ride fast at your own peril
+- Thin layer above system execution
+- Teaching aid to understand how computers
+
+** Alternatives to C
+:PROPERTIES:
+:CUSTOM_ID: alternatives-to-c
+:END:
+- Rust from Mozilla
+  - Modern
+  - Fast as c mostly
+  - Safer ( for the most part)
+- Swift
+  - Successor to Objective-C
+  - Used in Macs
+- Zig
+  - Zero dependency drop in C compiler that supports cross compilation
+    out of the box
+  - No hidden control flow, memory allocation
+  - No pre-processor, no macros
+
+** Additional Notes
+:PROPERTIES:
+:CUSTOM_ID: additional-notes
+:END:
+- Segmentation faults rather than stack trace errors in python3 or
+  javac.
+- No exceptions, type safety etc.
+- Javac and sys programming language.
+- C++,Rust and Zig as alternative system programming languages.
+- Rust future of system programming.
+- Don't think in code use English as a translation to code.

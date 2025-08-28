@@ -1,0 +1,82 @@
+* What is a design pattern
+:PROPERTIES:
+:CUSTOM_ID: what-is-a-design-pattern
+:END:
+- A standard solution to a common problem
+
+- Technique for making code more flexibly by making it meet certain
+  criteria
+
+- Design or implementation structure that achievess a particular purpose
+
+- A shorthand for descirbing certain aspects of program organisation
+
+- Recurring aspects of design ## Patterns
+
+- An abstraction from a concrete form which keeps recurring in specific
+  non arbitrary contexts
+
+- A recurring solution to a common problem in a given context and system
+  of forces
+
+- Should be as general as possible
+
+- Contain a solution that has been proven effective in solving such
+  problems
+
+** Rules
+:PROPERTIES:
+:CUSTOM_ID: rules
+:END:
+- First learn the rules and the physical requirements
+- Then the principles
+
+* Defining a pattern
+:PROPERTIES:
+:CUSTOM_ID: defining-a-pattern
+:END:
+** Attributes of a pattern
+:PROPERTIES:
+:CUSTOM_ID: attributes-of-a-pattern
+:END:
+1. Name: Meaningful name
+2. Problem: Statement of the problem
+3. Context: Patterns application
+4. Forces: relevant forces and constraints
+5. Solution: Static relationships and dynamic rules on how to realise
+   the desired outcome
+6. Consequences: Implications of using the solution
+7. Examples: One or more sample applications of the pattern
+
+** Why patterns
+:PROPERTIES:
+:CUSTOM_ID: why-patterns
+:END:
+- Solves problems (cap)
+- Capture domain expertise
+- Document design decisions and rationale
+- Convey expert insight
+
+* Abstract Occurence Pattern
+:PROPERTIES:
+:CUSTOM_ID: abstract-occurence-pattern
+:END:
+** Context
+:PROPERTIES:
+:CUSTOM_ID: context
+:END:
+- Often you find a set of related objects
+- Members of such set share common info
+  - But also differ in different important ways
+
+** Problems
+:PROPERTIES:
+:CUSTOM_ID: problems
+:END:
+- What is the best way to show the sets of occurrences in a class
+  diagram? ## Forces
+
+- You want to represent the members of each set of occurrences without
+  duplicating the common information
+
+- Composition favourable over inheritance

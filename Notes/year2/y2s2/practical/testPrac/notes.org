@@ -1,0 +1,72 @@
+* C programming examples
+:PROPERTIES:
+:CUSTOM_ID: c-programming-examples
+:END:
+** Making a pointer
+:PROPERTIES:
+:CUSTOM_ID: making-a-pointer
+:END:
+*** Standard pointer
+:PROPERTIES:
+:CUSTOM_ID: standard-pointer
+:END:
+#+begin_src C
+int x = 1;
+int *ptr = &x;
+printf("%p",*ptr);
+#+end_src
+
+*** String pointer
+:PROPERTIES:
+:CUSTOM_ID: string-pointer
+:END:
+#+begin_src C
+    char string[20] = "What am i saying!!!";
+    char *ptr = string; 
+#+end_src
+
+*** Array pointer
+:PROPERTIES:
+:CUSTOM_ID: array-pointer
+:END:
+#+begin_src C
+int arr[5] = {1,2,4,6,3};
+int *ptr = arr;
+#+end_src
+
+*** Struct pointer
+:PROPERTIES:
+:CUSTOM_ID: struct-pointer
+:END:
+#+begin_src C
+typedef struct Point{
+    int x;
+    int y;
+}Point;
+
+Point *test;
+test->x = 2;
+test->y = 4;
+#+end_src
+
+** Allocating memory
+:PROPERTIES:
+:CUSTOM_ID: allocating-memory
+:END:
+*** For a string
+:PROPERTIES:
+:CUSTOM_ID: for-a-string
+:END:
+#+begin_src C
+char c;
+,*c = malloc(sizeof(char)*20);
+#+end_src
+
+*** For an interger
+:PROPERTIES:
+:CUSTOM_ID: for-an-interger
+:END:
+#+begin_src C
+int x;
+,*x = malloc(sizeof(int)*20);
+#+end_src

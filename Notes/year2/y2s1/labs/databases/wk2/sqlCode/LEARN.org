@@ -1,0 +1,7 @@
+** mysql -u your_username -p your_password
+:PROPERTIES:
+:CUSTOM_ID: mysql--u-your_username--p-your_password
+:END:
+- use db_name
+
+- source /file.sql
