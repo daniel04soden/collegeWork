@@ -1,0 +1,36 @@
+#+title: Developmentlifecycle
+
+* What is the life cycle
+
+- Process used by the industry to design, develop and test high quality software
+- SDLC Defines a methodology for improving the quality of software and the overall development process.
+
+** Phases of SDLC
+
+1. Planning
+2. Analysis
+3. Design
+4. Implementation
+5. Testing and integration
+6. Maintenance
+
+** Planning and requirement analysis
+- Most important part of the SDLC
+*** Problem statement
+- What am i solving?
+- Who is using this software?
+- What goal do you want to achieve, or what is the scope of this project?
+*** Planning stage
+1. Defining goal
+2. Defining scope
+3. Creating a project plan
+4. Getting approval: Present the project plan to stakeholders for approval
+
+- In the designing stage, not as worried about the frontend, would be nice and score well but functionality more important in this regard
+
+*** Stages of development
+- Writing code,
+- creating unit tests, integration etc
+- Debugging -  Fixing any bugs or errors during testing
+- User acceptance testing - Involves having end users test the software to ensure that it meets their needs
+- Geting approval - once the software has passed all tests it is presented to stakeholders for approval

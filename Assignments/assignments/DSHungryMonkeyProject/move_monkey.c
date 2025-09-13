@@ -4,6 +4,16 @@
 #define TINY_VAL 0 // - small value for reference - could be lower value, helps matrix better represented
 
 
+void printMatrix(int arr[FIELD_HEIGHT][FIELD_WIDTH]){
+   for (int i = 0; i<FIELD_HEIGHT; i++) {
+       // printf("["); - can be uncommented to view matrix
+   for (int j = 0; j<FIELD_WIDTH; j++) {
+        printf("%d",arr[i][j]); 
+    } 
+   // printf("]\n");
+    printf("\n");
+   } 
+}
 
 struct monkey_action move_monkey(int field[][FIELD_WIDTH], void *monkey_state) {
     struct monkey_action retval;  
@@ -52,6 +62,11 @@ struct monkey_action move_monkey(int field[][FIELD_WIDTH], void *monkey_state) {
                                       // ie maximum treats collectible to reach each cell.
         } 
     }
+    /*
+    printf("-----------------\n");
+     printMatrix(dp);
+    printf("-----------------\n");
+    */
 
     int treats_up = (row > 0) ? dp[row - 1][first_col] : TINY_VAL; // if still within bounds, treats over monkey simply becomes value above in dp matrix - different worth for matrix gen
     // if within bounds, treats left to monkey becomes value above and to left in dp matrix 
@@ -59,7 +74,7 @@ struct monkey_action move_monkey(int field[][FIELD_WIDTH], void *monkey_state) {
     // if row is greater than 0 and so is the first col value, treats right of  monkey becomes value above and to right in dp matrix;
     int treats_right = (row > 0 && first_col < FIELD_WIDTH - 1) ? dp[row - 1][first_col + 1] : TINY_VAL;
 
-    // Move decisions, depending on in dp matrix, whaat yields more for future moves - can be seen in  output
+    // Move decisions, depending on in dp matrix, whaat yields more for future moves - can be seen in print output
     // IE we decide on the best decision for the current mvoe to make corresponding to the monkeys pos,
     // and the treat "worth" the most in terms of future chances
     int left_decision = (treats_left >= treats_up) && (treats_left >= treats_right);

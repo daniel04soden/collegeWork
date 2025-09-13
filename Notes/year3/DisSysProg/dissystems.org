@@ -1,0 +1,85 @@
+#+title: Dissystems
+
+* What are they?
+
+- Systems in which components located at networked computers communicate and coordinate their actions only by passing messages. This definiton leads to the following characteristics
+  1. Concurrency of components
+  2. No global clock
+  3. Independent failures of components
+
+** Centralized vs Distributed system characteristics
+*** Centralized
+- One components with non-autonomous parts
+- Component shared by users all the time
+- All resources accessible
+- Software runs in a single process
+- Single point of control and single point of failure
+*** Distributed
+- Multiple autonomous components
+- Components not shared by all users
+- Software runs in concurrent processes on different processors.
+- Multiple points of control, multiple points of failure
+
+**  Examples of distributed systems
+
+- Local area network and intranet
+- Database management system
+- Automatic teller machine network
+- The "Cloud"
+
+** Common characteristics of distributed systems:
+
+*** 1. Diversity/Hetrogenity
+- Differences in networks, computer hardware, operating systems, programming languages and implementations by different devs
+- Middleware to provide a programming abstraction as well as making the diversity of the underlying networks,hardware,OS anf languages
+- Mobile code to refer to code that can be sent from one computer to another
+
+*** 2. Openess
+- Concerend with extensions and imporvements of distributed systems
+- Detailed interfaces of components need to be published.
+
+- New components have to be integerated with existing components.
+
+- Differences in data representation of interface types of diffrent processors have to be resolved
+
+*** 3. Security
+
+- Clients send requests to access data managed by servers, resources in the networks
+  - Doctors requesting records from hospitals
+  - Users purchase products through electronic commerce
+- Security is required for:
+  - Concealing the contents of messages: security + privacy
+  - Identifying a remote suer or other agent correctly (ie authentication)
+- New challenges:
+  - Denial of service attack
+  - Security of mobile code
+
+*** 4. Scalability
+
+- Adaption of distributed systems to accomodate more users and respond faster.
+- Usually done by adding more/faster processing
+- Components shouldn't need to be changed when the scale of a system increase, horizontal scaling is favourable ie clusters, replication, microservices etc.
+
+*** 5. Concurrency
+- Components in distributed systems are executed in concurrent processes.
+- Components access and update shared resources (eg variables, databases and device drivers)
+
+- Integrity of the system may be violated if concurrent updates are not coordinated
+  - Lost updates (eg user a adds line to end of file and save changes remotely, user B making a change at the same time and saves the change remotely slightl later but user A's change was lost in the process)
+  - Inconsistent analysis
+
+- Will examine strategies later using locking or semaphores
+
+*** 6. Transparency
+- Distributed systems should be perceived by users and application programmers as a whole rather than as a collection of cooperating components
+- Transparency has different aspects
+- These represent various properties that distributed systems should have
+**** Types of transparency
+
+*** 7. Failure handling
+- Hardware software and networks do fail.
+- Must maintain availability even at low levels of hardware/software/network reliability
+
+- Fault tolerance is achieved by
+  - Recovery (health monitor notices failure, restarts service)
+  - Redundancy (Multiple copies running in a cluster so a failure of a copy only means service degredation rather than full failure)

@@ -1,0 +1,11 @@
+#+title: First Lecture Mobile Development
+
+* Course content
+- UI
+- User input
+- Multiple screen apps
+- Networking
+- Sensors
+- Threads
+
+**
