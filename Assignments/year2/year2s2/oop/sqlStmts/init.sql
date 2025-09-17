@@ -1,0 +1,20 @@
+-- Creating our SQLite db
+CREATE DATABASE IF NOT EXISTS compShop;
+
+-- CREATING OUR FIRST TABLE - Customers
+ 
+CREATE TABLE IF NOT EXISTS Customer(
+	customerID INTEGER PRIMARY KEY,
+	email VARCHAR(25),
+	name VARCHAR(30),
+	age INTEGER,
+	double REAL,
+	PRIMARY KEY(customerID)
+);
+
+CREATE TABLE IF NOT EXISTS Product(
+);
+
+CREATE TABLE IF NOT EXISTS Purchases(
+);
+

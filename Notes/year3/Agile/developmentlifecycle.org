@@ -34,3 +34,57 @@
 - Debugging -  Fixing any bugs or errors during testing
 - User acceptance testing - Involves having end users test the software to ensure that it meets their needs
 - Geting approval - once the software has passed all tests it is presented to stakeholders for approval
+* Waterfall Model:
+
+** What is it ?
+
+- A sequential design process. It is elegant in theory and intuitively obvious. In this porcess, progress flows downwards through the phases of the project. Each phase must be completed before moving on to the next one. This methodology is commonly ued in projects wehre the requirements are actually well-defined, and the project team has a clear understanding of what needs to be done. THis model is not a practical model in the sense that it cannot be used in actual Softdev projects. This model can be considered to be a theoretical way of develping software.
+** Requirement Phase:
+
+- Team leaders need to know:
+  - What is required by visiting client side?
+  - types of data being input to the system
+  - Output data to be produced by the system
+  - What kind of processing needs to be done on this data?
+  - Various constraints on the behaviour of the system.
+
+* V Model
+
+** What is it?
+
+- An extension of the waterfall model aka the verification and validation model. It is based on the association of a testing phase for each corresponding development stage. The development of each step is directly assoiciated with the testing phase.
+  - The next phase  starts only after completion of the previous phase ie for each development activity, there is a testing activity corresponding to it
+
+** Requirement Phase?
+- This is the first step of the designation of the development cycle where product requirement needs to be cured from the customer’s perspective. in these phases include proper communication with the customer to understand the requirements of the customers. these are the very important activities that need to be handled properly, as most of the time customers do not know exactly what they want, and they are not sure about it at that time then we use an acceptance test design planning which is done at the time of business requirement it will be used as an input for acceptance testing.
+
+* Incremental Model
+
+** What is it ?
+
+- Initially a system will be implemented with a few basic features and then that is delivered to the customer. From there the customer will review this system, ask for more requirements,fixes issues etc and from there after many successive iterations are creteed, the customer will have their desired sytem.
+
+* Iterative Model
+
+** What is it ?
+
+- Focuses on an initial basic implementation that gradually adds more complexity and a broader feature set until the final system is complete. Iterative development, in a nutshell is a method breaking down the software of a massive program into smaller components
+
+  - Get a working piece of software very early in its lifecycle becasue the iterative model beings with a simple execution of a small collection of software requirements, which improves the evolving variants until the entire system is executed and ready to be redistributed. Bugs and erros from the previous iterations do not propogate to the next iteration and the model is flexible enough to incorproate customer feedback in each iterations
+
+* Spiral Model
+
+** What is it?
+
+- The spiral model is a combination of the waterfall and iterative model. Provides support for risk handling. This model provides a systematic and iterative approach to software development. In its diagrammtic representation, looks like a spiral with many loops. The exact number of loops of the spiral is largely unkown and can vary from project to projet. Each loop of the spiral is known as a phase. The innermost loop might be concerned with the feasibility study while the next one could be requirements specification the the next one design and
+- Quadrants go into:
+  1. Objective setting
+  2. Risk assesment and Reduction
+  3. Development and Validation
+  4. Review and Planning
+
+* RAD Model
+
+** What is it?
+
+- Type of incremental process model in which there is an extremely short development cycle. When requirements are fully understood and the componenet-based construction approach is adopted then the RAD model is used. The critical feature of this model

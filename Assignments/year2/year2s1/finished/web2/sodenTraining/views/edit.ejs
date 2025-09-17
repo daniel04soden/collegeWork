@@ -1,0 +1,28 @@
+<%- include('partials/head') %>
+    <h1>Modify your Training Session</h1>
+    <form action="/session/changing" method="POST">
+        <h4>Booking time and date</h4>
+        <input type="hidden" name="_id" value="<%= _id %>">
+
+        <label for="newDate">New Date:</label>
+        <input type="date" id="newDate" name="newDate" required>
+        <br>
+        <label for="newTime">New Time:</label>
+        <input type="time" id="newTime" name="newTime" required>
+        <br>
+        <h4>Change your training session type:</h4>
+
+        <input type="radio" id="cardio" name="newTrainingType" value="Cardio">
+        <label for="cardio">Cardio</label>
+        <br>
+
+        <input type="radio" id="weights" name="newTrainingType" value="Weights">
+        <label for="weights">Weights</label><br>
+
+        <input type="radio" id="yoga" name="newTrainingType" value="Yoga">
+        <label for="yoga">Yoga</label>
+        <br>
+        <br>
+        <button type="submit">Edit Record</button>
+    </form>
+    <%- include('partials/foot') %>
