@@ -1,0 +1,88 @@
+#+title: Design Patterns Class
+
+* What are they?
+- A solution to a problem in context.
+
+** Know your context, know your patterns:
+
+- The most important thing in learning design patterns is the intent and context of the pattern
+- Under what conditions is the pattern intended to be used in.
+
+- Doing the background research can help you identify a pattern that lends itself as a solution to a design problem you're facing. You can then evaluate a candidate pattern more closely for applicability, considering the solution and its consequences in detail
+- If this fails you can look to related patterns.
+
+- In some cases you might find more than one pattern can be used effectively. In other cases there may not be an applicable pattern or the cost of using an applicable pattern in terms of performance or complexity may be too high and an ad hoc solution may be the best way to go
+
+- Unfortunately there is no substitue for experience, inexperienced devs may miss a pretty obvious pattern. This is rarely an issue as long as the adhoc/bespoke solution is codeed according to the general principles of software engineering.
+- You will be a great dev even if you struggle with many of the patterns
+
+- As a system matures and you gain experience and flaws appear in the software, its good to reconsider choices you've made along the way. You may have to rewrite ad hoc code so that it uses a pattern instead or choose one pattern instead of aonther or remove a pattern enitrely to eliminate a layer of indirection.
+
+  - Embrace change as it's inevitable
+
+
+*** Anti-Patterns
+
+- Commonly implemented solutions that are either ineffecitve or will lead to later probelms
+
+- Design patterns themselves are described as anti patterns becuase their presence indicates a lack of abstraction (eg as is provided by spring) the view is that the pattern should have been implemented somewehre once and made available as simplified code
+
+*** When not to use Patterns
+
+- Reusability obtained by introducing encapsulation or indrection which can performance and increase complexity.
+
+- You can use the facade pattern to wrap loosely related classes with a single class to create a single set of functionality that is easy to use
+
+*  How to categorize patterns?
+
+
+** Creational
+- The way objects are made
+- When decision must be made at the time of creation
+*** Examples:
+**** Singleton Pattern
+  - Encapsulates the creatoin of a single object to maintain control over that one object. Eg Single connection a database
+  - Enables lazy initialization ie only actually create the object at the time we need it (as opposed to up front)
+
+****
+
+** Behavioural
+
+** Structural
+
+** Adapter pattern
+- Structural design pattern that allows objects with incompatible interfaces to collaborate with one another.
+- A special object that converts the interface of one object so that another object can understand it. An adapter wraps one of the objects to hide the complexity of conversion happening behind the scnes.
+
+#+begin_src java
+class RoundHole is
+    constructor RoundHole(radius) { ... }
+
+    method getRadius() is
+
+    method fits(peg: RoundPeg) is
+        return this.getRadius() >= peg.getRadius()
+
+class RoundPeg is
+    constructor RoundPeg(radius) { ... }
+
+    method getRadius() is
+
+
+class SquarePeg is
+    constructor SquarePeg(width) { ... }
+
+    method getWidth() is
+        // Return the square peg width.
+
+
+class SquarePegAdapter extends RoundPeg is
+    private field peg: SquarePeg
+
+    constructor SquarePegAdapter(peg: SquarePeg) is
+        this.peg = peg
+
+    method getRadius() is
+        return peg.getWidth() * Math.sqrt(2) / 2
+
+#+end_src
