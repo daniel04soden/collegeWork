@@ -1,0 +1,55 @@
+#+title: Scrum
+
+* What does scrum focus on?
+
+1. What are we gonna build?
+2. How are we going to build it?
+3. How are we going to work together?
+
+** Three important roles in the scrum process:
+1. product owner - They decide:
+   - What are we goinng to build?
+   - What order are we going to build it in ?
+
+- Product owner caputres what we are gonna build through the goal, vision or long term objective
+
+- Product owner also needs to think about how we are going to reach this objective, what steps we are gonna take to get there and what order should we take these steps in.
+
+
+- It is the product owners responsibility to prioritise the product backlog it is their responsibility to maximise return on investment.
+
+
+2. Developers
+*** Responsible for:
+1. Getting the work done
+2. Deciding how long this work will take to get done
+
+
+3. Scrum master
+*** Responsible for:
+1. Make sure process is adapted efficiently and contionusly improve the process over time
+2. Decides how to optimise the whole process
+
+
+
+4. Stakeholders
+
+-  People who have interests on what your team is doing and what your team will produce in a longer term.
+** Difference between Jira and Confluence
+
+- Jira = Tracking tool for tracking to gain some visibility on where the work is in the progress of the sprint. Who is doing what?
+
+- Confluence = Tool to capture information and knowledge of the team - note taking kinda. Documentation captured within confluence
+
+  - When defining in confluence follow this syntax:
+    - FOR <TARGET CUSTOMER> WHO <STATEMENT OF NEE> THE <product name> IS A <product company> THAT <key benefit, compelling reason to buy>  UNLIKE <competition/alternative> OUR PRODUCT <compelling statement of differientiatoin>
+* Product backlogs
+
+- Product backlogs should be DEEP
+  - Detailed appropriately,
+  - Estimated,
+  - Emergent,
+  - Prioritised
+
+** Structure of backglog
+- Epics ->
