@@ -1,0 +1,34 @@
+#+title: Agile Stories and Backlogs
+
+* What is a story?
+
+- A user story is the smallest unit of work 
+- A user story is an informal, general explanation of software feature written from the perspective of the end user or customer
+- The purpose of user stories is to articulate how a piece of work will deliver a particular outcome
+- They are a few sentences in simple language that outline the diesired outcome. They don't go into detail
+- User stories are added to sprints and "burned down" over the duration of the sprint
+  
+
+** User stories
+
+- Definition of done - the story is generally done when the user can complete the outlined task but make sure to define what that actually is.
+  
+- Outline subtasks or tasks - deciding on which specific steps need to be completed and who is responinsible for each of them
+
+- User personas, for whom? If there are multiple end users consider making multiple stories 
+  
+- Ordered steps - write a story for each step in a larger process
+
+- Listen to feedback - talk to users and capture the problem or need in their words. No need to guess at stories when you can source them from your cusotmers
+  
+- Time - stories should be completable in one sprint. Stories that might take weeks or months to complete, should be broken up into smaller stories or should be considered as their own epic
+  
+*** How to write a user story:
+
+- As a blank, I want to blank so that I blank
+  - As a blank - Who is this for?
+  - Wants to - What do they want to achieve? This statement should be implementation free
+
+* What is an epic?
+
+- An agile epic is a body of work that can be broken down into specific tasks based on the needs/requests of customers or end-users. 

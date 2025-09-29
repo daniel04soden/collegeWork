@@ -1,0 +1,37 @@
+"""
+book = open("test.txt","r")
+
+
+line = " "
+eof = ""
+while line!=eof:
+    line = book.readline()
+    x = line.find("a")
+    if len(line) > 0 and line[0].islower():
+        print(line.capitalize().strip())
+        if x != -1:
+            print(f"a  found at {x}")
+book.close()
+
+fruit = ["apple","orange","lemon"]
+
+fruits = ",".join(fruit)
+print(fruits)
+
+
+"""
+print("whats up")
+print("this is new")
+
+book = open("test.txt", "r")
+content = book.read()
+PaliWords = set()
+for word in content.split():
+    word = word.strip()
+    word = word.lower()
+    pali = str(word[::-1])
+    if pali == word and len(word)>1:
+        PaliWords.add(word)
+print(PaliWords)
+
+book.close()

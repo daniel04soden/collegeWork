@@ -1,0 +1,50 @@
+package main
+
+type PersonBuilder interface{
+	SetName(name string) PersonBuilder
+	SetAge(age int) PersonBuilder
+	SetHeight(height float32) PersonBuilder
+	Build() *Person
+}
+
+type personBuilder struct{
+	person *Person
+}
+
+type PersonDirector struct{
+	builder PersonBuilder
+}
+
+func (p *PersonDirector) ConstructPerson(age int, name string, height float32) *Person{
+	p.builder.SetAge(age)
+	p.builder.SetName(name)
+	p.builder.SetHeight(height)
+
+	return p.builder.Build()
+}
+
+func NewPersonBuilder() PersonBuilder{
+	return &personBuilder{
+		person:&Person{},
+	}
+}
+
+func (pb *personBuilder) SetAge(age int) PersonBuilder {
+	pb.person.age = age
+	return pb
+}
+
+
+func (pb *personBuilder) SetHeight(height float32) PersonBuilder {
+	pb.person.height = height
+	return pb
+}
+
+func (pb *personBuilder) SetName(name string) PersonBuilder {
+	pb.person.name = name
+	return pb
+}
+
+func (pb *personBuilder) Build() *Person{
+	return pb.person
+}

@@ -1,0 +1,6 @@
+package main
+
+type EntryBuilder interface{
+	set
+
+}
