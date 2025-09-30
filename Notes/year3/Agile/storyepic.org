@@ -28,7 +28,27 @@
 - As a blank, I want to blank so that I blank
   - As a blank - Who is this for?
   - Wants to - What do they want to achieve? This statement should be implementation free
+  - So that - How does their immediate desire to do something this fit inot their bigger picture? What's the overall benefit they're trying to achieve? What is the big problem they are trying to solve?
+- Examples: "As a manager, I want to be able to understand my colleagues progress, so
+I can better report our success and failures"
 
 * What is an epic?
 
 - An agile epic is a body of work that can be broken down into specific tasks based on the needs/requests of customers or end-users. 
+
+
+** Initiative vs epic
+** Story vs epic
+- Stories are something the team can commit a one or two week sprint to.
+
+- Epics are few in number but take much longer to complete. Teams often have two or three epics they work to complete each quarter
+
+- Phone users need access to a vertical view of the live feed when using the mobile app.
+
+- Desktop users need a “view fullscreen” button in the lower right-hand corner of the video player
+
+- Android users need to be linked to apple store
+  
+- The above stories are all related and could be considered individual tasks that drive towards the completion of an epic. The epic will be improving streaming service for Q1 launch
+
+- If you are reporting to the team's progress to the head of engineering you're speaking in epics but for engineers you're speaking in stories

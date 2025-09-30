@@ -23,12 +23,15 @@
 - CrewAI is recommended if specialized agent collaboration, workflow memory, and scalability to other diagnosis modalities are needed.
 
 ### Product Backlog
+#### Crewai work
 
 - [ ] Retrieve news relating to dimentia and send it to ui elements as json - news is patient focused
   - [ ] Medical Researcher agent - checks recent news sources for dementia related news of interest to medical professionals
   - [ ] Patient Researcher eagent - checks patient specific new sources for dementia related news of interest to carers and thoe suffering from dementia
   - [ ] Risk calculator agent - Uses the patient data based on speech patterns in order to determine whether or not someone has dementia or not
  - [ ] Risk assesment - reformats data in order to report back on result in a user friendy way
+    
+#### TensorFlow work
  - [ ] Risk predication through the speeces and questionaire results from nms web and mobile apps
 
 ## Fawaz Product Backlog - Backend/Db
