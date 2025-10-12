@@ -38,8 +38,8 @@
 
 ### Tech stack
 
-- Database - Postgresql
-- Language/Framework - Golang
+- Database - SQLite
+- Language/Framework - Golang + Fiber 
 
 ### Product Backlog
 
@@ -47,6 +47,7 @@
 - [ ] **User table** - Different users, Admin,doctors,patients
 - [ ] **Docker containers for database**
 - [ ] API Linkinng mobile app and web app - Done much later upon completion of other aspects
+- [ ] Store date time duration of tests being taken
 
 
 ## Ben  - Mobile
@@ -71,6 +72,9 @@
 - [ ] **Home Frontend** - Includes dead links for now to all features
 - [ ] Register logic
 - [ ] Login logic - I would reccomend MVC pattern for this tbh
+- [ ] Forget pass logic  
+- [ ] 2fa
+
 
 - [ ] Questionnaire Class 
 - [ ] Questionnaire frontend 
@@ -82,9 +86,9 @@
   - [ ] If possible, have microphone test to ensure no issues.
 - [ ] Cognitive mini tests - Prompt user to take test on login periodically???
 - [ ] Support ticket frontend - to devs
-- [ ] Support ticket bacckend - to devs
+- [ ] Support ticket backend - to devs
 - [ ] Support ticket frontend - to healthcare providers
-- [ ] Support ticket bacckend - to healthcare providers
+- [ ] Support ticket backend - to healthcare providers
 
 - [ ] Dementia score tile at home menu - links to summary from all completed tests
   - find some kinda of graphing library for kotlin - if not link in python images
@@ -104,11 +108,14 @@
 - [ ] **Login Frontend**
 - [ ] **Home Frontend** - Different depending on user type - admin,doctor,patient 
 - [ ] Auth+cookies - users can't access much of site until logged in like server side 
+- [ ] Forget pass logic  
 
 - [ ] Patient Profile pages - Include pfp, bio etc
 - [ ] Doctor Profile pages - Include pfp, bio etc
 - [ ] Risk dashboard - store visual scores from mobile app
 - [ ] Reports - Tile on doctor portal showing list of their patients and brief report on their risk profiles
+- [  ] Captcha
+- [  ] 2fa
 
 - [ ] Admin portal - Includes CRUD operations for patients & doctors 
 - [ ] Data aggregation -  Ability for admins to extend training data

@@ -1,0 +1,16 @@
+#+title: Product Backlog - Animal Shelter ML
+
+* TODO Sprint 1 - Organising and Parsing the data []
+- [] Remove monthyear Column
+  - [] Once monthyear deleted, split date and time
+    -[] Time needs seconds taken out as always XX:00
+- [] Overall, combine two csv files into one with unique identifiers as each row
+- [] Create column for if still in/out ie outcome may be null - if not in outcome, have boolean for in shelter still
+  - This will need a lot of evaluation of both files, many cells/entries may be removed as some with outcomes may not be included in intakes and vice versa
+- [] Get rid of names, irrelevant to trends and chatbot info, will take up processing power
+- [] Age can be removed, date of birth infers and can calculate current age as time goes on
+- [] For any species labelled as other, replace other with breed entry
+  - If the Other breed includes mix, we leave breed as mix and species as animal
+  - Otherwise itd be like bat bat
+- [] Add separate column for being spayed/neutered or not - boolean as spay/neuter is inferred by gender
+- [] Remove sex upon outcome, sex will not change intime

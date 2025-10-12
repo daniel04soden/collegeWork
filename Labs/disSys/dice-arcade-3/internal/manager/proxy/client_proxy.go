@@ -1,0 +1,51 @@
+package proxy
+
+import (
+	gamemanagerpb "dice-arcade/api/dicearcade/v1"
+	"time"
+	// "google.golang.org/grpc" - may be needed later
+	"context"
+
+)
+
+type ClientProxy struct {
+	Inner gamemanagerpb.GameManagerClient
+	MaxPerSec int
+	lastCall time.Time
+	minGap time.Duration
+}
+
+func NewClientProxy(inner gamemanagerpb.GameManagerClient, maxPerSec int) *ClientProxy{
+	gap:=time.Second
+	if maxPerSec > 0 {
+		gap  = time.Second/time.Duration(maxPerSec)
+	}
+	
+	return &ClientProxy{Inner:inner,MaxPerSec: maxPerSec, minGap:gap}
+}
+
+func (p *ClientProxy) throttle(){
+	now := time.Now()
+	wait := p.minGap - now.Sub(p.lastCall)
+	if wait > 0 {
+		time.Sleep(wait)
+	}
+	p.lastCall = time.Now()
+}
+
+func (p *ClientProxy) CreateGame(ctx context.Context,req *gamemanagerpb.CreateGameRequest, opts ...interface{}) (*gamemanagerpb.CreateGameResponse,error) {
+	p.throttle()
+	return p.Inner.CreateGame(ctx,req)
+}
+
+
+
+func (p *ClientProxy) PlayOnce(ctx context.Context,req *gamemanagerpb.PlayOnceRequest, opts ...interface{}) (*gamemanagerpb.PlayOnceResponse,error) {
+	p.throttle()
+	return p.Inner.PlayOnce(ctx,req)
+}
+
+func (p *ClientProxy) GetSummary(ctx context.Context, req *gamemanagerpb.GetSummaryRequest, opts ...interface{}) (*gamemanagerpb.GameSummaryResponse, error) {
+   p.throttle()
+   return p.Inner.GetSummary(ctx, req /* opts... */)
+}
