@@ -1,6 +1,7 @@
 package main
 
 import (
+	"distributedSysAssignment1/data"
 	"distributedSysAssignment1/entity"
 	"fmt"
 	"math/rand"
@@ -16,18 +17,29 @@ func scrambleLetters(input string) (output string) {
 	return output
 }
 
+func formatPangram(pangram entity.Pangram) (res string) {
+	for i := 0; i < pangram.Length; i++ {
+		if i == pangram.Length/2 {
+			res += fmt.Sprintf(" [" + string(pangram.Letters[i]) + "] ")
+		} else {
+			res += fmt.Sprintf(" " + string(pangram.Letters[i]) + " ")
+		}
+	}
+	return res
+}
+
 func gameLoop(numGames int) {
 	var points int
 	points = 0
 	var validGuessedWords []string
-	genWord := scrambleLetters("autocrat")
+	genWord := scrambleLetters(data.GetRandomPangram("../../data/words_dictionary.json"))
 	pangramBuilder := entity.NewPangramBuilder()
 	pangramDirector := &entity.PangramDirector{PangramBuilder: pangramBuilder}
 	pangram := pangramDirector.ConstructPangram(genWord)
 	fmt.Printf("Spelling Bee Welcome!\n")
 	for range numGames {
-		fmt.Printf("Pangram: %s\n", genWord)
-		fmt.Printf("Middle value %v", pangram.MiddleVal)
+		fmt.Printf("Pangram: %s\n", formatPangram(*pangram))
+		fmt.Printf("Middle value %v\n", pangram.MiddleVal)
 		fmt.Printf("Enter your word: ")
 		var userIn string
 		fmt.Scanln(&userIn)
