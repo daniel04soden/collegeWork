@@ -8,6 +8,7 @@ import (
 type PangramBuilder interface {
 	SetLetters(letters string) PangramBuilder
 	SetLength(letters string) PangramBuilder
+	setMiddleVal(letters string) PangramBuilder
 	Build() *Pangram
 }
 
@@ -16,14 +17,18 @@ type pangramBuilder struct {
 }
 
 type PangramDirector struct {
-	pangramBuilder PangramBuilder
+	PangramBuilder PangramBuilder
 }
 
 func (pD *PangramDirector) ConstructPangram(letters string) *Pangram {
-	pD.pangramBuilder.SetLetters(letters)
-	pD.pangramBuilder.SetLength(letters)
+	if pD.PangramBuilder == nil {
+		return nil
+	}
+	pD.PangramBuilder.SetLetters(letters)
+	pD.PangramBuilder.SetLength(letters)
+	pD.PangramBuilder.setMiddleVal(letters)
 
-	return pD.pangramBuilder.Build()
+	return pD.PangramBuilder.Build()
 }
 
 func NewPangramBuilder() PangramBuilder {
@@ -33,7 +38,7 @@ func NewPangramBuilder() PangramBuilder {
 }
 
 func (pb *pangramBuilder) SetLetters(letters string) PangramBuilder {
-	pb.pangram.letters = letters
+	pb.pangram.Letters = letters
 	return pb
 }
 
@@ -43,15 +48,15 @@ func (pb *pangramBuilder) SetLength(letters string) PangramBuilder {
 		fmt.Println("Word too short try again next time")
 		return nil
 	} else {
-		pb.pangram.length = lenLetters
+		pb.pangram.Length = lenLetters
 		return pb
 	}
 }
 
 func (pb *pangramBuilder) setMiddleVal(letters string) PangramBuilder {
 	res := []rune(letters)
-	pb.pangram.middleVal = res[pb.pangram.length/2]
-	fmt.Println(pb.pangram.middleVal)
+	length := len(res)
+	pb.pangram.MiddleVal = string(res[length/2])
 	return pb
 }
 

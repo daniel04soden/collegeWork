@@ -1,10 +1,16 @@
 package com.example.fitnesslogger.Models
 import android.R.attr.name
+import android.os.Build
+import androidx.annotation.RequiresApi
 import org.mindrot.jbcrypt.BCrypt
+import java.time.LocalDate
+import java.time.Period
+import java.util.Date
 
 class User{
     final val id: Int
     var firstName:String
+    var dateOfBirth: LocalDate
     var lastName: String
     var userName:String
     var password: String
@@ -21,6 +27,7 @@ class User{
         age:Int,
         email:String,
         passPhrase: String,
+        dateOfBirth: LocalDate
     ){
         this.firstName = firstName
         this.lastName = lastName
@@ -30,6 +37,7 @@ class User{
         this.age = age
         this.email = email
         this.passPhrase = passPhrase
+        this.dateOfBirth = dateOfBirth
     }
     fun changePassword(originalPassEntry:String,newPassword:String): Boolean {
         if (BCrypt.checkpw(originalPassEntry,this.password)){
@@ -37,5 +45,10 @@ class User{
             return true
         }
         return false
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getAge(year: Int, month: Int, dayOfMonth: Int): Period? {
+        return Period.between(dateOfBirth, LocalDate.now())
     }
 }

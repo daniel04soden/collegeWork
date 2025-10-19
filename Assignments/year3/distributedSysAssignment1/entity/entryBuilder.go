@@ -2,10 +2,11 @@ package entity
 
 import (
 	"fmt"
+	"strings"
 )
 
 type EntryBuilder interface {
-	SetLetters(letters string) EntryBuilder
+	SetLetters(letters string, p Pangram) EntryBuilder
 	SetLength(letters string) EntryBuilder
 	Build() *Entry
 }
@@ -18,12 +19,12 @@ type EntryDirector struct {
 	EntryBuilder EntryBuilder
 }
 
-func (eD *EntryDirector) ConstructEntry(letters string) *Entry {
+func (eD *EntryDirector) ConstructEntry(letters string, p Pangram) *Entry {
 	if eD.EntryBuilder == nil {
 		return nil
 	}
 
-	eD.EntryBuilder.SetLetters(letters)
+	eD.EntryBuilder.SetLetters(letters, p)
 	eD.EntryBuilder.SetLength(letters)
 	return eD.EntryBuilder.Build()
 }
@@ -34,7 +35,11 @@ func NewEntryBuilder() EntryBuilder {
 	}
 }
 
-func (eb *entryBuilder) SetLetters(letters string) EntryBuilder {
+func (eb *entryBuilder) SetLetters(letters string, p Pangram) EntryBuilder {
+	if !strings.Contains(letters, p.MiddleVal) {
+		fmt.Printf("Invalid entry must contain letter %s\n", p.MiddleVal)
+		return nil
+	}
 	eb.entry.Letters = letters
 	return eb
 }

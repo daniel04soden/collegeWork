@@ -20,16 +20,21 @@ func gameLoop(numGames int) {
 	var points int
 	points = 0
 	var validGuessedWords []string
-	genWord := scrambleLetters("autocracy")
-	fmt.Printf("Spelling Bee Welcome!\nHere is your pangram %s\n", genWord)
+	genWord := scrambleLetters("autocrat")
+	pangramBuilder := entity.NewPangramBuilder()
+	pangramDirector := &entity.PangramDirector{PangramBuilder: pangramBuilder}
+	pangram := pangramDirector.ConstructPangram(genWord)
+	fmt.Printf("Spelling Bee Welcome!\n")
 	for range numGames {
+		fmt.Printf("Pangram: %s\n", genWord)
+		fmt.Printf("Middle value %v", pangram.MiddleVal)
 		fmt.Printf("Enter your word: ")
 		var userIn string
 		fmt.Scanln(&userIn)
 		if !slices.Contains(validGuessedWords, userIn) {
 			entryBuilder := entity.NewEntryBuilder()
 			entryDirector := &entity.EntryDirector{EntryBuilder: entryBuilder}
-			entry := entryDirector.ConstructEntry(userIn)
+			entry := entryDirector.ConstructEntry(userIn, *pangram)
 			if entry.Length != 0 {
 				validGuessedWords = append(validGuessedWords, entry.Letters)
 			}

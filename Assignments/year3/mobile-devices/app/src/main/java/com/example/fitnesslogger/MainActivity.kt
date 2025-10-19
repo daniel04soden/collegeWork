@@ -1,7 +1,5 @@
 package com.example.fitnesslogger
 
-import android.R.attr.password
-import android.R.attr.text
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -15,6 +13,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
@@ -111,11 +110,10 @@ fun Settings(){
 }
 
 @Composable
-fun Register(){
-    var username by remember { mutableStateOf("") }
+fun RegisterUserDetails(){
+    var email by remember { mutableStateOf("") }
     var passwd by remember { mutableStateOf("") }
-    var firstName by remember { mutableStateOf("") }
-    var lastName by remember { mutableStateOf("") }
+    var confirmPasswd by remember { mutableStateOf("") }
 
     Box(
         modifier = Modifier
@@ -130,7 +128,93 @@ fun Register(){
                 verticalArrangement = Arrangement.Center
             ){
                 Row {
-                    Text("Register Page")
+                    Text("Register")
+                }
+                Spacer(modifier = Modifier.height(20.dp))
+                Row{
+                    Text("Account Details")
+                }
+                Spacer(modifier = Modifier.height(20.dp))
+                Row() {
+                    TextField(
+                        value = email,
+                        onValueChange = {email = it},
+                        label = {
+                            Text("Enter a new email")
+                        }
+                    )
+                }
+                Spacer(modifier = Modifier.height(20.dp))
+                Row() {
+                    TextField(
+                        value = passwd,
+                        onValueChange = {passwd = it},
+                        label = {
+                            Text("Enter a safe and secure password")
+
+                        },
+                    )
+                }
+                Spacer(modifier = Modifier.height(20.dp))
+                Row() {
+                    TextField(
+                        value = confirmPasswd,
+                        onValueChange = {confirmPasswd = it},
+                        label = {
+                            Text("Re-enter a safe and secure password")
+
+                        },
+                    )
+                }
+                Spacer(modifier = Modifier.height(20.dp))
+                Row(){
+                    Button(
+                        onClick = TODO(),
+                        modifier = TODO(),
+                        enabled = TODO(),
+                        shape = TODO(),
+                        colors = TODO(),
+                        elevation = TODO(),
+                        border = TODO(),
+                        contentPadding = TODO(),
+                        interactionSource = TODO()
+                    ) {Text("Back")}
+                    Button(
+                        onClick = TODO(),
+                        modifier = TODO(),
+                        enabled = TODO(),
+                        shape = TODO(),
+                        colors = TODO(),
+                        elevation = TODO(),
+                        border = TODO(),
+                        contentPadding = TODO(),
+                        interactionSource = TODO()
+                    ) {Text("Submit")}
+                }
+            }
+        }
+    }
+}
+@Composable
+fun RegisterPersonalDetails(){
+    var firstName by remember { mutableStateOf("") }
+    var lastName by remember { mutableStateOf("") }
+    var dateOfBirth by remember { mutableStateOf("") }
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = Color.LightGray )
+            .padding(top= Dp(56f)),
+        contentAlignment = Alignment.Center
+    ){
+        Box(modifier = Modifier.fillMaxSize(0.5f).align(Alignment.TopCenter)){
+            Column(Modifier.background(Color.White).fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ){
+                Row {
+                    Text("Register")
                 }
                 Row{
                     Text("Personal Details")
@@ -152,7 +236,7 @@ fun Register(){
                         value = lastName,
                         onValueChange = {lastName = it},
                         label = {
-                            Text("last name")
+                            Text("Last name")
 
                         },
                     )
@@ -160,25 +244,28 @@ fun Register(){
                 Spacer(modifier = Modifier.height(20.dp))
                 Row() {
                     TextField(
-                        value = username,
-                        onValueChange = {username = it},
+                        value = dateOfBirth,
+                        onValueChange = {dateOfBirth = it},
                         label = {
-                            Text("Enter a new username")
-                        }
-                    )
-                }
-                Spacer(modifier = Modifier.height(20.dp))
-                Row() {
-                    TextField(
-                        value = passwd,
-                        onValueChange = {passwd = it},
-                        label = {
-                            Text("Enter your password")
+                            Text("Date of Birth")
 
                         },
                     )
                 }
                 Spacer(modifier = Modifier.height(20.dp))
+                Row(){
+                    Button(
+                        onClick = TODO(),
+                        modifier = TODO(),
+                        enabled = TODO(),
+                        shape = TODO(),
+                        colors = TODO(),
+                        elevation = TODO(),
+                        border = TODO(),
+                        contentPadding = TODO(),
+                        interactionSource = TODO()
+                    ) {Text("Next")}
+                }
             }
         }
 
@@ -187,7 +274,7 @@ fun Register(){
 
 @Composable
 fun Login(){
-    var username by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
     var passwd by remember { mutableStateOf("") }
 
     Box(
@@ -244,15 +331,16 @@ fun ProfilePreview() {
 @Composable
 fun RegisterPreview() {
     FitnessLoggerTheme {
-        Register()
+        RegisterPersonalDetails()
     }
 }
 
 @Preview(showBackground = true)
+
 @Composable
 fun LoginPreview() {
     FitnessLoggerTheme {
-        Login()
+        RegisterPersonalDetails()
     }
 }
 
@@ -262,14 +350,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             FitnessLoggerTheme {
-                Register()
+                RegisterPersonalDetails()
             }
         }
     }
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
 }
