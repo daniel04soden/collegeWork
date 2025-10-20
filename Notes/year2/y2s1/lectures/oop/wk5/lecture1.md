@@ -1,0 +1,15 @@
+# Inheritance
+
+## What is inheritance:
+
+- A mechanism in which one object acquires all the properties and
+  behaviours of a parent object
+
+  - Inheritance is crucial for large software projects as it alllows a
+    dev to create and organize reusable classes.
+  - Eg Golden retriever Class to a dog class
+
+- In particular a programmer can tailor a derived class as needed by:
+
+  - Adding new variables methods and or
+  - Modifying existing methods and variables

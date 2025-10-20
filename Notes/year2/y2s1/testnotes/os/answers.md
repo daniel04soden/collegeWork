@@ -1,0 +1,45 @@
+# Lab 1
+
+1.  True - correct
+2.  False - correct
+3.  True - Correct
+4.  True - correct
+5.  False - Correct
+6.  True - Incorrect - A ready process will indeed become blocked if it
+    requests a service from the OS
+7.  False - C
+8.  False - C
+
+MCQ
+
+1.  B -c
+2.  A - c
+3.  A - c
+4.  D -c
+5.  A - c
+6.  A - c
+7.  C,D - c -c
+
+SAQ:
+
+1.  Operating systen - c
+2.  Ready suspend - I - Blocked suspend
+3.  Set of instructions - corect
+4.  File - correct
+5.  Ready - correct
+6.  Memory - correct
+7.  Process state - correctish - CPU state info
+
+# Lab 2
+
+False True False False - incorrect - A mode switch the interrupted
+process does regain the cpu True True True True - Incorrect - Hardware
+is only ealing with the beginning and end True True - Incorrect - The pc
+values dictates the next value to be fetched not to be executed True
+True
+
+MCQ
+
+C B D A A
+
+SAQ Interrupt handler . Are saved, are discarded

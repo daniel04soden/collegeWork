@@ -1,0 +1,187 @@
+# Topics:
+
+1.  Design patterns
+2.  Interface
+3.  JavaFx
+4.  Unit tests
+5.  JavaDoc
+6.  Databases
+7.  Java fundamental
+
+# Design patterns
+
+- Provides reusable solutions for common problems that occur in software
+  design by showing the relationship between classes and objects
+- They are completely independent from the programming language itself
+
+# Structural patterns
+
+- Explain how to assemble objects and classes into larger structures
+  while keping these structures flexible and efficient.
+- The structural design patterns simplifies the structure by identifying
+  the relationships
+- These patterns focus on hwo the classes inherit from each other and
+  how they are composed from other classes
+
+## Creational patterns
+
+- Deal with the best way to create instances of objects
+- In java the simplest way to create an instance of an object is by
+  using the new operator.
+
+## Singleton
+
+- Ensures that a class has only one instance
+
+- Provides a global access point to this particular instance
+
+- The problem:
+
+  - Ensures that each class has only a single instance
+  - Proivdes a global access to that instance
+
+- Solution:
+
+  - Make the constructor private - prevents other objects from using the
+    new operator.
+
+  - Create a static method that acts as a constructor
+
+    ``` java
+
+    public static void construct(int id){
+        return new Customer(id)
+    }
+    ```
+
+### Features
+
+- Static in nature
+- Thread safe
+- Private constructor
+- Private instance of the class
+- No parameters to the constructor
+
+### When to use:
+
+- use your singlton pattern when a class in your progrma should just
+  have a single instance available to all clients
+- One transaction must be completed before another one can begin
+
+### Examples:
+
+- Printers - Only one connection allowed
+- Database - A few connections allowed
+- Web sockets - One connection allowed
+- An application cannot create arbitrary number of connections and needs
+  to know their status (closed,lost,open)
+
+### Pros/Cons:
+
+1.  Pros:
+
+    - You can be sure that a class has only a single instance
+    - You can gain a global access point to that class
+    - The singleton object is initialized only when its requested for
+      the firs time
+
+2.  Cons:
+
+    - Violates the single responsibility principle.
+      - The pattern solves two problems at once
+    - Singleton pattern can mask bad design, when the components of the
+      program know too much about each other
+
+## Builder pattern
+
+- Separates the construction of a complex object from its representation
+
+### The solution:
+
+- Create the object class, a builder interface and a concrete builder.
+  the final product will be built by a builder
+- A director is an optional layer of control for this situation
+
+### When to use:
+
+- Object has many optional paramters or configurations
+- Avoid telescoping constructors (Constructor with too many parameters)
+- When you need to create different representations of the same object
+
+### Use cases:
+
+- Building complex objects that contain ui components.
+- Building complex objects like HTML docs and XML parsers.
+- Building configuration objects for libraries or frameworks.
+
+## Model view controller design pattern
+
+- What is a model?
+
+  - Models are wrappers for the data we intend to store
+  - Includes getters,setters, definition of data
+  - Simple checks
+
+- What is the view?
+
+  - Contains interface code
+  - Limited in terms of coding, mostly for ui
+
+- What is the Controller?
+
+  - Engine of the application
+  - All logic is kept here
+  - Checks validitiy and stores data
+
+### How are they connected?
+
+- Views are aware of controllers and vice versa
+
+- IE
+
+  ``` java
+  public class View{
+     protected Controller controller;
+
+      public View(Controller controller){
+          this.controller = controller;
+      }
+
+  }
+
+  ```
+
+- All actions like buttons and other functionality the view wishes to
+  implement, is taken and coded from the controller
+
+## Adapter Pattern
+
+- Adapter is a design that allows different and incompatible things to
+  work together
+
+### Problem
+
+- Incompatibility between methodologies
+- Breaking of functionality when upgrading
+
+### Solution
+
+- Create an adapter
+
+### When to use
+
+- Whenever an adapter is needed
+
+### Pros and cons
+
+1.  Pros
+
+    - Single responsibility: You can separate the interface or data
+      conversion with the business logic of the codebase
+    - You can introduce new types of adapters into the program without
+      breaking the existing client code
+
+2.  Cons
+
+    - Complexity increases as we now have multiple new interfaces and
+      classes

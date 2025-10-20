@@ -1,0 +1,15 @@
+# Epic - Analyze data
+
+## Story 1: identify abnormal data
+
+- Task 1 - Check how ebery featue in the data sets works
+- Task 2 - Check empty data points
+- Task 3 - Make box plots to identify anomalies
+- Task 4 - Calculate Z-score to confirm the outliers
+
+## Story 2: Check the balance of data
+
+- Task - Count the target labels for each class ot see whether it is a
+  50/50 split
+
+## Story 3: Explore the distribution of data

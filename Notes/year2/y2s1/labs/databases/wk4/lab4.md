@@ -1,0 +1,27 @@
+# Databases 4th lab
+
+## 12.11
+
+### (a). Entities
+
+- Courses
+- Instructors
+- Trainees
+- Teams
+
+### (b) Multiplicities,relationships, assumptions
+
+- Courses - Relationship to teams - many to one
+- Teams - Multiplicity to courses and trainees - one to many
+- Instructors - Relationship to teams - one to one
+- Trainees - One to one relationship with course.
+
+## 12.12
+
+### (a) Main entity types
+
+- Branch - one to one with
+- Staff
+- Videos
+- Members
+- Rentals

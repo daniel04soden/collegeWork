@@ -1,0 +1,17 @@
+# Multiplicity
+
+- Multipilicities are made up of two types of restrictions on
+  relationships: Cardinality and participation
+
+## ER models
+
+- Problems may arise wehn deisgining a conceptual data modle called
+  connection traps
+
+  - A class diagram models a high level conceptual view of the system
+
+    Class diagrams describe:
+
+    - The basic elements of a system
+    - The associations or relationships between the entitities/objects
+      classes \`

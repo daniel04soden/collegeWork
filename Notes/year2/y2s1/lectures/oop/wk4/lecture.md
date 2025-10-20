@@ -1,0 +1,10 @@
+# OOP Pillars
+
+## Encapsulation
+
+- Encapsulation is the process of putting together a data entity
+  including:
+  - all its main characteristics (fields)
+  - all its operations (methods)
+
+into a single unit (class)

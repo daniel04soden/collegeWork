@@ -1,0 +1,56 @@
+# What is software?
+
+- Set of instructions to acquire inputs and manipulate them ot produce
+  the desired output in terms of functions and performace as determined
+  by the user of the software
+- Two types: Generic, customised
+  - Generic: designed for broad customers whose requirements very common
+  - Custom: Personalised customised products in their domain
+
+## Attributes of good software.
+
+1.  Maintainability: Must evolve to meet changing requirements
+2.  Dependability: Software must be trustworthy
+3.  Efficiency: Not make wasteful use of resources
+4.  Usability
+
+- Software is operational - it can be measured on budget usability
+  correctness etc
+- Software is transitional - portable on various operating systems and
+  environments
+- Reusability, adaptability
+
+### Maintenance of software
+
+- Modularity
+- Scaling
+- Flexibility
+
+### Software must change
+
+- Adapted to meet the needs of new computing environments and technology
+- Must be enhanced to implement new business requirements
+- Must be re-architected to make it viable within a network environment
+
+-Must be extended to make it interoperable with other more modern
+systems or databases
+
+## Types of software
+
+1.  System software - Programs written to service other programs at
+    system level ie compilers os
+2.  Real time - Programs that monitor analyze control real wrold events
+    as they occur
+3.  Business - programs that access anaylze and process info
+4.  Engineership/Scientific - Software for different science and
+    applications
+5.  Embedded software
+6.  AI software
+7.  Internet Software
+
+## Software processes.
+
+- Forms a basis of project management, budget and schedule, application
+  of technical methods and product quality control
+- Framework activities: work tasks,products,milestones,checkpoints
+- Communication,Planning,Modelling,Construction, Deployment

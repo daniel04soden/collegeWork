@@ -1,0 +1,75 @@
+# CPU Scheduling
+
+## Evaluation Criteria
+
+- User Oriented
+
+  - Behaviour of system from user POV Eg
+    - Reposnse time for interactive user
+    - Predictability, provision of same service in different conditions.
+
+- System oriented
+
+  - Focus on effecitve and efficient use of the CPU
+
+### Algorithms
+
+- First come first serve
+- Round robin
+- Shortest process next
+- Shortest remaining time
+- Highest response ratio next
+- Multi-level feedback
+
+## CPU Scheduling
+
+- The aim of this scheduling is to share out CPU Access among all
+  processes so that the objectives of the system are met.
+
+- The objective is to allocate processor time so as to optimise one or
+  more aspects of the system behaviour.
+
+  - We will examine a number of basic algos that try to achieve this.
+  - Assume uniprocessor aka dispatching, short term scheduling.
+
+### Main attributes
+
+- Reponse time
+- Throughput
+- Processor efficiency
+
+## Priorities
+
+- Many systems assign a priority to processes
+- Schedulers may choose higher priority process to allocate time to
+  first.
+- Different queues.
+- Serve all of them first
+- They then server all the processes here
+- Could lead to starvation - High priority processes keep arriving
+- Rule to prevent starvation where if a process hasn\'t gotten any CPU
+  for a while, pushed to top of queue
+
+### Service Burst Time
+
+- When a process is ready to run and gains access to the CPU, it will
+  have a small amount of its overall work to do and will then either be
+  forced out of the CPU by some interrupt or it will leave voluntarily
+  becuase it is waitinf for some system call request(IO)
+- Service = a small amount of work
+
+### Pre-emptimve vs Non-pre-emptive
+
+- Preemptive scheduling allows a running process to be interrupted by a
+  high priority process, whereas in non-preemptive scheduling, any new
+  process has to wait until the running process finishes its CPU cycle.
+  We have also discussed the differences between preemptive and
+  non-preemptive scheduling.
+
+### CPU bound vs IO bound
+
+- If a process spends a lot of its time using th eprocess its cpu bound,
+  whereas if it spends most time doing io it is io bound
+
+  - CPU bound - large service bursts
+  - IO bound - Short service bursts
