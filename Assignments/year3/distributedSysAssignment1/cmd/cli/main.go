@@ -1,32 +1,11 @@
 package main
 
 import (
-	"distributedSysAssignment1/data"
-	"distributedSysAssignment1/entity"
+	"distributedSysAssignment1/internal/data"
+	"distributedSysAssignment1/internal/entity"
 	"fmt"
-	"math/rand"
 	"slices"
 )
-
-func scrambleLetters(input string) (output string) {
-	shuff := []rune(input)
-	rand.Shuffle(len(shuff), func(i, j int) {
-		shuff[i], shuff[j] = shuff[j], shuff[i]
-	})
-	output = string(shuff)
-	return output
-}
-
-func formatPangram(pangram entity.Pangram) (res string) {
-	for i := 0; i < pangram.Length; i++ {
-		if i == pangram.Length/2 {
-			res += fmt.Sprintf(" [" + string(pangram.Letters[i]) + "] ")
-		} else {
-			res += fmt.Sprintf(" " + string(pangram.Letters[i]) + " ")
-		}
-	}
-	return res
-}
 
 func gameLoop(numGames int) {
 	var points int
@@ -39,10 +18,10 @@ func gameLoop(numGames int) {
 	fmt.Printf("Spelling Bee Welcome!\n")
 	for range numGames {
 		fmt.Printf("Pangram: %s\n", formatPangram(*pangram))
-		fmt.Printf("Middle value %v\n", pangram.MiddleVal)
 		fmt.Printf("Enter your word: ")
 		var userIn string
 		fmt.Scanln(&userIn)
+
 		if !slices.Contains(validGuessedWords, userIn) {
 			entryBuilder := entity.NewEntryBuilder()
 			entryDirector := &entity.EntryDirector{EntryBuilder: entryBuilder}

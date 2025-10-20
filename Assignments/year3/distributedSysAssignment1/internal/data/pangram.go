@@ -1,4 +1,4 @@
-package data
+package main
 
 import (
 	"encoding/json"
@@ -21,6 +21,33 @@ func checkIsPangram(wordIn string) (isPangram bool) {
 	return len(wordIn) == 7 && !strings.Contains(strings.ToLower(wordIn), "s")
 }
 
+func getValidWords(wordDictFile string) (res WordDictionary) {
+	jsonFile, err := os.Open(wordDictFile)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer jsonFile.Close()
+
+	data, err := io.ReadAll(jsonFile)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	var words WordDictionary
+	err = json.Unmarshal(data, &words)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return words
+}
+
+func validateWord(word string, words WordDictionary) bool {
+	wordAccess := words.ValidWords[0]
+	wordExists := wordAccess[word] == 1
+	return wordExists
+}
+
 func GetRandomPangram(wordDictFile string) (pangram string) {
 	var allPangrams []string
 
@@ -28,6 +55,7 @@ func GetRandomPangram(wordDictFile string) (pangram string) {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	defer jsonFile.Close()
 
 	data, err := io.ReadAll(jsonFile)
@@ -41,10 +69,6 @@ func GetRandomPangram(wordDictFile string) (pangram string) {
 		log.Fatal(err)
 	}
 
-	if len(words.ValidWords) == 0 {
-		return ""
-	}
-
 	wordMap := words.ValidWords[0]
 
 	for word := range wordMap {
@@ -55,4 +79,10 @@ func GetRandomPangram(wordDictFile string) (pangram string) {
 
 	randomIndex := rand.IntN(len(allPangrams))
 	return allPangrams[randomIndex]
+}
+
+func main() {
+	words := getValidWords("words_dictionary.json")
+	validateWord("", words)
+	validateWord("test", words)
 }
