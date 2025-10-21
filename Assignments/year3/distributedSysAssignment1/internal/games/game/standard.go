@@ -10,11 +10,11 @@ import (
 
 type Result struct {
 	GamesPlayed int
-	GameStats   []Game
+	GameStats   []game
 	UserName    string
 }
 
-type Game struct {
+type game struct {
 	Points      int
 	WordsGussed []string
 }
@@ -94,10 +94,10 @@ func RunOnce(dictPath string) int {
 	return score
 }
 
-func RunGame(timesToRun int, userName string, dictPath string) (finalScore int) {
-	games := []Game{}
+func PlayOnce(timesToRun int, userName string, dictPath string) (finalScore int) {
+	games := []game{}
 	for range timesToRun {
-		curGame := Game{0, []string{}}
+		curGame := game{0, []string{}}
 		pGram, displayPangram := generatePangram(dictPath)
 
 		fmt.Printf("Pangram = %s\n", formatPangram(displayPangram, pGram))
@@ -112,7 +112,7 @@ func RunGame(timesToRun int, userName string, dictPath string) (finalScore int) 
 
 		games = append(games, curGame)
 	}
-	res := Result{timesToRun, games, userName}
+	res := Result{len(games), games, userName}
 
 	finalScore = 0
 	for i := range res.GameStats {

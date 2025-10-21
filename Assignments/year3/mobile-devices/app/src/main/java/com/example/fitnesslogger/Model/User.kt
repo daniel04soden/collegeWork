@@ -1,11 +1,9 @@
-package com.example.fitnesslogger.Models
-import android.R.attr.name
+package com.example.fitnesslogger.Model
 import android.os.Build
 import androidx.annotation.RequiresApi
 import org.mindrot.jbcrypt.BCrypt
 import java.time.LocalDate
 import java.time.Period
-import java.util.Date
 
 class User{
     final val id: Int
@@ -16,7 +14,6 @@ class User{
     var password: String
     var age:Int
     var email: String
-    var passPhrase: String
 
     constructor(
         id:Int,
@@ -36,12 +33,11 @@ class User{
         this.password = BCrypt.hashpw(password, BCrypt.gensalt())
         this.age = age
         this.email = email
-        this.passPhrase = passPhrase
         this.dateOfBirth = dateOfBirth
     }
     fun changePassword(originalPassEntry:String,newPassword:String): Boolean {
         if (BCrypt.checkpw(originalPassEntry,this.password)){
-            this.password = newPassword
+            this.password = BCrypt.hashpw(newPassword,BCrypt.gensalt())
             return true
         }
         return false

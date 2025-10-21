@@ -110,7 +110,7 @@ fun Settings(){
 }
 
 @Composable
-fun RegisterUserDetails(){
+fun RegisterUserDetails() {
     var email by remember { mutableStateOf("") }
     var passwd by remember { mutableStateOf("") }
     var confirmPasswd by remember { mutableStateOf("") }
@@ -118,27 +118,32 @@ fun RegisterUserDetails(){
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color.LightGray )
-            .padding(top= Dp(56f)),
+            .background(color = Color.LightGray)
+            .padding(top = Dp(56f)),
         contentAlignment = Alignment.Center
-    ){
-        Box(modifier = Modifier.fillMaxSize(0.5f).align(Alignment.TopCenter)){
-            Column(Modifier.background(Color.White).fillMaxSize(),
+    ) {
+        Box(modifier = Modifier
+            .fillMaxSize(0.5f)
+            .align(Alignment.TopCenter)) {
+            Column(
+                Modifier
+                    .background(Color.White)
+                    .fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
-            ){
+            ) {
                 Row {
                     Text("Register")
                 }
                 Spacer(modifier = Modifier.height(20.dp))
-                Row{
+                Row {
                     Text("Account Details")
                 }
                 Spacer(modifier = Modifier.height(20.dp))
                 Row() {
                     TextField(
                         value = email,
-                        onValueChange = {email = it},
+                        onValueChange = { email = it },
                         label = {
                             Text("Enter a new email")
                         }
@@ -148,7 +153,7 @@ fun RegisterUserDetails(){
                 Row() {
                     TextField(
                         value = passwd,
-                        onValueChange = {passwd = it},
+                        onValueChange = { passwd = it },
                         label = {
                             Text("Enter a safe and secure password")
 
@@ -159,7 +164,7 @@ fun RegisterUserDetails(){
                 Row() {
                     TextField(
                         value = confirmPasswd,
-                        onValueChange = {confirmPasswd = it},
+                        onValueChange = { confirmPasswd = it },
                         label = {
                             Text("Re-enter a safe and secure password")
 
@@ -167,7 +172,8 @@ fun RegisterUserDetails(){
                     )
                 }
                 Spacer(modifier = Modifier.height(20.dp))
-                Row(){
+                Row() {
+                    /*
                     Button(
                         onClick = TODO(),
                         modifier = TODO(),
@@ -179,6 +185,9 @@ fun RegisterUserDetails(){
                         contentPadding = TODO(),
                         interactionSource = TODO()
                     ) {Text("Back")}
+
+                     */
+                    /*
                     Button(
                         onClick = TODO(),
                         modifier = TODO(),
@@ -191,12 +200,15 @@ fun RegisterUserDetails(){
                         interactionSource = TODO()
                     ) {Text("Submit")}
                 }
+                */
+                }
             }
         }
     }
 }
+
 @Composable
-fun RegisterPersonalDetails(){
+fun RegisterPersonalDetails() {
     var firstName by remember { mutableStateOf("") }
     var lastName by remember { mutableStateOf("") }
     var dateOfBirth by remember { mutableStateOf("") }
@@ -204,26 +216,31 @@ fun RegisterPersonalDetails(){
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color.LightGray )
-            .padding(top= Dp(56f)),
+            .background(color = Color.LightGray)
+            .padding(top = Dp(56f)),
         contentAlignment = Alignment.Center
-    ){
-        Box(modifier = Modifier.fillMaxSize(0.5f).align(Alignment.TopCenter)){
-            Column(Modifier.background(Color.White).fillMaxSize(),
+    ) {
+        Box(modifier = Modifier
+            .fillMaxSize(0.5f)
+            .align(Alignment.TopCenter)) {
+            Column(
+                Modifier
+                    .background(Color.White)
+                    .fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
-            ){
+            ) {
                 Row {
                     Text("Register")
                 }
-                Row{
+                Row {
                     Text("Personal Details")
                 }
 
                 Row() {
                     TextField(
                         value = firstName,
-                        onValueChange = {firstName = it},
+                        onValueChange = { firstName = it },
                         label = {
                             Text("First name")
 
@@ -234,7 +251,7 @@ fun RegisterPersonalDetails(){
                 Row() {
                     TextField(
                         value = lastName,
-                        onValueChange = {lastName = it},
+                        onValueChange = { lastName = it },
                         label = {
                             Text("Last name")
 
@@ -245,7 +262,7 @@ fun RegisterPersonalDetails(){
                 Row() {
                     TextField(
                         value = dateOfBirth,
-                        onValueChange = {dateOfBirth = it},
+                        onValueChange = { dateOfBirth = it },
                         label = {
                             Text("Date of Birth")
 
@@ -253,18 +270,10 @@ fun RegisterPersonalDetails(){
                     )
                 }
                 Spacer(modifier = Modifier.height(20.dp))
-                Row(){
+                Row() {
                     Button(
-                        onClick = TODO(),
-                        modifier = TODO(),
-                        enabled = TODO(),
-                        shape = TODO(),
-                        colors = TODO(),
-                        elevation = TODO(),
-                        border = TODO(),
-                        contentPadding = TODO(),
-                        interactionSource = TODO()
-                    ) {Text("Next")}
+                        onClick = { /*TODO*/ },
+                    ) { Text("Next") }
                 }
             }
         }
@@ -273,19 +282,25 @@ fun RegisterPersonalDetails(){
 }
 
 @Composable
-fun Login(){
+fun Login() {
     var email by remember { mutableStateOf("") }
     var passwd by remember { mutableStateOf("") }
 
     Box(
-        modifier = Modifier.fillMaxSize().background(color = Color.LightGray ).padding(top= Dp(56f)),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = Color.LightGray)
+            .padding(top = Dp(56f)),
         contentAlignment = Alignment.Center
-    ){
-        Box(modifier = Modifier.fillMaxSize(0.5f).align(Alignment.TopCenter)){
-            Column(Modifier.background(Color.White),
+    ) {
+        Box(modifier = Modifier
+            .fillMaxSize(0.5f)
+            .align(Alignment.TopCenter)) {
+            Column(
+                Modifier.background(Color.White),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
-            ){
+            ) {
                 Text("Login Page")
             }
         }
@@ -295,11 +310,11 @@ fun Login(){
 
 
 @Composable
-fun Profile(){
+fun Profile() {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
-    ){
+    ) {
         Text("Profiles page")
     }
 }
@@ -312,6 +327,7 @@ fun TrackPreview() {
         Track()
     }
 }
+
 @Preview(showBackground = true)
 @Composable
 fun SettingsPreview() {
@@ -319,6 +335,7 @@ fun SettingsPreview() {
         Settings()
     }
 }
+
 @Preview(showBackground = true)
 @Composable
 fun ProfilePreview() {
@@ -327,7 +344,7 @@ fun ProfilePreview() {
     }
 }
 
-@Preview(showBackground = true)
+@Preview()
 @Composable
 fun RegisterPreview() {
     FitnessLoggerTheme {
@@ -336,11 +353,10 @@ fun RegisterPreview() {
 }
 
 @Preview(showBackground = true)
-
 @Composable
 fun LoginPreview() {
     FitnessLoggerTheme {
-        RegisterPersonalDetails()
+        Login()
     }
 }
 
