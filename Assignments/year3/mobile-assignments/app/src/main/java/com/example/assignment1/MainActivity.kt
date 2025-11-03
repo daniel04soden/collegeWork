@@ -12,10 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.assignment1.ui.theme.Assignment1Theme
-import com.example.assignment1.viewmodels.UserViewModel
 
 class MainActivity : ComponentActivity() {
-    private val userViewModel = UserViewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
