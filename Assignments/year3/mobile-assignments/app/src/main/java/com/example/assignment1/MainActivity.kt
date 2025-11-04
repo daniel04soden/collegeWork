@@ -1,41 +1,86 @@
 package com.example.assignment1
 
-import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.assignment1.ViewModels.EntryViewModel
+import com.example.assignment1.Views.BottomNavBar
+import com.example.assignment1.Views.EntryDetailsView
 import com.example.assignment1.Views.EntryScreen
-import com.example.assignment1.ui.theme.Assignment1Theme
+import com.example.assignment1.Views.LogScreen
+import com.example.assignment1.Views.Screen
+import com.example.assignment1.ui.theme.AppTheme
+
 
 class MainActivity : ComponentActivity() {
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            Assignment1Theme {
+            AppTheme {
                 Surface (
                     modifier = Modifier.fillMaxSize(),
                 ){
-                    EntryScreen()
+                    MainScreen()
+                }
+            }
+        }
+    }
+}
+@Composable
+fun BlankScreen(){
+    val navController = rememberNavController()
+    Text("Testing")
+}
+
+@Composable
+fun MainScreen() {
+    val navController = rememberNavController()
+    val entryViewModel: EntryViewModel = viewModel()
+
+    Scaffold(
+        bottomBar = { BottomNavBar(navController) }
+    ) { innerPadding ->
+        NavHost(
+            navController = navController,
+            startDestination = Screen.Home.route,
+            modifier = Modifier.padding(innerPadding)
+        ) {
+            composable(Screen.Home.route) { EntryScreen(entryViewModel, navController) }
+            composable(Screen.Logs.route) { LogScreen(entryViewModel,navController) }
+            composable(Screen.EntryDetail.route) { backStackEntry ->
+                val entryId = backStackEntry.arguments?.getString("entryId")?.toIntOrNull()
+                if (entryId != null) {
+                    EntryDetailsView(
+                        entryId = entryId,
+                        entryViewModel = entryViewModel,
+                        navController = navController
+                    )
                 }
             }
         }
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
+
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview(){
-    Assignment1Theme {
-        EntryScreen()
+    AppTheme {
+        MainScreen()
     }
 }
