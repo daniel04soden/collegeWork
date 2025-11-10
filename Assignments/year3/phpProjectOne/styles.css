@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.flex-item {
+    flex: 1 1 30px;
+}
+
+#flex-sep {
+    flex: 1 1;
+}
+
+.imgSearching {
+    width: 10%;
+    height: 5%;
+}
