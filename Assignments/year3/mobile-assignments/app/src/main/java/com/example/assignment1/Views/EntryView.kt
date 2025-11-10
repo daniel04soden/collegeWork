@@ -14,10 +14,12 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Clear
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -45,7 +47,7 @@ fun EntryScreen(viewModel: EntryViewModel=viewModel(), navController: NavControl
     Scaffold(
         topBar = {Text(text = "Journal Entries: Improvio")},
         content = {
-            paddingValues ->
+                paddingValues ->
             Column(
                 modifier = Modifier.fillMaxSize().padding(paddingValues)
             ) {
@@ -61,14 +63,13 @@ fun EntryScreen(viewModel: EntryViewModel=viewModel(), navController: NavControl
 
 @Composable
 fun ListOfEntries(viewModel: EntryViewModel = viewModel(), navController: NavController){
-    val itemLimit:Int = 10
+    val itemLimit = 10
     val listOfEntries = viewModel.entries.take(itemLimit)
 
     LazyColumn {
         items(listOfEntries){entry->
             EntryItem(
                 entry = entry,
-                onDelete = { viewModel.removeEntry(entry) },
                 onClick = { navController.navigate("entryDetails/${entry.id}") }
             )
         }
@@ -77,7 +78,7 @@ fun ListOfEntries(viewModel: EntryViewModel = viewModel(), navController: NavCon
 }
 
 @Composable
-fun EntryItem(entry: Entry, onDelete: () -> Unit, onClick: () -> Unit){
+fun EntryItem(entry: Entry, onClick: () -> Unit){
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -93,21 +94,14 @@ fun EntryItem(entry: Entry, onDelete: () -> Unit, onClick: () -> Unit){
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = "Date: ${entry.date.format(DateTimeFormatter.ISO_DATE)}", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                Text(text = "Date: ${entry.date.format(DateTimeFormatter.ISO_DATE)}",
+                    fontWeight = FontWeight.Bold, fontSize = 18.sp)
                 Text(text = "Rating: ${entry.rating.toString()}", fontSize = 16.sp)
             }
             Spacer(modifier = Modifier.height(8.dp))
             Text(text = "Name: ${entry.name}", fontSize = 16.sp)
             Spacer(modifier = Modifier.height(16.dp))
             Spacer(modifier = Modifier.height(8.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.End
-            ) {
-                IconButton(onClick = {onDelete()}) {
-                    Icon(Icons.Filled.Delete, contentDescription = "Delete Entry")
-                }
-            }
         }
     }
 }
@@ -159,44 +153,54 @@ fun AddEntry(viewModel: EntryViewModel) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        TextField(
-            value = rating,
-            onValueChange = { rating = it },
-            label = { Text("Rate your day out 10") },
-            modifier = Modifier.fillMaxWidth(),
-            trailingIcon = {
-                Icon(
-                    Icons.Default.Clear,
-                    contentDescription = "Clear Rating",
-                    modifier = Modifier.clickable {
-                        rating = ""
-                    }
-                )
-            }
-        )
+        var expanded by remember { mutableStateOf(false) }
 
-        Spacer(modifier = Modifier.height(16.dp))
+        val ratingData = List(10) { (it + 1).toString() }
 
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.End
-        ) {
-            IconButton(
-                onClick = {
-                    if (name.isNotBlank() && description.isNotBlank()) {
-                        viewModel.addEntry(description, name, rating)
-                        Toast.makeText(
-                            context,
-                            "Entry number ${viewModel.entries.size} added!",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        name = ""
-                        description = ""
-                        rating = ""
-                    }
+            verticalAlignment = Alignment.CenterVertically
+        ){
+            Text("Select Rating")
+            IconButton(onClick = { expanded = !expanded }) {
+                Icon(Icons.Default.ArrowDropDown, contentDescription = "Dropdown Arrow")
+            }
+            DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+                ratingData.forEach { option->
+                    DropdownMenuItem(
+                        text = {Text(option)},
+                        onClick = {
+                            rating = option
+                            expanded = false
+                        }
+                    )
+
                 }
+            }
+            Text("$rating/10")
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.End
             ) {
-                Icon(Icons.Filled.Add, contentDescription = "Add Entry")
+                IconButton(
+                    onClick = {
+                        if (name.isNotBlank() && description.isNotBlank()) {
+                            viewModel.addEntry(description, name, rating)
+                            Toast.makeText(
+                                context,
+                                "Entry number ${viewModel.entries.size} added!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            name = ""
+                            description = ""
+                            rating = ""
+                        }
+                    }
+                ) {
+                    Icon(Icons.Filled.Add, contentDescription = "Add Entry")
+                }
             }
         }
     }

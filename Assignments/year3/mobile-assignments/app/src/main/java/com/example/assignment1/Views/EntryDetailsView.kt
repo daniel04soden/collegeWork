@@ -13,9 +13,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -74,6 +77,9 @@ fun ViewEditEntry(selectedEntry: Entry, entryViewModel: EntryViewModel, navContr
     var description by remember { mutableStateOf(selectedEntry.text) }
     var rating by remember {mutableStateOf(selectedEntry.rating.toString())}
     val detailsViewModel: EntryDetailsViewModel = viewModel()
+    var expanded by remember { mutableStateOf(false) }
+
+    val ratingData = List(10) { (it + 1).toString() }
 
     val context = LocalContext.current
     Column(
@@ -126,22 +132,25 @@ fun ViewEditEntry(selectedEntry: Entry, entryViewModel: EntryViewModel, navContr
 
 
         Spacer(modifier = Modifier.height(16.dp))
-        TextField(
-            value = rating,
-            onValueChange = {rating=it},
-            label = {Text("Rating of the day:")},
-            modifier = Modifier.fillMaxWidth(),
-            trailingIcon = {
-                Icon(
-                    Icons.Default.Clear,
-                    contentDescription = "Clear Rating",
-                    modifier= Modifier.clickable{
-                        rating = ""
-                    }
-                )
+        Row(modifier = Modifier.fillMaxWidth()) {
+            Text("Select Rating")
+            IconButton(onClick = { expanded = !expanded }) {
+                Icon(Icons.Default.ArrowDropDown, contentDescription = "Dropdown Arrow")
             }
-        )
+            DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+                ratingData.forEach { option->
+                    DropdownMenuItem(
+                        text = {Text(option)},
+                        onClick = {
+                            rating = option
+                            expanded = false
+                        }
+                    )
 
+                }
+            }
+            Text("$rating/10")
+        }
         Spacer(modifier = Modifier.height(16.dp))
 
         Row(

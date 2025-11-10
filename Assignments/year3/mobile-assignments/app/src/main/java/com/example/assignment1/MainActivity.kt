@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -17,7 +16,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.assignment1.ViewModels.EntryViewModel
-import com.example.assignment1.Views.BottomNavBar
+import com.example.assignment1.Views.BottomBar
 import com.example.assignment1.Views.EntryDetailsView
 import com.example.assignment1.Views.EntryScreen
 import com.example.assignment1.Views.LogScreen
@@ -40,11 +39,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-@Composable
-fun BlankScreen(){
-    val navController = rememberNavController()
-    Text("Testing")
-}
 
 @Composable
 fun MainScreen() {
@@ -52,7 +46,7 @@ fun MainScreen() {
     val entryViewModel: EntryViewModel = viewModel()
 
     Scaffold(
-        bottomBar = { BottomNavBar(navController) }
+        bottomBar = { BottomBar(navController) }
     ) { innerPadding ->
         NavHost(
             navController = navController,
@@ -60,7 +54,7 @@ fun MainScreen() {
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(Screen.Home.route) { EntryScreen(entryViewModel, navController) }
-            composable(Screen.Logs.route) { LogScreen(entryViewModel,navController) }
+            composable(Screen.Logs.route) { LogScreen(entryViewModel) }
             composable(Screen.EntryDetail.route) { backStackEntry ->
                 val entryId = backStackEntry.arguments?.getString("entryId")?.toIntOrNull()
                 if (entryId != null) {

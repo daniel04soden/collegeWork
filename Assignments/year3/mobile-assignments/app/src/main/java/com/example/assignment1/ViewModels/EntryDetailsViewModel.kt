@@ -27,7 +27,7 @@ class EntryDetailsViewModel : ViewModel() {
         textToSpeech = TextToSpeech(context) { status ->
             if (status == TextToSpeech.SUCCESS) {
                 textToSpeech?.let { txtToSpeech ->
-                    txtToSpeech.language = Locale.US
+                    txtToSpeech.language = Locale.UK
                     txtToSpeech.setSpeechRate(1.0f)
                     entry.text?.let { textToSpeak ->
                         txtToSpeech.speak(

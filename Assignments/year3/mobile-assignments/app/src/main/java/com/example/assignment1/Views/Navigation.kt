@@ -22,18 +22,18 @@ sealed class Screen(val route: String, val label: String, val icon: ImageVector)
 }
 
 
-val bottomNavItems = listOf(
+val bottomBarItems = listOf(
     Screen.Home,
     Screen.Logs,
 )
 
 @Composable
-fun BottomNavBar(navController: NavController) {
+fun BottomBar(navController: NavController) {
     NavigationBar {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
 
-        bottomNavItems.forEach { screen ->
+        bottomBarItems.forEach { screen ->
             NavigationBarItem(
                 icon = { Icon(screen.icon, contentDescription = null) },
                 label = { Text(screen.label) },

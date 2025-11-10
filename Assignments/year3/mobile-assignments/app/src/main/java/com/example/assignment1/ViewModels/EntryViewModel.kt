@@ -10,7 +10,6 @@ class EntryViewModel: ViewModel() {
     val entries: List<Entry> get() = _entries
 
     init {
-        // Add some dummy data
         addEntry("What a beautiful day!", "John Doe", "9")
         addEntry("I learned a new skill today.", "Jane Smith", "8")
         addEntry("Feeling a bit tired.", "Peter Pan", "6")
@@ -33,6 +32,29 @@ class EntryViewModel: ViewModel() {
             rating = rating.toInt(),
         )
         _entries.add(newEntry)
+    }
+
+    fun searchEntries(query: String): List<Entry> {
+        val filteredEntries = if (query.isBlank()){
+            _entries
+        }else{
+            _entries.filter { entry ->
+                val textMatch = entry.text?.contains(query, ignoreCase = true) ?: false
+                textMatch
+            }
+        }
+        return filteredEntries
+    }
+
+    fun sortByRating(rating:String) :List<Entry>{
+        val filteredEntries = if (rating.isBlank()){
+            _entries
+        }else{  _entries.filter {entry ->
+            val ratingMatch = entry.rating == rating.toInt()
+            ratingMatch
+            }
+        }
+        return filteredEntries
     }
 
     fun removeEntry(entry: Entry){
