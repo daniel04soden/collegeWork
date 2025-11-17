@@ -8,5 +8,5 @@ data class Food(
     val carboHyOneHundredG: Double, // Carbs per 100g
     val proteinOneHundredG: Double, // protein per 100g
     val fiberOneHundredG: Double, // fiber per 100g
-    var servingSize: Double = 100.0
+    val servingSize: Double = 100.0
 )

@@ -1,9 +1,12 @@
 package com.example.assignment1.Views
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBox
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -17,6 +20,9 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 
 sealed class Screen(val route: String, val label: String, val icon: ImageVector) {
     object Home : Screen("home", "Home", Icons.Default.Home)
+    object Settings:Screen("settings","Settings",Icons.Default.Settings)
+    object Login:Screen("login","Login",Icons.Default.AccountBox)
+    object SignUp:Screen("signUp","Sign Up",Icons.Default.AccountCircle)
     object Logs : Screen("logs", "Logs", Icons.Default.DateRange)
     object EntryDetail : Screen("entryDetails/{entryId}", "Entry Details", Icons.Default.Create)
 }
@@ -25,6 +31,8 @@ sealed class Screen(val route: String, val label: String, val icon: ImageVector)
 val bottomBarItems = listOf(
     Screen.Home,
     Screen.Logs,
+    Screen.Login,
+    Screen.SignUp
 )
 
 @Composable

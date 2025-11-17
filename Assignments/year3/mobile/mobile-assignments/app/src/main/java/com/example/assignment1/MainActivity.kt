@@ -16,11 +16,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.assignment1.ViewModels.EntryViewModel
+import com.example.assignment1.ViewModels.UserViewModel
 import com.example.assignment1.Views.BottomBar
 import com.example.assignment1.Views.EntryDetailsView
 import com.example.assignment1.Views.EntryScreen
 import com.example.assignment1.Views.LogScreen
+import com.example.assignment1.Views.LoginView
 import com.example.assignment1.Views.Screen
+import com.example.assignment1.Views.SignUpView
 import com.example.assignment1.ui.theme.AppTheme
 
 
@@ -44,6 +47,7 @@ class MainActivity : ComponentActivity() {
 fun MainScreen() {
     val navController = rememberNavController()
     val entryViewModel: EntryViewModel = viewModel()
+    val userViewModel: UserViewModel = viewModel()
 
     Scaffold(
         bottomBar = { BottomBar(navController) }
@@ -54,6 +58,9 @@ fun MainScreen() {
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(Screen.Home.route) { EntryScreen(entryViewModel, navController) }
+            composable(Screen.Settings.route) { EntryScreen(entryViewModel, navController) }
+            composable(Screen.Login.route) { LoginView(viewModel = userViewModel,navController) }
+            composable(Screen.SignUp.route) { SignUpView(viewModel = userViewModel,navController) }
             composable(Screen.Logs.route) { LogScreen(entryViewModel) }
             composable(Screen.EntryDetail.route) { backStackEntry ->
                 val entryId = backStackEntry.arguments?.getString("entryId")?.toIntOrNull()
