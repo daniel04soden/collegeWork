@@ -1,11 +1,18 @@
 package com.example.assignment1.ViewModels
+import android.util.Log
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.example.assignment1.Models.User
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import org.mindrot.jbcrypt.BCrypt
+
 
 class UserViewModel: ViewModel(){
-    private val users = mutableListOf<User>()
+    private val _users = mutableStateOf<List<User>>(emptyList())
+    val users: State<List<User>> = _users
+
 
     // Login info
     private val _email = MutableStateFlow("")
@@ -17,11 +24,11 @@ class UserViewModel: ViewModel(){
 
     // Signup info
 
-    private val _name = MutableStateFlow("")
-    val name: StateFlow<String> = _name
+    private val _username = MutableStateFlow("")
+    val username: StateFlow<String> = _username
 
-    fun onNameChange(newName: String) {
-        _name.value = newName
+    fun onUserNameChange(newName: String) {
+        _username.value = newName
     }
 
     private val _age = MutableStateFlow("")
@@ -45,7 +52,7 @@ class UserViewModel: ViewModel(){
     }
 
     private val _confirmPassword = MutableStateFlow("")
-    val confPswd: StateFlow<String> = _confirmPassword
+    val confirmPassword: StateFlow<String> = _confirmPassword
 
     fun onConfirmPasswordChange(newConfirmPassword: String) {
         _confirmPassword.value = newConfirmPassword
@@ -72,13 +79,70 @@ class UserViewModel: ViewModel(){
     }
 
     fun addUser(user: User){
-        users.add(user)
+        _users.value += user
     }
 
+    fun hashPass(password:String,confirmPassword: String): String? {
+        if (password != confirmPassword){
+            println("Passwords do not match")
+            return null
+        }
+        return BCrypt.hashpw(password, BCrypt.gensalt())
+    }
 
+    fun checkPassword(password: String, hashed: String): Boolean {
+        return BCrypt.checkpw(password, hashed)
+    }
 
+    fun signUp(
+        email: String,
+        password:String,
+        confirmPassword: String,
+        username: String,
+        age: String,
+        gender: String,
+        loseWeight: String,
+        weight: String,
+        height: String
+    ):Boolean
+    {
+        val hashPassword = hashPass(password, confirmPassword)
+        if (hashPassword.isNullOrEmpty()){
+            return false
+        }
 
+        val user = User(
+            username = username,
+            age = age.toInt(),
+            gender = gender,
+            email = email,
+            password = hashPassword,
+            weight = weight.toDouble(),
+            height = height.toDouble(),
+            loseWeight = loseWeight,
+            caloriesPerDay = User.calculateCaloriesPerDay(
+                weight.toDouble(),
+                height.toDouble(),
+                age.toInt(),
+                gender,
+                loseWeight)
+        )
+        Log.d("UsersTrack", "New user: ${user.toString()}")
+        addUser(user)
+        Log.d("UsersTrack", "Current users: ${users.toString()}")
+        return true
+    }
 
-
-
+    fun logIn(email: String, password:String, ):Boolean{
+        for (user in _users.value){
+            if (user.email == email){
+                val checkPassword = checkPassword(password, user.password)
+                if (checkPassword){
+                    Log.d("UsersTrack", "User: ${user.toString()} logged in")
+                    return true
+                }
+            }
+        }
+        return false
+    }
 }

@@ -31,8 +31,6 @@ sealed class Screen(val route: String, val label: String, val icon: ImageVector)
 val bottomBarItems = listOf(
     Screen.Home,
     Screen.Logs,
-    Screen.Login,
-    Screen.SignUp
 )
 
 @Composable

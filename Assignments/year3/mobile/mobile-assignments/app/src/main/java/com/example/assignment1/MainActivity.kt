@@ -17,7 +17,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.assignment1.ViewModels.EntryViewModel
 import com.example.assignment1.ViewModels.UserViewModel
-import com.example.assignment1.Views.BottomBar
 import com.example.assignment1.Views.EntryDetailsView
 import com.example.assignment1.Views.EntryScreen
 import com.example.assignment1.Views.LogScreen
@@ -43,6 +42,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+
 @Composable
 fun MainScreen() {
     val navController = rememberNavController()
@@ -50,11 +50,11 @@ fun MainScreen() {
     val userViewModel: UserViewModel = viewModel()
 
     Scaffold(
-        bottomBar = { BottomBar(navController) }
+        //TODO bottomBar = { BottomBar(navController) } - add back bottom bar in ergonomic way
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = Screen.Home.route,
+            startDestination = Screen.Login.route,
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(Screen.Home.route) { EntryScreen(entryViewModel, navController) }

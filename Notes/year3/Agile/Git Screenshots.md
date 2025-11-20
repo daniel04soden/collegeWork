@@ -1,0 +1,19 @@
+# Git setup
+
+## Git init & git flow init:
+
+![[Pasted image 20251119081303.png]]
+
+- Setting up git repo with git flow init
+
+## Git remote add origin
+
+![[Pasted image 20251119090839.png]]
+
+![[Pasted image 20251119091132.png]]
+
+## Git flow feature,git commit, git add
+![[Pasted image 20251119092235.png]]
+![[Pasted image 20251119092219.png]]
+
+![[Pasted image 20251119100510.png]]
