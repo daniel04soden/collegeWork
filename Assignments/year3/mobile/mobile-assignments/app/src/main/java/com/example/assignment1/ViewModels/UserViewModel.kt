@@ -1,19 +1,15 @@
 package com.example.assignment1.ViewModels
 import android.util.Log
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.assignment1.Models.User
+import com.example.assignment1.data.UserDao
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import org.mindrot.jbcrypt.BCrypt
 
-
-class UserViewModel: ViewModel(){
-    private val _users = mutableStateOf<List<User>>(emptyList())
-    val users: State<List<User>> = _users
-
-
+class UserViewModel(private val userDao: UserDao): ViewModel(){
     // Login info
     private val _email = MutableStateFlow("")
     val email: StateFlow<String> = _email
@@ -78,9 +74,6 @@ class UserViewModel: ViewModel(){
         _loseWeight.value = newLoseWeight
     }
 
-    fun addUser(user: User){
-        _users.value += user
-    }
 
     fun hashPass(password:String,confirmPassword: String): String? {
         if (password != confirmPassword){
@@ -94,7 +87,7 @@ class UserViewModel: ViewModel(){
         return BCrypt.checkpw(password, hashed)
     }
 
-    fun signUp(
+    suspend fun signUp(
         email: String,
         password:String,
         confirmPassword: String,
@@ -125,23 +118,21 @@ class UserViewModel: ViewModel(){
                 height.toDouble(),
                 age.toInt(),
                 gender,
-                loseWeight)
+                loseWeight
+            )
         )
+        viewModelScope.launch {
+            userDao.insertUser(user = user)
+        }
         Log.d("UsersTrack", "New user: ${user.toString()}")
-        addUser(user)
-        Log.d("UsersTrack", "Current users: ${users.toString()}")
         return true
     }
 
-    fun logIn(email: String, password:String, ):Boolean{
-        for (user in _users.value){
-            if (user.email == email){
-                val checkPassword = checkPassword(password, user.password)
-                if (checkPassword){
-                    Log.d("UsersTrack", "User: ${user.toString()} logged in")
-                    return true
-                }
-            }
+    fun logIn(email: String, password: String):Boolean{
+        val user = userDao.findUserByEmail(email)
+        if (checkPassword(password, user.password)) {
+            Log.d("UsersTrack", "User: ${user.toString()} logged in")
+           return true
         }
         return false
     }

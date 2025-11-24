@@ -10,6 +10,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
@@ -17,12 +18,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.assignment1.ViewModels.EntryViewModel
 import com.example.assignment1.ViewModels.UserViewModel
+import com.example.assignment1.ViewModels.UserViewModelFactory
 import com.example.assignment1.Views.EntryDetailsView
 import com.example.assignment1.Views.EntryScreen
 import com.example.assignment1.Views.LogScreen
 import com.example.assignment1.Views.LoginView
 import com.example.assignment1.Views.Screen
 import com.example.assignment1.Views.SignUpView
+import com.example.assignment1.data.AppDatabase
 import com.example.assignment1.ui.theme.AppTheme
 
 
@@ -47,7 +50,10 @@ class MainActivity : ComponentActivity() {
 fun MainScreen() {
     val navController = rememberNavController()
     val entryViewModel: EntryViewModel = viewModel()
-    val userViewModel: UserViewModel = viewModel()
+    val context = LocalContext.current
+    val userDao = AppDatabase.getDatabase(context).userDao()
+    val userViewModelFactory = UserViewModelFactory(userDao)
+    val userViewModel: UserViewModel = viewModel(factory = userViewModelFactory)
 
     Scaffold(
         //TODO bottomBar = { BottomBar(navController) } - add back bottom bar in ergonomic way

@@ -1,10 +1,17 @@
 package com.example.assignment1.data
 
-/*
-@Database(entities = [User::class], version = 1, exportSchema = false)
+import android.content.Context
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import com.example.assignment1.Models.User
+import com.example.assignment1.models.Entry
+
+@Database(entities = [User::class, Entry::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
+    abstract fun entryDao(): EntryDao
 
     companion object {
         @Volatile
@@ -30,5 +37,3 @@ abstract class AppDatabase : RoomDatabase() {
     }
 }
 
-
- */

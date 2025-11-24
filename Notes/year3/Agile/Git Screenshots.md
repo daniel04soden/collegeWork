@@ -17,3 +17,9 @@
 ![[Pasted image 20251119092219.png]]
 
 ![[Pasted image 20251119100510.png]]
+
+### Git flow feature full process:
+
+![[Pasted image 20251124101454.png]]
+## Release finish
+![[Pasted image 20251124101535.png]]

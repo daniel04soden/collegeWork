@@ -2,19 +2,12 @@ package com.example.assignment1.ViewModels
 
 import android.content.Context
 import android.speech.tts.TextToSpeech
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.assignment1.models.Entry
 import java.util.Locale
 
 class EntryDetailsViewModel : ViewModel() {
-    private val currentEntry = MutableLiveData<Entry>()
     private var textToSpeech: TextToSpeech? = null
-
-    fun getCurrentEntry(): LiveData<Entry> {
-        return currentEntry
-    }
 
     fun editEntry(entry: Entry, newText: String, newName: String, newRating: String): Entry {
         entry.text = newText

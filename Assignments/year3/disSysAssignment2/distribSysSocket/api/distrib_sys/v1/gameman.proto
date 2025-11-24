@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package distrib_sys.v1;
+
+option go_package = "distribSys/api/distribSys/v1;distribSys";
+
+service GameManService {
+  rpc CreateGame(CreateGameRequest) returns (CreateGameResponse);
+  rpc PlayGame(PlayGameRequest) returns (PlayGameResponse);
+  rpc GetSummary(GetSummaryRequest) returns (GetSummaryResponse);
+}
+
+service PangramService {
+  rpc GetPangram(GetPangramRequest) returns (GetPangramResponse);
+}
+
+message GetPangramRequest {
+  string id = 1;
+}
+
+message GetPangramResponse {
+  string pangram = 1;
+  string id = 2;
+}
+
+message CreateGameRequest {
+  string kind = 1;
+}
+message CreateGameResponse {
+  string id = 1;
+  string type = 2;
+}
+
+message PlayGameRequest {
+  string id = 1;
+}
+message PlayGameResponse {
+  int32 score = 1;
+  repeated string guesses = 2;
+}
+
+message GetSummaryRequest {
+  string id = 1;
+}
+
+message GetSummaryResponse {
+  string game_id = 1;
+  string game_type = 2;
+}
+
+message GameResult {
+  int32 score = 1;
+  repeated string guesses = 2;
+}

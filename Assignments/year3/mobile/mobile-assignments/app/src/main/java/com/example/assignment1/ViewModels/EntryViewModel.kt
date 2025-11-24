@@ -46,17 +46,6 @@ class EntryViewModel: ViewModel() {
         return filteredEntries
     }
 
-    fun sortByRating(rating:String) :List<Entry>{
-        val filteredEntries = if (rating.isBlank()){
-            _entries
-        }else{  _entries.filter {entry ->
-            val ratingMatch = entry.rating == rating.toInt()
-            ratingMatch
-            }
-        }
-        return filteredEntries
-    }
-
     fun removeEntry(entry: Entry){
         _entries.remove(entry)
     }

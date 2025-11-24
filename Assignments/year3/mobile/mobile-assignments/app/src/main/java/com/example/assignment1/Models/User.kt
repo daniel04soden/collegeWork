@@ -1,10 +1,14 @@
+// This should be the ONLY content in your User.kt file
+
 package com.example.assignment1.Models
 
-// @Entity(tableName = "user")
-data class User(
-    // @PrimaryKey(autoGenerate = true)
-    // val id: Int = 0,
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Entity(tableName = "user")
+data class User(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
     var username: String,
     var age: Int,
     val gender: String, // "female" or "male"

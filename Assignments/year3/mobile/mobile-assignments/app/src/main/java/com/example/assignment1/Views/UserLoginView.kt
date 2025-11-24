@@ -27,6 +27,7 @@ import androidx.navigation.NavController
 import com.example.assignment1.R
 import com.example.assignment1.ViewModels.UserViewModel
 
+
 @Composable
 fun ImprovementImage() {
     Image(painter = painterResource( R.drawable.improve),

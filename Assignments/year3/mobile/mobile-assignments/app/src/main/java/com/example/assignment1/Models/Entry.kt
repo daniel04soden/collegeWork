@@ -1,9 +1,13 @@
 package com.example.assignment1.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.time.LocalDateTime
 
+@Entity(tableName = "entry")
 data class Entry(
-    val id:Int, // Unique identifier for each entry
+    @PrimaryKey(autoGenerate = true)
+    val id:Int = 0, // Unique identifier for each entry
     var text:String? = null, // Text entered by the user
     var name:String? = "", // User who entered the text
     var date: LocalDateTime, // Date of entry

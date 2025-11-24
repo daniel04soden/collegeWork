@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -22,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.assignment1.ViewModels.UserViewModel
+import kotlinx.coroutines.launch
 
 @Composable
 fun SignUpView(viewModel: UserViewModel = viewModel(), navController: NavController) {
@@ -122,6 +124,7 @@ fun SignUpView(viewModel: UserViewModel = viewModel(), navController: NavControl
             }
         }
         Spacer(modifier = Modifier.height(16.dp))
+        val scope = rememberCoroutineScope()
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -131,17 +134,24 @@ fun SignUpView(viewModel: UserViewModel = viewModel(), navController: NavControl
 
             Button(
                 onClick = {
-                   val signUpSuccess = viewModel.signUp(
-                       email=email,
-                       username=username,
-                       password=password,
-                       confirmPassword=confirmPassword,
-                       age=age,
-                       gender=gender,
-                       loseWeight=loseWeight,
-                       weight=weight,
-                       height=height
-                   )
+                    scope.launch {
+                        val signUpSuccess = viewModel.signUp(
+                            email=email,
+                            username=username,
+                            password=password,
+                            confirmPassword=confirmPassword,
+                            age=age,
+                            gender=gender,
+                            loseWeight=loseWeight,
+                            weight=weight,
+                            height=height
+                        )
+                        if (signUpSuccess){
+                            navController.navigate("login")
+                        }else{
+                            println("Sign up fail")
+                        }
+                    }
 
                     viewModel.onEmailChange("")
                     viewModel.onPasswordChange("")
@@ -153,11 +163,6 @@ fun SignUpView(viewModel: UserViewModel = viewModel(), navController: NavControl
                     viewModel.onWeightChange("")
                     viewModel.onHeightChange("")
 
-                    if (signUpSuccess){
-                        navController.navigate("login")
-                    }else{
-                        println("Sign up fail")
-                    }
                 },
                 modifier = Modifier
                     .fillMaxWidth()
