@@ -23,3 +23,8 @@
 ![[Pasted image 20251124101454.png]]
 ## Release finish
 ![[Pasted image 20251124101535.png]]
+![[Pasted image 20251124164648.png]]
+![[Pasted image 20251124164724.png]]
+
+![[Pasted image 20251124171421.png]]
+![[Pasted image 20251124171426.png]]

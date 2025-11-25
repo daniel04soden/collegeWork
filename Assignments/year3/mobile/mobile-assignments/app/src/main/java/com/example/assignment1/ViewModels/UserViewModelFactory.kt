@@ -2,7 +2,7 @@ package com.example.assignment1.ViewModels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.assignment1.data.UserDao
+import com.example.assignment1.Data.UserDao
 
 class UserViewModelFactory(private val userDao: UserDao) : ViewModelProvider.Factory {
 

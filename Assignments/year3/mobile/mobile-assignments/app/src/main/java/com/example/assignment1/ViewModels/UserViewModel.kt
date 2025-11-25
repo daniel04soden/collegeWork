@@ -2,8 +2,8 @@ package com.example.assignment1.ViewModels
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.assignment1.Data.UserDao
 import com.example.assignment1.Models.User
-import com.example.assignment1.data.UserDao
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -128,7 +128,7 @@ class UserViewModel(private val userDao: UserDao): ViewModel(){
         return true
     }
 
-    fun logIn(email: String, password: String):Boolean{
+    suspend fun logIn(email: String, password: String):Boolean{
         val user = userDao.findUserByEmail(email)
         if (checkPassword(password, user.password)) {
             Log.d("UsersTrack", "User: ${user.toString()} logged in")

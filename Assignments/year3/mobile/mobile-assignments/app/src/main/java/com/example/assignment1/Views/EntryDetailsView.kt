@@ -10,6 +10,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -27,57 +33,46 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.assignment1.ViewModels.EntryDetailsViewModel
+import com.example.assignment1.Models.Entry
 import com.example.assignment1.ViewModels.EntryViewModel
-import com.example.assignment1.models.Entry
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material.icons.filled.Clear
-import androidx.compose.material.icons.filled.PlayArrow
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EntryDetailsView(entryId: Int, entryViewModel: EntryViewModel, navController: NavController){
-    val selectedEntry = entryViewModel.entries.find { it.id == entryId }
-    if (selectedEntry != null) {
-        Scaffold(
-            topBar = {
-                CenterAlignedTopAppBar(
-                    title = { Text("Edit Journal Entry") },
-                    navigationIcon = {
-                        IconButton(onClick = { navController.popBackStack() }) {
-                            Icon(
-                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                contentDescription = "Back"
-                            )
-                        }
+    val selectedEntry = entryViewModel.findEntryById(entryId)
+    Scaffold(
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = { Text("Edit Journal Entry") },
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Back"
+                        )
                     }
-                )
-            },
-            content = {
-                    paddingValues ->
-                Column(
-                    modifier = Modifier.fillMaxSize().padding(paddingValues)
-                ) {
-                    ViewEditEntry(selectedEntry = selectedEntry, entryViewModel = entryViewModel, navController = navController)
                 }
+            )
+        },
+        content = {
+                paddingValues ->
+            Column(
+                modifier = Modifier.fillMaxSize().padding(paddingValues)
+            ) {
+                ViewEditEntry(selectedEntry = selectedEntry, entryViewModel = entryViewModel, navController = navController)
             }
+        }
 
-        )
-    }
+    )
 }
 
 @Composable
-fun ViewEditEntry(selectedEntry: Entry, entryViewModel: EntryViewModel, navController: NavController){
-    var name by remember { mutableStateOf(selectedEntry.name) }
-    var description by remember { mutableStateOf(selectedEntry.text) }
-    var rating by remember {mutableStateOf(selectedEntry.rating.toString())}
-    val detailsViewModel: EntryDetailsViewModel = viewModel()
+fun ViewEditEntry(selectedEntry: Entry?, entryViewModel: EntryViewModel, navController: NavController){
+    var name by remember { mutableStateOf(selectedEntry?.name) }
+    var description by remember { mutableStateOf(selectedEntry?.text) }
+    var rating by remember {mutableStateOf(selectedEntry?.rating.toString())}
     var expanded by remember { mutableStateOf(false) }
 
     val ratingData = List(10) { (it + 1).toString() }
@@ -126,7 +121,7 @@ fun ViewEditEntry(selectedEntry: Entry, entryViewModel: EntryViewModel, navContr
                     }
                 )
             }
-            IconButton(onClick = { detailsViewModel.readEntry(context, selectedEntry) }) {
+            IconButton(onClick = { entryViewModel.readEntry(context, selectedEntry) }) {
                 Icon(Icons.Filled.PlayArrow, contentDescription = "Read Aloud")
             }
         }
@@ -161,13 +156,13 @@ fun ViewEditEntry(selectedEntry: Entry, entryViewModel: EntryViewModel, navContr
             IconButton(
                 onClick = {
                     if (name?.isNotBlank() == true && description?.isNotBlank() == true){
-                        detailsViewModel.editEntry(
+                        entryViewModel.editEntry(
                             entry = selectedEntry, description!!,
                             name!!,
                             rating)
                         Toast.makeText(
                             context,
-                            "Entry number ${selectedEntry.id} edited!",
+                            "Entry number ${selectedEntry?.id} edited!",
                             Toast.LENGTH_SHORT
                         ).show()
                         navController.popBackStack()

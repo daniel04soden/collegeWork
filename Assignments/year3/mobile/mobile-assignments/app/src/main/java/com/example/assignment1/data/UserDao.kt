@@ -1,10 +1,10 @@
-package com.example.assignment1.data
+package com.example.assignment1.Data
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-    import com.example.assignment1.Models.User
+import com.example.assignment1.Models.User
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -19,7 +19,7 @@ interface UserDao {
     fun loadAllUsersByIds(userIds: IntArray): List<User>
 
     @Query("SELECT * FROM user WHERE email = :email LIMIT 1")
-    fun findUserByEmail(email: String): User
+    suspend fun findUserByEmail(email: String): User
 
     @Insert
     fun insertAllUsers(vararg users: User)

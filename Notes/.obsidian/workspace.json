@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "2d9c3d180ad2fa9a",
+        "id": "53c9047c8be5d0eb",
         "type": "tabs",
         "children": [
           {
-            "id": "64740831e7c563da",
+            "id": "b9b82063868ac43a",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -166,19 +166,25 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "64740831e7c563da",
+  "active": "b9b82063868ac43a",
   "lastOpenFiles": [
+    "Pasted image 20251124171426.png",
+    "Pasted image 20251124171421.png",
+    "year3/Agile/agile.md",
+    "year3/Agile/developmentlifecycle.md",
+    "year3/Agile/software.md",
+    "Pasted image 20251119081303.png",
+    "Untitled 3.base",
+    "Untitled 2.base",
+    "year3/Agile/Git Screenshots.md",
+    "Pasted image 20251124164724.png",
+    "Pasted image 20251124164648.png",
+    "Pasted image 20251124164630.png",
     "Pasted image 20251124101535.png",
     "Pasted image 20251124101454.png",
     "Pasted image 20251119100510.png",
     "Pasted image 20251119092235.png",
     "Pasted image 20251119092219.png",
-    "Pasted image 20251119091132.png",
-    "Pasted image 20251119090839.png",
-    "Pasted image 20251119083831.png",
-    "Pasted image 20251119081303.png",
-    "year3/Agile/Pasted image 20251119081214.png",
-    "year3/Agile/Git Screenshots.md",
     "Untitled 1.base",
     "Untitled.base"
   ]

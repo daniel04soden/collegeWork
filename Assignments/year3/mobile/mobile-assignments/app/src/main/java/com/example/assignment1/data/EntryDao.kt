@@ -1,11 +1,10 @@
-package com.example.assignment1.data
+package com.example.assignment1.Data
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.assignment1.models.Entry
+import com.example.assignment1.Models.Entry
 import kotlinx.coroutines.flow.Flow
-import java.time.LocalDateTime
 
 @Dao
 interface EntryDao {
@@ -16,7 +15,7 @@ interface EntryDao {
     fun getAllEntries(): Flow<List<Entry>>
 
     @Query ("SELECT * FROM entry WHERE date = :date ORDER BY date ASC")
-    fun getEntriesFromDate(date: LocalDateTime): Flow<List<Entry>>
+    fun getEntriesFromDate(date: String): Flow<List<Entry>>
 
     @Query("DELETE FROM entry")
     suspend fun deleteAll()
@@ -26,5 +25,6 @@ interface EntryDao {
 
     @Query("DELETE FROM entry WHERE id = :id")
     suspend fun deleteEntryById(id: Int)
-
+    @Query ("UPDATE entry SET text = :newText, name = :newName, rating = :newRating WHERE id = :id")
+    suspend fun updateEntry(id: Int?, newText: String, newName: String, newRating: Int)
 }

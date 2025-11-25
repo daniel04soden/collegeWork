@@ -37,6 +37,18 @@ fun SignUpView(viewModel: UserViewModel = viewModel(), navController: NavControl
     val weight by viewModel.weight.collectAsState()
     val height by viewModel.height.collectAsState()
 
+    fun clearSignUp(viewmodel: UserViewModel){
+        viewModel.onEmailChange("")
+        viewModel.onPasswordChange("")
+        viewModel.onConfirmPasswordChange("")
+        viewModel.onUserNameChange("")
+        viewModel.onAgeChange("")
+        viewModel.onGenderChange("")
+        viewModel.onLoseWeightChange("")
+        viewModel.onWeightChange("")
+        viewModel.onHeightChange("")
+    }
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -152,17 +164,7 @@ fun SignUpView(viewModel: UserViewModel = viewModel(), navController: NavControl
                             println("Sign up fail")
                         }
                     }
-
-                    viewModel.onEmailChange("")
-                    viewModel.onPasswordChange("")
-                    viewModel.onConfirmPasswordChange("")
-                    viewModel.onUserNameChange("")
-                    viewModel.onAgeChange("")
-                    viewModel.onGenderChange("")
-                    viewModel.onLoseWeightChange("")
-                    viewModel.onWeightChange("")
-                    viewModel.onHeightChange("")
-
+                    clearSignUp(viewModel)
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -175,7 +177,10 @@ fun SignUpView(viewModel: UserViewModel = viewModel(), navController: NavControl
 
 
             Button(
-                onClick = { navController.navigate("login") },
+                onClick = {
+                    clearSignUp(viewModel)
+                    navController.navigate("login")
+                },
             ) {
                 Text(text = "Already have an account?", textAlign = TextAlign.Center)
             }

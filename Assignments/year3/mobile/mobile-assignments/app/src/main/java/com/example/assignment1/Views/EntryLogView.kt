@@ -39,6 +39,8 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -50,9 +52,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.assignment1.ViewModels.EntryDetailsViewModel
+import com.example.assignment1.Models.Entry
 import com.example.assignment1.ViewModels.EntryViewModel
-import com.example.assignment1.models.Entry
 import kotlinx.coroutines.launch
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
@@ -177,7 +178,7 @@ fun OptionsDropDownMenu(
 @Composable
 fun QuickEditEntry(
     entry: Entry,
-    viewModel: EntryDetailsViewModel,
+    viewModel: EntryViewModel,
     onDismiss: () -> Unit
 ) {
     var name by remember { mutableStateOf(entry.name ?: "") }
@@ -350,7 +351,6 @@ fun QuickAddEntry(viewModel: EntryViewModel, onAddEntry: () -> Unit) {
 fun LogItem(
     entry: Entry,
     viewModel: EntryViewModel,
-    secondViewModel: EntryDetailsViewModel,
     onEditClick: () -> Unit,
     onDeleteClick: () -> Unit
 
@@ -437,42 +437,40 @@ fun LogItem(
 
 
 @Composable
-fun EntireListOfEntries(
-    viewModel: EntryViewModel = viewModel(),
-    listState: LazyListState,
-    searchQuery: String,
-    ratingCategory:String
+fun EntireListOfEntries(    viewModel: EntryViewModel = viewModel(),
+                            listState: LazyListState,
+                            searchQuery: String,
+                            ratingCategory: String
 ) {
     var entryToEdit by remember { mutableStateOf<Entry?>(null) }
     var entryToDelete by remember { mutableStateOf<Entry?>(null) }
-    val detailsViewModel: EntryDetailsViewModel = viewModel()
-    entryToEdit?.let{
-        entry ->
+
+    entryToEdit?.let { entry ->
         QuickEditEntry(
             entry = entry,
-            viewModel = EntryDetailsViewModel(),
+            viewModel = viewModel,
             onDismiss = { entryToEdit = null }
         )
     }
 
-    entryToDelete?.let{
-            entry ->
+    entryToDelete?.let { entry ->
         QuickDeleteEntry(
             entry = entry,
             viewModel = viewModel,
             onDismiss = { entryToDelete = null }
         )
     }
-    val searchedEntries = if (searchQuery.isBlank()) {
-        viewModel.entries
-    } else {
-        viewModel.searchEntries(searchQuery)
+
+    LaunchedEffect(key1 = searchQuery) {
+        viewModel.onSearchQueryChange(searchQuery)
     }
 
+    val entries by viewModel.entries.collectAsState(initial = emptyList())
+
     val filteredEntries = if (ratingCategory.isBlank()) {
-        searchedEntries
+        entries
     } else {
-        searchedEntries.filter { it.rating == ratingCategory.toInt() }
+        entries.filter { it.rating == ratingCategory.toIntOrNull() }
     }
 
     LazyColumn(
@@ -486,7 +484,6 @@ fun EntireListOfEntries(
             LogItem(
                 entry = entry,
                 viewModel = viewModel,
-                secondViewModel = detailsViewModel,
                 onEditClick = { entryToEdit = entry },
                 onDeleteClick = { entryToDelete = entry }
             )

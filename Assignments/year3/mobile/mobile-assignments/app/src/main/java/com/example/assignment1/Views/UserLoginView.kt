@@ -15,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -26,7 +27,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.assignment1.R
 import com.example.assignment1.ViewModels.UserViewModel
-
+import kotlinx.coroutines.launch
 
 @Composable
 fun ImprovementImage() {
@@ -43,6 +44,11 @@ fun ImprovementImage() {
 fun LoginView(viewModel: UserViewModel=viewModel(), navController: NavController){
     val email by viewModel.email.collectAsState()
     val password by viewModel.password.collectAsState()
+    fun clearSignUp(viewmodel: UserViewModel){
+        viewModel.onEmailChange("")
+        viewModel.onPasswordChange("")
+    }
+    val coroutineScope = rememberCoroutineScope()
 
 
     Column(
@@ -88,7 +94,7 @@ fun LoginView(viewModel: UserViewModel=viewModel(), navController: NavController
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Start your journey with us!")
-           ImprovementImage()
+            ImprovementImage()
         }
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -101,20 +107,22 @@ fun LoginView(viewModel: UserViewModel=viewModel(), navController: NavController
 
             Button(
                 onClick = {
-                    val loginSuccess = viewModel.logIn(
-                        email=email,
-                        password=password,
-                    )
-                    viewModel.onEmailChange("")
-                    viewModel.onPasswordChange("")
-
-                    if (loginSuccess){
-                        navController.navigate("home")
-                        println("Login Successful")
-                    }else{
-                        navController.navigate("login")
-                        println("Login failed")
-                    }},
+                    coroutineScope.launch {
+                        val loginSuccess = viewModel.logIn(
+                            email=email,
+                            password=password,
+                        )
+                        if (loginSuccess){
+                            navController.navigate("home")
+                            println("Login Successful")
+                        }
+                        else{
+                            navController.navigate("login")
+                            println("Login failed")
+                        }
+                    }
+                    clearSignUp(viewModel)
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .requiredHeightIn(min = 48.dp)
@@ -126,7 +134,11 @@ fun LoginView(viewModel: UserViewModel=viewModel(), navController: NavController
 
 
             Button(
-                onClick = { navController.navigate("signUp") },
+                onClick = {
+                    clearSignUp(viewModel)
+                    navController.navigate("signUp")
+
+                },
             ) {
                 Text(text = "Don't have an account yet?", textAlign = TextAlign.Center)
             }
