@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+package distrib_sys.v1;
+
+option go_package = "distribSys/api/distribSys/v1;distribSys";
+
+service GameManService {
+  rpc CreateGame(CreateGameRequest) returns (CreateGameResponse);
+  rpc SubmitGuess(SubmitGuessRequest) returns (SubmitGuessResponse);
+  rpc GetSummary(GetSummaryRequest) returns (GetSummaryResponse);
+}
+
+service PangramService {
+  rpc GetPangram(GetPangramRequest) returns (GetPangramResponse);
+  rpc GetGameState(GetGameStateRequest) returns (GetGameStateResponse);
+}
+
+message CreateGameRequest {
+  string kind = 1;
+}
+
+message PlayGameRequest {
+  string id = 1;
+}
+
+message SubmitGuessRequest {
+  string id = 1;
+  string guess = 2;
+}
+
+message GetSummaryRequest {
+  string id = 1;
+}
+
+message GetPangramRequest {
+  string id = 1;
+}
+
+message GetGameStateRequest {
+  string id = 1;
+}
+
+message CreateGameResponse {
+  string id = 1;
+  string type = 2;
+}
+
+message PlayGameResponse {
+  int32 score = 1;
+  repeated string guesses = 2;
+}
+
+message SubmitGuessResponse {
+  int32 new_score = 1;
+  repeated string words_guessed = 2;
+  string message = 3;
+  bool game_over = 4;
+}
+
+message GetSummaryResponse {
+  string game_id = 1;
+  string game_type = 2;
+}
+
+message GetPangramResponse {
+  string pangram = 1;
+  string id = 2;
+}
+
+message GetGameStateResponse {
+  string display_letters = 1;
+  int32 current_score = 2;
+}
+
+message GameResult {
+  int32 score = 1;
+  repeated string guesses = 2;
+}
