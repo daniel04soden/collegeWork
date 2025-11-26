@@ -28,3 +28,7 @@
 
 ![[Pasted image 20251124171421.png]]
 ![[Pasted image 20251124171426.png]]
+
+## Hotfix
+
+![[Pasted image 20251125150149.png]]
