@@ -45,17 +45,31 @@ func NewEntryBuilder() EntryBuilder {
 	}
 }
 
+func containsLettersPangram(word string, validLetters string) bool {
+    for i := 0; i < len(word); i++ {
+        char := word[i] 
+        if strings.IndexByte(validLetters, char) == -1 {
+            return false
+        }
+    }
+    return true
+}
+
 func (eb *entryBuilder) SetLetters(letters string, p Pangram, words data.WordDictionary) EntryBuilder {
+	letters = strings.ToLower(letters)
 	if !isLetter(letters) {
 		fmt.Println("Invalid entry, must only be alpha chars ,try again next time")
 		return nil
-	} else if !strings.Contains(strings.ToLower(letters), p.MiddleVal) {
+	} else if !strings.Contains(letters, p.MiddleVal) {
 		fmt.Printf("Invalid entry must contain letter %s\n", p.MiddleVal)
 		return nil
 	} else if !(data.ValidateWord(letters, words)) {
 		fmt.Println("Invalid entry, not a real word")
 		return nil
-	} else {
+	} else if !containsLettersPangram(letters,p.Letters){
+		fmt.Println("Invalid entry, invalid letter entered")
+		return nil
+	}else {
 		eb.entry.Letters = letters
 		return eb
 	}

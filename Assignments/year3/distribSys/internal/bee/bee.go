@@ -1,6 +1,5 @@
 package bee
 
-// Package bee provides general logical functions for the spelling bee game.
 
 import (
 	"fmt"

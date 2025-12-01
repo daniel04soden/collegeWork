@@ -22,11 +22,11 @@ import com.example.assignment1.ViewModels.EntryViewModelFactory
 import com.example.assignment1.ViewModels.UserViewModel
 import com.example.assignment1.ViewModels.UserViewModelFactory
 import com.example.assignment1.Views.EntryDetailsView
-import com.example.assignment1.Views.EntryScreen
 import com.example.assignment1.Views.HomeScreen
 import com.example.assignment1.Views.LogScreen
 import com.example.assignment1.Views.LoginView
 import com.example.assignment1.Views.Screen
+import com.example.assignment1.Views.SettingsScreen
 import com.example.assignment1.Views.SignUpView
 import com.example.assignment1.ui.theme.AppTheme
 
@@ -68,7 +68,7 @@ fun MainScreen() {
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(Screen.Home.route) { HomeScreen(navController) }
-            composable(Screen.Settings.route) { (entryViewModel, navController) }
+            composable(Screen.Settings.route) { SettingsScreen(userViewModel, navController) }
             composable(Screen.Login.route) { LoginView(viewModel = userViewModel,navController) }
             composable(Screen.SignUp.route) { SignUpView(viewModel = userViewModel,navController) }
             composable(Screen.Logs.route) { LogScreen(entryViewModel) }

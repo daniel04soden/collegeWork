@@ -2,16 +2,19 @@ package main
 
 import (
 	"context"
+	"database/sql"
 	"fmt"
 	"log"
 	"os"
+	"strings"
 	"time"
-
 	gamemanagerpb "distribSys/api/distrib_sys/v1"
+	_ "github.com/mattn/go-sqlite3"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
+const dbPath string = "db/stats.db"
 
 func main() {
 	var choice string
@@ -74,8 +77,30 @@ func main() {
 		fmt.Printf("  -> Guessed Words: %v\n", sgr.GetWordsGuessed())
 
 		if sgr.GetGameOver() {
+			storeGame( int(sgr.GetNewScore()), sgr.GetWordsGuessed(), gsr.GetDisplayLetters())
 			fmt.Println("\n--- Game Over! Congratulations! ---")
 			break
 		}
 	}
+}
+
+func storeGame(totalScore int,guesses []string, letters string) {
+	avg := totalScore/len(guesses)
+	db,err :=sql.Open("sqlite3",dbPath)
+	if err!=nil{
+		log.Fatal(err)
+	}
+	defer db.Close()
+	guessesStr := strings.Join(guesses,",")
+
+	sqlStmt := "INSERT INTO gameStatistics (totalScore, averageScore, guesses, letters) VALUES (?,?,?,?)"
+	result, err := db.Exec(sqlStmt, totalScore,avg,guessesStr,letters)
+	if err!=nil{
+		log.Fatal(err)
+	}
+	res,err := result.RowsAffected()
+	if err!=nil{
+		log.Fatal(err)
+	}
+	fmt.Println(res)
 }

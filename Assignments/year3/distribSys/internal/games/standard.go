@@ -35,26 +35,20 @@ func NewStandardGame() *Standard {
 
 func (s *Standard) Type() string { return "Standard" }
 
-// GetState implements the Game interface method for the client display.
 func (s *Standard) GetState() (string, int) {
 	return bee.DisplayPangram(s.pangram), s.points
 }
 
-// ProcessGuess implements the Game interface method to handle client guesses.
 func (s *Standard) ProcessGuess(guess string) (int, []string, string, bool) {
 	guess = strings.ToLower(guess)
-
-	// 1. Check if already guessed
 	if slices.Contains(s.wordsGuessed, guess) {
 		return s.points, s.wordsGuessed, "You already guessed that word!", s.points >= s.targetScore
 	}
 
-	// 2. Process the guess
 	newPoints := bee.ProcessEntry(guess, s.pangram, s.words)
 
 	statusMessage := ""
 	if newPoints > 0 {
-		// If it was valid, update state
 		s.wordsGuessed = append(s.wordsGuessed, guess)
 		s.points += newPoints
 
@@ -65,11 +59,9 @@ func (s *Standard) ProcessGuess(guess string) (int, []string, string, bool) {
 		}
 
 	} else {
-		// Invalid word logic
 		statusMessage = "Invalid word or word not found."
 	}
 
-	// 3. Check for game over condition
 	isGameOver := s.points >= s.targetScore
 
 	return s.points, s.wordsGuessed, statusMessage, isGameOver

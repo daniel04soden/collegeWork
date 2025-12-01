@@ -11,6 +11,9 @@ import org.mindrot.jbcrypt.BCrypt
 
 class UserViewModel(private val userDao: UserDao): ViewModel(){
     // Login info
+    private val _currentUser = MutableStateFlow<User?>(null)
+    val currentUser: StateFlow<User?> = _currentUser
+
     private val _email = MutableStateFlow("")
     val email: StateFlow<String> = _email
 
@@ -128,10 +131,15 @@ class UserViewModel(private val userDao: UserDao): ViewModel(){
         return true
     }
 
+    fun logOut(){
+       _currentUser.value = null
+    }
+
     suspend fun logIn(email: String, password: String):Boolean{
         val user = userDao.findUserByEmail(email)
         if (checkPassword(password, user.password)) {
             Log.d("UsersTrack", "User: ${user.toString()} logged in")
+            _currentUser.value = user
            return true
         }
         return false
