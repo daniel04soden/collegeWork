@@ -5,17 +5,17 @@ import (
 	"fmt"
 	"net"
 	"os"
-	"strings"
 	"strconv"
+	"strings"
 )
 
 const (
-	tcpAddr  = ":9988"
-	host = "dbserver"
+	tcpAddr    = ":9988"
+	host       = "dbserver"
 	serverType = "tcp"
 )
 
-var statOptions = []string{"avg","guesses","total","all","letters"}
+var statOptions = []string{"avg", "guesses", "total", "all", "letters"}
 
 func main() {
 	fmt.Println("Running concurrent server...")
@@ -37,7 +37,7 @@ func main() {
 			fmt.Println("Error accepting: ", err.Error())
 			continue
 		}
-		
+
 		fmt.Println("Client connected from", connection.RemoteAddr())
 
 		go processClientData(connection)
@@ -48,7 +48,7 @@ func processClientData(connection net.Conn) {
 	defer connection.Close()
 
 	buffer := make([]byte, 1024)
-	
+
 	mLen, err := connection.Read(buffer)
 	if err != nil {
 		fmt.Printf("Error reading from %s: %s\n", connection.RemoteAddr(), err.Error())
@@ -60,9 +60,9 @@ func processClientData(connection net.Conn) {
 
 	parts := strings.Split(receivedMsg, ",")
 	option := parts[0]
-	
+
 	gameID := 0 // Default id
-	
+
 	if len(parts) == 2 {
 		idStr := parts[1]
 		parsedID, err := strconv.Atoi(idStr)
@@ -88,7 +88,7 @@ func processClientData(connection net.Conn) {
 			return
 		}
 		fmt.Println("Average score:", avg)
-		
+
 		responseBuilder.WriteString(fmt.Sprintf("Average score for ID %d: %f", gameID, avg))
 
 	case statOptions[1]:
@@ -99,7 +99,7 @@ func processClientData(connection net.Conn) {
 			return
 		}
 		fmt.Println("Guesses:", guesses)
-		
+
 		responseBuilder.WriteString(fmt.Sprintf("Guesses for ID %d: %v", gameID, guesses))
 
 	case statOptions[2]:
@@ -110,18 +110,19 @@ func processClientData(connection net.Conn) {
 			return
 		}
 		fmt.Println("Total Score:", total)
-		
+
 		responseBuilder.WriteString(fmt.Sprintf("Total score for ID %d: %.0f", gameID, total))
 
 	case statOptions[3]:
+
 		games, err := dao.ListGames()
 		if err != nil {
 			fmt.Println("Error listing games:", err)
 			connection.Write([]byte("ERROR: Failed to list all games."))
 			return
 		}
-		
-		for i := range games{
+
+		for i := range games {
 			output := fmt.Sprintf("Game ID: %d, Letters: %s, Guesses: %v, Avg: %.2f, Total: %.0f\n",
 				games[i].ID, games[i].Letters, games[i].Guesses, games[i].Avg, games[i].Total)
 			fmt.Print(output)
@@ -136,7 +137,7 @@ func processClientData(connection net.Conn) {
 			return
 		}
 		fmt.Println("Letters: ", letters)
-		
+
 		responseBuilder.WriteString(fmt.Sprintf("Letters for ID %d: %s", gameID, letters))
 
 	default:
@@ -144,10 +145,9 @@ func processClientData(connection net.Conn) {
 	}
 
 	_, err = connection.Write([]byte(responseBuilder.String()))
-
 	if err != nil {
 		fmt.Printf("Error writing response to %s: %s\n", connection.RemoteAddr(), err.Error())
 	}
-	
+
 	fmt.Printf("Connection to %s closed.\n", connection.RemoteAddr())
 }

@@ -3,17 +3,19 @@ package main
 import (
 	"context"
 	"database/sql"
+	gamemanagerpb "distribSys/api/distrib_sys/v1"
 	"fmt"
 	"log"
 	"os"
 	"strings"
 	"time"
-	gamemanagerpb "distribSys/api/distrib_sys/v1"
+
 	_ "github.com/mattn/go-sqlite3"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
+
 const dbPath string = "db/stats.db"
 
 func main() {
@@ -32,7 +34,7 @@ func main() {
 	defer conn.Close()
 
 	gameClient := gamemanagerpb.NewGameManServiceClient(conn)
-	pangramClient := gamemanagerpb.NewPangramServiceClient(conn) 
+	pangramClient := gamemanagerpb.NewPangramServiceClient(conn)
 
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
@@ -63,10 +65,9 @@ func main() {
 		}
 
 		sgr, err := gameClient.SubmitGuess(context.Background(), &gamemanagerpb.SubmitGuessRequest{
-			Id: gameID,
+			Id:    gameID,
 			Guess: guess,
 		})
-
 		if err != nil {
 			log.Fatalf("Error submitting guess: %v. Ending game.", err)
 			break
@@ -77,29 +78,29 @@ func main() {
 		fmt.Printf("  -> Guessed Words: %v\n", sgr.GetWordsGuessed())
 
 		if sgr.GetGameOver() {
-			storeGame( int(sgr.GetNewScore()), sgr.GetWordsGuessed(), gsr.GetDisplayLetters())
+			storeGame(int(sgr.GetNewScore()), sgr.GetWordsGuessed(), gsr.GetDisplayLetters())
 			fmt.Println("\n--- Game Over! Congratulations! ---")
 			break
 		}
 	}
 }
 
-func storeGame(totalScore int,guesses []string, letters string) {
-	avg := totalScore/len(guesses)
-	db,err :=sql.Open("sqlite3",dbPath)
-	if err!=nil{
+func storeGame(totalScore int, guesses []string, letters string) {
+	avg := totalScore / len(guesses)
+	db, err := sql.Open("sqlite3", dbPath)
+	if err != nil {
 		log.Fatal(err)
 	}
 	defer db.Close()
-	guessesStr := strings.Join(guesses,",")
+	guessesStr := strings.Join(guesses, ",")
 
 	sqlStmt := "INSERT INTO gameStatistics (totalScore, averageScore, guesses, letters) VALUES (?,?,?,?)"
-	result, err := db.Exec(sqlStmt, totalScore,avg,guessesStr,letters)
-	if err!=nil{
+	result, err := db.Exec(sqlStmt, totalScore, avg, guessesStr, letters)
+	if err != nil {
 		log.Fatal(err)
 	}
-	res,err := result.RowsAffected()
-	if err!=nil{
+	res, err := result.RowsAffected()
+	if err != nil {
 		log.Fatal(err)
 	}
 	fmt.Println(res)

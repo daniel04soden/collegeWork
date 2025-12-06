@@ -2,29 +2,28 @@ package main
 
 import (
 	"context"
-	"os"
+	"distribSys/internal/manager"
+	"distribSys/internal/mq"
 	"fmt"
 	"log"
 	"net"
+	"os"
 	"strings"
 
 	gamemanagerpb "distribSys/api/distrib_sys/v1"
-	"distribSys/internal/manager"
-	"distribSys/internal/mq"
 
 	"google.golang.org/grpc"
 )
 
 type server struct {
 	gamemanagerpb.UnimplementedGameManServiceServer
-	gamemanagerpb.UnimplementedPangramServiceServer 
+	gamemanagerpb.UnimplementedPangramServiceServer
 	mgr manager.Manager
 	pub *mq.Publisher
 }
 
-
 func (s *server) CreateGame(ctx context.Context, req *gamemanagerpb.CreateGameRequest) (*gamemanagerpb.CreateGameResponse, error) {
-	id, g, err := s.mgr.Create(req.GetKind()) 
+	id, g, err := s.mgr.Create(req.GetKind())
 	if err != nil {
 		fmt.Printf("Failed to create game due to %v \n", err)
 		return nil, err
@@ -40,9 +39,9 @@ func (s *server) SubmitGuess(ctx context.Context, req *gamemanagerpb.SubmitGuess
 
 	newScore, wordsGuessed, statusMessage, isGameOver := g.ProcessGuess(req.GetGuess())
 
-	if strings.Contains(statusMessage,"Pangram"){
-	s.pub.Publish("game.pangram", fmt.Sprintf("Pangram found %v",req.GetGuess()))
-	} 
+	if strings.Contains(statusMessage, "Pangram") {
+		s.pub.Publish("game.pangram", fmt.Sprintf("Pangram found %v", req.GetGuess()))
+	}
 
 	return &gamemanagerpb.SubmitGuessResponse{
 		NewScore:     int32(newScore),
@@ -52,7 +51,6 @@ func (s *server) SubmitGuess(ctx context.Context, req *gamemanagerpb.SubmitGuess
 	}, nil
 }
 
-
 func (s *server) GetSummary(ctx context.Context, req *gamemanagerpb.GetSummaryRequest) (*gamemanagerpb.GetSummaryResponse, error) {
 	g, ok := s.mgr.Get(req.GetId())
 	if !ok {
@@ -60,7 +58,6 @@ func (s *server) GetSummary(ctx context.Context, req *gamemanagerpb.GetSummaryRe
 	}
 	return &gamemanagerpb.GetSummaryResponse{GameId: req.GetId(), GameType: g.Type()}, nil
 }
-
 
 func (s *server) GetGameState(ctx context.Context, req *gamemanagerpb.GetGameStateRequest) (*gamemanagerpb.GetGameStateResponse, error) {
 	g, ok := s.mgr.Get(req.GetId())
@@ -81,13 +78,12 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
-	rabbitmqURL := os.Getenv("RABBITMQ_URL") 
+	rabbitmqURL := os.Getenv("RABBITMQ_URL")
 	if rabbitmqURL == "" {
-		rabbitmqURL = "amqp://guest:guest@rabbitmq:5672/" 
+		rabbitmqURL = "amqp://guest:guest@rabbitmq:5672/"
 	}
 
 	pub, err := mq.Connect(rabbitmqURL)
-
 	if err != nil {
 		log.Fatalf("Failed to connect to RabbitMQ: %v", err)
 	}

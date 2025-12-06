@@ -44,6 +44,8 @@ services:
       dockerfile: Dockerfile.ServerMQ
     container_name: mq-server
     command: ["./server-mq"]
+    ports:
+      - "9000:9000"
     environment:
       RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672/
     depends_on:
