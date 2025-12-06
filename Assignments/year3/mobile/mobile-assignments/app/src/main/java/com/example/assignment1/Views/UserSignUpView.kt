@@ -1,5 +1,6 @@
 package com.example.assignment1.Views
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -8,40 +9,116 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeightIn
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.assignment1.ViewModels.UserViewModel
 import kotlinx.coroutines.launch
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ReusableDropdown(
+    label: String,
+    options: List<String>,
+    selectedValue: String,
+    onValueChange: (String) -> Unit,
+    isError: Boolean, // Add isError parameter
+    modifier: Modifier = Modifier
+) {
+    var expanded by remember { mutableStateOf(false) }
+
+    Box(modifier = modifier) {
+        ExposedDropdownMenuBox(
+            expanded = expanded,
+            onExpandedChange = { expanded = !expanded }
+        ) {
+            OutlinedTextField(
+                value = selectedValue,
+                onValueChange = {},
+                readOnly = true,
+                label = { Text(label) },
+                trailingIcon = {
+                    ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
+                },
+                colors = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
+                isError = isError, // Apply the error state
+                modifier = Modifier
+                    .menuAnchor()
+                    .fillMaxWidth()
+            )
+            ExposedDropdownMenu(
+                expanded = expanded,
+                onDismissRequest = { expanded = false }
+            ) {
+                options.forEach { option ->
+                    DropdownMenuItem(
+                        text = { Text(option) },
+                        onClick = {
+                            onValueChange(option)
+                            expanded = false
+                        }
+                    )
+                }
+            }
+        }
+    }
+}
 
 @Composable
 fun SignUpView(viewModel: UserViewModel = viewModel(), navController: NavController) {
     val email by viewModel.email.collectAsState()
     val password by viewModel.password.collectAsState()
     val confirmPassword by viewModel.confirmPassword.collectAsState()
-    val username by viewModel.username.collectAsState()
+    val fullName by viewModel.fullName.collectAsState()
     val age by viewModel.age.collectAsState()
     val gender by viewModel.gender.collectAsState()
     val loseWeight by viewModel.loseWeight.collectAsState()
     val weight by viewModel.weight.collectAsState()
     val height by viewModel.height.collectAsState()
 
-    fun clearSignUp(viewmodel: UserViewModel){
+    // Collect error states from the ViewModel
+    val usernameError by viewModel.usernameError.collectAsState()
+    val emailError by viewModel.emailError.collectAsState()
+    val passwordError by viewModel.passwordError.collectAsState()
+    val confirmPasswordError by viewModel.confirmPasswordError.collectAsState()
+    val ageError by viewModel.ageError.collectAsState()
+    val weightError by viewModel.weightError.collectAsState()
+    val heightError by viewModel.heightError.collectAsState()
+    val genderError by viewModel.genderError.collectAsState()
+    val loseWeightError by viewModel.loseWeightError.collectAsState()
+
+    // Define options for dropdowns
+    val genderOptions = listOf("Male", "Female", "Other")
+    val loseWeightOptions = listOf("Y", "N")
+    val scope = rememberCoroutineScope()
+
+    fun clearSignUp(viewModel: UserViewModel){
         viewModel.onEmailChange("")
         viewModel.onPasswordChange("")
         viewModel.onConfirmPasswordChange("")
-        viewModel.onUserNameChange("")
+        viewModel.onFullNameChange("")
         viewModel.onAgeChange("")
         viewModel.onGenderChange("")
         viewModel.onLoseWeightChange("")
@@ -53,7 +130,7 @@ fun SignUpView(viewModel: UserViewModel = viewModel(), navController: NavControl
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
-            .padding(20.dp), // Use .dp for padding
+            .padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         LazyColumn(
@@ -68,88 +145,127 @@ fun SignUpView(viewModel: UserViewModel = viewModel(), navController: NavControl
             }
 
             item {
+                // Full Name
+                OutlinedTextField(
+                    value = fullName,
+                    onValueChange = viewModel::onFullNameChange,
+                    label = { Text(text = "Name") },
+                    isError = usernameError != null,
+                    modifier = Modifier.fillMaxWidth()
+                )
+                usernameError?.let { Text(text = it, color = MaterialTheme.colorScheme.error, fontSize = 12.sp) }
+                Spacer(modifier = Modifier.height(16.dp))
+
+                // Email
                 OutlinedTextField(
                     value = email,
-                    onValueChange = { viewModel.onEmailChange(it) },
+                    onValueChange = viewModel::onEmailChange,
                     label = { Text(text = "Email") },
+                    isError = emailError != null,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+                    modifier = Modifier.fillMaxWidth()
                 )
+                emailError?.let { Text(text = it, color = MaterialTheme.colorScheme.error, fontSize = 12.sp) }
                 Spacer(modifier = Modifier.height(16.dp))
 
-                OutlinedTextField(
-                    value = username,
-                    onValueChange = { viewModel.onUserNameChange(it) },
-                    label = { Text(text = "Name") },
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-
+                // Password
                 OutlinedTextField(
                     value = password,
-                    onValueChange = { viewModel.onPasswordChange(it) },
+                    onValueChange = viewModel::onPasswordChange,
                     label = { Text(text = "Enter a new password") },
+                    isError = passwordError != null,
                     visualTransformation = PasswordVisualTransformation(),
+                    modifier = Modifier.fillMaxWidth()
                 )
+                passwordError?.let { Text(text = it, color = MaterialTheme.colorScheme.error, fontSize = 12.sp) }
                 Spacer(modifier = Modifier.height(16.dp))
 
+                // Confirm Password
                 OutlinedTextField(
                     value = confirmPassword,
-                    onValueChange = { viewModel.onConfirmPasswordChange(it) },
+                    onValueChange = viewModel::onConfirmPasswordChange,
                     label = { Text(text = "Confirm password") },
+                    isError = confirmPasswordError != null,
                     visualTransformation = PasswordVisualTransformation(),
+                    modifier = Modifier.fillMaxWidth()
                 )
+                confirmPasswordError?.let { Text(text = it, color = MaterialTheme.colorScheme.error, fontSize = 12.sp) }
                 Spacer(modifier = Modifier.height(16.dp))
+
+                // Age
                 OutlinedTextField(
                     value = age,
-                    onValueChange = { viewModel.onAgeChange(it) },
+                    onValueChange = viewModel::onAgeChange,
                     label = { Text(text = "Age") },
-                    placeholder = { Text("99") },
+                    isError = ageError != null,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    modifier = Modifier.fillMaxWidth()
                 )
+                ageError?.let { Text(text = it, color = MaterialTheme.colorScheme.error, fontSize = 12.sp) }
                 Spacer(modifier = Modifier.height(16.dp))
 
-                OutlinedTextField(
-                    value = gender,
-                    onValueChange = { viewModel.onGenderChange(it) },
-                    label = { Text(text = "Gender") },
-                    placeholder = { Text("(M/F)") },
+                // Gender Dropdown
+                ReusableDropdown(
+                    label = "Gender",
+                    options = genderOptions,
+                    selectedValue = gender,
+                    onValueChange = viewModel::onGenderChange,
+                    isError = genderError != null,
+                    modifier = Modifier.fillMaxWidth()
                 )
+                genderError?.let { Text(text = it, color = MaterialTheme.colorScheme.error, fontSize = 12.sp) }
                 Spacer(modifier = Modifier.height(16.dp))
 
-                OutlinedTextField(
-                    value = loseWeight,
-                    onValueChange = { viewModel.onLoseWeightChange(it) },
-                    label = { Text(text = "Weight Loss") },
-                    placeholder = { Text("(Y/N)") },
-                )
-                Spacer(modifier = Modifier.height(16.dp))
+                // Weight
                 OutlinedTextField(
                     value = weight,
-                    onValueChange = { viewModel.onWeightChange(it) },
+                    onValueChange = viewModel::onWeightChange,
                     label = { Text(text = "Weight (kg)") },
-                    placeholder = { Text("170") },
+                    isError = weightError != null,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    modifier = Modifier.fillMaxWidth()
                 )
+                weightError?.let { Text(text = it, color = MaterialTheme.colorScheme.error, fontSize = 12.sp) }
                 Spacer(modifier = Modifier.height(16.dp))
+
+                // Height
                 OutlinedTextField(
                     value = height,
-                    onValueChange = { viewModel.onHeightChange(it) },
+                    onValueChange = viewModel::onHeightChange,
                     label = { Text(text = "Height (cm)") },
-                    placeholder = { Text("177") },
+                    isError = heightError != null,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    modifier = Modifier.fillMaxWidth()
                 )
+                heightError?.let { Text(text = it, color = MaterialTheme.colorScheme.error, fontSize = 12.sp) }
+                Spacer(modifier = Modifier.height(16.dp))
+
+                // Weight Loss Goal Dropdown
+                ReusableDropdown(
+                    label = "Weight Loss Goal",
+                    options = loseWeightOptions,
+                    selectedValue = loseWeight,
+                    onValueChange = viewModel::onLoseWeightChange,
+                    isError = loseWeightError != null,
+                    modifier = Modifier.fillMaxWidth()
+                )
+                loseWeightError?.let { Text(text = it, color = MaterialTheme.colorScheme.error, fontSize = 12.sp) }
             }
         }
         Spacer(modifier = Modifier.height(16.dp))
-        val scope = rememberCoroutineScope()
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Spacer(modifier = Modifier.height(16.dp)) // Space above the button
+            Spacer(modifier = Modifier.height(16.dp))
 
             Button(
                 onClick = {
                     scope.launch {
                         val signUpSuccess = viewModel.signUp(
                             email=email,
-                            username=username,
+                            username=fullName,
                             password=password,
                             confirmPassword=confirmPassword,
                             age=age,
@@ -158,13 +274,11 @@ fun SignUpView(viewModel: UserViewModel = viewModel(), navController: NavControl
                             weight=weight,
                             height=height
                         )
-                        if (signUpSuccess){
+                        if (signUpSuccess) {
+                            clearSignUp(viewModel)
                             navController.navigate("login")
-                        }else{
-                            println("Sign up fail")
                         }
                     }
-                    clearSignUp(viewModel)
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -173,12 +287,10 @@ fun SignUpView(viewModel: UserViewModel = viewModel(), navController: NavControl
                 Text(text = "Sign Up")
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
-
-
             Button(
                 onClick = {
                     clearSignUp(viewModel)
+                    viewModel.clearAllErrors()
                     navController.navigate("login")
                 },
             ) {
@@ -186,5 +298,4 @@ fun SignUpView(viewModel: UserViewModel = viewModel(), navController: NavControl
             }
         }
     }
-
 }

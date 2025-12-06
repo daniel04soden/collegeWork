@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 import java.util.Locale
 
-class EntryViewModel(private val entryDao: EntryDao) : ViewModel() {
+class EntryViewModel(private val entryDao: EntryDao,val userViewModel: UserViewModel) : ViewModel() {
 
     private val _searchQuery = MutableStateFlow("")
     val searchQuery = _searchQuery.asStateFlow()
@@ -44,13 +44,14 @@ class EntryViewModel(private val entryDao: EntryDao) : ViewModel() {
         _searchQuery.value = newQuery
     }
 
-    fun addEntry(text: String, name: String, rating: String) {
+    fun addEntry(text: String,rating: String) {
         viewModelScope.launch {
             val newEntry = Entry(
                 text = text,
-                name = name,
+                name = userViewModel.currentUser.value?.fullName,
                 date = LocalDateTime.now(),
                 rating = rating.toIntOrNull() ?: 0,
+                userId = userViewModel.currentUser.value?.id
             )
             entryDao.insertEntry(newEntry)
         }
@@ -62,13 +63,12 @@ class EntryViewModel(private val entryDao: EntryDao) : ViewModel() {
         }
     }
 
-    fun editEntry(entry: Entry?, newText: String, newName: String, newRating: String) {
+    fun editEntry(entry: Entry?, newText: String,newRating: String) {
         viewModelScope.launch {
             entryDao.updateEntry(
                 entry?.id,
                 newText,
-                newName,
-                newRating.toIntOrNull() ?: 0
+                newRating = newRating.toIntOrNull() ?: 0
             )
         }
     }

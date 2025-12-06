@@ -24,7 +24,7 @@ func main() {
 		log.Fatalf("failed to read choice: %v", err)
 	}
 
-	conn, err := grpc.NewClient("localhost:50051", grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.NewClient("localhost:50052", grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatalf("failed to create client: %v", err)
 	}

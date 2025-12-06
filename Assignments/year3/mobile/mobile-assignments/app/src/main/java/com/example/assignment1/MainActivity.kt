@@ -9,25 +9,27 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.assignment1.Data.AppDatabase
 import com.example.assignment1.ViewModels.EntryViewModel
 import com.example.assignment1.ViewModels.EntryViewModelFactory
 import com.example.assignment1.ViewModels.UserViewModel
 import com.example.assignment1.ViewModels.UserViewModelFactory
-import com.example.assignment1.Views.EntryDetailsView
+import com.example.assignment1.Views.BottomBar
 import com.example.assignment1.Views.HomeScreen
 import com.example.assignment1.Views.LogScreen
 import com.example.assignment1.Views.LoginView
 import com.example.assignment1.Views.Screen
-import com.example.assignment1.Views.SettingsScreen
 import com.example.assignment1.Views.SignUpView
+import com.example.assignment1.Views.UserSettingsScreen
 import com.example.assignment1.ui.theme.AppTheme
 
 
@@ -55,36 +57,38 @@ fun MainScreen() {
     val userDao = AppDatabase.getDatabase(context).userDao()
     val entryDao = AppDatabase.getDatabase(context).entryDao()
     val userViewModelFactory = UserViewModelFactory(userDao)
-    val entryViewModelFactory = EntryViewModelFactory(entryDao)
     val userViewModel: UserViewModel = viewModel(factory = userViewModelFactory)
+    val entryViewModelFactory = EntryViewModelFactory(entryDao,userViewModel)
     val entryViewModel: EntryViewModel = viewModel(factory = entryViewModelFactory)
+    val screensWithBar = listOf(
+        Screen.Home.route,
+        Screen.Settings.route,
+        Screen.Logs.route
+    )
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val showingBottomBar = navBackStackEntry?.destination?.route in screensWithBar
 
     Scaffold(
-        //TODO bottomBar = { BottomBar(navController) } - add back bottom bar in ergonomic way
+        bottomBar = {
+            if (showingBottomBar){
+                BottomBar(navController)
+            }
+        },
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = Screen.Logs.route,
+            startDestination = Screen.Login.route,
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(Screen.Home.route) { HomeScreen(navController) }
-            composable(Screen.Settings.route) { SettingsScreen(userViewModel, navController) }
+            composable(Screen.Settings.route) { UserSettingsScreen(navController, userViewModel) }
             composable(Screen.Login.route) { LoginView(viewModel = userViewModel,navController) }
             composable(Screen.SignUp.route) { SignUpView(viewModel = userViewModel,navController) }
             composable(Screen.Logs.route) { LogScreen(entryViewModel) }
-            composable(Screen.EntryDetail.route) { backStackEntry ->
-                val entryId = backStackEntry.arguments?.getString("entryId")?.toIntOrNull()
-                if (entryId != null) {
-                    EntryDetailsView(
-                        entryId = entryId,
-                        entryViewModel = entryViewModel,
-                        navController = navController
-                    )
-                }
-            }
         }
     }
 }
+
 
 
 @Preview(showBackground = true)

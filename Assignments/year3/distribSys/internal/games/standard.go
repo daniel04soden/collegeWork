@@ -10,7 +10,6 @@ import (
 	"distribSys/internal/entity"
 )
 
-// Standard now holds the necessary state for the game
 type Standard struct {
 	words        data.WordDictionary
 	wordsGuessed []string
@@ -18,11 +17,11 @@ type Standard struct {
 	pangram      *entity.Pangram
 	targetScore  int
 }
+const dictPath string = "./internal/data/words_dictionary.json"
 
-// NewStandardGame is the constructor called by the factory.
 func NewStandardGame() *Standard {
-	words := data.GetValidWords("internal/data/words_dictionary.json")
-	pangram := bee.GeneratePangram("internal/data/words_dictionary.json")
+	words := data.GetValidWords(dictPath)
+	pangram := bee.GeneratePangram(dictPath)
 
 	return &Standard{
 		words:        words,
@@ -41,8 +40,8 @@ func (s *Standard) GetState() (string, int) {
 
 func (s *Standard) ProcessGuess(guess string) (int, []string, string, bool) {
 	guess = strings.ToLower(guess)
-	if slices.Contains(s.wordsGuessed, guess) {
-		return s.points, s.wordsGuessed, "You already guessed that word!", s.points >= s.targetScore
+	if slices.Contains(s.wordsGuessed, guess) || len(guess) < 4 {
+		return s.points, s.wordsGuessed, "Invalid guess", s.points >= s.targetScore
 	}
 
 	newPoints := bee.ProcessEntry(guess, s.pangram, s.words)

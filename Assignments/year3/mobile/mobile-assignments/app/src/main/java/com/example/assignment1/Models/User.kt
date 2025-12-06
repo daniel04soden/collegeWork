@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
 data class User(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    var username: String,
+    var fullName: String,
     var age: Int,
     val gender: String, // "female" or "male"
     var email: String,
@@ -25,7 +25,7 @@ data class User(
     var consistencyScore: Int? = null
 ) {
     constructor(
-        username: String,
+        fullName: String,
         age: Int,
         gender: String,
         email: String,
@@ -34,7 +34,7 @@ data class User(
         height: Double,
         loseWeight: String
     ) : this(
-        username = username,
+        fullName = fullName,
         age = age,
         gender = gender,
         email = email,

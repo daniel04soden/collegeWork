@@ -1,154 +1,128 @@
 package main
 
 import (
-	"distribSys/sockets/dao"
+	"bufio"
 	"fmt"
+	"log"
 	"net"
-	"os"
 	"strings"
-	"strconv"
+	"sync"
+
+	"github.com/streadway/amqp"
 )
 
 const (
-	tcpAddr  = ":9988"
-	host = "localhost"
-	serverType = "tcp"
+	amqpURL = "amqp://guest:guest@rabbitmq:5672/"
+	tcpAddr = ":9000"
 )
 
-var statOptions = []string{"avg","guesses","total","all","letters"}
+var (
+	mu      sync.Mutex
+	clients = make(map[net.Conn]struct{})
+)
 
 func main() {
-	fmt.Println("Running concurrent server...")
 
-	server, err := net.Listen(serverType, host+tcpAddr)
+	conn, err := amqp.Dial(amqpURL)
 	if err != nil {
-		fmt.Println("Error Listening: ", err.Error())
-		os.Exit(1)
+		log.Fatalf("amqp dial: %v", err)
+	}
+	defer conn.Close()
+
+	ch, err := conn.Channel()
+	if err != nil {
+		log.Fatalf("amqp channel: %v", err)
+	}
+	defer ch.Close()
+
+	if err := ch.ExchangeDeclare(
+		"game.events",
+		"topic",
+		true,
+		false,
+		false,
+		false,
+		nil); err != nil {
+		log.Fatalf("exchange declare: %v", err)
 	}
 
-	defer server.Close()
+	q, err := ch.QueueDeclare("", false, true, true, false, nil)
+	if err != nil {
+		log.Fatalf("queue declare: %v", err)
+	}
 
-	fmt.Println("Listening on " + host + tcpAddr)
-	fmt.Println("Waiting for clients...")
+	if err := ch.QueueBind(q.Name, "game.pangram", "game.events", false, nil); err != nil {
+		log.Fatalf("queue bind: %v", err)
+	}
+
+	deliveries, err := ch.Consume(q.Name, "", true, true, false, false, nil)
+	if err != nil {
+		log.Fatalf("consume: %v", err)
+	}
+
+	ln, err := net.Listen("tcp", tcpAddr)
+	if err != nil {
+		log.Fatalf("listen: %v", err)
+	}
+	log.Printf("Socket server listening on %s", tcpAddr)
+
+	go func() {
+		for d := range deliveries {
+			payload := strings.TrimSpace(string(d.Body))
+			broadcastMsg := fmt.Sprintf("\n*** PANGRAM FOUND! *** [%s] %s\n", d.RoutingKey, payload) 
+			log.Println("BROADCASTING:", broadcastMsg)
+
+			mu.Lock()
+
+			for conn := range clients {
+				if _, err := conn.Write([]byte(broadcastMsg)); err != nil {
+					log.Printf("Error writing to client %s: %v. Disconnecting.", conn.RemoteAddr(), err)
+					delete(clients, conn)
+					conn.Close()
+				}
+			}
+
+			mu.Unlock()
+		}
+		log.Println("RabbitMQ consumer ended")
+	}()
 
 	for {
-		connection, err := server.Accept()
+		conn, err := ln.Accept()
 		if err != nil {
-			fmt.Println("Error accepting: ", err.Error())
+			log.Printf("accept: %v", err)
 			continue
 		}
-		
-		fmt.Println("Client connected from", connection.RemoteAddr())
 
-		go processClientData(connection)
+		mu.Lock()
+		clients[conn] = struct{}{}
+		mu.Unlock()
+
+		go handleClient(conn)
 	}
 }
+func handleClient(conn net.Conn) {
+    log.Printf("Client %s connected.", conn.RemoteAddr())
 
-func processClientData(connection net.Conn) {
-	defer connection.Close()
+    defer func() {
+        mu.Lock()
+        delete(clients, conn)
+        mu.Unlock()
+        conn.Close()
+        log.Printf("Client %s disconnected.", conn.RemoteAddr())
+    }()
 
-	buffer := make([]byte, 1024)
-	
-	mLen, err := connection.Read(buffer)
-	if err != nil {
-		fmt.Printf("Error reading from %s: %s\n", connection.RemoteAddr(), err.Error())
-		return
-	}
+    w := bufio.NewWriter(conn)
 
-	receivedMsg := string(buffer[:mLen])
-	fmt.Printf("Received from %s: %s\n", connection.RemoteAddr(), receivedMsg)
+    _, err := w.WriteString("Welcome! Waiting for Pangram events...\n")
+    if err != nil {
+        log.Printf("Error writing initial welcome message to client %s: %v", conn.RemoteAddr(), err)
+        return
+    }
+    _ = w.Flush()
 
-	parts := strings.Split(receivedMsg, ",")
-	option := parts[0]
-	
-	gameID := 0 // Default id
-	
-	if len(parts) == 2 {
-		idStr := parts[1]
-		parsedID, err := strconv.Atoi(idStr)
-		if err != nil {
-			response := []byte(fmt.Sprintf("ERROR: Game ID '%s' is not a valid number.", idStr))
-			connection.Write(response)
-			return
-		}
-		gameID = parsedID
-	} else if len(parts) > 2 {
-		response := []byte("ERROR: Invalid message format. Expected 'option' or 'option,gameID'.")
-		connection.Write(response)
-		return
-	}
+    log.Printf("Client %s welcome message sent. Blocking handler.", conn.RemoteAddr())
 
-	// String builder needed for reformatting parsed data
-	var responseBuilder strings.Builder
-	switch option {
-	case statOptions[0]:
-		avg, err := dao.GetAverage(gameID)
-		if err != nil {
-			fmt.Println("Error getting average:", err)
-			connection.Write([]byte("ERROR: Failed to retrieve average."))
-			return
-		}
-		fmt.Println("Average score:", avg)
-		
-		responseBuilder.WriteString(fmt.Sprintf("Average score for ID %d: %f", gameID, avg))
-
-	case statOptions[1]:
-		guesses, err := dao.GetGuesses(gameID)
-		if err != nil {
-			fmt.Println("Error getting guesses:", err)
-			connection.Write([]byte("ERROR: Failed to retrieve guesses."))
-			return
-		}
-		fmt.Println("Guesses:", guesses)
-		
-		responseBuilder.WriteString(fmt.Sprintf("Guesses for ID %d: %v", gameID, guesses))
-
-	case statOptions[2]:
-		total, err := dao.GetTotal(gameID)
-		if err != nil {
-			fmt.Println("Error getting total:", err)
-			connection.Write([]byte("ERROR: Failed to retrieve total score."))
-			return
-		}
-		fmt.Println("Total Score:", total)
-		
-		responseBuilder.WriteString(fmt.Sprintf("Total score for ID %d: %.0f", gameID, total))
-
-	case statOptions[3]:
-		games, err := dao.ListGames()
-		if err != nil {
-			fmt.Println("Error listing games:", err)
-			connection.Write([]byte("ERROR: Failed to list all games."))
-			return
-		}
-		
-		for i := range games{
-			output := fmt.Sprintf("Game ID: %d, Letters: %s, Guesses: %v, Avg: %.2f, Total: %.0f\n",
-				games[i].ID, games[i].Letters, games[i].Guesses, games[i].Avg, games[i].Total)
-			fmt.Print(output)
-			responseBuilder.WriteString(output)
-		}
-
-	case statOptions[4]:
-		letters, err := dao.GetLetters(gameID)
-		if err != nil {
-			fmt.Println("Error getting letters:", err)
-			connection.Write([]byte("ERROR: Failed to retrieve letters."))
-			return
-		}
-		fmt.Println("Letters: ", letters)
-		
-		responseBuilder.WriteString(fmt.Sprintf("Letters for ID %d: %s", gameID, letters))
-
-	default:
-		responseBuilder.WriteString(fmt.Sprintf("ERROR: Invalid statistical option '%s'", option))
-	}
-
-	_, err = connection.Write([]byte(responseBuilder.String()))
-
-	if err != nil {
-		fmt.Printf("Error writing response to %s: %s\n", connection.RemoteAddr(), err.Error())
-	}
-	
-	fmt.Printf("Connection to %s closed.\n", connection.RemoteAddr())
+    <-make(chan struct{})
+    log.Printf("Client %s handler unblocked unexpectedly!", conn.RemoteAddr()) 
 }

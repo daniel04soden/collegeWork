@@ -66,9 +66,6 @@ fun HomeScreen(navController: NavController){
                 }
             )
                  },
-        bottomBar = {
-            BottomBar(navController)
-        },
         content = { paddingValues ->
             Column(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
                 Spacer(modifier = Modifier.height(20.dp))

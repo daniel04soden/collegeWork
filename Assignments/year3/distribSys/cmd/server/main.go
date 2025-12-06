@@ -2,12 +2,15 @@ package main
 
 import (
 	"context"
+	"os"
 	"fmt"
 	"log"
 	"net"
+	"strings"
 
 	gamemanagerpb "distribSys/api/distrib_sys/v1"
 	"distribSys/internal/manager"
+	"distribSys/internal/mq"
 
 	"google.golang.org/grpc"
 )
@@ -16,6 +19,7 @@ type server struct {
 	gamemanagerpb.UnimplementedGameManServiceServer
 	gamemanagerpb.UnimplementedPangramServiceServer 
 	mgr manager.Manager
+	pub *mq.Publisher
 }
 
 
@@ -35,6 +39,10 @@ func (s *server) SubmitGuess(ctx context.Context, req *gamemanagerpb.SubmitGuess
 	}
 
 	newScore, wordsGuessed, statusMessage, isGameOver := g.ProcessGuess(req.GetGuess())
+
+	if strings.Contains(statusMessage,"Pangram"){
+	s.pub.Publish("game.pangram", fmt.Sprintf("Pangram found %v",req.GetGuess()))
+	} 
 
 	return &gamemanagerpb.SubmitGuessResponse{
 		NewScore:     int32(newScore),
@@ -68,20 +76,28 @@ func (s *server) GetGameState(ctx context.Context, req *gamemanagerpb.GetGameSta
 	}, nil
 }
 
-func (s *server) GetPangram(ctx context.Context, req *gamemanagerpb.GetPangramRequest) (*gamemanagerpb.GetPangramResponse, error) {
-	return nil, fmt.Errorf("GetPangram not implemented; use GetGameState")
-}
-
-
 func main() {
 	lis, err := net.Listen("tcp", ":50051")
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
+	rabbitmqURL := os.Getenv("RABBITMQ_URL") 
+	if rabbitmqURL == "" {
+		rabbitmqURL = "amqp://guest:guest@rabbitmq:5672/" 
+	}
 
-	s := &server{mgr: manager.Get()}
+	pub, err := mq.Connect(rabbitmqURL)
+
+	if err != nil {
+		log.Fatalf("Failed to connect to RabbitMQ: %v", err)
+	}
+	defer pub.Close()
+	s := &server{
+		mgr: manager.Get(),
+		pub: pub,
+	}
 	grpcServer := grpc.NewServer()
-	
+
 	gamemanagerpb.RegisterGameManServiceServer(grpcServer, s)
 	gamemanagerpb.RegisterPangramServiceServer(grpcServer, s)
 

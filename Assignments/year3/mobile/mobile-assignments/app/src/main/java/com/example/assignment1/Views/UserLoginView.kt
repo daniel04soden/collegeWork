@@ -9,7 +9,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeightIn
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,9 +22,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.assignment1.R
@@ -44,7 +48,9 @@ fun ImprovementImage() {
 fun LoginView(viewModel: UserViewModel=viewModel(), navController: NavController){
     val email by viewModel.email.collectAsState()
     val password by viewModel.password.collectAsState()
-    fun clearSignUp(viewmodel: UserViewModel){
+    val emailError by viewModel.emailError.collectAsState()
+    val passwordError by viewModel.passwordError.collectAsState()
+    fun clearLogin(viewmodel: UserViewModel){
         viewModel.onEmailChange("")
         viewModel.onPasswordChange("")
     }
@@ -70,21 +76,29 @@ fun LoginView(viewModel: UserViewModel=viewModel(), navController: NavController
             }
 
             item {
+                // Email
                 OutlinedTextField(
                     value = email,
-                    onValueChange = { viewModel.onEmailChange(it) },
+                    onValueChange = viewModel::onEmailChange,
                     label = { Text(text = "Email") },
+                    isError = emailError != null,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+                    modifier = Modifier.fillMaxWidth()
                 )
+                emailError?.let { Text(text = it, color = MaterialTheme.colorScheme.error, fontSize = 12.sp) }
                 Spacer(modifier = Modifier.height(16.dp))
 
+                // Password
                 OutlinedTextField(
                     value = password,
-                    onValueChange = { viewModel.onPasswordChange(it) },
+                    onValueChange = viewModel::onPasswordChange,
                     label = { Text(text = "Enter a new password") },
+                    isError = passwordError != null,
                     visualTransformation = PasswordVisualTransformation(),
+                    modifier = Modifier.fillMaxWidth()
                 )
+                passwordError?.let { Text(text = it, color = MaterialTheme.colorScheme.error, fontSize = 12.sp) }
                 Spacer(modifier = Modifier.height(16.dp))
-
             }
         }
         Spacer(modifier = Modifier.height(16.dp))
@@ -115,13 +129,13 @@ fun LoginView(viewModel: UserViewModel=viewModel(), navController: NavController
                         if (loginSuccess){
                             navController.navigate("home")
                             println("Login Successful")
+                            clearLogin(viewModel)
                         }
                         else{
                             navController.navigate("login")
-                            println("Login failed")
+                            clearLogin(viewModel)
                         }
                     }
-                    clearSignUp(viewModel)
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -135,7 +149,8 @@ fun LoginView(viewModel: UserViewModel=viewModel(), navController: NavController
 
             Button(
                 onClick = {
-                    clearSignUp(viewModel)
+                    clearLogin(viewModel)
+                    viewModel.clearAllErrors()
                     navController.navigate("signUp")
 
                 },

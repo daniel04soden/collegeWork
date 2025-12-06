@@ -25,6 +25,6 @@ interface EntryDao {
 
     @Query("DELETE FROM entry WHERE id = :id")
     suspend fun deleteEntryById(id: Int)
-    @Query ("UPDATE entry SET text = :newText, name = :newName, rating = :newRating WHERE id = :id")
-    suspend fun updateEntry(id: Int?, newText: String, newName: String, newRating: Int)
+    @Query ("UPDATE entry SET text = :newText, rating = :newRating WHERE id = :id")
+    suspend fun updateEntry(id: Int?, newText: String, newRating: Int)
 }

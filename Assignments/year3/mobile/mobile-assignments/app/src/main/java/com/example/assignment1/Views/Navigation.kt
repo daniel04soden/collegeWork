@@ -3,7 +3,6 @@ package com.example.assignment1.Views
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
@@ -24,7 +23,6 @@ sealed class Screen(val route: String, val label: String, val icon: ImageVector)
     object Login:Screen("login","Login",Icons.Default.AccountBox)
     object SignUp:Screen("signUp","Sign Up",Icons.Default.AccountCircle)
     object Logs : Screen("logs", "Logs", Icons.Default.DateRange)
-    object EntryDetail : Screen("entryDetails/{entryId}", "Entry Details", Icons.Default.Create)
 }
 
 

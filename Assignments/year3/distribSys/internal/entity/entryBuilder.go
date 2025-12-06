@@ -57,8 +57,8 @@ func containsLettersPangram(word string, validLetters string) bool {
 
 func (eb *entryBuilder) SetLetters(letters string, p Pangram, words data.WordDictionary) EntryBuilder {
 	letters = strings.ToLower(letters)
-	if !isLetter(letters) {
-		fmt.Println("Invalid entry, must only be alpha chars ,try again next time")
+	if !isLetter(letters) || len(letters) < 4{
+		fmt.Println("Invalid entry")
 		return nil
 	} else if !strings.Contains(letters, p.MiddleVal) {
 		fmt.Printf("Invalid entry must contain letter %s\n", p.MiddleVal)

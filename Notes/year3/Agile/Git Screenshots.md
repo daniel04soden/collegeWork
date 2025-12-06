@@ -28,7 +28,8 @@
 
 ![[Pasted image 20251124171421.png]]
 ![[Pasted image 20251124171426.png]]
-
+![[Pasted image 20251203094427.png]]
+![[Pasted image 20251203094435.png]]
 ## Hotfix
 
 ![[Pasted image 20251125150149.png]]

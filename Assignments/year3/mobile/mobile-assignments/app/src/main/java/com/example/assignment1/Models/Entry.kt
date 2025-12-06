@@ -7,10 +7,11 @@ import java.time.LocalDateTime
 @Entity(tableName = "entry")
 data class Entry(
     @PrimaryKey(autoGenerate = true)
-    val id:Int = 0, // Unique identifier for each entry
-    var text:String? = null, // Text entered by the user
-    var name:String? = "", // User who entered the text
+    val id: Int = 0, // Unique identifier for each entry
+    val userId: Int?, // Id attached to user
+    var text: String? = null, // Text entered by the user
+    val name: String?, // User who entered the text
     var date: LocalDateTime, // Date of entry
     var time: String = date.toLocalTime().toString(), // Time of entry
-    var rating:Int? = null,  // Rating out of ten for the day
+    var rating: Int? = null,  // Rating out of ten for the day
 )

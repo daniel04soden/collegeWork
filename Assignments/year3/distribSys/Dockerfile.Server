@@ -1,0 +1,24 @@
+FROM golang:1.25-alpine AS builder
+
+WORKDIR /app
+
+COPY go.mod go.sum ./
+
+RUN go mod download
+
+COPY . .
+
+RUN apk add --no-cache gcc musl-dev
+RUN GOOS=linux go build -o server-game-app ./cmd/server
+
+FROM alpine:latest
+
+WORKDIR /root/
+
+EXPOSE 50051
+
+COPY --from=builder /app/server-game-app .
+COPY db ./db/
+COPY internal/data ./internal/data/
+
+CMD ["./server-game-app"]

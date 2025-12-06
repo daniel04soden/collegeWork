@@ -1,301 +1,101 @@
-# Daniel Soden Distributed Systems Assignment - Spelling Bee gRPC + Design Patterns
+# Daniel Soden Distributed Systems Assignment 2 - Spelling Bee Docker + Rabbitmq + Sockets
 
 ## Table of contents
 
-- [Design Pattern 1 - Builder pattern](#design-pattern-1---builder-pattern)
-- [Design Pattern 2&3 - Factory and Decorator](#design-pattern-2&3---factory-and-decorator)
-- [Design Pattern 4 - Singleton](#design-pattern-4---singleton)
-- [Conclusion/Issues](#conclusionissues)
+# Table of Contents
+1. [Architecture](#Architecture)
+2. [Database Socket Client](#Database Socket Client)
+3. [Rabbitmq Socket Client](#Rabbitmq Socket Client)
+4. [Dockerfiles and docker compose](#Dockerfiles and docker compose)
 
-## Design Pattern 1 - Builder pattern
 
-- When processing user entry and generating pangrams there was a multitude of restrictions that would break the conditions of being a valid entry or pangram.
-- Given these restrictions, we can use the builder pattern to create a builder that can be used to build a valid entry or pangram by returning nil if ever these restrictions are broken. In the main implementation of these structs, if they are ever nil, the function will know to handle it effectively and build again.
+# Architecture
+![[Screenshot 2025-12-06 at 12.50.30.png]]
 
-### Entry Builder
-
-- To be a valid entry, it needs to:
-
-1. Have the middle letter of the pangram
-2. Be 4 characters minimum
-3. Be a valid English word (using provided dictionary)
-
-#### entryBuilder.go
-
-```go
-
-type EntryBuilder interface {
-	SetLetters(letters string, p Pangram, d data.WordDictionary) EntryBuilder
-	SetLength(letters string) EntryBuilder
-	Build() *Entry
-}
-
-type entryBuilder struct {
-	entry *Entry
-}
-
-type EntryDirector struct {
-	EntryBuilder EntryBuilder
-}
-
-func (eD *EntryDirector) ConstructEntry(letters string, p Pangram, w data.WordDictionary) *Entry {
-	if eD.EntryBuilder == nil {
-		fmt.Println("Invalid entry, try play again & re-read the rules")
-		return nil
-	} else {
-		eD.EntryBuilder.SetLetters(letters, p, w)
-		eD.EntryBuilder.SetLength(letters)
-		return eD.EntryBuilder.Build()
+- My idea for the design of this system was initially to have it so it works similar to last time wherein a client connects to our game server and is given a couple of letters and from there has to play the spelling bee game. However I had to refactor my original protobuf file a good bit as in my previous design, there was no way to track game state so whenever a client would connect, the game state would all be stored on the server and the game was also running on the server. After a good chunk of refactoring I ended up with something like this 
+  
+  
+  ```go
+  // cmd/cli/main.go
+func main() {
+	var choice string
+	fmt.Println("Welcome to the Spelling bee, What game would you line to play? [standard], [standard+logging]")
+	_, err := fmt.Fscanln(os.Stdin, &choice)
+	if err != nil && err.Error() != "unexpected newline" {
+		log.Fatalf("failed to read choice: %v", err)
 	}
-}
+	```
+- The user is prompted to decide again like last time if they'd like to play as normal, or as normal with logging on the server end
 
-func NewEntryBuilder() EntryBuilder {
-	return &entryBuilder{
-		entry: &Entry{},
-	}
-}
-
-func (eb *entryBuilder) SetLetters(letters string, p Pangram, words data.WordDictionary) EntryBuilder {
-	if !isLetter(letters) {
-		fmt.Println("Invalid entry, must only be alpha chars ,try again next time")
-		return nil
-	} else if !strings.Contains(strings.ToLower(letters), p.MiddleVal) {
-		fmt.Printf("Invalid entry must contain letter %s\n", p.MiddleVal)
-		return nil
-	} else if !(data.ValidateWord(letters, words)) {
-		fmt.Println("Invalid entry, not a real word")
-		return nil
-	} else {
-		eb.entry.Letters = letters
-		return eb
-	}
-}
-
-func (eb *entryBuilder) SetLength(letters string) EntryBuilder {
-	lenLetters := len(letters)
-	if lenLetters < 4 {
-		fmt.Println("Word too short try again next time")
-		eb.entry.Length = 0
-		return eb
-	} else {
-		eb.entry.Length = lenLetters
-		return eb
-	}
-}
-
-func (eb *entryBuilder) Build() *Entry {
-	return eb.entry
-}
-```
-
-#### bee.go - example of entry builder usage
-
-- As we can see we declare our builder, pass the builder into the director and then call the construct method on the director.
-- All of the functions called in construction method can either return an entrybuilder as normal to be put together for the final construction or nil and if any are nil,this is handled by setting the points to 0
-
-```go
-func ProcessEntry(userInput string, p *entity.Pangram, validWords data.WordDictionary) (points int) {
-	// Construct entry to ensure that it is valid
-	entryBuilder := entity.NewEntryBuilder()
-	entryDirector := &entity.EntryDirector{EntryBuilder: entryBuilder}
-	entry := entryDirector.ConstructEntry(userInput, *p, validWords)
-
-	if entry != nil {
-		points = getPoints(entry.Letters, p.Letters)
-	} else {
-		points = 0
-	}
-	return
-}
-```
-
-### Pangram Builder
-
-#### pangramBuilder.go
-
-```go
-func (pD *PangramDirector) ConstructPangram(letters string) *Pangram {
-	if pD.PangramBuilder == nil { // If ever returned as nil with various setters, not constructed
-		fmt.Println("Invalid pangram, try play again & re-read the rules")
-		return nil
-	}
-	pD.PangramBuilder.SetLetters(letters)
-	pD.PangramBuilder.SetLength(letters)
-	pD.PangramBuilder.SetMiddleVal(letters)
-
-	return pD.PangramBuilder.Build()
-}
-
-func NewPangramBuilder() PangramBuilder {
-	return &pangramBuilder{
-		pangram: &Pangram{},
-	}
-}
-
-
-func (pb *pangramBuilder) SetLetters(letters string) PangramBuilder {
-	if !verifyPangram(letters) {
-		fmt.Printf("Invalid pangram must contain letter s\n")
-		return nil
-	} else {
-		pb.pangram.Letters = letters
-		return pb
-	}
-}
-
-func (pb *pangramBuilder) SetLength(letters string) PangramBuilder {
-	lenLetters := len(letters)
-	if lenLetters < 4 {
-		fmt.Println("Word too short try again next time")
-		return nil
-	} else {
-		pb.pangram.Length = lenLetters
-		return pb
-	}
-}
-
-func (pb *pangramBuilder) SetMiddleVal(letters string) PangramBuilder {
-	if len(letters) < 4 {
-		fmt.Println("Word too short try again next time")
-		return nil
-	} else {
-		res := []rune(letters)
-		length := len(res)
-		middle := (length / 2) - 1 // works well for both odd and even
-		pb.pangram.MiddleVal = string(res[middle])
-		return pb
-	}
-}
-
-func (pb *pangramBuilder) Build() *Pangram {
-	return pb.pangram
-}
-```
-
-#### bee.go - example of pangram builder usage
-
-- This is a lot simpler as we simply see it being constructed from a randomly generated pangram, being passed into the construct pangram function and being returned.
-- Pangram is the most difficult due to its main conditions:
-
-1. All letters must be unique
-2. It must 7 characters in length
-3. It cannot have the letter 's' in the word
-
-- These restrictions are handled by the setLetters function, which checks said conditions and, if it is all okay, it will return a builder, otherwise the function will return nil.
-
-```go
-func GeneratePangram(dictPath string) (p *entity.Pangram) {
-	pangramStr := data.GetRandomPangram(dictPath)
-	pangramBuilder := entity.NewPangramBuilder()
-	pangramDirector := &entity.PangramDirector{PangramBuilder: pangramBuilder}
-	pangram := pangramDirector.ConstructPangram(pangramStr)
-
-	return pangram
-}
-```
-
-## Design Pattern 2&3 - Factory and Decorator
-
-- In this assignment we were tasked with making a spelling bee **game**. In said game we were given a set of strict rules thus a variation of games initially to me made no sense
-- That was until in one of the labs we implemented decorators as seen below, where we are able to create a variation on the output coming from an interface's methods implementation by simply passing said interface into another method
-- To introduce the options of playing with the logging decoration, the factory pattern was needed as seen below:
-
-```go
-
-func New(kind string) (Game, error) {
-	switch kind {
-	case "standard":
-		return Standard{}, nil
-	case "standard+logging":
-		s := Standard{}
-		return decorate.WrapLogging(s), nil
-	default:
-		return nil, fmt.Errorf("unknown game kind %s", kind)
-	}
-}
-```
-
-- Here we simply pass in the name for a kind of game ie standard or standard and logging and we return the interface for the chosen kind.
-- standard just returns the standard object whereas standard+logging wraps said interface in this additional functionality:
-
-```go
-
-type Game interface {
-	Type() string
-	Play() (int, []string)
-}
-
-type Logging struct {
-	Inner Game
-}
-
-func (d Logging) Type() string { return d.Inner.Type() }
-
-func (d Logging) Play() (int, []string) {
-	point, guess := d.Inner.Play()
-	log.Printf("[LOG] %s → Total Points %d", d.Type(), point)
-	for i := range guess {
-		log.Printf("[LOG] Guess No. %d → %s", i, guess[i])
-	}
-	return point, guess
-}
-
-func WrapLogging(g Game) Game { return Logging{g} }
-```
-
-- We re-define games here and introduce an inner interface in our logging struct which uses the game.Play() method and also adds a log for specific metrics such as words guessed and the points we have earned at different parts of the game
-
-## Design Pattern 4 - Singleton
-
-- In our code to manage the creation of games we used a manager instance as a means of getting information about said game and passing it through grpc.
-
-- However if one were to have multiple managers we may run into issues where a game is ongoing, we are accessing information related to the game on one manager and the game has been updated and new information has arose and we are accessing information related to the game on another manager.
-- To solve this issue we can use the singleton pattern to ensure that only one instance of a game is created and that all information is accessed through said instance.
-
-```go
-func Get() Manager {
-	once.Do(func() {
-		instance = &mgr{
-			items: make(map[string]games.Game),
-		}
-	})
-	return instance
-}
-```
-
-- As seen above we have a publicly accesible function Get which returns a manager. In this manager function we retrieve the address of mgr which stores the various ongoing games
-- Manager is able to create games as seen below and we are able to prevent the creation of multiple users accessing our manager by using a mutex lock.
-
-```go
-func (m *mgr) Create(kind string) (string, games.Game, error) {
-	g, err := games.New(kind)
+	```go
+	conn, err := grpc.NewClient("localhost:50052", grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
-		return "", nil, err
+		log.Fatalf("failed to create client: %v", err)
 	}
 
-	m.mu.Lock()
-	m.nextID++
-	id := fmt.Sprintf("game-%d", m.nextID)
-	m.items[id] = g
+	defer conn.Close()
 
-	defer m.mu.Unlock()
+	gameClient := gamemanagerpb.NewGameManServiceClient(conn)
+	pangramClient := gamemanagerpb.NewPangramServiceClient(conn) 
 
-	return id, g, nil
-}
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
 
-func (m *mgr) Get(id string) (games.Game, bool) {
-	m.mu.RLock()
-	defer m.mu.RUnlock()
-	g, ok := m.items[id]
+	cr, err := gameClient.CreateGame(ctx, &gamemanagerpb.CreateGameRequest{Kind: choice})
+	if err != nil {
+		log.Fatalf("failed to create game: %v", err)
+	}
+	gameID := cr.GetId()
+	fmt.Printf("\n--- Game %s Created (Type: %s) ---\n", gameID, cr.GetType())
 
-	return g, ok
+	gsr, err := pangramClient.GetGameState(ctx, &gamemanagerpb.GetGameStateRequest{Id: gameID})
+	```
+- From here in the protobuf file, we have go code to request the creation of both pangrams (moreso the letters to guess pangrams) and a game struct. This game is then stored as a state so the user can be informed whether or not their guess was valid, their points so far, have they gotten a pangram etc etc.
+	
+	``` go
+	if err != nil {
+		log.Fatalf("failed to get game state: %v", err)
+	}
+
+	fmt.Printf("Letters: %s\n", gsr.GetDisplayLetters())
+	fmt.Printf("Current Score: %d\n", gsr.GetCurrentScore())
+	fmt.Println("----------------------------------")
+
+	for {
+		var guess string
+		fmt.Print("Enter a word: ")
+		_, err := fmt.Fscanln(os.Stdin, &guess)
+		if err != nil && err.Error() != "unexpected newline" {
+			log.Printf("Error reading guess: %v. Ending game.", err)
+			break
+		}
+
+		sgr, err := gameClient.SubmitGuess(context.Background(), &gamemanagerpb.SubmitGuessRequest{
+			Id: gameID,
+			Guess: guess,
+		})
+
+		if err != nil {
+			log.Fatalf("Error submitting guess: %v. Ending game.", err)
+			break
+		}
+
+```
+- Next we have the standard game loop, the user receives the display letters and their score from the game state, from there they are able to enter a guess, the gameClient receives these guesses, using an internal function which uses some of the internal builders that verifies whether their guess is a real word, if it has the letters and then finally it proceses how many points said guess should receive (+7 if pangram). If a guess causes a major error (unlikely) the game can terminate
+```go
+		fmt.Printf("  -> Status: %s\n", sgr.GetMessage())
+		fmt.Printf("  -> New Score: %d\n", sgr.GetNewScore())
+		fmt.Printf("  -> Guessed Words: %v\n", sgr.GetWordsGuessed())
+		if sgr.GetGameOver() {
+			storeGame( int(sgr.GetNewScore()), sgr.GetWordsGuessed(), gsr.GetDisplayLetters())
+			fmt.Println("\n--- Game Over! Congratulations! ---")
+			break
+		}
+	}
 }
 ```
 
-# Conclusion/Issues
-
-- I learned a lot throughout this project about certain design patterns and how they are implemented practically instead of for very little reason in certain object oriented languages. On top of this I was able to explore gRPC and send messages across two "machines".
-
-## Issues
-
-- The primary issue that arose for me that I was never able to fully resolve was mainly to do with grpc. I ended up modelling the system very similarly to the dice game we had practiced in class however compared to this game where you are providing a multitude of inputs, the dice game has one request and one result. This game has a larger quantity of checks and overall complexity. The main issue I faced was when connecting the client to the server, the code I wanted to be prompted on the clients end ended up being prompted on the server end. My resolution for this would be to re-factor the system to have games tate be saved so that the client is able to send and receive data on the fly as opposed to the final summary being given as of now. Due to time constraints this was not possible but this will be re-factored before assignment 2.
+- Finally once the gameover condition is met (any score > 25), we receive a game over message and the game breaks. Next we will go onto the database socket client setup, which the game client is also involved in
+# Database Socket Client
+# Rabbitmq Socket client
+# Dockerfiles and docker compose 

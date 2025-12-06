@@ -1,81 +1,45 @@
 package main
 
 import (
-	"net"
+	"bufio"
 	"fmt"
+	"log"
+	"net"
 	"os"
-	"slices"
-	"strconv"
+	"strings"
 )
 
-const (
-	tcpAddr = ":9988"
-	host = "localhost"
-	serverType = "tcp"
-)
-
-var statOptions = []string{"avg","guesses","total","all","letters"}
-var requiresGameID = []string{"avg", "guesses", "total", "letters"}
-
-func main(){
-	if len(os.Args) < 2 {
-		fmt.Println("Usage: './cli <statistical option> [gameID]'")
-		fmt.Println("Options:", statOptions)
-		os.Exit(1)
+func main() {
+	addr := "localhost:9000"
+	if len(os.Args) > 1 {
+		addr = os.Args[1]
 	}
 
-	userChoice := os.Args[1]
-	
-	if !slices.Contains(statOptions, userChoice) {
-		fmt.Printf("Error: Invalid option '%s'\n", userChoice)
-		fmt.Println("Options:", statOptions)
-		os.Exit(1) 
+	conn, err := net.Dial("tcp", addr)
+	if err != nil {
+		log.Fatalf("connect: %v", err)
 	}
+	defer conn.Close()
 
-	var msg string 
-
-	if slices.Contains(requiresGameID, userChoice) {
-		if len(os.Args) != 3 {
-			fmt.Printf("Usage: './cli %s <gameID>' - Missing game ID\n", userChoice)
-			os.Exit(1)
-		}
-		
-		gameIDStr := os.Args[2] 
-		
-		if _, err := strconv.Atoi(gameIDStr); err != nil {
-			fmt.Printf("Error: Game ID '%s' must be a valid integer.\n", gameIDStr)
-			os.Exit(1)
-		}
-
-		msg = fmt.Sprintf("%s,%s", userChoice, gameIDStr) 
-
-	} else if userChoice == "all" {
-		if len(os.Args) != 2 {
-			fmt.Printf("Usage: './cli %s' - Too many arguments (expected 1)\n", userChoice)
-			os.Exit(1)
-		}
-		
-		msg = userChoice 
+	serverReader := bufio.NewReader(conn)
+	welcomeMsg, err := serverReader.ReadString('\n')
+	if err != nil {
+		log.Fatalf("Error reading welcome message from server: %v", err)
 	}
-    
-	connection,err := net.Dial(serverType,host+tcpAddr)
-	if err!=nil{
-		panic(err)
-	}
-    defer connection.Close()
+	fmt.Print(strings.TrimRight(welcomeMsg, "\n") + "\n") 
+	fmt.Printf("Connected to server at %s. Waiting for Pangram broadcasts...\n", addr)
 
-	_,err = connection.Write([]byte(msg))
-	if err!=nil{
-	    panic(err)
-	}
-	
-	buffer:= make([]byte,1024)
-	mLen,err := connection.Read(buffer)
-	if err!=nil{
-		fmt.Println("Error reading: ", err.Error())
-		return
-	}
+	go func() {
+ 		for {
+ 			line, err := serverReader.ReadString('\n')
+ 			if err != nil {
+				log.Printf("Error reading from server: %v. Disconnecting.", err)
+				break 
+			} else {
+				fmt.Print(strings.TrimRight(line, "\n") + "\n")
+ 			}
+ 		}
+ 	}()
 
-	fmt.Printf("Received: %s\n", string(buffer[:mLen]))
-
+	<-make(chan struct{})
 }
