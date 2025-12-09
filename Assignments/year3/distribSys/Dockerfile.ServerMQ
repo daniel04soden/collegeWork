@@ -16,6 +16,5 @@ FROM alpine:latest
 WORKDIR /root/
 
 COPY --from=builder /app/server-mq .
-COPY db ./db/
 
 CMD ["server-mq"]
