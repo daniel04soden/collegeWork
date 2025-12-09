@@ -22,7 +22,9 @@ sealed class Screen(val route: String, val label: String, val icon: ImageVector)
     object Settings:Screen("settings","Settings",Icons.Default.Settings)
     object Login:Screen("login","Login",Icons.Default.AccountBox)
     object SignUp:Screen("signUp","Sign Up",Icons.Default.AccountCircle)
-    object Logs : Screen("logs", "Logs", Icons.Default.DateRange)
+    object Journalling : Screen("journalling", "Journalling", Icons.Default.DateRange)
+    object Food : Screen("food", "Food", Icons.Default.DateRange)
+    object Meditation : Screen("meditation", "Meditation", Icons.Default.DateRange)
 }
 
 
@@ -36,7 +38,6 @@ fun BottomBar(navController: NavController) {
     NavigationBar {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
-
         bottomBarItems.forEach { screen ->
             NavigationBarItem(
                 icon = { Icon(screen.icon, contentDescription = null) },
@@ -44,8 +45,12 @@ fun BottomBar(navController: NavController) {
                 selected = currentRoute == screen.route,
                 onClick = {
                     navController.navigate(screen.route) {
-                        popUpTo(navController.graph.startDestinationId)
+                        popUpTo(Screen.Home.route) {
+                            saveState = true
+                        }
                         launchSingleTop = true
+                        restoreState = true
+
                     }
                 }
             )

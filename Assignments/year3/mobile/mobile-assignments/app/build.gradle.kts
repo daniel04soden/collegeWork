@@ -56,6 +56,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.core.i18n)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -65,8 +66,10 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     implementation(platform("androidx.compose:compose-bom:2025.10.01"))
-    val room_version = "2.6.1" // Using a stable version is recommended
+    val room_version = "2.6.1"
     implementation("androidx.room:room-runtime:$room_version")
-    implementation("androidx.room:room-ktx:$room_version") // <-- ADD THIS for coroutine support
-    kapt("androidx.room:room-compiler:$room_version")     // <-- CHANGE 'annotationProcessor' to 'kapt'
+    implementation("androidx.room:room-ktx:$room_version") // For coroutine support
+    kapt("androidx.room:room-compiler:$room_version")
+
+    implementation("androidx.security:security-crypto:1.0.0")
 }

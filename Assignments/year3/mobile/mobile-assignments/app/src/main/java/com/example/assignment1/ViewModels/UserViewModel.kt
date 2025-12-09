@@ -5,18 +5,45 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.assignment1.Data.UserDao
 import com.example.assignment1.Models.User
+import com.example.assignment1.SessionManager
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import org.mindrot.jbcrypt.BCrypt
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 
-class UserViewModel(private val userDao: UserDao): ViewModel(){
-    // Login info
+class UserViewModel(val userDao: UserDao,private val sessionManager: SessionManager): ViewModel(){
     private val _currentUser = MutableStateFlow<User?>(null)
     val currentUser: StateFlow<User?> = _currentUser
+
+    private val _isAutoLoginCheckComplete = MutableStateFlow(false)
+    val isAutoLoginCheckComplete: StateFlow<Boolean> = _isAutoLoginCheckComplete
     fun onUserChange(newUser: User?) {
         _currentUser.value = newUser
+    }
+    init {
+        checkForAutoLogin()
+    }
+    private fun checkForAutoLogin(){
+        viewModelScope.launch {
+            try {
+                val userId = sessionManager.getLoggedInUserId()
+                if (userId != -1L) {
+                    val user = userDao.findUserById(userId)
+                    if (user != null) {
+                        _currentUser.value = user
+                        checkForDailyReset(user)
+                        Log.d("UsersTrack", "Auto-logged in user: ${user.fullName}")
+                    } else {
+                        sessionManager.clearSession()
+                    }
+                }
+            } finally {
+                _isAutoLoginCheckComplete.value = true
+            }
+        }
     }
 
     private val _email = MutableStateFlow("")
@@ -175,17 +202,17 @@ class UserViewModel(private val userDao: UserDao): ViewModel(){
             isValid = false
         }
 
-        if (!_age.value.isDigitsOnly() || _age.value.toString().length > 3 || _age.value.isEmpty()){
+        if (!_age.value.isDigitsOnly() || _age.value.length > 3 || _age.value.isEmpty()){
             _ageError.value = "Please enter a valid age"
             isValid = false
         }
 
-        if (!_weight.value.isDigitsOnly() || _weight.value.toString().length > 3 || _weight.value.isEmpty()){
+        if (!_weight.value.isDigitsOnly() || _weight.value.length > 3 || _weight.value.isEmpty()){
             _weightError.value = "Please enter a valid weight (E.g. 75, 120 etc)"
             isValid = false
         }
 
-        if (!_height.value.isDigitsOnly() || _height.value.toString().length > 3 || _weight.value.isEmpty()){
+        if (!_height.value.isDigitsOnly() || _height.value.length > 3 || _weight.value.isEmpty()){
             _heightError.value = "Please enter a valid height (E.g. 177, 130 etc)"
             isValid = false
         }
@@ -252,7 +279,7 @@ class UserViewModel(private val userDao: UserDao): ViewModel(){
             viewModelScope.launch {
                 userDao.insertUser(user = user)
             }
-            Log.d("UsersTrack", "New user: ${user.toString()}")
+            Log.d("UsersTrack", "New user: $user")
             return true
         }
         return false
@@ -260,6 +287,8 @@ class UserViewModel(private val userDao: UserDao): ViewModel(){
 
     fun logOut(){
        _currentUser.value = null
+        sessionManager.clearSession()
+        Log.d("UsersTrack", "User logged out")
     }
     fun loadSettings() {
         _currentUser.value?.let { user ->
@@ -276,22 +305,28 @@ class UserViewModel(private val userDao: UserDao): ViewModel(){
         onUserChange(user)
         userDao.updateUser(user)
     }
-
-    suspend fun logIn(email: String, password: String):Boolean{
-        if (!validateLogin()){
+    suspend fun logIn(email: String, password: String): Boolean {
+        if (!validateLogin()) {
             return false
         }
 
         val user = userDao.findUserByEmail(email)
         if (user == null) {
             Log.d("UsersTrack", "User not found")
+            _emailError.value = "User with this email does not exist."
             return false
-        }else{
+        } else {
             if (checkPassword(password, user.password)) {
-                Log.d("UsersTrack", "User: ${user.toString()} logged in")
+                Log.d("UsersTrack", "User: $user logged in")
                 _currentUser.value = user
+
+                sessionManager.saveUserSession(user.id)
+
+                checkForDailyReset(user)
+
                 return true
             }
+            _passwordError.value = "Incorrect password."
             return false
         }
     }
@@ -305,5 +340,22 @@ class UserViewModel(private val userDao: UserDao): ViewModel(){
         _heightError.value = null
         _genderError.value = null
         _loseWeightError.value = null
+    }
+    fun checkForDailyReset(user: User) {
+        viewModelScope.launch {
+            val today = LocalDate.now()
+            val lastUpdateDate = user.lastCalorieEntryDate?.let {
+                LocalDate.parse(it, DateTimeFormatter.ISO_LOCAL_DATE)
+            }
+
+            if (lastUpdateDate == null || lastUpdateDate.isBefore(today)) {
+                val updatedUser = user.copy(
+                    caloriesToday = 0.0,
+                    lastCalorieEntryDate = today.format(DateTimeFormatter.ISO_LOCAL_DATE)
+                )
+                userDao.updateUser(updatedUser)
+                _currentUser.value = updatedUser
+            }
+        }
     }
 }

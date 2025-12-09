@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredHeightIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
@@ -45,6 +46,7 @@ fun UserSettingsScreen(
     val caloriesPerDay by viewModel.caloriesPerDay.collectAsState()
 
     val coroutineScope = rememberCoroutineScope()
+    val currentUser by viewModel.currentUser.collectAsState()
 
     LaunchedEffect(Unit) {
         viewModel.loadSettings()
@@ -120,6 +122,14 @@ fun UserSettingsScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
+            Text(
+                "Current Journal Streak: " +
+                        "${currentUser?.journalStreak}",
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
             Button(
                 onClick = {
                     viewModel.currentUser.value?.let { currentUser ->
@@ -141,6 +151,24 @@ fun UserSettingsScreen(
             ) {
                 Text("Save Changes")
             }
+
+
+            Spacer(modifier = Modifier.height(4.dp))
+
+            Button(
+                onClick = {
+                    coroutineScope.launch {
+                        viewModel.logOut()
+                        navController.navigate("login")
+                    }
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .requiredHeightIn(min = 48.dp)
+            ) {
+                Text(text = "Logout")
+            }
+
         }
     }
 }

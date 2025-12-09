@@ -1,6 +1,5 @@
 package com.example.assignment1.Views
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -20,8 +19,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
@@ -29,23 +26,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.assignment1.R
 import com.example.assignment1.ViewModels.UserViewModel
 import kotlinx.coroutines.launch
 
-@Composable
-fun ImprovementImage() {
-    Image(painter = painterResource( R.drawable.improve),
-        contentDescription = "Scaled Image",
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(350.dp),
-        contentScale = ContentScale.FillBounds
-    )
-}
 
 @Composable
-fun LoginView(viewModel: UserViewModel=viewModel(), navController: NavController){
+fun LoginView(viewModel: UserViewModel=viewModel(), navController: NavController, onLoginSuccess: () -> Unit){
     val email by viewModel.email.collectAsState()
     val password by viewModel.password.collectAsState()
     val emailError by viewModel.emailError.collectAsState()
@@ -108,7 +94,7 @@ fun LoginView(viewModel: UserViewModel=viewModel(), navController: NavController
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Start your journey with us!")
-            ImprovementImage()
+            LoginImage()
         }
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -126,15 +112,20 @@ fun LoginView(viewModel: UserViewModel=viewModel(), navController: NavController
                             email=email,
                             password=password,
                         )
+                        // --- START: THIS IS THE ONLY CHANGE YOU NEED ---
                         if (loginSuccess){
-                            navController.navigate("home")
+                            // Instead of navigating here directly,
+                            // call the lambda function passed from MainActivity.
+                            // This gives MainActivity control over the navigation,
+                            // allowing it to clear the back stack properly.
+                            onLoginSuccess()
+
                             println("Login Successful")
                             clearLogin(viewModel)
                         }
-                        else{
-                            navController.navigate("login")
-                            clearLogin(viewModel)
-                        }
+                        // The 'else' block is no longer needed because if login fails,
+                        // the user should simply stay on the login screen to see the errors.
+                        // --- END: THIS IS THE ONLY CHANGE YOU NEED ---
                     }
                 },
                 modifier = Modifier

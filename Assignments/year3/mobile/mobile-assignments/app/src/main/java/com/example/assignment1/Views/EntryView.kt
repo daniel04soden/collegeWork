@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
@@ -33,6 +34,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -151,29 +154,6 @@ fun LogScreen(viewModel: EntryViewModel = viewModel()) {
         }
     )
 }
-@Composable
-fun OptionsDropDownMenu(
-    expanded:Boolean,
-    onDismiss: () -> Unit,
-    onOptionSelected: (String) -> Unit,
-    options: List<String>
-){
-    val context = LocalContext.current
-    DropdownMenu(
-        expanded = expanded,
-        onDismissRequest = {onDismiss()}
-    ) {
-        options.forEach {option->
-            DropdownMenuItem(
-                text = {Text(option)},
-                onClick = {
-                    onOptionSelected(option)
-                    onDismiss()
-                }
-            )
-        }
-    }
-}
 
 @Composable
 fun QuickEditEntry(
@@ -280,62 +260,97 @@ fun QuickDeleteEntry(
 }
 
 @Composable
-fun QuickAddEntry(viewModel: EntryViewModel, onAddEntry: () -> Unit) {
+fun QuickAddEntry(
+    viewModel: EntryViewModel,
+    onAddEntry: () -> Unit
+) {
     var description by remember { mutableStateOf("") }
     var rating by remember { mutableStateOf("") }
-    val context = LocalContext.current
-    var expanded by remember { mutableStateOf(false) }
+    var isRatingExpanded by remember { mutableStateOf(false) }
+    val ratingOptions = (1..10).map { it.toString() }
 
-    val ratingData = List(10) { (it + 1).toString() }
+    val scope = rememberCoroutineScope()
+    val context = LocalContext.current
 
     Column(
-        modifier = Modifier.padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        Text("Add New Log", style = MaterialTheme.typography.headlineSmall)
-        TextField(
+        Text("Add New Journal Entry")
+
+        OutlinedTextField(
             value = description,
             onValueChange = { description = it },
-            label = { Text("How was today?") },
-            modifier = Modifier.fillMaxWidth()
+            label = { Text("How was your day?") },
+            modifier = Modifier.fillMaxWidth(),
+            singleLine = false,
+            maxLines = 5
         )
-        Row(modifier = Modifier.fillMaxWidth()) {
-            Text("Select Rating")
-            IconButton(onClick = { expanded = !expanded }) {
+
+        Box(modifier = Modifier.wrapContentSize(Alignment.TopStart)) {
+            OutlinedButton(
+                onClick = { isRatingExpanded = true },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(if (rating.isNotBlank()) "Rating: $rating" else "Select a Rating")
                 Icon(Icons.Default.ArrowDropDown, contentDescription = "Dropdown Arrow")
             }
-            DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-                ratingData.forEach { option->
+
+            DropdownMenu(
+                expanded = isRatingExpanded,
+                onDismissRequest = { isRatingExpanded = false },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                ratingOptions.forEach { selectionOption ->
                     DropdownMenuItem(
-                        text = {Text(option)},
+                        text = { Text(selectionOption) },
                         onClick = {
-                            rating = option
-                            expanded = false
+                            rating = selectionOption
+                            isRatingExpanded = false
                         }
                     )
-
                 }
             }
-            Text("$rating/10")
         }
-
-        Button(
-            onClick = {
-                if (description.isNotBlank() && rating.isNotBlank()) {
-                    viewModel.addEntry(
-                        text=description,
-                        rating = rating
-                    )
-                    Toast.makeText(context, "Entry added!", Toast.LENGTH_SHORT).show()
-                    onAddEntry()
-                }
-            },
-            modifier = Modifier.align(Alignment.End)
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.End
         ) {
-            Text("Add")
+            Button(
+                onClick = {
+                    if (description.isNotBlank() && rating.isNotBlank()) {
+                        scope.launch {
+                            val wasEntryAdded = viewModel.addEntry(
+                                text = description,
+                                rating = rating
+                            )
+
+                            if (wasEntryAdded) {
+                                Toast.makeText(context, "Entry added successfully!", Toast.LENGTH_SHORT).show()
+                                description = ""
+                                rating = ""
+                                onAddEntry()
+                            } else {
+                                Toast.makeText(context, "An entry has already been made today.", Toast.LENGTH_LONG).show()
+                            }
+                        }
+                    } else {
+                        Toast.makeText(context, "Please fill in all fields.", Toast.LENGTH_SHORT).show()
+                    }
+                },
+                enabled = description.isNotBlank() && rating.isNotBlank()
+            ) {
+                Text("Add Entry")
+            }
         }
     }
 }
+
+
+
 @Composable
 fun LogItem(
     entry: Entry,

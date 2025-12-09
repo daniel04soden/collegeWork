@@ -1,6 +1,5 @@
 package com.example.assignment1.Views
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -11,20 +10,13 @@ import androidx.compose.foundation.layout.requiredHeightIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExposedDropdownMenuBox
-import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
@@ -37,57 +29,13 @@ import androidx.navigation.NavController
 import com.example.assignment1.ViewModels.UserViewModel
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
-fun ReusableDropdown(
-    label: String,
-    options: List<String>,
-    selectedValue: String,
-    onValueChange: (String) -> Unit,
-    isError: Boolean, // Add isError parameter
-    modifier: Modifier = Modifier
+fun SignUpView(
+    viewModel: UserViewModel = viewModel(),
+    navController: NavController,
+    onSignUpSuccess: () -> Unit
 ) {
-    var expanded by remember { mutableStateOf(false) }
-
-    Box(modifier = modifier) {
-        ExposedDropdownMenuBox(
-            expanded = expanded,
-            onExpandedChange = { expanded = !expanded }
-        ) {
-            OutlinedTextField(
-                value = selectedValue,
-                onValueChange = {},
-                readOnly = true,
-                label = { Text(label) },
-                trailingIcon = {
-                    ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
-                },
-                colors = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
-                isError = isError, // Apply the error state
-                modifier = Modifier
-                    .menuAnchor()
-                    .fillMaxWidth()
-            )
-            ExposedDropdownMenu(
-                expanded = expanded,
-                onDismissRequest = { expanded = false }
-            ) {
-                options.forEach { option ->
-                    DropdownMenuItem(
-                        text = { Text(option) },
-                        onClick = {
-                            onValueChange(option)
-                            expanded = false
-                        }
-                    )
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun SignUpView(viewModel: UserViewModel = viewModel(), navController: NavController) {
     val email by viewModel.email.collectAsState()
     val password by viewModel.password.collectAsState()
     val confirmPassword by viewModel.confirmPassword.collectAsState()
@@ -98,7 +46,6 @@ fun SignUpView(viewModel: UserViewModel = viewModel(), navController: NavControl
     val weight by viewModel.weight.collectAsState()
     val height by viewModel.height.collectAsState()
 
-    // Collect error states from the ViewModel
     val usernameError by viewModel.usernameError.collectAsState()
     val emailError by viewModel.emailError.collectAsState()
     val passwordError by viewModel.passwordError.collectAsState()
@@ -109,8 +56,7 @@ fun SignUpView(viewModel: UserViewModel = viewModel(), navController: NavControl
     val genderError by viewModel.genderError.collectAsState()
     val loseWeightError by viewModel.loseWeightError.collectAsState()
 
-    // Define options for dropdowns
-    val genderOptions = listOf("Male", "Female", "Other")
+    val genderOptions = listOf("Male", "Female")
     val loseWeightOptions = listOf("Y", "N")
     val scope = rememberCoroutineScope()
 
@@ -204,7 +150,6 @@ fun SignUpView(viewModel: UserViewModel = viewModel(), navController: NavControl
                 ageError?.let { Text(text = it, color = MaterialTheme.colorScheme.error, fontSize = 12.sp) }
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Gender Dropdown
                 ReusableDropdown(
                     label = "Gender",
                     options = genderOptions,
@@ -276,7 +221,7 @@ fun SignUpView(viewModel: UserViewModel = viewModel(), navController: NavControl
                         )
                         if (signUpSuccess) {
                             clearSignUp(viewModel)
-                            navController.navigate("login")
+                            onSignUpSuccess()
                         }
                     }
                 },

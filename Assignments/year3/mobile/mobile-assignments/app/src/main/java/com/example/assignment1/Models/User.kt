@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "user")
 data class User(
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+    val id: Long = 0,
     var fullName: String,
     var age: Int,
     val gender: String, // "female" or "male"
@@ -18,6 +18,8 @@ data class User(
     var height: Double,
     var loseWeight: String, // "Y" or "N"
     var caloriesPerDay: Double,
+    var caloriesToday: Double = 0.0, // resets everyday
+    var lastCalorieEntryDate: String? = null,
 
     var calorieStreak: Int? = null,
     var meditationStreak: Int? = null,
