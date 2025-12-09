@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "year3/DisSysProg/README.md",
+                "file": "year3/webapp/Guide Setup.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "Guide Setup"
             }
           }
         ]
@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "c322238dd0ae331f",
@@ -169,23 +168,25 @@
   },
   "active": "f3630077902f4750",
   "lastOpenFiles": [
+    "Pasted image 20251208205254.png",
+    "Pasted image 20251208205120.png",
+    "Pasted image 20251208205052.png",
+    "Pasted image 20251208204921.png",
+    "Pasted image 20251208204911.png",
+    "Information needed.png",
+    "Pasted image 20251208204410.png",
+    "year3/DisSysProg/README.md",
+    "year3/webapp/Guide Setup.md",
+    "Screenshot 2025-12-06 at 12.50.30.png",
+    "Pasted image 20251206165838.png",
+    "Pasted image 20251203094435.png",
     "year3/Agile/Git Screenshots.md",
     "Untitled 4.base",
-    "year3/DisSysProg/README.md",
-    "Screenshot 2025-12-06 at 12.50.30.png",
     "Screenshot.md",
     "year3/DisSysProg/overview.md",
     "year3/DisSysProg/designPatternsSep.md",
     "year3/DisSysProg/designPatternsOne.md",
     "Pasted image 20251119081303.png",
-    "Pasted image 20251119092219.png",
-    "Pasted image 20251119091132.png",
-    "Pasted image 20251119090839.png",
-    "Pasted image 20251119083831.png",
-    "Pasted image 20251203094435.png",
-    "Pasted image 20251203094427.png",
-    "Pasted image 20251125150149.png",
-    "Pasted image 20251124171426.png",
     "year3/Agile/agile.md",
     "year3/Agile/developmentlifecycle.md",
     "year3/Agile/software.md",
