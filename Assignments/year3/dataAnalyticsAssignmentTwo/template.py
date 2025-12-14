@@ -427,6 +427,9 @@ Main Output
 
 
 def task_7(file_name: str):
+    """
+    Certain columns I personally selected based on relevance to the domain of loans and paying them back
+    """
     numeric_columns = [
         "age",
         "annual_income",
@@ -460,12 +463,12 @@ def task_7(file_name: str):
 
     selected_df = df[numeric_columns + categorical_columns].copy()
 
-    df[target_column] = pd.cut(
-        df[target_column], bins=2, labels=[0, 1], include_lowest=True
-    )
+    df[target_column] = pd.cut(df[target_column], bins=2, labels=[0, 1]).astype(int)
 
     features = selected_df.drop(columns=[target_column])
     target = df[target_column]
+
+    features = pd.get_dummies(features, columns=categorical_columns, drop_first=True)
 
     X_train, X_test, y_train, y_test = train_test_split(
         features, target, test_size=0.2, random_state=42
@@ -473,24 +476,33 @@ def task_7(file_name: str):
 
     clf = tree.DecisionTreeClassifier(max_depth=5, random_state=42)
     clf.fit(X_train, y_train)
-    clf.score(X_test, y_test)
-
-    # Display accuracy for proof of working decision tree
 
     print(f"Decision Tree Classifier Test Accuracy: {clf.score(X_test, y_test):.4f}")
-
-    # Bar chart for feature importance
 
     feature_importances = clf.feature_importances_
     feature_names = features.columns
     importance_series = pd.Series(feature_importances, index=feature_names)
     sorted_importance = importance_series.sort_values(ascending=False)
+    top_5_importance = sorted_importance.head(5)
+
     plt.figure(figsize=(10, 6))
-    sorted_importance.plot(kind="bar")
-    plt.title("Feature Importance in Loan Default Prediction")
+    top_5_importance.plot(kind="bar")
+    plt.title("Top 5 Feature Importance in Loan Default Prediction")
     plt.xlabel("Features")
     plt.ylabel("Importance Score")
-    plt.show()
+    plt.tight_layout()
+    plt.savefig("test.png")
+    plt.close()
+
+    """
+    Based on the figure presented we can see that the main importance features 
+    driving decisions on paying back loans are:
+    1. Emplyoment status
+    2. Debt:Income Ratio
+    3. Credit Score
+    4. Employment Status as a student
+    5. Emplyoment status as a retired indvidual
+    """
 
 
 def main():
