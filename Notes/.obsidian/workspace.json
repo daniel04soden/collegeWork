@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "year3/webapp/Guide Setup.md",
+                "file": "TODO/Current Agenda.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Guide Setup"
+              "title": "Current Agenda"
             }
           }
         ]
@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "c322238dd0ae331f",
@@ -168,28 +169,36 @@
   },
   "active": "f3630077902f4750",
   "lastOpenFiles": [
+    "TODO/TODO.md",
+    "TODO/Current Agenda.md",
+    "TODO/SIdeWork/TODO Personal.md",
+    "Information needed.png",
+    "year3/sem2",
+    "year3/sem1",
+    "sem1",
+    "year3/mobile/App Readme.md",
+    "year3/sem1/webapp/Guide Setup.md",
+    "year3/sem1/Agile/Exam Questions.md",
+    "year3/sem1/Agile/Presentation.md",
     "Pasted image 20251208205254.png",
     "Pasted image 20251208205120.png",
     "Pasted image 20251208205052.png",
     "Pasted image 20251208204921.png",
     "Pasted image 20251208204911.png",
-    "Information needed.png",
     "Pasted image 20251208204410.png",
-    "year3/DisSysProg/README.md",
-    "year3/webapp/Guide Setup.md",
+    "year3/sem1/DisSysProg/README.md",
     "Screenshot 2025-12-06 at 12.50.30.png",
     "Pasted image 20251206165838.png",
     "Pasted image 20251203094435.png",
-    "year3/Agile/Git Screenshots.md",
+    "year3/sem1/Agile/Git Screenshots.md",
     "Untitled 4.base",
     "Screenshot.md",
-    "year3/DisSysProg/overview.md",
-    "year3/DisSysProg/designPatternsSep.md",
-    "year3/DisSysProg/designPatternsOne.md",
-    "Pasted image 20251119081303.png",
-    "year3/Agile/agile.md",
-    "year3/Agile/developmentlifecycle.md",
-    "year3/Agile/software.md",
+    "year3/sem1/DisSysProg/overview.md",
+    "year3/sem1/DisSysProg/designPatternsSep.md",
+    "year3/sem1/DisSysProg/designPatternsOne.md",
+    "year3/sem1/Agile/agile.md",
+    "year3/sem1/Agile/developmentlifecycle.md",
+    "year3/sem1/Agile/software.md",
     "Untitled 3.base",
     "Untitled 2.base",
     "Untitled 1.base",

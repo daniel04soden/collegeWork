@@ -1,0 +1,78 @@
+/*
+Theme Name: Assignment 2 Theme
+Description: Theme created for assignment 2 
+Author: DS
+Author URI: https://webdevcit.com/
+Version: 1.0
+Tags: education, one-column
+
+
+*/
+body {
+	margin: 0;
+	font-family: "Helvetica Neue", Arial, sans-serif;
+	line-height: 1.6;
+	color: #1f2933;
+	background: linear-gradient(180deg, #f7f9fb 0%, #eef2f6 100%);
+	min-height: 100vh;
+}
+
+p {
+	margin: 0 0 1.2em;
+	color: #334155;
+	max-width: 70ch;
+}
+
+
+.navbar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: #333333;
+  display: flex;
+}
+
+.navbar li a {
+  display: block;
+  color: white;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.navbar li a:hover {
+  background-color: #111111;
+}
+
+
+hr {
+	border: none;
+	height: 1px;
+	background: linear-gradient(90deg, transparent, #cbd5e1, transparent);
+	margin: 2em 0;
+}
+
+footer {
+	padding: 2em 0;
+	color: #475569;
+	border-top: 1px solid #d7dde5;
+}
+
+header {
+	padding: 1.5em 0;
+	border-bottom: 1px solid #d7dde5;
+}
+
+
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+thead th {
+  background-color: #000000;
+  color: white;
+  border: 1px solid #ddd;
+}
+
+tbody td {
+  border: 1px solid #ddd;
+}	
